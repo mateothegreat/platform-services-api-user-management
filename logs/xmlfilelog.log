@@ -1,0 +1,28 @@
+2017-08-19 22:46:21.465 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 211432 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 22:46:21.465 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.RC3
+2017-08-19 22:46:21.466 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 22:46:30.192 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 9.519 seconds (JVM running for 16.073)
+2017-08-19 22:50:21.928 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 210216 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 22:50:21.929 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.RC3
+2017-08-19 22:50:21.929 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 22:50:30.546 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 9.435 seconds (JVM running for 15.409)
+2017-08-19 22:52:18.807 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 200464 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 22:52:18.807 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.RC3
+2017-08-19 22:52:18.808 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 22:52:27.454 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 9.37 seconds (JVM running for 15.466)
+2017-08-19 23:05:22.600 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 198000 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 23:05:22.600 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.RC3
+2017-08-19 23:05:22.601 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 23:05:31.308 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 9.534 seconds (JVM running for 15.264)
+2017-08-19 23:16:31.041 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 220316 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 23:16:31.042 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.RC3
+2017-08-19 23:16:31.042 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 23:16:39.823 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 9.526 seconds (JVM running for 15.347)
+2017-08-19 23:20:15.870 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 210584 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 23:20:15.871 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.RC3
+2017-08-19 23:20:15.871 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 23:20:24.320 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 9.221 seconds (JVM running for 15.033)
+2017-08-19 23:54:42.549 [INFO ] [main] c.s.a.u.UsersApplication: Starting UsersApplication on WINDOWS10ENT with PID 223992 (E:\workspace\spring\streaming-platform-api-users\target\classes started by yomateod in E:\workspace\spring\streaming-platform-api-users)
+2017-08-19 23:54:42.550 [DEBUG] [main] c.s.a.u.UsersApplication: Running with Spring Boot v2.0.0.M3, Spring v5.0.0.BUILD-SNAPSHOT
+2017-08-19 23:54:42.550 [INFO ] [main] c.s.a.u.UsersApplication: The following profiles are active: @spring.profiles.active@
+2017-08-19 23:54:53.169 [INFO ] [main] c.s.a.u.UsersApplication: Started UsersApplication in 11.409 seconds (JVM running for 26.27)

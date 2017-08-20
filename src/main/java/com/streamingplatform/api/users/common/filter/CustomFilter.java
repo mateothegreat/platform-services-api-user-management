@@ -16,30 +16,23 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.exception.handlers;
+package com.streamingplatform.api.users.common.filter;
 
-public class ErrorResponse {
+import org.springframework.web.filter.GenericFilterBean;
 
-    private int    errorCode;
-    private String message;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
 
-    public int getErrorCode() {
-
-        return errorCode;
+public class CustomFilter extends GenericFilterBean {
+    
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+                                                                                                     ServletException {
+        
+        chain.doFilter(request, response);
     }
-
-    void setErrorCode(int errorCode) {
-
-        this.errorCode = errorCode;
-    }
-
-    public String getMessage() {
-
-        return message;
-    }
-
-    void setMessage(String message) {
-
-        this.message = message;
-    }
+    
 }

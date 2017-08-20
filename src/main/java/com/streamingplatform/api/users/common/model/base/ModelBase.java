@@ -16,29 +16,11 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.exception.handlers;
+package com.streamingplatform.api.users.common.model.base;
 
-public class UserException extends Exception {
+import java.io.Serializable;
 
-    private static final long serialVersionUID = 1L;
-    private String errorMessage;
-
-    public String getErrorMessage() {
-
-        return errorMessage;
-
-    }
-
-    public UserException(String errorMessage) {
-
-        super(errorMessage);
-
-    }
-
-    public UserException() {
-
-        super();
-
-    }
+public class ModelBase implements Serializable {
 
 }
+

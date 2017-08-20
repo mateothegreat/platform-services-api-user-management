@@ -16,18 +16,31 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.repositories;
+package com.streamingplatform.api.users.common.model.json.response;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
-import java.util.List;
-import java.util.Optional;
-
-@RepositoryRestResource(path = "users", collectionResourceRel = "users")
-public interface UsersRepository extends CrudRepository<User, Long> {
-
-    Optional<List<User>> findByUsername(String username);
-
+public class AuthenticationResponse {
+    
+    private static final long serialVersionUID = -6624726180748515507L;
+    private String token;
+    
+    public AuthenticationResponse() {
+        
+        super();
+    }
+    
+    public AuthenticationResponse(String token) {
+        
+        this.setToken(token);
+    }
+    
+    public String getToken() {
+        
+        return this.token;
+    }
+    
+    public void setToken(String token) {
+        
+        this.token = token;
+    }
+    
 }
