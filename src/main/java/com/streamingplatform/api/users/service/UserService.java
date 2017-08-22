@@ -22,6 +22,8 @@ import com.streamingplatform.api.users.models.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface UserService {
     
     public Page<User> findAll(Pageable pageable);
@@ -31,5 +33,11 @@ public interface UserService {
     public User getUserByEmail(String email);
     
     public void saveUser(User user);
+    
+    List<String> getPermissions(String username);
+    
+    User getCurrentUser();
+    
+    Boolean isCurrentUserLoggedIn();
     
 }

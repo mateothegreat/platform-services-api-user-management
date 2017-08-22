@@ -18,31 +18,37 @@
 
 package com.streamingplatform.api.users;
 
+import com.streamingplatform.api.users.common.utils.logging.Log;
 import com.streamingplatform.api.users.controllers.UserController;
+import com.streamingplatform.api.users.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebAppConfiguration
+// @WebAppConfiguration
+// @ComponentScan("com.streamingplatform")
+@SpringBootTest(classes = UsersApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+// @ContextConfiguration(classes = UsersApplication.class)
+// @WebAppConfiguration
 public class UserControllerUnitTest {
     
-    private final Logger LOG = LoggerFactory.getLogger(UserController.class);
-    
+    @Autowired
+    private UserController        userController;
+    @Autowired
+    private UserRepository        userRepository;
     @Autowired
     private WebApplicationContext context;
     private MockMvc               mvc;
@@ -50,84 +56,38 @@ public class UserControllerUnitTest {
     @Before
     public void setup() {
         
-        mvc = MockMvcBuilders.webAppContextSetup(context).build();
-        //                             .apply(SecurityMockMvcConfigurers.springSecurity()).build();
+        mvc = MockMvcBuilders.webAppContextSetup(context)
+                             .build();
         
     }
     
-    @Test
-    public void getUsers_anonymous() throws Exception {
-        
-        MockHttpServletResponse mvcResult = mvc.perform(get("/users")).andReturn().getResponse();
-        
-        System.out.print(mvcResult.toString());
-        System.out.print(mvcResult.getStatus());
-        
-        LOG.error(mvcResult.toString());
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.debug("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.debug("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.debug("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.debug("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.debug("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.debug("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.info("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.trace("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.trace("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.trace("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.trace("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.trace("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.trace("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        LOG.error(String.valueOf(mvcResult.getStatus()));
-        
-        //        .andExpect(authenticated());
-        
-    }
+    // @Test
+    // public void getUsers_anonymous() throws Exception {
+    //
+    //     mvc.perform(get("/users"))
+    //        .andExpect(unauthenticated());
+    //
+    // }
     
     @Test
-    
     public void withHttpBasic() throws Exception {
         
-        mvc.perform(get("/").with(httpBasic("user", "password")));
+        // mvc.perform(get("/").with(httpBasic("jlong", "dabc125")));
+        
+        Log.getLogger(this)
+           .error("DASFASDFASFDASDFASDFASDF");
+        
+        mvc.perform(get("/users").header(HttpHeaders.AUTHORIZATION,
+                                         "Basic " + Base64Utils.encodeToString("jlong:abc125".getBytes())))
+           .andExpect(status().isOk());
         
     }
     
-    @Test
-    
-    public void unathenticatedTest() throws Exception {
-        
-        mvc.perform(formLogin().password("invalid")).andExpect(unauthenticated());
-        
-    }
+    // @Test
+    // public void logoutTest() throws Exception {
+    //
+    //     mvc.perform(logout())
+    //        .andExpect(unauthenticated());
+    //
+    // }
 }

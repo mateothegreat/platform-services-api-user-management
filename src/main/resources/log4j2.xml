@@ -17,7 +17,9 @@
   ~ <http://www.gnu.org/licenses/>.
   -->
 
-<Configuration monitorInterval="60">
+<!--https://logging.apache.org/log4j/2.x/manual/configuration.html-->
+
+<Configuration strict="true" monitorInterval="60">
 
     <Properties>
 
@@ -28,53 +30,128 @@
 
     <Appenders>
 
-        <Console name="Console-Appender" target="SYSTEM_OUT">
+        <Console name="console" target="SYSTEM_OUT">
 
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
 
         </Console>
 
-        <File name="File-Appender" fileName="${log-path}/xmlfilelog.log">
+        <File name="com.streamingplatform" fileName="${log-path}/com.streamingplatform.log">
 
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
 
         </File>
 
-        <RollingFile name="RollingFile-Appender"
-                     fileName="${log-path}/traces.log"
-                     filePattern="${archive}/traces.log.%d{yyyy-MM-dd-hh-mm}.gz">
+        <File name="stdout" fileName="${log-path}/stdout.log">
 
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
 
-            <Policies>
+        </File>
 
-                <!--<TimeBasedTriggeringPolicy/>-->
-                <SizeBasedTriggeringPolicy size="1M"/>
+        <File name="org.springframework.test" fileName="${log-path}/org.springframework.test.log">
 
-            </Policies>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
 
-            <DefaultRolloverStrategy max="5"/>
-
-        </RollingFile>
+        </File>
 
     </Appenders>
 
     <Loggers>
 
-        <Logger name="com.streamingplatform" level="debug">
+        <Logger name="com.streamingplatform" level="trace">
 
-            <AppenderRef ref="File-Appender" level="trace"/>
-            <AppenderRef ref="RollingFile-Appender" level="debug"/>
-            <AppenderRef ref="Console-Appender" level="debug"/>
+            <AppenderRef ref="com.streamingplatform"/>
+
+        </Logger>
+
+        <Logger name="org.springframework.test" level="debug" additivity="false">
+
+            <AppenderRef ref="org.springframework.test"/>
+
+        </Logger>
+
+        <Logger name="stdout" level="debug">
+
+            <AppenderRef ref="stdout"/>
 
         </Logger>
 
         <Root level="debug">
 
-            <AppenderRef ref="Console-Appender" level="debug"/>
+            <AppenderRef ref="stdout" level="debug"/>
+            <AppenderRef ref="console" level="info"/>
 
         </Root>
 
     </Loggers>
+
+    <!--<Appenders>-->
+
+    <!--<Appender type="Console" name="console">-->
+
+    <!--<Layout type="PatternLayout" pattern="%m MDC%X%n"/>-->
+
+    <!--<Filters>-->
+
+    <!--<Filter type="MarkerFilter" marker="FLOW" onMatch="DENY" onMismatch="NEUTRAL"/>-->
+    <!--<Filter type="MarkerFilter" marker="EXCEPTION" onMatch="DENY" onMismatch="ACCEPT"/>-->
+
+    <!--</Filters>-->
+
+    <!--</Appender>-->
+
+    <!--&lt;!&ndash;<Console name="console" target="SYSTEM_OUT">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<PatternLayout pattern="asdfasdfasdfds %d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</Console>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<RollingFile name="RollingFile-Appender"&ndash;&gt;-->
+    <!--&lt;!&ndash;fileName="${log-path}/RollingFile.log"&ndash;&gt;-->
+    <!--&lt;!&ndash;filePattern="${archive}/RollingFile.log.%d{yyyy-MM-dd-hh-mm}.gz">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%t] %c: %message{ansi}%n"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<Policies>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;<TimeBasedTriggeringPolicy/>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<SizeBasedTriggeringPolicy size="1M"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</Policies>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<DefaultRolloverStrategy max="5"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</RollingFile>&ndash;&gt;-->
+
+    <!--</Appenders>-->
+
+    <!--<Loggers>-->
+
+    <!--<Logger name="console">-->
+
+    <!--<AppenderRef ref="console" level="info"/>-->
+
+    <!--</Logger>-->
+
+    <!--&lt;!&ndash;<Logger name="org.springframework.web" level="trace">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</Logger>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<Logger name="org.hibernate" level="debug">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<Console target="SYSTEM_OUT">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<PatternLayout pattern="HIBERNATE - [%-5level] [%t] %c{1.}: %message{ansi}%n"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</Console>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</Logger>&ndash;&gt;-->
+    <!--&lt;!&ndash;<Root level="trace">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<AppenderRef ref="Console-Appender" level="trace"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</Root>&ndash;&gt;-->
+
+    <!--</Loggers>-->
 
 </Configuration>

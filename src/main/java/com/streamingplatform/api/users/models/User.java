@@ -18,12 +18,14 @@
 
 package com.streamingplatform.api.users.models;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Table(name = "user")
 public class User {
     
@@ -35,6 +37,19 @@ public class User {
     private String password;
     private int    status;
     private String email;
+    private String login;
+    
+    public String getLogin() {
+        
+        return login;
+        
+    }
+    
+    public void setLogin(String login) {
+        
+        this.login = login;
+        
+    }
     
     public int getId() {
         

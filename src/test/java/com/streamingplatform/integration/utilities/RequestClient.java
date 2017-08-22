@@ -26,15 +26,14 @@ import org.springframework.web.client.RestTemplate;
 
 public class RequestClient {
     
-    
     private final String       contentType;
     private final String       token;
     private final String       username;
     private final String       password;
     private final Object       body;
     private final RestTemplate client;
-    private final HttpHeaders httpHeaders;
-    private final HttpEntity  httpEntity;
+    private final HttpHeaders  httpHeaders;
+    private final HttpEntity   httpEntity;
     
     private RequestClient(RequestClientBuilder builder) {
         
@@ -44,7 +43,7 @@ public class RequestClient {
         this.password = builder.password;
         this.body = builder.body;
         
-        if (builder.client == null) {
+        if(builder.client == null) {
             
             this.client = new RestTemplate();
             
@@ -58,18 +57,18 @@ public class RequestClient {
         this.httpEntity = this.buildEntity(this.httpHeaders, this.body);
         
     }
-
+    
     private HttpHeaders buildHeaders() {
         
         HttpHeaders headers = new HttpHeaders();
         
-        if (!contentType.isEmpty()) {
+        if(!contentType.isEmpty()) {
             
             headers.add(HttpHeaders.CONTENT_TYPE, contentType);
             
         }
         
-        if (username != null && password != null) {
+        if(username != null && password != null) {
             
             String plainClientCredentials  = username + ":" + password;
             String base64ClientCredentials = new String(Base64.encodeBase64(plainClientCredentials.getBytes()));
@@ -78,7 +77,7 @@ public class RequestClient {
             
         }
         
-        if (token != null) {
+        if(token != null) {
             
             headers.add("X-Auth-Token", token);
             
@@ -90,7 +89,7 @@ public class RequestClient {
     
     private HttpEntity<Object> buildEntity(HttpHeaders httpHeaders, Object body) {
         
-        if (body == null) {
+        if(body == null) {
             
             return new HttpEntity<>(httpHeaders);
             

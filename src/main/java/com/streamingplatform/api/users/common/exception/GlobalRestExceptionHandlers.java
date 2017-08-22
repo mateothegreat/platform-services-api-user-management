@@ -20,9 +20,9 @@ package com.streamingplatform.api.users.common.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

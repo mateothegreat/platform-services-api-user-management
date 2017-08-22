@@ -29,12 +29,15 @@ public class UsersApplication {
     public DriverManagerDataSource dataSource() {
         
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         driverManagerDataSource.setUrl(
             "jdbc:mysql://192.168.152.128:3306/platform_base?useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false");
         driverManagerDataSource.setUsername("user");
         driverManagerDataSource.setPassword("agaeq14");
+        
         return driverManagerDataSource;
+        
     }
     
     public static void main(String[] args) {
