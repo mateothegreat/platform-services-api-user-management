@@ -16,52 +16,31 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.models;
+package com.streamingplatform.api.users.common.models.json.request;
 
-import com.streamingplatform.api.users.common.models.BaseEntity;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "user")
-public class User extends BaseEntity {
+@Component
+public class AuthenticationRequest {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    private int parent_id;
-    
+    private static final long serialVersionUID = 6624726180748515507L;
     private String username;
     private String password;
     
-    private int status;
-    
-    private String email;
-    
-    public Long getId() {
+    public AuthenticationRequest() {
         
-        return id;
+        super();
     }
     
-    public void setId(Long id) {
+    public AuthenticationRequest(String username, String password) {
         
-        this.id = id;
-    }
-    
-    public int getParent_id() {
-        
-        return parent_id;
-    }
-    
-    public void setParent_id(int parent_id) {
-        
-        this.parent_id = parent_id;
+        this.setUsername(username);
+        this.setPassword(password);
     }
     
     public String getUsername() {
         
-        return username;
+        return this.username;
     }
     
     public void setUsername(String username) {
@@ -71,32 +50,12 @@ public class User extends BaseEntity {
     
     public String getPassword() {
         
-        return password;
+        return this.password;
     }
     
     public void setPassword(String password) {
         
         this.password = password;
-    }
-    
-    public int getStatus() {
-        
-        return status;
-    }
-    
-    public void setStatus(int status) {
-        
-        this.status = status;
-    }
-    
-    public String getEmail() {
-        
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        
-        this.email = email;
     }
     
 }

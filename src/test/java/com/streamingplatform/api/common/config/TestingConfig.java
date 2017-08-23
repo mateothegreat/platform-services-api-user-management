@@ -16,24 +16,15 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.service;
+package com.streamingplatform.api.common.config;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
-
-public interface UserService {
+public final class TestingConfig {
     
-    public Page findAll(Pageable pageable);
-    
-    public User getUserByUsername(String username);
-    
-    public User getUserByEmail(String email);
-    
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
+    public static final String USER_VALID_USERNAME   = "jlong";
+    public static final String USER_VALID_PASSWORD   = "abc125";
+    public static final String USER_VALID_EMAIL      = "user1@user1.com";
+    public static final String USER_INVALID_USERNAME = "invalid";
+    public static final String USER_INVALID_PASSWORD = "invalid";
+    public static final String USER_INVALID_EMAIL    = "invalid@invalid.com";
     
 }

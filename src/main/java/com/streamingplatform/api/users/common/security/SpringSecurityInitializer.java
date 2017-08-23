@@ -16,24 +16,10 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.service;
+package com.streamingplatform.api.users.common.security;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
-import java.util.List;
+public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
 
-public interface UserService {
-    
-    public Page findAll(Pageable pageable);
-    
-    public User getUserByUsername(String username);
-    
-    public User getUserByEmail(String email);
-    
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
-    
 }

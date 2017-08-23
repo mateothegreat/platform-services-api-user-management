@@ -20,8 +20,9 @@ package com.streamingplatform.api.users.common.security;
 
 import com.streamingplatform.api.users.models.User;
 import com.streamingplatform.api.users.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,21 +34,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@EnableJpaRepositories
 public class CustomUserDetailsService implements UserDetailsService {
     
-    @Autowired
-    private final UserService userService;
+    private static final Logger log = LogManager.getLogger(CustomUserDetailsService.class);
     
     @Autowired
-    CustomUserDetailsService(UserService userService) {
+    private final UserService UserService;
+    
+    @Autowired
+    CustomUserDetailsService(UserService UserService) {
         
-        this.userService = userService;
+        log.trace("CustomUserDetailsService");
+        
+        this.UserService = UserService;
     }
     
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        User user = userService.getUserByUsername(username);
+        log.trace("loadUserByUsername: {}", username);
+        
+        User user = UserService.getUserByUsername(username);
         
         if(user == null) {
             
@@ -56,9 +62,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        List<String>           permissions        = userService.getPermissions(user.getLogin());
+        List<String>           permissions        = UserService.getPermissions(user.getUsername());
         
         for(String permission : permissions) {
+            
+            log.trace("loadUserByUsername->grantedAuthorities.add: {}", permission);
             
             grantedAuthorities.add(new SimpleGrantedAuthority(permission));
             

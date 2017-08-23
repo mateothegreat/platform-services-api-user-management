@@ -18,8 +18,8 @@
 //
 //package com.streamingplatform.api.users.sessions;
 //
-//import com.streamingplatform.api.users.common.model.json.request.AuthenticationRequest;
-//import com.streamingplatform.api.users.common.model.json.response.AuthenticationResponse;
+//import com.streamingplatform.api.users.common.models.json.request.AuthenticationRequest;
+//import com.streamingplatform.api.users.common.models.json.response.AuthenticationResponse;
 //import com.streamingplatform.api.users.UsersApplication;
 //import com.streamingplatform.api.users.repositories.UsersRepository;
 //import org.apache.commons.codec.binary.Base64;
@@ -97,7 +97,7 @@
 //                          HttpMethod.POST,
 //                          httpEntity,
 //                          AuthenticationResponse.class);
-//
+//~
 //            AuthenticationResponse authenticationResponse = responseEntity.getBody();
 //
 //            assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));

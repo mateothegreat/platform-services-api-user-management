@@ -16,23 +16,20 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.repository;
+package com.streamingplatform.api.users.common.config;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Repository
-public interface UserRepository extends PagingAndSortingRepository<User, Long> {
+@Configuration
+public class CommonBeanConfig {
     
-    User findByEmail(String email);
-    
-    public Page<User> findAll(Pageable pageable);
-    
-    User getUserByEmail(String email);
-    
-    User getUserByUsername(String username);
+    @Bean
+    public BCryptPasswordEncoder bcryptEncoder() {
+        
+        return new BCryptPasswordEncoder();
+        
+    }
     
 }

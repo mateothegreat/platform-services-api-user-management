@@ -16,24 +16,21 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.service;
+package com.streamingplatform.api.users.repos;
 
+import com.streamingplatform.api.users.common.repository.BaseRepository;
 import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface UserService {
+@Repository
+public interface UserRepository extends BaseRepository<User, Long> {
     
-    public Page findAll(Pageable pageable);
+    User findByEmail(String email);
     
-    public User getUserByUsername(String username);
+    // public Page<User> findAll(Pageable pageable);
     
-    public User getUserByEmail(String email);
+    User getUserByEmail(String email);
     
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
+    User getUserByUsername(String username);
     
 }

@@ -18,9 +18,8 @@
 
 package com.streamingplatform.api.users.service;
 
-import com.streamingplatform.api.users.common.security.LoggedInChecker;
 import com.streamingplatform.api.users.models.User;
-import com.streamingplatform.api.users.repository.UserRepository;
+import com.streamingplatform.api.users.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,49 +32,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     
-    private final LoggedInChecker loggedInChecker;
-    
     @Autowired
     private UserRepository userRepository;
-    
-    @Autowired
-    UserServiceImpl(LoggedInChecker loggedInChecker) {
-        
-        this.loggedInChecker = loggedInChecker;
-        
-    }
-    
-    //    @Autowired
-    //    private RoleRepository        roleRepository;
-    
-    @Override
-    public List<String> getPermissions(String username) {
-        
-        return new ArrayList<>();
-    }
-    
-    @Override
-    public User getCurrentUser() {
-        
-        return loggedInChecker.getLoggedInUser();
-    }
-    
-    @Override
-    public Boolean isCurrentUserLoggedIn() {
-        
-        return loggedInChecker.getLoggedInUser() != null;
-    }
     
     public Page<User> findAll(Pageable pageable) {
         
         return userRepository.findAll(pageable);
-        
-    }
-    
-    @Override
-    public User getUserByEmail(String email) {
-        
-        return userRepository.getUserByEmail(email);
         
     }
     
@@ -87,16 +49,29 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    public User getUserByEmail(String email) {
+        
+        User user = userRepository.getUserByEmail(email);
+        return user;
+        
+    }
+    
+    @Override
     public void saveUser(User user) {
         
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setStatus(2);
         
         //        Role userRole = roleRepository.findByRole("ADMIN");
         //        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         
         userRepository.save(user);
         
+    }
+    
+    @Override
+    public List<String> getPermissions(String username) {
+        
+        return new ArrayList<>();
     }
     
 }

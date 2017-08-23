@@ -16,24 +16,10 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.service;
+package com.streamingplatform.api.users.common.repository;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.io.Serializable;
 
-import java.util.List;
-
-public interface UserService {
-    
-    public Page findAll(Pageable pageable);
-    
-    public User getUserByUsername(String username);
-    
-    public User getUserByEmail(String email);
-    
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
-    
+public interface GenericDao<T extends Serializable> extends Operations<T> {
+    //
 }

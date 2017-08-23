@@ -18,22 +18,10 @@
 
 package com.streamingplatform.api.users.service;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.streamingplatform.api.users.common.repository.Operations;
 
-import java.util.List;
+import java.io.Serializable;
 
-public interface UserService {
-    
-    public Page findAll(Pageable pageable);
-    
-    public User getUserByUsername(String username);
-    
-    public User getUserByEmail(String email);
-    
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
-    
+public abstract class AbstractUserService<T extends Serializable> extends AbstractService<T> implements Operations<T> {
+
 }

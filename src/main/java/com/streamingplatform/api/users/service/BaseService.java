@@ -18,22 +18,17 @@
 
 package com.streamingplatform.api.users.service;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.io.Serializable;
 
-public interface UserService {
+@Service
+public interface BaseService<T, ID extends Serializable> {
     
-    public Page findAll(Pageable pageable);
+    public static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
     
-    public User getUserByUsername(String username);
-    
-    public User getUserByEmail(String email);
-    
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
+    <S extends T> S findAll(S pageable);
     
 }

@@ -16,11 +16,29 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.common.model.base;
+package com.streamingplatform.api.users.common.repository;
+
+import com.streamingplatform.api.users.common.controller.AbstractRestController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.Repository;
 
 import java.io.Serializable;
 
-public class ModelBase implements Serializable {
-
+@NoRepositoryBean
+public interface BaseRepository<T, ID extends Serializable> extends Repository<T, ID> {
+    
+    Logger log = LogManager.getLogger(AbstractRestController.class);
+    
+    // void delete(T deleted);
+    
+    Page<T> findAll(Pageable pageable);
+    
+    // Optional<T> findOne(ID id);
+    
+    T save(T persisted);
+    
 }
-

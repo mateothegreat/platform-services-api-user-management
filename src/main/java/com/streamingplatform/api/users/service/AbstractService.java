@@ -16,23 +16,12 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.common.filter;
+package com.streamingplatform.api.users.service;
 
-import org.springframework.web.filter.GenericFilterBean;
+import com.streamingplatform.api.users.common.repository.Operations;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import java.io.IOException;
+import java.io.Serializable;
 
-public class CustomFilter extends GenericFilterBean {
-    
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-                                                                                                     ServletException {
-        
-        chain.doFilter(request, response);
-    }
-    
+public abstract class AbstractService<T extends Serializable> implements Operations<T> {
+
 }

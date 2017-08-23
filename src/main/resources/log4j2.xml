@@ -18,8 +18,8 @@
   -->
 
 <!--https://logging.apache.org/log4j/2.x/manual/configuration.html-->
-
-<Configuration strict="true" monitorInterval="60">
+<!--http://www.baeldung.com/log4j2-appenders-layouts-filters-->
+<Configuration monitorInterval="10">
 
     <Properties>
 
@@ -30,56 +30,95 @@
 
     <Appenders>
 
+        <!--<Syslog name="Syslog"-->
+        <!--format="RFC5424" host="localhost" port="514"-->
+        <!--protocol="TCP" facility="local3" connectTimeoutMillis="10000"-->
+        <!--reconnectionDelayMillis="5000">-->
+        <!--</Syslog>-->
+
+        <!--<Failover name="FailoverAppender" primary="Syslog">-->
+        <!--<Failovers>-->
+        <!--<AppenderRef ref="ConsoleAppender"/>-->
+        <!--</Failovers>-->
+        <!--</Failover>-->
+
         <Console name="console" target="SYSTEM_OUT">
-
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
-
+            <PatternLayout pattern="%-5p | %d{HH:mm:ss} | [%t] %c (%F:%L) - %m%n"/>
         </Console>
 
         <File name="com.streamingplatform" fileName="${log-path}/com.streamingplatform.log">
+            <PatternLayout pattern="%-5p | %d{HH:mm:ss} | [%t] %c (%F:%L) - %m%n"/>
+        </File>
 
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
-
+        <File name="org.hibernate" fileName="${log-path}/org.hibernate.log">
+            <PatternLayout pattern="%-5p | %d{HH:mm:ss} | [%t] %c (%F:%L) - %m%n"/>
         </File>
 
         <File name="stdout" fileName="${log-path}/stdout.log">
-
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
-
+            <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss.SSS} | [%t] %c (%F:%L) - %m%n"/>
         </File>
 
         <File name="org.springframework.test" fileName="${log-path}/org.springframework.test.log">
 
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%-5level] [%t] %c{1.}: %message{ansi}%n"/>
+            <!--<PatternLayout pattern="&#45;&#45;&ndash;&gt; %d{HH:mm:ss.SSS} [%-5level] [%t] %c: %message{ansi}%n"/>-->
+            <PatternLayout pattern="%-5p | %d{HH:mm:ss} | [%t] %c (%F:%L) - %m%n"/>
 
+        </File>
+
+        <File name="log4jdbc_file" fileName="${log-path}/log4jdbc.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %level - %m%n%ex%n"/>
         </File>
 
     </Appenders>
 
     <Loggers>
 
+        <Logger name="org.hibernate" level="debug">
+            <AppenderRef ref="org.hibernate"/>
+        </Logger>
         <Logger name="com.streamingplatform" level="trace">
-
             <AppenderRef ref="com.streamingplatform"/>
-
         </Logger>
 
-        <Logger name="org.springframework.test" level="debug" additivity="false">
+        <Logger name="org.springframework.web.client" level="trace" additivity="false">
+            <AppenderRef ref="com.streamingplatform"/>
+        </Logger>
 
+        <Logger name="org.springframework.security.authentication" level="trace">
+            <AppenderRef ref="com.streamingplatform"/>
+        </Logger>
+
+        <Logger name="org.springframework.security.web" level="trace" additivity="false">
+            <AppenderRef ref="com.streamingplatform"/>
+        </Logger>
+
+        <Logger name="org.springframework.test" level="trace">
             <AppenderRef ref="org.springframework.test"/>
-
         </Logger>
 
-        <Logger name="stdout" level="debug">
-
-            <AppenderRef ref="stdout"/>
-
+        <Logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="trace"
+                additivity="false">
+            <AppenderRef ref="stdout" level="trace"/>
         </Logger>
 
-        <Root level="debug">
+        <Logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"
+                level="debug"
+                additivity="false">
+            <AppenderRef ref="stdout" level="trace"/>
+        </Logger>
 
-            <AppenderRef ref="stdout" level="debug"/>
-            <AppenderRef ref="console" level="info"/>
+        <Logger name="stdout" level="trace">
+            <AppenderRef ref="stdout" level="trace"/>
+        </Logger>
+
+        <Logger name="log4jdbc.log4j2" level="trace">
+            <AppenderRef ref="log4jdbc_file"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Root level="info">
+
+            <AppenderRef ref="console"/>
 
         </Root>
 
@@ -137,7 +176,7 @@
 
     <!--&lt;!&ndash;</Logger>&ndash;&gt;-->
 
-    <!--&lt;!&ndash;<Logger name="org.hibernate" level="debug">&ndash;&gt;-->
+    <!--&lt;!&ndash;<Logger name="org.hibernate" level="trace">&ndash;&gt;-->
 
     <!--&lt;!&ndash;<Console target="SYSTEM_OUT">&ndash;&gt;-->
 

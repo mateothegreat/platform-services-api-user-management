@@ -16,24 +16,24 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.service;
+package com.streamingplatform.api.users.common.controller;
 
-import com.streamingplatform.api.users.models.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.List;
+import java.io.Serializable;
 
-public interface UserService {
+public abstract class AbstractRestController<T, ID extends Serializable> {
     
-    public Page findAll(Pageable pageable);
+    protected static final Logger log = LogManager.getLogger(AbstractRestController.class);
     
-    public User getUserByUsername(String username);
-    
-    public User getUserByEmail(String email);
-    
-    public void saveUser(User user);
-    
-    List<String> getPermissions(String username);
+    // @RequestMapping(method = RequestMethod.GET)
+    // public ResponseEntity<Page<User>> findAll(Pageable pageable) throws NotFoundException {
+    //
+    //     Page<User> page = service.findAll(pageable);
+    //
+    //     return new ResponseEntity<Page<User>>(page, HttpStatus.OK);
+    //
+    // }
     
 }

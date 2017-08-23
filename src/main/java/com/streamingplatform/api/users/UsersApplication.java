@@ -19,31 +19,30 @@ package com.streamingplatform.api.users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+// @ComponentScan(basePackages = "com.streamingplatform")
 @SpringBootApplication
 public class UsersApplication {
-    
-    @Bean(name = "platformBaseDataSource")
-    public DriverManagerDataSource dataSource() {
-        
-        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        
-        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl(
-            "jdbc:mysql://192.168.152.128:3306/platform_base?useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false");
-        driverManagerDataSource.setUsername("user");
-        driverManagerDataSource.setPassword("agaeq14");
-        
-        return driverManagerDataSource;
-        
-    }
     
     public static void main(String[] args) {
         
         SpringApplication.run(UsersApplication.class, args);
         
     }
+    
+    // @Bean(name = "platformBaseDataSource")
+    // public DriverManagerDataSource platformBaseDataSource() {
+    //
+    //     DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+    //
+    //     driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+    //     driverManagerDataSource.setUrl(
+    //         "jdbc:mysql://192.168.152.128:3306/platform_base?useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false");
+    //     driverManagerDataSource.setUsername("user");
+    //     driverManagerDataSource.setPassword("agaeq14");
+    //
+    //     return driverManagerDataSource;
+    //
+    // }
     
 }

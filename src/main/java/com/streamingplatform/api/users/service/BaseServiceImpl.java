@@ -16,27 +16,25 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.common.security;
+package com.streamingplatform.api.users.service;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.stereotype.Component;
+import com.streamingplatform.api.users.common.repository.BaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-@Component
-public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
+public class BaseServiceImpl implements BaseService {
     
+    @Autowired
+    private BaseRepository repository;
+    
+    // public Page findAll(Pageable pageable) {
+    //
+    //     return repository.findAll(pageable);
+    //
+    // }
+    //
     @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                Authentication authentication) throws IOException {
+    public Object findAll(final Object pageable) {
         
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter()
-                .flush();
-        
+        return null;
     }
-    
 }

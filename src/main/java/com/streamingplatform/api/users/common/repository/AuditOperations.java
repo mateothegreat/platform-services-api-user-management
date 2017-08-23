@@ -16,25 +16,17 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.common.security;
+package com.streamingplatform.api.users.common.repository;
 
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-@Component
-public class HttpAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public interface AuditOperations<T extends Serializable> {
     
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException {
-        
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-        
-    }
+    List<T> getEntitiesAtRevision(Number revision);
+    
+    List<T> getEntitiesModifiedAtRevision(Number revision);
+    
+    List<T> getRevisions();
     
 }

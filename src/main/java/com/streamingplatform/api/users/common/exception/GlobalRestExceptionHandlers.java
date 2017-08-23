@@ -18,23 +18,24 @@
 
 package com.streamingplatform.api.users.common.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.streamingplatform.api.users.controllers.UserController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.data.rest.core.RepositoryConstraintViolationException;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.client.HttpClientErrorException;
 
 import javax.persistence.NonUniqueResultException;
-import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 
@@ -42,15 +43,46 @@ import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 @RestControllerAdvice
 public class GlobalRestExceptionHandlers {
     
-    private final Logger logger = LoggerFactory.getLogger(
-        com.streamingplatform.api.users.controllers.UserController.class);
+    private static final Logger logger = LogManager.getLogger(UserController.class);
+    
+    @ExceptionHandler(value = {NotFoundException.class})
+    public ResponseEntity<RestErrorResponse> handleNotFoundException(NotFoundException notFoundException) {
+        
+        logger.trace("handleNotFoundException");
+        
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
+    }
+    
+    @ExceptionHandler(value = {DataAccessException.class})
+    public ResponseEntity<RestErrorResponse> handleDataAccessException(DataAccessException dataAccessEx) {
+        
+        logger.trace("handleDataAccessException");
+        logger.trace(dataAccessEx.getMessage());
+        logger.trace(dataAccessEx.toString());
+        
+        return new ResponseEntity<>(PRECONDITION_FAILED);
+        
+    }
+    
+    @ExceptionHandler(value = {InsufficientAuthenticationException.class})
+    public ResponseEntity<RestErrorResponse> handleInsufficientAuthenticationException(
+        InsufficientAuthenticationException e) {
+        
+        logger.trace("handleInsufficientAuthenticationException");
+        logger.trace(e.getMessage());
+        logger.trace(e.toString());
+        
+        e.printStackTrace();
+        
+        return new ResponseEntity<>(PRECONDITION_FAILED);
+        
+    }
     
     @ExceptionHandler(value = {UnsatisfiedServletRequestParameterException.class})
     public ResponseEntity<RestErrorResponse> handleUnsatisfiedServletRequestParameterException(
         UnsatisfiedServletRequestParameterException e) {
         
-        logger.trace("handleUnsatisfiedServletRequestParameterException");
-        logger.trace("handleUnsatisfiedServletRequestParameterException");
         logger.trace("handleUnsatisfiedServletRequestParameterException");
         logger.trace("handleUnsatisfiedServletRequestParameterException");
         logger.trace("handleUnsatisfiedServletRequestParameterException");
@@ -63,11 +95,45 @@ public class GlobalRestExceptionHandlers {
         
     }
     
+    @ExceptionHandler(value = {HttpClientErrorException.class})
+    public ResponseEntity<?> handleHttpClientErrorException(HttpServletRequest request, Throwable e) {
+        
+        HttpStatus status = getStatus(request);
+        logger.trace(status.toString());
+        logger.trace(status.toString());
+        logger.trace(status.toString());
+        logger.trace(status.toString());
+        logger.trace(status.toString());
+        logger.trace(status.toString());
+        logger.trace("HttpClientErrorException");
+        logger.trace("HttpClientErrorException");
+        logger.trace("HttpClientErrorException");
+        logger.trace("HttpClientErrorException");
+        logger.trace("HttpClientErrorException");
+        logger.trace("HttpClientErrorException");
+        logger.trace("HttpClientErrorException");
+        logger.trace(e.getMessage());
+        logger.error(e.getStackTrace());
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
+    }
+    
+    private HttpStatus getStatus(HttpServletRequest request) {
+        
+        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        if(statusCode == null) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return HttpStatus.valueOf(statusCode);
+    }
+    
     @ExceptionHandler(value = {ResourceNotFoundException.class})
     public ResponseEntity<RestErrorResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
         
         logger.trace("handleResourceNotFoundException");
-        
+        logger.trace(e.getMessage());
+        logger.error(e.getStackTrace());
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         
     }
@@ -76,7 +142,8 @@ public class GlobalRestExceptionHandlers {
     public ResponseEntity<RestErrorResponse> handleNonUniqueResultException(NonUniqueResultException e) {
         
         logger.trace("NonUniqueResultException");
-        
+        logger.trace(e.getMessage());
+        logger.error(e.getStackTrace());
         return new ResponseEntity<>(HttpStatus.CONFLICT);
         
     }
@@ -86,36 +153,52 @@ public class GlobalRestExceptionHandlers {
         IncorrectResultSizeDataAccessException e) {
         
         logger.trace("IncorrectResultSizeDataAccessException");
-        
+        logger.trace(e.getMessage());
+        logger.error(e.getStackTrace());
         return new ResponseEntity<>(HttpStatus.CONFLICT);
         
     }
     
-    @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<RestErrorResponse> exceptionHandler(Exception ex) {
-        
-        //        RestErrorResponse error = new RestErrorResponse();
-        //
-        //        error.setErrorCode(HttpStatus.BAD_REQUEST.value());
-        //        error.setMessage("The request could not be understood by the server due to malformed syntax.");
-        
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        
-    }
-    
-    @ExceptionHandler(value = {RepositoryConstraintViolationException.class})
-    public ResponseEntity<Object> handleAccessDeniedException(Exception ex, WebRequest request) {
-        
-        RepositoryConstraintViolationException nevEx = (RepositoryConstraintViolationException) ex;
-        
-        String errors = nevEx.getErrors()
-                             .getAllErrors()
-                             .stream()
-                             .map(ObjectError::toString)
-                             .collect(Collectors.joining("\n"));
-        
-        return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
-        
-    }
+    // @ExceptionHandler(value = {Exception.class})
+    // public ResponseEntity<RestErrorResponse> exceptionHandler(Exception e) {
+    //
+    //     //        RestErrorResponse error = new RestErrorResponse();
+    //     //
+    //     //        error.setErrorCode(HttpStatus.BAD_REQUEST.value());
+    //     //        error.setMessage("The request could not be understood by the server due to malformed syntax.");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //     logger.trace("exceptionHandler");
+    //
+    //     logger.trace(e.getMessage());
+    //     logger.trace(e.toString());
+    //     logger.error(e.getStackTrace());
+    //     e.printStackTrace();
+    //     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    //
+    // }
+    // @ExceptionHandler(value = {RepositoryConstraintViolationException.class})
+    // public ResponseEntity<Object> handleAccessDeniedException(Exception ex, WebRequest request) {
+    //
+    //     RepositoryConstraintViolationException nevEx = (RepositoryConstraintViolationException) ex;
+    //
+    //     String errors = nevEx.getErrors()
+    //                          .getAllErrors()
+    //                          .stream()
+    //                          .map(ObjectError::toString)
+    //                          .collect(Collectors.joining("\n"));
+    //
+    //     return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+    //
+    // }
     
 }

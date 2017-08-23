@@ -16,20 +16,11 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.controllers;
+package com.streamingplatform.api.users.common.models.base;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.io.Serializable;
 
-@RestController
-public class RootController {
-    
-    // private final Logger logger = LoggerFactory.getLogger(RootController.class);
-    //
-    // @RequestMapping(params = "/login", method = RequestMethod.POST)
-    // public void login() {
-    //
-    //     logger.trace("login");
-    //
-    // }
-    
+public class ModelBase implements Serializable {
+
 }
+

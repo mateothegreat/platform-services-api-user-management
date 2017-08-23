@@ -16,46 +16,31 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.common.model.json.request;
+package com.streamingplatform.api.users.common.models.json.response;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class AuthenticationRequest {
+public class AuthenticationResponse {
     
-    private static final long serialVersionUID = 6624726180748515507L;
-    private String username;
-    private String password;
+    private static final long serialVersionUID = -6624726180748515507L;
+    private String token;
     
-    public AuthenticationRequest() {
+    public AuthenticationResponse() {
         
         super();
     }
     
-    public AuthenticationRequest(String username, String password) {
+    public AuthenticationResponse(String token) {
         
-        this.setUsername(username);
-        this.setPassword(password);
+        this.setToken(token);
     }
     
-    public String getUsername() {
+    public String getToken() {
         
-        return this.username;
+        return this.token;
     }
     
-    public void setUsername(String username) {
+    public void setToken(String token) {
         
-        this.username = username;
-    }
-    
-    public String getPassword() {
-        
-        return this.password;
-    }
-    
-    public void setPassword(String password) {
-        
-        this.password = password;
+        this.token = token;
     }
     
 }
