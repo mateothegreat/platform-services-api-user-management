@@ -17,6 +17,13 @@
   ~ <http://www.gnu.org/licenses/>.
   -->
 
+
+
+
+
+
+
+
 <!--https://logging.apache.org/log4j/2.x/manual/configuration.html-->
 <!--http://www.baeldung.com/log4j2-appenders-layouts-filters-->
 <Configuration monitorInterval="10">

@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -15,6 +16,7 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
+
 package com.streamingplatform.api.users;
 
 import org.springframework.boot.SpringApplication;
