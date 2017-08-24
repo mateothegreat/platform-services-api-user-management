@@ -15,17 +15,22 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.sessions;
 
-@SpringBootApplication
-public class UsersApplication {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.session.web.context.AbstractHttpSessionApplicationInitializer;
+
+public class SessionApplicationInitializer extends AbstractHttpSessionApplicationInitializer {
     
-    public static void main(String[] args) {
+    protected static final Logger log = LogManager.getLogger(SessionApplicationInitializer.class);
+    
+    public SessionApplicationInitializer() {
         
-        SpringApplication.run(UsersApplication.class, args);
+        super(SessionConfiguration.class);
+        
+        log.trace("AppInitializer()");
         
     }
     

@@ -15,18 +15,18 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.common.repository;
 
-@SpringBootApplication
-public class UsersApplication {
+import java.io.Serializable;
+import java.util.List;
+
+public interface AuditOperations<T extends Serializable> {
     
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
+    List<T> getEntitiesAtRevision(Number revision);
+    
+    List<T> getEntitiesModifiedAtRevision(Number revision);
+    
+    List<T> getRevisions();
     
 }

@@ -15,18 +15,39 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.common.exception;
 
-@SpringBootApplication
-public class UsersApplication {
+public class RestErrorResponse {
     
-    public static void main(String[] args) {
+    private int    errorCode;
+    private String message;
+    
+    public RestErrorResponse(int errorCode, String message) {
         
-        SpringApplication.run(UsersApplication.class, args);
+        this.errorCode = errorCode;
+        this.message = message;
         
+        //        return new ResponseEntity<RestErrorResponse>(new RestErrorResponse(HttpStatus.NOT_FOUND);
     }
     
+    public int getErrorCode() {
+        
+        return errorCode;
+    }
+    
+    void setErrorCode(int errorCode) {
+        
+        this.errorCode = errorCode;
+    }
+    
+    public String getMessage() {
+        
+        return message;
+    }
+    
+    void setMessage(String message) {
+        
+        this.message = message;
+    }
 }

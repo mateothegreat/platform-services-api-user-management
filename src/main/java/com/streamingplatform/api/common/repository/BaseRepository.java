@@ -16,21 +16,29 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.repos;
+package com.streamingplatform.api.common.repository;
 
-import com.streamingplatform.api.common.repository.BaseRepository;
-import com.streamingplatform.api.users.models.User;
-import org.springframework.stereotype.Repository;
+import com.streamingplatform.api.common.controller.AbstractRestController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.Repository;
 
-@Repository
-public interface UserRepository extends BaseRepository<User, Long> {
+import java.io.Serializable;
+
+@NoRepositoryBean
+public interface BaseRepository<T, ID extends Serializable> extends Repository<T, ID> {
     
-    User findByEmail(String email);
+    Logger log = LogManager.getLogger(AbstractRestController.class);
     
-    // public Page<User> findAll(Pageable pageable);
+    // void delete(T deleted);
     
-    User getUserByEmail(String email);
+    Page<T> findAll(Pageable pageable);
     
-    User getUserByUsername(String username);
+    // Optional<T> findOne(ID id);
+    
+    T save(T persisted);
     
 }

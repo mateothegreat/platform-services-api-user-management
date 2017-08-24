@@ -15,18 +15,25 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.common.controller;
 
-@SpringBootApplication
-public class UsersApplication {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.Serializable;
+
+public abstract class AbstractRestController<T, ID extends Serializable> {
     
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
+    protected static final Logger log = LogManager.getLogger(AbstractRestController.class);
+    
+    // @RequestMapping(method = RequestMethod.GET)
+    // public ResponseEntity<Page<User>> findAll(Pageable pageable) throws NotFoundException {
+    //
+    //     Page<User> page = service.findAll(pageable);
+    //
+    //     return new ResponseEntity<Page<User>>(page, HttpStatus.OK);
+    //
+    // }
     
 }

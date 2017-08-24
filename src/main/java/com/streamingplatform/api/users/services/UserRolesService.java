@@ -15,18 +15,9 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.users.services;
 
-@SpringBootApplication
-public class UsersApplication {
-    
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
-    
+public class UserRolesService {
+
 }

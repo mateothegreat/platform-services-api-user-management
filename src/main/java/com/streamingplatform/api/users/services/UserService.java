@@ -15,18 +15,25 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.users.services;
 
-@SpringBootApplication
-public class UsersApplication {
+import java.util.List;
+
+import com.streamingplatform.api.users.models.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+public interface UserService {
     
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
+    public Page findAll(Pageable pageable);
+    
+    public User getUserByUsername(String username);
+    
+    public User getUserByEmail(String email);
+    
+    public void saveUser(User user);
+    
+    List<String> getPermissions(String username);
     
 }

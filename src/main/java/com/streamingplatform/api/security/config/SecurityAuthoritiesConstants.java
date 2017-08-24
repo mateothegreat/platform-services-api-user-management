@@ -15,18 +15,16 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.security.config;
 
-@SpringBootApplication
-public class UsersApplication {
+public final class SecurityAuthoritiesConstants {
     
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
+    public static final String ADMIN     = "ROLE_ADMIN";
+    public static final String USER      = "ROLE_USER";
+    public static final String ANONYMOUS = "ROLE_ANONYMOUS";
+    
+    private SecurityAuthoritiesConstants() {
+    
     }
-    
 }

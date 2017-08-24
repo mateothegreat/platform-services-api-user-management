@@ -15,18 +15,13 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.common.domain;
 
-@SpringBootApplication
-public class UsersApplication {
+public interface DomainObject {
     
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
+    int getId();
+    
+    void setId(int id);
     
 }

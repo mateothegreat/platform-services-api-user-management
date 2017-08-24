@@ -65,22 +65,19 @@
 
         </File>
 
-        <File name="log4jdbc_file" fileName="${log-path}/log4jdbc.log">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %level - %m%n%ex%n"/>
-        </File>
-
     </Appenders>
 
     <Loggers>
 
-        <Logger name="org.hibernate" level="debug">
+        <Logger name="org.hibernate" level="trace" additivity="false">
             <AppenderRef ref="org.hibernate"/>
         </Logger>
+
         <Logger name="com.streamingplatform" level="trace">
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 
-        <Logger name="org.springframework.web.client" level="trace" additivity="false">
+        <Logger name="org.springframework.web.client" level="trace">
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 
@@ -96,24 +93,18 @@
             <AppenderRef ref="org.springframework.test"/>
         </Logger>
 
-        <Logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="trace"
+        <Logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="info"
                 additivity="false">
-            <AppenderRef ref="stdout" level="trace"/>
+            <AppenderRef ref="stdout" level="info"/>
         </Logger>
 
         <Logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"
-                level="debug"
-                additivity="false">
+                level="info" additivity="false">
             <AppenderRef ref="stdout" level="trace"/>
         </Logger>
 
         <Logger name="stdout" level="trace">
             <AppenderRef ref="stdout" level="trace"/>
-        </Logger>
-
-        <Logger name="log4jdbc.log4j2" level="trace">
-            <AppenderRef ref="log4jdbc_file"/>
-            <AppenderRef ref="console"/>
         </Logger>
 
         <Root level="info">

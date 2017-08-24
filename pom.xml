@@ -90,6 +90,7 @@
 
         <!--<version.spring>5.0.0.BUILD-SNAPSHOT</version.spring>-->
         <version.spring>5.0.0.M3</version.spring>
+        <!--<version.spring.boot>1.5.6.RELEASE</version.spring.boot>-->
         <version.spring.boot>2.0.0.M3</version.spring.boot>
         <!--<version.spring.security>4.2.3.RELEASE</version.spring.security>-->
         <version.spring.security>5.0.0.M3</version.spring.security>
@@ -140,6 +141,12 @@
     <dependencies>
 
         <!-- Spring Boot -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${version.spring.boot}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -167,7 +174,18 @@
             <artifactId>spring-boot-starter-security</artifactId>
             <version>${version.spring.boot}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <version>${version.spring.boot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!--<version>1.4.1.RELEASE</version>-->
+            <version>${version.spring.boot}</version>
+            <optional>true</optional>
+        </dependency>
         <!--<dependency>-->
         <!--<groupId>org.hibernate</groupId>-->
         <!--<artifactId>hibernate-entitymanager</artifactId>-->
@@ -206,11 +224,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${version.mysql-connector}</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-envers</artifactId>
-            <version>5.2.10.Final</version>
-        </dependency>
+
         <!--<dependency>-->
         <!--<groupId>org.hibernate.javax.persistence</groupId>-->
         <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
@@ -254,50 +268,94 @@
             <scope>test</scope>
             <version>${version.spring.boot}</version>
         </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.8.0</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.assertj</groupId>-->
+        <!--<artifactId>assertj-core</artifactId>-->
+        <!--<version>3.8.0</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit4-runner</artifactId>
-            <version>5.0.0-ALPHA</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>5.0.0.RC3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-            <version>${version.spring.boot}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <version>${version.spring.security}</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.junit</groupId>-->
+        <!--<artifactId>junit4-runner</artifactId>-->
+        <!--<version>5.0.0-ALPHA</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-test</artifactId>-->
+        <!--<version>5.0.0.RC3</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-test</artifactId>-->
+        <!--<version>${version.spring.boot}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.security</groupId>-->
+        <!--<artifactId>spring-security-test</artifactId>-->
+        <!--<version>${version.spring.security}</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!-- Redis -->
+
+        <!--<dependency>-->
+        <!--<groupId>org.jredis</groupId>-->
+        <!--<artifactId>jredis-core-ri</artifactId>-->
+        <!--<version>RELEASE</version>-->
+        <!--<scope>compile</scope>-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.jredis</groupId>-->
+        <!--<artifactId>jredis-core-api</artifactId>-->
+        <!--<version>RELEASE</version>-->
+        <!--<scope>compile</scope>-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>redis.clients</groupId>-->
+        <!--<artifactId>jedis</artifactId>-->
+        <!--<version>2.9.0</version>-->
+        <!--<scope>compile</scope>-->
+        <!--<optional>true</optional>-->
+        <!--</dependency>-->
 
         <!-- Spring Logging -->
 
+        <!--<dependency>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-api</artifactId>-->
+        <!--<version>1.7.25</version>-->
+        <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-log4j12</artifactId>-->
+        <!--<version>1.7.25</version>-->
+        <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--&lt;!&ndash;https://logging.apache.org/log4j/2.x/maven-artifacts.html&ndash;&gt;-->
+        <!--<groupId>org.apache.logging.log4j</groupId>-->
+        <!--<artifactId>log4j-api</artifactId>-->
+        <!--<version>${version.log4j}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.logging.log4j</groupId>-->
+        <!--<artifactId>log4j-core</artifactId>-->
+        <!--<version>${version.log4j}</version>-->
+        <!--</dependency>-->
+
+        <!-- Sessions -->
+
         <dependency>
-            <!--https://logging.apache.org/log4j/2.x/maven-artifacts.html-->
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${version.log4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${version.log4j}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.0.0.M3</version>
         </dependency>
 
         <!-- Utilities -->
@@ -307,39 +365,59 @@
             <artifactId>commons-codec</artifactId>
             <version>${version.commons-codec}</version>
         </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.session</groupId>-->
+        <!--<artifactId>spring-session-data-redis</artifactId>-->
+        <!--<version>2.0.0.M3</version>-->
+        <!--</dependency>-->
 
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-core</artifactId>
+            <version>2.0.0.M3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>2.0.0.M3</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.data</groupId>-->
+        <!--<artifactId>spring-data-redis</artifactId>-->
+        <!--<version>2.0.0.M3</version>-->
+        <!--</dependency>-->
         <!-- Metrics -->
 
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-healthchecks</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-graphite</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-annotation</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-jvm</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ryantenney.metrics</groupId>
-            <artifactId>metrics-spring</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>io.dropwizard.metrics</groupId>-->
+        <!--<artifactId>metrics-core</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>io.dropwizard.metrics</groupId>-->
+        <!--<artifactId>metrics-healthchecks</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>io.dropwizard.metrics</groupId>-->
+        <!--<artifactId>metrics-graphite</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>io.dropwizard.metrics</groupId>-->
+        <!--<artifactId>metrics-annotation</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>io.dropwizard.metrics</groupId>-->
+        <!--<artifactId>metrics-jvm</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.ryantenney.metrics</groupId>-->
+        <!--<artifactId>metrics-spring</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
@@ -380,15 +458,29 @@
 
             <plugin>
 
+                <!--http://docs.spring.io/spring-boot/docs/1.4.1.RELEASE/maven-plugin/usage.html-->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${version.spring.boot}</version>
 
+                <configuration>
+
+                    <executable>true</executable>
+
+                    <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>
+
+                    <profiles>
+
+                        <profile>test</profile>
+                        <profile>dev</profile>
+
+                    </profiles>
+
+                </configuration>
+
                 <executions>
 
                     <execution>
-
-                        <id>generate build info files</id>
 
                         <goals>
 

@@ -15,18 +15,12 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.common.models.base;
 
-@SpringBootApplication
-public class UsersApplication {
-    
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
-    
+import java.io.Serializable;
+
+public class ModelBase implements Serializable {
+
 }
+

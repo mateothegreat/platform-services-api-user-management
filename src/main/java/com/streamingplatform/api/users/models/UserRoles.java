@@ -22,28 +22,24 @@ import com.streamingplatform.api.common.models.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "user")
-public class User extends BaseEntity {
+@Table(name = "user_roles")
+public class UserRoles extends BaseEntity {
     
-    private int parent_id;
-    
+    @NotNull
     private String username;
-    private String password;
+    @NotNull
+    private String role;
     
-    private int status;
-    
-    private String email;
-    
-    public int getParent_id() {
+    public UserRoles(final String username, final String role) {
         
-        return parent_id;
-    }
-    
-    public void setParent_id(int parent_id) {
+        super();
         
-        this.parent_id = parent_id;
+        this.username = username;
+        this.role = role;
+        
     }
     
     public String getUsername() {
@@ -51,39 +47,18 @@ public class User extends BaseEntity {
         return username;
     }
     
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         
         this.username = username;
     }
     
-    public String getPassword() {
+    public String getRole() {
         
-        return password;
+        return role;
     }
     
-    public void setPassword(String password) {
+    public void setRole(final String role) {
         
-        this.password = password;
+        this.role = role;
     }
-    
-    public int getStatus() {
-        
-        return status;
-    }
-    
-    public void setStatus(int status) {
-        
-        this.status = status;
-    }
-    
-    public String getEmail() {
-        
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        
-        this.email = email;
-    }
-    
 }

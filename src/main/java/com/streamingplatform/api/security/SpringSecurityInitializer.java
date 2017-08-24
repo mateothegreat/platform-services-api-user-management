@@ -15,18 +15,11 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.security;
 
-@SpringBootApplication
-public class UsersApplication {
-    
-    public static void main(String[] args) {
-        
-        SpringApplication.run(UsersApplication.class, args);
-        
-    }
-    
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
+public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
+
 }

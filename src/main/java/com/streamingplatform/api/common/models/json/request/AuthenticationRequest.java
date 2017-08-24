@@ -16,39 +16,31 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package com.streamingplatform.api.users.models;
+package com.streamingplatform.api.common.models.json.request;
 
-import com.streamingplatform.api.common.models.BaseEntity;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "user")
-public class User extends BaseEntity {
+@Component
+public class AuthenticationRequest {
     
-    private int parent_id;
-    
+    private static final long serialVersionUID = 6624726180748515507L;
     private String username;
     private String password;
     
-    private int status;
-    
-    private String email;
-    
-    public int getParent_id() {
+    public AuthenticationRequest() {
         
-        return parent_id;
+        super();
     }
     
-    public void setParent_id(int parent_id) {
+    public AuthenticationRequest(String username, String password) {
         
-        this.parent_id = parent_id;
+        this.setUsername(username);
+        this.setPassword(password);
     }
     
     public String getUsername() {
         
-        return username;
+        return this.username;
     }
     
     public void setUsername(String username) {
@@ -58,32 +50,12 @@ public class User extends BaseEntity {
     
     public String getPassword() {
         
-        return password;
+        return this.password;
     }
     
     public void setPassword(String password) {
         
         this.password = password;
-    }
-    
-    public int getStatus() {
-        
-        return status;
-    }
-    
-    public void setStatus(int status) {
-        
-        this.status = status;
-    }
-    
-    public String getEmail() {
-        
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        
-        this.email = email;
     }
     
 }

@@ -63,7 +63,7 @@ public class UserControllerUnitTest {
                                                       TestingConfig.USER_VALID_PASSWORD).build();
         
         logger.trace("setup");
-        Thread.sleep(5000);
+        // Thread.sleep(5000);
     }
     
     // @Test
@@ -90,57 +90,7 @@ public class UserControllerUnitTest {
     // }
     
     @Test
-    public void getUsers_validCredentials1() throws Exception {
-        
-        ResponseEntity responseEntity = requestClient.getClient()
-                                                     .exchange(getUrl("/users"), HttpMethod.GET,
-                                                               requestClient.getHttpEntity(), String.class);
-        
-        assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
-        
-    }
-    
-    private String getUrl(String path) {
-        
-        return "http://localhost:" + localServerPort + path;
-        
-    }
-    
-    @Test
-    public void getUsers_validCredentials2() throws Exception {
-        
-        ResponseEntity responseEntity = requestClient.getClient()
-                                                     .exchange(getUrl("/users"), HttpMethod.GET,
-                                                               requestClient.getHttpEntity(), String.class);
-        
-        assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
-        
-    }
-    
-    @Test
-    public void getUsers_validCredentials3() throws Exception {
-        
-        ResponseEntity responseEntity = requestClient.getClient()
-                                                     .exchange(getUrl("/users"), HttpMethod.GET,
-                                                               requestClient.getHttpEntity(), String.class);
-        
-        assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
-        
-    }
-    
-    @Test
-    public void getUsers_validCredentials4() throws Exception {
-        
-        ResponseEntity responseEntity = requestClient.getClient()
-                                                     .exchange(getUrl("/users"), HttpMethod.GET,
-                                                               requestClient.getHttpEntity(), String.class);
-        
-        assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
-        
-    }
-    
-    @Test
-    public void getUsers_validCredentials5() throws Exception {
+    public void getUsers_validCredentials() throws Exception {
         
         ResponseEntity responseEntity = requestClient.getClient()
                                                      .exchange(getUrl("/users"), HttpMethod.GET,
@@ -167,14 +117,9 @@ public class UserControllerUnitTest {
     //
     // }
     
-    @Test
-    public void getUsers_validCredentials() throws Exception {
+    private String getUrl(String path) {
         
-        ResponseEntity responseEntity = requestClient.getClient()
-                                                     .exchange(getUrl("/users"), HttpMethod.GET,
-                                                               requestClient.getHttpEntity(), String.class);
-        
-        assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
+        return "http://localhost:" + localServerPort + path;
         
     }
     

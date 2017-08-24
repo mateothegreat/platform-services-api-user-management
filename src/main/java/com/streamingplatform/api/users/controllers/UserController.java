@@ -18,9 +18,9 @@
 
 package com.streamingplatform.api.users.controllers;
 
-import com.streamingplatform.api.users.common.controller.AbstractRestController;
+import com.streamingplatform.api.common.controller.AbstractRestController;
 import com.streamingplatform.api.users.models.User;
-import com.streamingplatform.api.users.service.UserService;
+import com.streamingplatform.api.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;

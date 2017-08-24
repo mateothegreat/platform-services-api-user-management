@@ -15,18 +15,32 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package com.streamingplatform.api.users;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.streamingplatform.api.common.models.json.response;
 
-@SpringBootApplication
-public class UsersApplication {
+public class AuthenticationResponse {
     
-    public static void main(String[] args) {
+    private static final long serialVersionUID = -6624726180748515507L;
+    private String token;
+    
+    public AuthenticationResponse() {
         
-        SpringApplication.run(UsersApplication.class, args);
+        super();
+    }
+    
+    public AuthenticationResponse(String token) {
         
+        this.setToken(token);
+    }
+    
+    public String getToken() {
+        
+        return this.token;
+    }
+    
+    public void setToken(String token) {
+        
+        this.token = token;
     }
     
 }
