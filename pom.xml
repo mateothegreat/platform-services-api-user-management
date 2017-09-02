@@ -49,7 +49,7 @@
         <java.version>1.8</java.version>
 
         <license.licenseName>platform</license.licenseName>
-        <license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
+        <license.licenseResolver>${project.baseUri}/src/licenses</license.licenseResolver>
         <license.processStartTag>$$ Software License</license.processStartTag>
         <license.processEndTag>streaming-platform.com</license.processEndTag>
         <license.sectionDelimeter>%%</license.sectionDelimeter>
@@ -58,7 +58,7 @@
         <version.spring>5.0.0.M3</version.spring>
         <!--<version.spring.boot>1.5.6.RELEASE</version.spring.boot>-->
         <version.spring.boot>2.0.0.M3</version.spring.boot>
-        <!--<version.spring.security>4.2.3.RELEASE</version.spring.security>-->
+        <!--<version.spring.authentication>4.2.3.RELEASE</version.spring.authentication>-->
         <version.spring.security>5.0.0.M3</version.spring.security>
 
         <version.mysql-connector>5.1.43</version.mysql-connector>
@@ -218,19 +218,19 @@
         <!-- Spring Security -->
 
         <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-core</artifactId>-->
-        <!--<version>${version.spring.security}</version>-->
+        <!--<groupId>org.springframework.authentication</groupId>-->
+        <!--<artifactId>spring-authentication-core</artifactId>-->
+        <!--<version>${version.spring.authentication}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-web</artifactId>-->
-        <!--<version>${version.spring.security}</version>-->
+        <!--<groupId>org.springframework.authentication</groupId>-->
+        <!--<artifactId>spring-authentication-web</artifactId>-->
+        <!--<version>${version.spring.authentication}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-config</artifactId>-->
-        <!--<version>${version.spring.security}</version>-->
+        <!--<groupId>org.springframework.authentication</groupId>-->
+        <!--<artifactId>spring-authentication-config</artifactId>-->
+        <!--<version>${version.spring.authentication}</version>-->
         <!--</dependency>-->
 
         <!-- Spring Testing -->
@@ -267,9 +267,9 @@
         <!--<scope>test</scope>-->
         <!--</dependency>-->
         <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-test</artifactId>-->
-        <!--<version>${version.spring.security}</version>-->
+        <!--<groupId>org.springframework.authentication</groupId>-->
+        <!--<artifactId>spring-authentication-test</artifactId>-->
+        <!--<version>${version.spring.authentication}</version>-->
         <!--<scope>test</scope>-->
         <!--</dependency>-->
 
@@ -392,6 +392,23 @@
         <!--<version>3.1.0</version>-->
         <!--</dependency>-->
 
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.0.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>3.0.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -434,7 +451,7 @@
 
                     <executable>true</executable>
 
-                    <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>
+                    <!--<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>-->
 
                     <profiles>
 
@@ -504,35 +521,73 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>1.13</version>
-                <configuration>
-
-                    <extraFiles>
-
-                        <DockerFile>properties</DockerFile>
-
-                    </extraFiles>
-
-                </configuration>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
                 <executions>
-
                     <execution>
-
-                        <id>first</id>
+                        <id>prepare-agent</id>
                         <goals>
-
-                            <goal>update-file-header</goal>
-
+                            <goal>prepare-agent</goal>
                         </goals>
-
-                        <phase>process-sources</phase>
-
                     </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the path to the file which contains the execution data. -->
 
+                            <dataFile>target/jacoco.exec</dataFile>
+                            <!-- Sets the output directory for the code coverage report. -->
+                            <outputDirectory>target/jacoco-ut</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
+                <configuration>
+                        <destFile>target/jacoco.exec</destFile>
+                </configuration>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>licenses-maven-plugin</artifactId>-->
+                <!--<version>1.13</version>-->
+                <!--<configuration>-->
+
+                    <!--<extraFiles>-->
+
+                        <!--<DockerFile>properties</DockerFile>-->
+
+                    <!--</extraFiles>-->
+
+                <!--</configuration>-->
+                <!--<executions>-->
+
+                    <!--<execution>-->
+
+                        <!--<id>first</id>-->
+                        <!--<goals>-->
+
+                            <!--<goal>update-file-header</goal>-->
+
+                        <!--</goals>-->
+
+                        <!--<phase>process-sources</phase>-->
+
+                    <!--</execution>-->
+
+                <!--</executions>-->
+            <!--</plugin>-->
 
         </plugins>
 
@@ -571,5 +626,4 @@
         </profile>
 
     </profiles>
-
 </project>
