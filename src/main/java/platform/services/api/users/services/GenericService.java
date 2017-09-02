@@ -31,15 +31,13 @@ package platform.services.api.users.services;
  * streaming-platform.com
  */
 
-import com.streamingplatform.api.common.entities.*;
-import org.apache.logging.log4j.*;
-import org.springframework.data.domain.*;
-import platform.api.common.entities.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import platform.services.api.common.jpa.entities.BaseEntity;
 
 //@Service
-public interface GenericService<T, D, ID> {
-
-    Logger log = LogManager.getLogger(GenericServiceImpl.class);
+public interface GenericService {
 
     Page getAll(Pageable pageable);
 

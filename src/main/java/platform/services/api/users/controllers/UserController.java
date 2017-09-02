@@ -50,42 +50,49 @@ package platform.services.api.users.controllers;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
-import com.streamingplatform.api.common.controller.*;
-import com.streamingplatform.api.users.entities.*;
-import com.streamingplatform.api.users.services.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.data.crossstore.ChangeSetPersister.*;
-import org.springframework.data.domain.*;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
-import platform.api.common.controller.*;
-import platform.services.api.users.entities.*;
-import platform.services.api.users.services.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import platform.services.api.common.controller.BaseRestController;
+import platform.services.api.common.utilities.Tracing;
+import platform.services.api.users.jpa.User;
+import platform.services.api.users.services.UserService;
 
 @RestController
 @RequestMapping("/users")
-public class UserController extends AbstractRestController {
+public class UserController extends BaseRestController {
 
     @Autowired
     private UserService service;
     
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> save(@RequestBody User user) {
-        
-        log.trace("create: {}", user);
+
+        Tracing.trace("create: {}", user);
 
         User created = service.save(user);
 
-        return new ResponseEntity<User>(created, HttpStatus.OK);
+        return new ResponseEntity<>(created, HttpStatus.OK);
         
     }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Page> getAll(Pageable pageable) throws NotFoundException {
-        
-        Page<User> results = service.getAll(pageable);
 
-        return new ResponseEntity<>((Page) results, HttpStatus.OK);
+    @PreAuthorize("hasAuthority('ROLE_USER_ADMIN')")
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Page<?>> getAll(Pageable pageable) throws NotFoundException {
+        
+        final Page<?> results = service.getAll(pageable);
+
+        return new ResponseEntity<> (results, HttpStatus.OK);
         
     }
     

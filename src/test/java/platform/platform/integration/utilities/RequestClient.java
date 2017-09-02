@@ -55,6 +55,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
+import platform.services.api.common.authentication.*;
 
 public class RequestClient {
     
@@ -105,7 +106,7 @@ public class RequestClient {
             String plainClientCredentials  = username + ":" + password;
             String base64ClientCredentials = new String(Base64.encodeBase64(plainClientCredentials.getBytes()));
             
-            headers.add("Authorization", "Basic " + base64ClientCredentials);
+            headers.add(AuthenticationEntryPoint.HEADER_AUTHORIZATION, "Basic " + base64ClientCredentials);
             
         }
         

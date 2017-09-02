@@ -1,15 +1,15 @@
 package platform.platform.api.common;
 
-import platform.api.common.entities.*;
-import platform.api.common.repositories.*;
-import platform.api.common.utils.logging.*;
+import platform.services.api.common.jpa.entities.*;
+import platform.services.api.common.jpa.repositories.*;
+import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.services.*;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class BaseTests {
 
-    protected GenericService genericService;
+    private GenericService genericService;
 
     protected void baseEntity_deleteByObj(BaseEntity entity) {
 
@@ -17,7 +17,7 @@ public class BaseTests {
 
         baseEntity_isValid(entity);
 
-        genericService.delete(entity);
+        getGenericService().delete(entity);
 
     }
 
@@ -44,4 +44,13 @@ public class BaseTests {
 
     }
 
+    public GenericService getGenericService() {
+
+        return genericService;
+    }
+
+    public void setGenericService(GenericService genericService) {
+
+        this.genericService = genericService;
+    }
 }

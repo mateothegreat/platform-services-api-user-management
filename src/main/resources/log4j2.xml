@@ -110,7 +110,7 @@
             <AppenderRef ref="org.hibernate"/>
         </Logger>
 
-        <Logger name="com.streamingplatform" level="trace">
+        <Logger name="platform" level="trace">
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 

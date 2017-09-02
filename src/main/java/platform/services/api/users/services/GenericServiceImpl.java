@@ -31,39 +31,45 @@ package platform.services.api.users.services;
  * streaming-platform.com
  */
 
-import com.streamingplatform.api.common.entities.*;
-import com.streamingplatform.api.common.repositories.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.dao.*;
-import org.springframework.data.domain.*;
-import platform.api.common.entities.*;
-import platform.api.common.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import platform.services.api.common.jpa.entities.BaseEntity;
+import platform.services.api.common.jpa.repositories.BaseRepository;
+import platform.services.api.common.utilities.Tracing;
 
 //@Service
-public class GenericServiceImpl<T, D, ID> implements GenericService<T, D, ID> {
+public class GenericServiceImpl implements GenericService {
 
-    private final BaseRepository baseRepository;
+    private BaseRepository baseRepository;
 
     @Autowired
     public GenericServiceImpl(final BaseRepository baseRepository) {
 
-        log.trace("GenericServiceImpl(BaseRepository): {}", baseRepository.toString());
+        Tracing.trace("GenericServiceImpl(BaseRepository): {}", baseRepository.toString());
 
         this.baseRepository = baseRepository;
 
     }
 
-    public BaseEntity saveEntity(BaseEntity entity) throws DuplicateKeyException {
+    public GenericServiceImpl() {}
 
-        log.fatal("saveEntity: {}", entity.toString());
+    public BaseEntity saveEntity(final BaseEntity entity) {
+
+        Tracing.trace("saveEntity: {}", entity.toString());
+
+        BaseEntity result = null;
 
         try {
 
-            return (BaseEntity) baseRepository.save(entity);
+            result = (BaseEntity) baseRepository.save(entity);
 
-        } catch(DataIntegrityViolationException e) {
+        } catch(final DataIntegrityViolationException e) {
 
-            Throwable t = e.getRootCause();
+            final Throwable t = e.getRootCause();
 
             if(t != null) {
 
@@ -82,11 +88,11 @@ public class GenericServiceImpl<T, D, ID> implements GenericService<T, D, ID> {
 
         }
 
-        return null;
+        return result;
 
     }
 
-    public Page getAll(final Pageable pageable) {
+    public Page<?> getAll(final Pageable pageable) {
 
         return baseRepository.findAll(pageable);
 

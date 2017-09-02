@@ -595,17 +595,17 @@
 
     <profiles>
 
-        <profile>
+        <!--<profile>-->
 
-            <id>dev</id>
-            <properties>
+            <!--<id>dev</id>-->
+            <!--<properties>-->
 
-                <spring.profiles.active>dev</spring.profiles.active>
-                <logging.level.root>info</logging.level.root>
+                <!--<spring.profiles.active>dev</spring.profiles.active>-->
+                <!--<logging.level.root>info</logging.level.root>-->
 
-            </properties>
+            <!--</properties>-->
 
-        </profile>
+        <!--</profile>-->
 
         <profile>
 
@@ -613,7 +613,7 @@
             <properties>
 
                 <spring.profiles.active>test</spring.profiles.active>
-                <logging.level.root>info</logging.level.root>
+                <logging.level.root>trace</logging.level.root>
 
             </properties>
 

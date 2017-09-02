@@ -49,23 +49,101 @@ package platform.services.api.users.services;
  * streaming-platform.com
  */
 
-import com.streamingplatform.api.users.entities.*;
-import platform.services.api.users.entities.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Service
-public interface UserService extends GenericService {
+import platform.services.api.common.jpa.entities.BaseEntity;
+import platform.services.api.common.security.SecurityCryptor;
+import platform.services.api.common.utilities.Tracing;
+import platform.services.api.users.jpa.User;
+import platform.services.api.users.jpa.UserRepository;
 
-//    User save(User entity) throws DuplicateKeyException;
+@Service
+//public class UserServiceImpl implements GenericService {
+public class UserService extends GenericServiceImpl  {
+//public class UserServiceImpl implements UserService {
 
-    User getUserByUsername(String username);
+    @Autowired
+    private final UserRepository userRepository;
 
-    User getUserByEmail(String email);
+    public UserService(final UserRepository userRepository) {
 
-    List<String> getPermissions(String username);
+        super(userRepository);
 
-    User save(User user);
+        Tracing.trace("UserServiceImpl(UserRepository): {}", userRepository.toString());
 
-//    boolean delete(User created);
+        this.userRepository = userRepository;
+
+    }
+
+    @Override
+    public boolean delete(final BaseEntity entity) {
+
+        userRepository.deleteById(entity.getId());
+
+        return !userRepository.existsById(entity.getId());
+
+    }
+
+    public User save(final User entity) {
+
+        entity.setPassword(SecurityCryptor.encode(entity.getPassword()));
+
+        return (User) this.saveEntity(entity);
+
+    }
+//    public User getUserByUsername(String username) {
+//
+//        return baseRepository.getUserByUsername(username);
+//
+//    }
+//
+//    public User getUserByEmail(String email) {
+//
+//        return baseRepository.getUserByEmail(email);
+//
+//    }
+
+    public List<String> getPermissions(String username) {
+
+        Tracing.trace("getPermissions: {}", username);
+
+        return new ArrayList<>();
+
+    }
+
+    public User getUserByUsername(final String username) {
+
+        return null;
+    }
+
+    public User getUserByEmail(final String email) {
+
+        return null;
+    }
+
+    // public User getUserInfo(String username) {
+    //
+    //     String sql = "SELECT u.username name, u.password pass, a.authority role FROM " + "comp_users u INNER JOIN comp_authorities a on u.username=a
+    // .username WHERE " + "u.enabled =1 and u.username = ?";
+    //     UserInfo userInfo = (UserInfo) jdbcTemplate.queryForObject(sql, new Object[]{username},
+    //                                                                new RowMapper<UserInfo>() {
+    //
+    //                                                                    public UserInfo mapRow(ResultSet rs,
+    //                                                                                           int rowNum) throws
+    //                                                                                                       SQLException {
+    //
+    //                                                                        UserInfo user = new UserInfo();
+    //                                                                        user.setUsername(rs.getString("name"));
+    //                                                                        user.setPassword(rs.getString("pass"));
+    //                                                                        user.setRole(rs.getString("role"));
+    //                                                                        return user;
+    //                                                                    }
+    //                                                                });
+    //     return userInfo;
+    // }
+
 }
