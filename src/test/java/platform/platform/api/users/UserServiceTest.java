@@ -1,15 +1,14 @@
 package platform.platform.api.users;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import org.junit.*;
+import org.junit.runner.*;
 
 import platform.platform.api.common.BaseTests;
 import platform.services.api.common.jpa.repositories.BaseRepositoryOperations;
@@ -28,6 +27,7 @@ public class UserServiceTest extends BaseTests {
 
     @Autowired private UserService userService;
 
+    private User user;
 
     @Before
     public void setUp() throws Exception {

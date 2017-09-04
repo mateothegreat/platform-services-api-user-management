@@ -5,12 +5,9 @@ import org.apache.logging.log4j.*;
 
 public class Tracing {
 
-
-//    public static Logger log = LogManager.getLogger(BaseEntity.class);
-
     public static String toString(Object o) {
 
-        return ToStringBuilder.reflectionToString(o, RecursiveToStringStyle.MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(o, ToStringStyle.MULTI_LINE_STYLE);
 
     }
 
@@ -19,4 +16,5 @@ public class Tracing {
         LogManager.getLogger().trace(str, args);
 
     }
+
 }

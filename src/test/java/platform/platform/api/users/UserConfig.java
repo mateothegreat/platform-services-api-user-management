@@ -68,12 +68,19 @@ import platform.services.api.users.jpa.User;
 @ComponentScan({ ApplicationConfig.PLATFORM_SERVICES_API_COMMON, ApplicationConfig.PLATFORM_SERVICES_API_USERS, })
 public class UserConfig {
 
-    public static final String USER_VALID_USERNAME   = "test-user1";
-    public static final String USER_VALID_PASSWORD   = "test-password";
-    public static final String USER_VALID_EMAIL      = "test-user1@test-user1.com";
-    public static final String USER_INVALID_USERNAME = "invalid";
-    public static final String USER_INVALID_PASSWORD = "invalid";
-    public static final String USER_INVALID_EMAIL    = "invalid@invalid.com";
+    public static final Long   USER_VALID_ID               = 1L;
+    public static final Long   USER_VALID_PARENT_ID        = 1L;
+    public static final int    USER_VALID_STATUS           = 1;
+    public static final String USER_VALID_EMAIL            = "test-user1@test-user1.com";
+    public static final String USER_VALID_USERNAME         = "test-user1";
+    public static final String USER_VALID_PASSWORD         = "test-password";
+    public static final String USER_VALID_PASSWORD_ENCODED = "$2a$10$atc5W7EVviaucgev1/LgWu3fIcOH0S9dYPzX0cUgYQE6fHIshL4.q";
+    public static final Long   USER_INVALID_ID             = 0L;
+    public static final Long   USER_INVALID_PARENT_ID      = -1L;
+    public static final int    USER_INVALID_STATUS         = -1;
+    public static final String USER_INVALID_EMAIL          = "invalid@invalid.com";
+    public static final String USER_INVALID_USERNAME       = "invalid";
+    public static final String USER_INVALID_PASSWORD       = "invalid";
 
     //    private UserRepository userRepository;
 //    private UserService    userService;
@@ -87,11 +94,12 @@ public class UserConfig {
 
         final User user = new User();
 
+        user.setId(USER_VALID_ID);
+        user.setParentId(USER_VALID_PARENT_ID);
+        user.setStatus(USER_VALID_STATUS);
         user.setEmail(USER_VALID_EMAIL);
         user.setUsername(USER_VALID_USERNAME);
         user.setPassword(USER_VALID_PASSWORD);
-        user.setParentId(0L);
-        user.setStatus(1);
 
         return user;
 

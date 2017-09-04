@@ -51,9 +51,6 @@ package platform.services.api.users.jpa;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -62,7 +59,6 @@ import javax.validation.constraints.NotEmpty;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.common.security.SecurityCryptor;
-import platform.services.api.common.utilities.Tracing;
 
 @Entity
 @Table(name = "user")
@@ -73,20 +69,20 @@ public class User extends BaseEntity {
     private @NotEmpty @Length(min = 8, max = 60) String password;
     private @NotEmpty @Range(min = 0, max = 9)   int    status;
 
-    private static UserDetails getAuthenticationUserDetails() {
-
-        final Authentication authentication = SecurityContextHolder.getContext()
-                                                                   .getAuthentication();
-
-        if(authentication == null || !authentication.isAuthenticated()) {
-
-            return null;
-
-        }
-
-        return (UserDetails) authentication.getPrincipal();
-
-    }
+//    public static UserDetails getAuthenticationUserDetails() {
+//
+//        final Authentication authentication = SecurityContextHolder.getContext()
+//                                                                   .getAuthentication();
+//
+//        if(authentication == null || !authentication.isAuthenticated()) {
+//
+//            return null;
+//
+//        }
+//
+//        return (UserDetails) authentication.getPrincipal();
+//
+//    }
 
     public String getUsername() {
 
@@ -99,24 +95,13 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    /**
-     * https://stackoverflow.com/questions/5393803/can-someone-explain-how-bcrypt-verifies-a-hash/10933491#10933491
-     * <p>
-     * LEFT: User@1f172892[ parent_id=0 username=user1 password=$2a$10$pycCLgy/EJLM2Dkl921dnOdOBL7WGkbShrp7t1bBAiykVTR9IXvNa status=1 email=user1@user1.com
-     * id=264 ], RIGHT: User@57a667c8[ parent_id=0 username=user1 password=$2a$10$HqGOkQh20j.xrYTdi4fqCekaImD1s8TA8MIjB/nsJZ7SuGU43sJ8q status=1
-     * email=user1@user1.com id= 264 ]
-     */
     public String getPassword() {
-
-        Tracing.trace("getPassword: {} - {}", password, SecurityCryptor.encode(password));
 
         return SecurityCryptor.encode(password);
 
     }
 
     public void setPassword(final String password) {
-
-        Tracing.trace("setPassword: {} - {}", password, SecurityCryptor.encode(password));
 
         this.password = SecurityCryptor.encode(password);
 
