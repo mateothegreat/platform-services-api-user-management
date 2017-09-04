@@ -21,6 +21,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserTest extends BaseTests {
 
+    @Test
+    public void getAuthenticationUserDetails() throws Exception {
+
+
+
+        assertThat(User.getAuthenticationUserDetails()).isNull();
+
+
+
+    }
+
     private User user;
 
     @Before public void setUp() {
@@ -28,10 +39,6 @@ public class UserTest extends BaseTests {
         SecurityCryptor.setTrace(false);
 
         user = UserConfig.buildUser();
-
-    }
-
-    @After public void tearDown() {
 
     }
 
@@ -94,7 +101,6 @@ public class UserTest extends BaseTests {
     public void toStringTest() {
 
         assertThat(user.toString()).isNotBlank();
-assertThat(SecurityCryptor.encode("test")).isNotEmpty();
 
     }
 

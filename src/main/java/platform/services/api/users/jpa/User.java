@@ -51,6 +51,10 @@ package platform.services.api.users.jpa;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -69,20 +73,21 @@ public class User extends BaseEntity {
     private @NotEmpty @Length(min = 8, max = 60) String password;
     private @NotEmpty @Range(min = 0, max = 9)   int    status;
 
-//    public static UserDetails getAuthenticationUserDetails() {
-//
-//        final Authentication authentication = SecurityContextHolder.getContext()
-//                                                                   .getAuthentication();
-//
-//        if(authentication == null || !authentication.isAuthenticated()) {
-//
-//            return null;
-//
-//        }
-//
-//        return (UserDetails) authentication.getPrincipal();
-//
-//    }
+    @Nullable
+    public static UserDetails getAuthenticationUserDetails() {
+
+        final Authentication authentication = SecurityContextHolder.getContext()
+                                                                   .getAuthentication();
+
+        if(authentication == null || !authentication.isAuthenticated()) {
+
+            return null;
+
+        }
+
+        return (UserDetails) authentication.getPrincipal();
+
+    }
 
     public String getUsername() {
 
