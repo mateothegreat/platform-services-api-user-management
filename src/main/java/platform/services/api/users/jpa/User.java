@@ -49,16 +49,16 @@ package platform.services.api.users.jpa;
  * streaming-platform.com
  */
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.common.security.SecurityCryptor;
@@ -68,35 +68,23 @@ import platform.services.api.common.utilities.Tracing;
 @Table(name = "user")
 public class User extends BaseEntity {
 
+    private @NotEmpty @Email                     String email;
+    private @NotEmpty @Length(min = 4, max = 32) String username;
+    private @NotEmpty @Length(min = 8, max = 60) String password;
+    private @NotEmpty @Range(min = 0, max = 9)   int    status;
 
-    @NotNull
-    @Range(min = 0)
-    private int parent_id;
+    private static UserDetails getAuthenticationUserDetails() {
 
-    @NotEmpty
-    @Length(min = 4, max = 32)
-    private String username;
+        final Authentication authentication = SecurityContextHolder.getContext()
+                                                                   .getAuthentication();
 
-    @NotEmpty
-    @Length(min = 8, max = 60)
-    private String password;
+        if(authentication == null || !authentication.isAuthenticated()) {
 
-    @Range(min = 0, max = 9)
-    @NotNull
-    private int status;
+            return null;
 
-    @NotEmpty
-    @Email
-    private String email;
+        }
 
-    public int getParent_id() {
-
-        return parent_id;
-    }
-
-    public void setParent_id(int parent_id) {
-
-        this.parent_id = parent_id;
+        return (UserDetails) authentication.getPrincipal();
 
     }
 
@@ -106,13 +94,17 @@ public class User extends BaseEntity {
 
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
 
         this.username = username;
     }
 
-    /*
+    /**
      * https://stackoverflow.com/questions/5393803/can-someone-explain-how-bcrypt-verifies-a-hash/10933491#10933491
+     * <p>
+     * LEFT: User@1f172892[ parent_id=0 username=user1 password=$2a$10$pycCLgy/EJLM2Dkl921dnOdOBL7WGkbShrp7t1bBAiykVTR9IXvNa status=1 email=user1@user1.com
+     * id=264 ], RIGHT: User@57a667c8[ parent_id=0 username=user1 password=$2a$10$HqGOkQh20j.xrYTdi4fqCekaImD1s8TA8MIjB/nsJZ7SuGU43sJ8q status=1
+     * email=user1@user1.com id= 264 ]
      */
     public String getPassword() {
 
@@ -121,27 +113,8 @@ public class User extends BaseEntity {
         return SecurityCryptor.encode(password);
 
     }
-//LEFT: User@1f172892[
-//parent_id=0
-//username=user1
-//password=$2a$10$pycCLgy/EJLM2Dkl921dnOdOBL7WGkbShrp7t1bBAiykVTR9IXvNa
-//status=1
-//email=user1@user1.com
-//        id=264
-//], RIGHT: User@57a667c8[
-//parent_id=0
-//username=user1
-//password=$2a$10$HqGOkQh20j.xrYTdi4fqCekaImD1s8TA8MIjB/nsJZ7SuGU43sJ8q
-//status=1
-//email=user1@user1.com
-//        id= 264
-//]
-//    public void setPas
-//username=user1
-//password=$2a$10$HqGOkQh20j.xrYTdi4fqCekaImD1s8TA8MIjB/nsJZ7SuGU43sJ8q
-//status=1
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 
         Tracing.trace("setPassword: {} - {}", password, SecurityCryptor.encode(password));
 
@@ -154,7 +127,7 @@ public class User extends BaseEntity {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(final int status) {
 
         this.status = status;
     }
@@ -164,36 +137,15 @@ public class User extends BaseEntity {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 
         this.email = email;
     }
 
-    private String getUsernameOfAuthenticatedUser() {
+    @Override public String toString() {
 
-        Authentication authentication = SecurityContextHolder.getContext()
-                                                             .getAuthentication();
-
-        if(authentication == null || !authentication.isAuthenticated()) {
-
-            return null;
-
-        }
-
-        return ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+        return String.format("User{email='%s', username='%s', password='%s', status=%d}", email, username, password, status);
 
     }
 
-    @Override
-    public String toString() {
-
-        return "User{" +
-                "id=" + id +
-                ", parent_id=" + parent_id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", status=" + status +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

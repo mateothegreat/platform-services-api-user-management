@@ -44,28 +44,37 @@ import platform.services.api.common.utilities.Tracing;
 //@Service
 public class GenericServiceImpl implements GenericService {
 
+//    private final BaseRepository<BaseEntity, Long> baseRepository;
     private BaseRepository baseRepository;
+
+//    public GenericServiceImpl(final BaseRepository<BaseEntity, Long> baseRepository) {
+//
+//
+//        this.baseRepository = baseRepository;
+//
+//    }
 
     @Autowired
     public GenericServiceImpl(final BaseRepository baseRepository) {
 
-        Tracing.trace("GenericServiceImpl(BaseRepository): {}", baseRepository.toString());
-
         this.baseRepository = baseRepository;
+
+        Tracing.trace("GenericServiceImpl(BaseRepository): {}", baseRepository.toString());
 
     }
 
     public GenericServiceImpl() {}
 
+
     public BaseEntity saveEntity(final BaseEntity entity) {
 
         Tracing.trace("saveEntity: {}", entity.toString());
 
-        BaseEntity result = null;
+        Object result = null;
 
         try {
 
-            result = (BaseEntity) baseRepository.save(entity);
+            result = baseRepository.save(entity);
 
         } catch(final DataIntegrityViolationException e) {
 
@@ -88,7 +97,7 @@ public class GenericServiceImpl implements GenericService {
 
         }
 
-        return result;
+        return (BaseEntity) result;
 
     }
 
@@ -106,9 +115,11 @@ public class GenericServiceImpl implements GenericService {
 
     }
 
-    public void deleteById(final long entityId) {
+    public boolean deleteById(final long entityId) {
 
         baseRepository.deleteById(entityId);
+
+        return !baseRepository.existsById(entityId);
 
     }
 

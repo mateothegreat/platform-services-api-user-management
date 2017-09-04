@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -51,29 +49,63 @@ package platform.services.api.common.jpa.entities;
  * streaming-platform.com
  */
 
-import javax.persistence.*;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 //@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class BaseEntity {
 //public class BaseEntity implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
+    private Long id;
+
+    private @NotNull @Range(min = 0) Long parentId;
+
+//    @Version
+//    private Integer version;
+
+    public Long getParentId() {
+
+        return parentId;
+    }
+
+    public void setParentId(final Long parentId) {
+
+        this.parentId = parentId;
+
+    }
 
     public Long getId() {
-        
+
         return id;
+
     }
-    
-    public void setId(Long id) {
-        
+
+    public void setId(final Long id) {
+
         this.id = id;
 
     }
-    
+
+//    public Integer getVersion() {
+//
+//        return version;
+//    }
+
+//    public void setVersion(final Integer version) {
+//
+//        this.version = version;
+//
+//    }
+
+
     // @Column(name = "createdByUser", nullable = false)
     // @CreatedBy
     // private String createdByUser;
@@ -90,7 +122,5 @@ public class BaseEntity {
     // @Column(name = "modificationTime", nullable = false)
     // @LastModifiedDate
     // private ZonedDateTime modificationTime;
-    
 
-    
 }

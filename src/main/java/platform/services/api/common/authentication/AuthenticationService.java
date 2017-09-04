@@ -88,7 +88,7 @@ public class AuthenticationService implements UserDetailsService {
 
         }
 
-        final List<String> permissions = service.getPermissions(user.getUsername());
+        final List<String> permissions = UserService.getPermissions(user.getUsername());
 
         Tracing.trace("loadUserByUsername->service.getPermissions({}): {}", user.getUsername(), permissions.toString());
 

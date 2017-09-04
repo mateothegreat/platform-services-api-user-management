@@ -16,7 +16,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.platform.api.users.services;
+package platform.platform.api.users;
 
 /*-
  * $$SoftwareLicense
@@ -56,6 +56,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.ApplicationConfig;
+import platform.services.api.users.jpa.User;
 
 //@Profile("test")
 @Configuration
@@ -65,7 +66,7 @@ import platform.services.api.users.ApplicationConfig;
 //@EntityScan(basePackages = { ApplicationConfig.PLATFORM_SERVICES_API_USERS_JPA, })
 //@AutoConfigureTestEntityManager
 @ComponentScan({ ApplicationConfig.PLATFORM_SERVICES_API_COMMON, ApplicationConfig.PLATFORM_SERVICES_API_USERS, })
-public class TestingConfig {
+public class UserConfig {
 
     public static final String USER_VALID_USERNAME   = "test-user1";
     public static final String USER_VALID_PASSWORD   = "test-password";
@@ -77,9 +78,23 @@ public class TestingConfig {
     //    private UserRepository userRepository;
 //    private UserService    userService;
 
-    public TestingConfig() {
+    public UserConfig() {
 
         Tracing.trace("TestingConfig: ");
+    }
+
+    public static User buildUser() {
+
+        final User user = new User();
+
+        user.setEmail(USER_VALID_EMAIL);
+        user.setUsername(USER_VALID_USERNAME);
+        user.setPassword(USER_VALID_PASSWORD);
+        user.setParentId(0L);
+        user.setStatus(1);
+
+        return user;
+
     }
 //    public TestingConfig(final UserRepository userRepository, final UserService userService) {
 //

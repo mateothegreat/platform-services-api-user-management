@@ -42,6 +42,8 @@ public interface GenericService {
     Page getAll(Pageable pageable);
 
     boolean delete(final BaseEntity entity);
+
+
 //        T save(T entity) throws DuplicateKeyException;
 //    Object save(BaseEntity entity) throws DuplicateKeyException;
 

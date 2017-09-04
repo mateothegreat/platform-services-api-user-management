@@ -122,7 +122,7 @@
 //        user1.setEmail("user1@user1.com");
 //        user1.setUsername("user1");
 //        user1.setPassword("password");
-//        user1.setParent_id(0);
+//        user1.setParentId(0);
 //        user1.setStatus(1);
 //
 //    }

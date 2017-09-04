@@ -49,15 +49,18 @@ package platform.services.api.common.jpa.repositories;
  * streaming-platform.com
  */
 
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
-@NoRepositoryBean
-public interface BaseRepository<T, ID extends Serializable> extends PagingAndSortingRepository<T, ID> {
+@Repository
+//@NoRepositoryBean
+public interface BaseRepository<T, ID extends Serializable> extends PagingAndSortingRepository<T, ID> {//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
 
-//    /**
+//    /**s
 //     * Returns all entities sorted by the given options.
 //     *
 //     * @param sort

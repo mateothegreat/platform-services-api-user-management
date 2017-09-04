@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -56,16 +54,43 @@ import org.springframework.stereotype.Repository;
 import platform.services.api.common.jpa.repositories.BaseRepository;
 
 @Repository
-//public interface UserRepository extends JpaRepository {
 public interface UserRepository extends BaseRepository<User, Long> {
+    //public interface UserRepository<User, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
 
-//    Page<User> findAll(Pageable pageable);
+//    Page<BaseEntity> findAll(Pageable pageable);
 
-//    void deleteById(Long id);
+    User getUserByEmail(String email);
+
+    User getUserByUsername(String username);
+
+//    @Override Iterable<BaseEntity> findAll(Sort sort);
+
+//    @Override Page<BaseEntity> findAll(Pageable pageable);
+
+//    @Override <S extends T> S save(S entity);
+
+//    @Override <S extends T> Iterable<S> saveAll(Iterable<S> entities);
+
+//    @Override Optional<BaseEntity> findById(java.lang.Long aLong);
+
+//    @Override boolean existsById(java.lang.Long aLong);
+
+//    @Override Iterable<BaseEntity> findAll();
 //
-//    User getUserByEmail(String email);
+//    @Override long count();
 //
-//    User getUserByUsername(String username);
+//    @Override void delete(BaseEntity entity);
+//
+//    @Override void deleteAll();
+//
+//    @Override void deleteById(java.lang.Long aLong);
+//
+//    @Override void deleteAll(Iterable<? extends platform.services.api.common.jpa.entities.BaseEntity> entities);
+//
+//    @Override Iterable<platform.services.api.common.jpa.entities.BaseEntity> findAllById(Iterable<java.lang.Long> longs);
+
+//    void delete(final BaseEntity entity);
+//    void deleteById(final long entityId);
 
 //    User save(User user);
 

@@ -1,4 +1,4 @@
-package platform.platform.api.users.services;
+package platform.platform.api.users;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import platform.platform.api.common.BaseTests;
-import platform.platform.api.users.UserTestUtils;
 import platform.services.api.common.jpa.repositories.BaseRepositoryOperations;
 import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.jpa.User;
@@ -23,25 +22,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 //@ActiveProfiles("test")
 @Profile("test")
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = TestingConfig.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = { UserService.class, UserConfig.class }, loader = AnnotationConfigContextLoader.class)
+
 public class UserServiceTest extends BaseTests {
 
-    @Autowired
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    private UserService userService;
+    @Autowired private UserService userService;
 
-    private User user;
 
     @Before
     public void setUp() throws Exception {
 
-        this.setGenericService(userService);
+        this.genericService = userService;
 
-        user = UserTestUtils.buildUser();
+        user = UserConfig.buildUser();
 
         final User created = userService.save(user);
 
-        this.baseEntity_isValid(created);
+        BaseTests.baseEntity_isValid(created);
 
     }
 
@@ -50,7 +47,7 @@ public class UserServiceTest extends BaseTests {
 
         this.baseEntity_deleteByObj(user);
 
-        assertThat(userService.getUserByEmail(TestingConfig.USER_VALID_EMAIL)).isNull();
+        assertThat(userService.getUserByEmail(UserConfig.USER_VALID_EMAIL)).isNull();
 
     }
 
@@ -64,28 +61,45 @@ public class UserServiceTest extends BaseTests {
         assertThat(results.getTotalElements()).isGreaterThan(1);
         assertThat(results.getTotalPages()).isEqualTo(1);
 
-        this.baseEntity_isValid((User) results.getContent()
-                                              .get(0));
+        BaseTests.baseEntity_isValid((User) results.getContent()
+                                                   .get(0));
 
     }
 
-//    @Test
-//    public void findAll1() throws Exception {
-//
-//    }
+    @Test
+    public void getUserByUsername() throws Exception {
 
-//    @Test
-//    public void getUserByUsername() throws Exception {
-//
-//        baseEntity_isValid(userService.getUserByUsername(UserTestUtils.USER_VALID_USERNAME));
-//
-//    }
-//    @Test
-//    public void getUserByEmail() throws Exception {
-//
-//        baseEntity_isValid(userService.getUserByEmail(UserTestUtils.USER_VALID_EMAIL));
-//
-//    }
+        final User result = userService.getUserByUsername(UserConfig.USER_VALID_USERNAME);
+
+        baseEntity_isValid(user);
+        baseEntity_compare(result, user);
+
+    }
+
+    @Test
+    public void getUserByEmail() throws Exception {
+
+        final User result = userService.getUserByEmail(UserConfig.USER_VALID_EMAIL);
+
+        baseEntity_isValid(userService.getUserByEmail(UserConfig.USER_VALID_EMAIL));
+        baseEntity_compare(result, user);
+
+    }
+
+    public UserService getUserService() {
+
+        assertThat(userService).isNotNull();
+
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+
+        assertThat(userService).isNotNull();
+
+        this.userService = userService;
+
+    }
 
 //    @Test
 //    public void save() throws Exception {

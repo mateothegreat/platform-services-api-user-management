@@ -1,21 +1,3 @@
-/*
- * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
- *
- * This library is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library.  If not, see
- * <http://www.gnu.org/licenses/>.
- */
-
 package platform.services.api.users.services;
 
 /*-
@@ -62,13 +44,11 @@ import platform.services.api.users.jpa.User;
 import platform.services.api.users.jpa.UserRepository;
 
 @Service
-//public class UserServiceImpl implements GenericService {
-public class UserService extends GenericServiceImpl  {
-//public class UserServiceImpl implements UserService {
+public class UserService extends GenericServiceImpl {
 
-    @Autowired
     private final UserRepository userRepository;
 
+    @Autowired
     public UserService(final UserRepository userRepository) {
 
         super(userRepository);
@@ -76,6 +56,14 @@ public class UserService extends GenericServiceImpl  {
         Tracing.trace("UserServiceImpl(UserRepository): {}", userRepository.toString());
 
         this.userRepository = userRepository;
+
+    }
+
+    public static List<String> getPermissions(final String username) {
+
+        Tracing.trace("getPermissions: {}", username);
+
+        return new ArrayList<>(0);
 
     }
 
@@ -95,34 +83,17 @@ public class UserService extends GenericServiceImpl  {
         return (User) this.saveEntity(entity);
 
     }
-//    public User getUserByUsername(String username) {
-//
-//        return baseRepository.getUserByUsername(username);
-//
-//    }
-//
-//    public User getUserByEmail(String email) {
-//
-//        return baseRepository.getUserByEmail(email);
-//
-//    }
-
-    public List<String> getPermissions(String username) {
-
-        Tracing.trace("getPermissions: {}", username);
-
-        return new ArrayList<>();
-
-    }
 
     public User getUserByUsername(final String username) {
 
-        return null;
+        return userRepository.getUserByUsername(username);
+
     }
 
     public User getUserByEmail(final String email) {
 
-        return null;
+        return userRepository.getUserByEmail(email);
+
     }
 
     // public User getUserInfo(String username) {
