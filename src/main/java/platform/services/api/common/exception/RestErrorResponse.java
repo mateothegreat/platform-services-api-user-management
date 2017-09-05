@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -50,36 +48,39 @@ package platform.services.api.common.exception;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
+//public class RestErrorResponse extends ResponseEntity<RestErrorResponse> {
 public class RestErrorResponse {
-    
+
     private int    errorCode;
     private String message;
-    
+
     public RestErrorResponse(int errorCode, String message) {
-        
+
         this.errorCode = errorCode;
         this.message = message;
-        
-        //        return new ResponseEntity<RestErrorResponse>(new RestErrorResponse(HttpStatus.NOT_FOUND);
+
+//        return new ResponseEntity<RestErrorResponse>(new RestErrorResponse(errorCode, message));
+//        return new ResponseEntity<RestErrorResponse>(new RestErrorResponse(errorCode, message));
+
     }
-    
+
     public int getErrorCode() {
-        
+
         return errorCode;
     }
-    
+
     void setErrorCode(int errorCode) {
-        
+
         this.errorCode = errorCode;
     }
-    
+
     public String getMessage() {
-        
+
         return message;
     }
-    
+
     void setMessage(String message) {
-        
+
         this.message = message;
     }
 }

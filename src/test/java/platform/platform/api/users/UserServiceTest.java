@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.*;
 import org.junit.runner.*;
@@ -18,21 +20,22 @@ import platform.services.api.users.services.UserService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@ActiveProfiles("test")
 @Profile("test")
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = { UserService.class, UserConfig.class }, loader = AnnotationConfigContextLoader.class)
-
+@EnableTransactionManagement
+@Transactional
+@ContextConfiguration(classes = { UserConfig.class, UserService.class }, loader = AnnotationConfigContextLoader.class)
 public class UserServiceTest extends BaseTests {
 
     @Autowired private UserService userService;
-
-    private User user;
+    private            User        user;
 
     @Before
     public void setUp() throws Exception {
 
-        this.genericService = userService;
+        setGenericService(userService);
+
+        setUserService(userService);
 
         user = UserConfig.buildUser();
 
@@ -45,9 +48,8 @@ public class UserServiceTest extends BaseTests {
     @After
     public void tearDown() throws Exception {
 
-        this.baseEntity_deleteByObj(user);
-
-        assertThat(userService.getUserByEmail(UserConfig.USER_VALID_EMAIL)).isNull();
+        baseEntity_deleteByObj(user);
+        baseEntity_getById_doesNotExist(user.getId());
 
     }
 
@@ -58,8 +60,7 @@ public class UserServiceTest extends BaseTests {
 
         Tracing.trace("getAll: {}", Tracing.toString(results));
 
-        assertThat(results.getTotalElements()).isGreaterThan(1);
-        assertThat(results.getTotalPages()).isEqualTo(1);
+        assertThat(results.getTotalElements()).isGreaterThan(1L);
 
         BaseTests.baseEntity_isValid((User) results.getContent()
                                                    .get(0));
@@ -86,14 +87,34 @@ public class UserServiceTest extends BaseTests {
 
     }
 
+
+    @Test
+    public void save() throws Exception {
+
+        user.setStatus(5);
+        user.setParentId(1L);
+
+        final User result = userService.save(user);
+
+        baseEntity_isValid(userService.getById(user.getId()));
+        baseEntity_compare(result, user);
+
+    }
+
+    @Test
+    public void getById() throws Exception {
+
+        baseEntity_isValid(userService.getById(user.getId()));
+
+    }
+
     public UserService getUserService() {
 
         assertThat(userService).isNotNull();
 
         return userService;
     }
-
-    public void setUserService(UserService userService) {
+    public void setUserService(final UserService userService) {
 
         assertThat(userService).isNotNull();
 

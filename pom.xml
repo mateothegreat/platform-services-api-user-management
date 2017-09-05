@@ -19,7 +19,8 @@
 
 <!--https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#using-boot-starter-->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -424,6 +425,15 @@
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-rest-hal-browser</artifactId>
+            </dependency>
 
     </dependencies>
 
@@ -466,6 +476,7 @@
                 <configuration>
 
                     <executable>true</executable>
+                    <excludeDevtools>false</excludeDevtools>
 
                     <!--<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>-->
 
@@ -570,39 +581,39 @@
                     </execution>
                 </executions>
                 <configuration>
-                        <destFile>target/jacoco.exec</destFile>
+                    <destFile>target/jacoco.exec</destFile>
                 </configuration>
             </plugin>
 
             <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>licenses-maven-plugin</artifactId>-->
-                <!--<version>1.13</version>-->
-                <!--<configuration>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>licenses-maven-plugin</artifactId>-->
+            <!--<version>1.13</version>-->
+            <!--<configuration>-->
 
-                    <!--<extraFiles>-->
+            <!--<extraFiles>-->
 
-                        <!--<DockerFile>properties</DockerFile>-->
+            <!--<DockerFile>properties</DockerFile>-->
 
-                    <!--</extraFiles>-->
+            <!--</extraFiles>-->
 
-                <!--</configuration>-->
-                <!--<executions>-->
+            <!--</configuration>-->
+            <!--<executions>-->
 
-                    <!--<execution>-->
+            <!--<execution>-->
 
-                        <!--<id>first</id>-->
-                        <!--<goals>-->
+            <!--<id>first</id>-->
+            <!--<goals>-->
 
-                            <!--<goal>update-file-header</goal>-->
+            <!--<goal>update-file-header</goal>-->
 
-                        <!--</goals>-->
+            <!--</goals>-->
 
-                        <!--<phase>process-sources</phase>-->
+            <!--<phase>process-sources</phase>-->
 
-                    <!--</execution>-->
+            <!--</execution>-->
 
-                <!--</executions>-->
+            <!--</executions>-->
             <!--</plugin>-->
 
         </plugins>
@@ -613,13 +624,13 @@
 
         <!--<profile>-->
 
-            <!--<id>dev</id>-->
-            <!--<properties>-->
+        <!--<id>dev</id>-->
+        <!--<properties>-->
 
-                <!--<spring.profiles.active>dev</spring.profiles.active>-->
-                <!--<logging.level.root>info</logging.level.root>-->
+        <!--<spring.profiles.active>dev</spring.profiles.active>-->
+        <!--<logging.level.root>info</logging.level.root>-->
 
-            <!--</properties>-->
+        <!--</properties>-->
 
         <!--</profile>-->
 

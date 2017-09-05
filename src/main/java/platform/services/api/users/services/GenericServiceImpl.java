@@ -40,19 +40,12 @@ import org.springframework.data.domain.Pageable;
 import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.common.jpa.repositories.BaseRepository;
 import platform.services.api.common.utilities.Tracing;
+import platform.services.api.users.jpa.User;
 
 //@Service
 public class GenericServiceImpl implements GenericService {
 
-//    private final BaseRepository<BaseEntity, Long> baseRepository;
-    private BaseRepository baseRepository;
-
-//    public GenericServiceImpl(final BaseRepository<BaseEntity, Long> baseRepository) {
-//
-//
-//        this.baseRepository = baseRepository;
-//
-//    }
+    private final BaseRepository baseRepository;
 
     @Autowired
     public GenericServiceImpl(final BaseRepository baseRepository) {
@@ -63,8 +56,9 @@ public class GenericServiceImpl implements GenericService {
 
     }
 
-    public GenericServiceImpl() {}
-
+//    public GenericServiceImpl() {
+//
+//    }
 
     public BaseEntity saveEntity(final BaseEntity entity) {
 
@@ -101,23 +95,42 @@ public class GenericServiceImpl implements GenericService {
 
     }
 
-    public Page<?> getAll(final Pageable pageable) {
+//    public BaseRepositoryPage<User> getAll(final BasePageable pageable) {
+    public Page<User> getAll(final Pageable pageable) {
 
         return baseRepository.findAll(pageable);
 
     }
 
+    public BaseEntity getById(final Long id) {
+
+        return (BaseEntity) baseRepository.getById(id);
+
+    }
+
+    @Override public boolean existsById(final Long entityId) {
+
+        Tracing.trace("GenericServiceImpl->existsById: {}", entityId);
+
+        return baseRepository.existsById(entityId);
+
+    }
+
     public boolean delete(final BaseEntity entity) {
 
-        baseRepository.delete(entity);
+        Tracing.trace("GenericServiceImpl->delete: {}", entity.toString());
 
-        return !baseRepository.existsById(entity.getId());
+        return deleteById(entity.getId());
 
     }
 
     public boolean deleteById(final long entityId) {
 
+        Tracing.trace("GenericServiceImpl->deleteById: {}", entityId);
+
         baseRepository.deleteById(entityId);
+
+
 
         return !baseRepository.existsById(entityId);
 
@@ -165,12 +178,4 @@ public class GenericServiceImpl implements GenericService {
 //
 //    }
 //
-//    @Override
-//    public void deleteById(final long entityId) {
-//
-//        log.trace("GenericServiceImpl.deleteById: {}", entityId);
-//
-//        baseRepository.deleteById(entityId);
-//
-//    }
 }

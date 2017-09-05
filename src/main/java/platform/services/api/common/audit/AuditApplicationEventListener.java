@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -50,25 +48,28 @@ package platform.services.api.common.audit;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.actuate.audit.listener.AuditApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import platform.services.api.common.utilities.Tracing;
+
 @Component
 public class AuditApplicationEventListener {
-    
-    private static final Logger logger = LogManager.getLogger(AuditApplicationEventListener.class);
-    
+
     @EventListener
-    public void onAuditEvent(AuditApplicationEvent event) {
-        
-        AuditEvent actualAuditEvent = event.getAuditEvent();
-        
-        logger.trace("onAuditEvent: timestamp: {}, principal: {}, type: {}, " + "data: {}",
-                     actualAuditEvent.getTimestamp(), actualAuditEvent.getPrincipal(), actualAuditEvent.getType(),
-                     actualAuditEvent.getData());
+    public static void onAuditEvent(final AuditApplicationEvent event) {
+
+        final AuditEvent actualAuditEvent = event.getAuditEvent();
+
+        Tracing.trace("onAuditEvent: timestamp: {}, principal: {}, type: {}, data: {}",
+                actualAuditEvent.getTimestamp(),
+                actualAuditEvent.getPrincipal(),
+                actualAuditEvent.getType(),
+                actualAuditEvent.getData());
+
     }
+
 }

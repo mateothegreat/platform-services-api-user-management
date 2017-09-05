@@ -49,16 +49,24 @@ package platform.services.api.common.jpa.repositories;
  * streaming-platform.com
  */
 
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
+//@Repository
+@NoRepositoryBean
+//public interface BaseRepository<T, ID extends Serializable> extends PagingAndSortingRepository<T, ID> {//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+//public interface BaseRepository extends org.springframework.data.repository.Repository<BaseEntity, Long> {
+//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+//public interface BaseRepository extends PagingAndSortingRepository {
+//public interface BaseRepository<BaseEntity, ID extends Serializable> extends PagingAndSortingRepository<platform.services.api.common.jpa.entities.BaseEntity, ID> {
 
-@Repository
-//@NoRepositoryBean
-public interface BaseRepository<T, ID extends Serializable> extends PagingAndSortingRepository<T, ID> {//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
-//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
-//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+
+    BaseEntity getById(Long id);
+
+//    BaseEntity findById(Long id);
+
+//    BaseRepositoryPage<BaseEntity> findAll(BasePageable pageable);
 
 //    /**s
 //     * Returns all entities sorted by the given options.

@@ -69,7 +69,7 @@ import platform.services.api.users.ApplicationConfig;
 //@Import({SecurityConfiguration.class})
 @EnableJpaRepositories(basePackages = { ApplicationConfig.PLATFORM_SERVICES_API_USERS_JPA })
 @EnableTransactionManagement
-//@ComponentScan({"com.streamingplatform"})
+//@ComponentScan(basePackages = { "platform.services.api.users", "platform.services.api.*", "platform.services.api.users.services"})
 public class DataSourceConfig {
 
     @Bean

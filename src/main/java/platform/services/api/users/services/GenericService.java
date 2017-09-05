@@ -35,14 +35,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
+import platform.services.api.users.jpa.User;
 
 //@Service
 public interface GenericService {
 
-    Page getAll(Pageable pageable);
+    //    BaseRepositoryPage<User> getAll(BasePageable pageable);
+    Page<User> getAll(Pageable pageable);
+    BaseEntity getById(final Long id);
+
+    boolean existsById(Long entityId);
 
     boolean delete(final BaseEntity entity);
-
+    boolean deleteById(final long entityId);
 
 //        T save(T entity) throws DuplicateKeyException;
 //    Object save(BaseEntity entity) throws DuplicateKeyException;

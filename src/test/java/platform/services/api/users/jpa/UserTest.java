@@ -11,28 +11,23 @@ import org.junit.runner.*;
 import platform.platform.api.common.BaseTests;
 import platform.platform.api.users.UserConfig;
 import platform.services.api.common.security.SecurityCryptor;
-import platform.services.api.users.services.UserService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Profile("test")
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = { UserService.class, UserConfig.class }, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = UserConfig.class, loader = AnnotationConfigContextLoader.class)
 
 public class UserTest extends BaseTests {
+
+    private User user;
 
     @Test
     public void getAuthenticationUserDetails() throws Exception {
 
-
-
         assertThat(User.getAuthenticationUserDetails()).isNull();
 
-
-
     }
-
-    private User user;
 
     @Before public void setUp() {
 

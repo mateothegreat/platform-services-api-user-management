@@ -49,24 +49,24 @@ package platform.services.api.common.authentication;
  * streaming-platform.com
  */
 
-import org.springframework.security.core.*;
-import org.springframework.security.web.authentication.www.*;
-import org.springframework.stereotype.*;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.MessageFormat;
+
+import platform.services.api.common.request.HttpHeader;
 import platform.services.api.common.utilities.Tracing;
-import platform.services.api.users.*;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.text.*;
+import platform.services.api.users.ApplicationConfig;
 
 @Component
 public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
-
-    public static final String HEADER_AUTHORIZATION    = "Authorization";
-    public static final String HEADER_WWW_AUTHENTICATE = "WWW-Authenticate";
-    public static final String BASIC_REALM             = "Basic realm=";
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -82,10 +82,10 @@ public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
                          final AuthenticationException authException) throws IOException, ServletException {
 
         Tracing.trace("commence: realm: {}", this.getRealmName());
-        Tracing.trace(request.getHeader(HEADER_AUTHORIZATION));
+        Tracing.trace(request.getHeader(HttpHeader.AUTHORIZATION_NAME));
         Tracing.trace(authException.getMessage());
 
-        response.addHeader(HEADER_WWW_AUTHENTICATE, String.format("%s%s", BASIC_REALM, this.getRealmName()));
+        response.addHeader(HttpHeader.HEADER_WWW_AUTHENTICATE, String.format("%s=%s", HttpHeader.BASIC_REALM, this.getRealmName()));
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 

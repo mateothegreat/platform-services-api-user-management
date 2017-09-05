@@ -53,16 +53,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-/**
- *
- */
 @ComponentScan(ApplicationConfig.PLATFORM_SERVICES_API)
 @SpringBootApplication(scanBasePackages = { ApplicationConfig.PLATFORM_SERVICES_API })
+
 public class Application {
 
-//    public static void main(final String... args) {
-
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         SpringApplication.run(Application.class, args);
 

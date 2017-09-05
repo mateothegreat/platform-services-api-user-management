@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -52,78 +50,110 @@ package platform.services.api.users.controllers;
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import platform.services.api.common.controller.BaseRestController;
+import platform.services.api.common.exception.RestResponse;
 import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.jpa.User;
 import platform.services.api.users.services.UserService;
+
+import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 
 @RestController
 @RequestMapping("/users")
 public class UserController extends BaseRestController {
 
+    private final UserService service;
+
     @Autowired
-    private UserService service;
-    
+    public UserController(final UserService service) {
+
+        this.service = service;
+
+    }
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<User> save(@RequestBody User user) {
+    public ResponseEntity<?> save(@RequestBody final User user) {
 
         Tracing.trace("create: {}", user);
 
-        User created = service.save(user);
+        user.setParentId(0L);
 
-        return new ResponseEntity<>(created, HttpStatus.OK);
-        
+        try {
+
+            final User created = service.save(user);
+
+            return new ResponseEntity<>(created, HttpStatus.OK);
+
+        } catch(final DataAccessException e) {
+
+            return new ResponseEntity<>(new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, "username", "email address", "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
+
+        }
+
     }
 
     @PreAuthorize("hasAuthority('ROLE_USER_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Page<?>> getAll(Pageable pageable) throws NotFoundException {
-        
-        final Page<?> results = service.getAll(pageable);
+//    public ResponseEntity<BaseRepositoryPage<User>> getAll(final Pageable pageable) throws NotFoundException {
+//    public ResponseEntity<Page<User>> getAll(final Pageable pageable) throws NotFoundException {
+//
+//        final Page<User> results = service.getAll(pageable);
+//
+//        return new ResponseEntity<Page<User>> (results, HttpStatus.OK);
+//
+//    }
 
-        return new ResponseEntity<> (results, HttpStatus.OK);
-        
+//    public BaseRepositoryPage<BaseEntity> getAll(final Pageable pageable) throws NotFoundException {
+     public Page<User> getAll(final Pageable pageable) throws NotFoundException {
+
+//        final BaseRepositoryPage<BaseEntity> results = service.getAll(pageable);
+
+        return service.getAll(pageable);
+
     }
-    
-//    @RequestMapping(params = "username", method = RequestMethod.GET)
-//    public ResponseEntity<Object> getByUsername(@RequestParam String username) throws NotFoundException {
-//
-//        User user = service.getUserByUsername(username);
-//
-//        if(user == null || user.getId() <= 0) {
-//
-//            throw new NotFoundException();
-//
-//        }
-//
-//        return new ResponseEntity<Object>(user, HttpStatus.OK);
-//
-//    }
-//
-//    @RequestMapping(params = "email", method = RequestMethod.GET)
-//    public ResponseEntity<Object> getByEmail(@RequestParam String email) throws DataAccessException, NotFoundException {
-//
-//        User user = service.getUserByEmail(email);
-//
-//        if(user == null || user.getId() <= 0) {
-//
-//            throw new NotFoundException();
-//
-//        }
-//
-//        return new ResponseEntity<Object>(user, HttpStatus.OK);
-//
-//    }
-    
+
+    @RequestMapping(params = "username", method = RequestMethod.GET)
+    public ResponseEntity<User> getByUsername(@RequestParam final String username) throws NotFoundException {
+
+        final User user = service.getUserByUsername(username);
+
+        if(user == null || user.getId() <= 0L) {
+
+            throw new NotFoundException();
+
+        }
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(params = "email", method = RequestMethod.GET)
+    public ResponseEntity<User> getByEmail(@RequestParam final String email) throws DataAccessException, NotFoundException {
+
+        final User user = service.getUserByEmail(email);
+
+        if(user == null || user.getId() <= 0L) {
+
+            throw new NotFoundException();
+
+        }
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+
+    }
+
 }

@@ -52,23 +52,17 @@ package platform.platform.api.users;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.ApplicationConfig;
 import platform.services.api.users.jpa.User;
 
-//@Profile("test")
 @Configuration
-@EnableTransactionManagement
 @EnableJpaRepositories(basePackages = { ApplicationConfig.PLATFORM_SERVICES_API_USERS_JPA })
-//@EnableJpaRepositories({ "platform.services.api.*", "platform.services.api.common.jpa.repositories", "platform.services.api.users.jpa", })
-//@EntityScan(basePackages = { ApplicationConfig.PLATFORM_SERVICES_API_USERS_JPA, })
-//@AutoConfigureTestEntityManager
 @ComponentScan({ ApplicationConfig.PLATFORM_SERVICES_API_COMMON, ApplicationConfig.PLATFORM_SERVICES_API_USERS, })
 public class UserConfig {
 
-    public static final Long   USER_VALID_ID               = 1L;
+    public static final Long   USER_VALID_ID               = null;
     public static final Long   USER_VALID_PARENT_ID        = 1L;
     public static final int    USER_VALID_STATUS           = 1;
     public static final String USER_VALID_EMAIL            = "test-user1@test-user1.com";
@@ -82,19 +76,17 @@ public class UserConfig {
     public static final String USER_INVALID_USERNAME       = "invalid";
     public static final String USER_INVALID_PASSWORD       = "invalid";
 
-    //    private UserRepository userRepository;
-//    private UserService    userService;
-
     public UserConfig() {
 
         Tracing.trace("TestingConfig: ");
+
     }
 
     public static User buildUser() {
 
         final User user = new User();
 
-        user.setId(USER_VALID_ID);
+//        user.setId(USER_VALID_ID);
         user.setParentId(USER_VALID_PARENT_ID);
         user.setStatus(USER_VALID_STATUS);
         user.setEmail(USER_VALID_EMAIL);

@@ -51,7 +51,6 @@ package platform.services.api.common.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -88,19 +87,19 @@ public class AuthenticationService implements UserDetailsService {
 
         }
 
-        final List<String> permissions = UserService.getPermissions(user.getUsername());
+//        final List<String> permissions = UserService.getPermissions(user.getUsername());
 
-        Tracing.trace("loadUserByUsername->service.getPermissions({}): {}", user.getUsername(), permissions.toString());
+//        Tracing.trace("loadUserByUsername->service.getPermissions({}): {}", user.getUsername(), permissions.toString());
 
         final List<GrantedAuthority> grantedAuthorities = new ArrayList<>(0);
 
-        for(final String permission : permissions) {
-
-            Tracing.trace("loadUserByUsername->grantedAuthorities.add: {}", permission);
-
-            grantedAuthorities.add(new SimpleGrantedAuthority(permission));
-
-        }
+//        for(final String permission : permissions) {
+//
+//            Tracing.trace("loadUserByUsername->grantedAuthorities.add: {}", permission);
+//
+//            grantedAuthorities.add(new SimpleGrantedAuthority(permission));
+//
+//        }
 
         return new CustomUserDetails(user, grantedAuthorities);
 

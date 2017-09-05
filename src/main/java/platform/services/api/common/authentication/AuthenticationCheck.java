@@ -50,10 +50,11 @@ package platform.services.api.common.authentication;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
-import platform.services.api.users.jpa.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import platform.services.api.users.jpa.User;
 
 @Component
 public class AuthenticationCheck {

@@ -54,13 +54,15 @@ import org.springframework.stereotype.Repository;
 import platform.services.api.common.jpa.repositories.BaseRepository;
 
 @Repository
-public interface UserRepository extends BaseRepository<User, Long> {
-    //public interface UserRepository<User, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+//public interface UserRepository extends PagingAndSortingRepository {
+public interface UserRepository extends BaseRepository<User, Long> {//public interface UserRepository extends BaseRepository<User, Long> {
+//    public interface UserRepository<User, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+//    public interface UserRepository<User, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
 
-//    Page<BaseEntity> findAll(Pageable pageable);
+//    User getById(Long id);
+//    User findById(Long id);
 
     User getUserByEmail(String email);
-
     User getUserByUsername(String username);
 
 //    @Override Iterable<BaseEntity> findAll(Sort sort);

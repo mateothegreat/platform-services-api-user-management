@@ -1,7 +1,9 @@
 package platform.services.api.users;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+@ComponentScan(ApplicationConfig.PLATFORM_SERVICES_API)
 @Configuration
 public class ApplicationConfig {
 

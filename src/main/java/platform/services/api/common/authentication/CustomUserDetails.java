@@ -50,12 +50,13 @@ package platform.services.api.common.authentication;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
-import platform.services.api.users.jpa.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+
+import platform.services.api.users.jpa.User;
 
 public class CustomUserDetails implements UserDetails {
     

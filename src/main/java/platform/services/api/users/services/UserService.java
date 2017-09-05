@@ -32,14 +32,12 @@ package platform.services.api.users.services;
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.common.security.SecurityCryptor;
-import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.jpa.User;
 import platform.services.api.users.jpa.UserRepository;
 
@@ -53,26 +51,7 @@ public class UserService extends GenericServiceImpl {
 
         super(userRepository);
 
-        Tracing.trace("UserServiceImpl(UserRepository): {}", userRepository.toString());
-
         this.userRepository = userRepository;
-
-    }
-
-    public static List<String> getPermissions(final String username) {
-
-        Tracing.trace("getPermissions: {}", username);
-
-        return new ArrayList<>(0);
-
-    }
-
-    @Override
-    public boolean delete(final BaseEntity entity) {
-
-        userRepository.deleteById(entity.getId());
-
-        return !userRepository.existsById(entity.getId());
 
     }
 
@@ -96,25 +75,16 @@ public class UserService extends GenericServiceImpl {
 
     }
 
-    // public User getUserInfo(String username) {
-    //
-    //     String sql = "SELECT u.username name, u.password pass, a.authority role FROM " + "comp_users u INNER JOIN comp_authorities a on u.username=a
-    // .username WHERE " + "u.enabled =1 and u.username = ?";
-    //     UserInfo userInfo = (UserInfo) jdbcTemplate.queryForObject(sql, new Object[]{username},
-    //                                                                new RowMapper<UserInfo>() {
-    //
-    //                                                                    public UserInfo mapRow(ResultSet rs,
-    //                                                                                           int rowNum) throws
-    //                                                                                                       SQLException {
-    //
-    //                                                                        UserInfo user = new UserInfo();
-    //                                                                        user.setUsername(rs.getString("name"));
-    //                                                                        user.setPassword(rs.getString("pass"));
-    //                                                                        user.setRole(rs.getString("role"));
-    //                                                                        return user;
-    //                                                                    }
-    //                                                                });
-    //     return userInfo;
-    // }
+    public Page<User> getAll(final Pageable pageable) {
+
+        return userRepository.findAll(pageable);
+
+    }
+
+    public BaseEntity getById(final Long id) {
+
+        return userRepository.getById(id);
+
+    }
 
 }

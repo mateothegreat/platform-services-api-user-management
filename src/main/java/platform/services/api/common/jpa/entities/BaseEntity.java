@@ -60,13 +60,16 @@ import javax.validation.constraints.NotNull;
 //@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class BaseEntity {
+//public class BaseEntity {
 //public class BaseEntity implements Serializable {
+
+    public BaseEntity() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    protected Long id;
 
-    private @NotNull @Range(min = 0) Long parentId;
+    protected @NotNull @Range(min = 0) Long parentId;
 
 //    @Version
 //    private Integer version;
@@ -104,7 +107,6 @@ public class BaseEntity {
 //        this.version = version;
 //
 //    }
-
 
     // @Column(name = "createdByUser", nullable = false)
     // @CreatedBy

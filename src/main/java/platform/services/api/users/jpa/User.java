@@ -56,10 +56,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import java.text.MessageFormat;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.common.security.SecurityCryptor;
@@ -68,10 +72,27 @@ import platform.services.api.common.security.SecurityCryptor;
 @Table(name = "user")
 public class User extends BaseEntity {
 
-    private @NotEmpty @Email                     String email;
+    @Column(unique = true) private @NotEmpty @Email String email;
+
     private @NotEmpty @Length(min = 4, max = 32) String username;
     private @NotEmpty @Length(min = 8, max = 60) String password;
-    private @NotEmpty @Range(min = 0, max = 9)   int    status;
+    private @NotNull @Range(min = 0, max = 9)    int    status;
+
+//    @JsonCreator
+//    public User(@JsonProperty("email") String email,
+//                @JsonProperty("username") String username,
+//                @JsonProperty("password") String password,
+//                @JsonProperty("status") int status) {
+//
+//        this.email = email;
+//        this.username = username;
+//        this.password = password;
+//        this.status = status;
+//    }
+
+    public User() {
+
+    }
 
     @Nullable
     public static UserDetails getAuthenticationUserDetails() {
@@ -134,8 +155,12 @@ public class User extends BaseEntity {
 
     @Override public String toString() {
 
-        return String.format("User{email='%s', username='%s', password='%s', status=%d}", email, username, password, status);
-
+        return MessageFormat.format("User'{'email=''{0}'', username=''{1}'', password=''{2}'', status={3}, id={4}, parentId={5}'}'",
+                email,
+                username,
+                password,
+                status, id,
+                parentId);
     }
 
 }
