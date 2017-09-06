@@ -51,7 +51,7 @@ package platform.services.api.common.jpa.repositories;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 //@Repository
 @NoRepositoryBean
@@ -61,7 +61,7 @@ import org.springframework.data.repository.Repository;
 //public interface BaseRepository extends PagingAndSortingRepository {
 //public interface BaseRepository<BaseEntity, ID extends Serializable> extends PagingAndSortingRepository<platform.services.api.common.jpa.entities.BaseEntity, ID> {
 //public interface BaseRepository<T, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
-public interface BaseRepository<BaseEntity, Long> extends Repository<BaseEntity, Long> {
+public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
 
 
     BaseEntity getById(Long id);
@@ -192,7 +192,7 @@ public interface BaseRepository<BaseEntity, Long> extends Repository<BaseEntity,
     //    Object save(Object persisted);
 
     //    Object save(Object persisted);
-    BaseEntity save(BaseEntity entity);
+//    BaseEntity save(BaseEntity entity);
 
     void deleteById(Long id);
 

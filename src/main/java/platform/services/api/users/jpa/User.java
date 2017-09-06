@@ -98,18 +98,18 @@ public class User extends BaseEntity<String> {
 //    @NotNull @Range(min = BaseEntity.STATUS_RANGE_MIN, max = BaseEntity.STATUS_RANGE_MAX)
     private Long status;
 
-    public User() {
+//    public User() {
+//
+//    }
 
-    }
-
-    public User(@NotEmpty @Email final String email, @NotEmpty @Length(min = 4, max = 32) final String username, @NotEmpty @Length(min = 8, max = 60) final String password, @NotNull @Range(min = 0, max = 9) final Long status) {
-
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.status = status;
-
-    }
+//    public User(@NotEmpty @Email final String email, @NotEmpty @Length(min = 4, max = 32) final String username, @NotEmpty @Length(min = 8, max = 60) final String password, @NotNull @Range(min = 0, max = 9) final Long status) {
+//
+//        this.email = email;
+//        this.username = username;
+//        this.password = password;
+//        this.status = status;
+//
+//    }
 
     @Nullable
     public static UserDetails getAuthenticationUserDetails() {

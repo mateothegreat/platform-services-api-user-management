@@ -98,16 +98,14 @@ public class BaseEntity<S> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-//    @Range(min = BaseEntity.ID_RANGE_MIN, max = BaseEntity.ID_RANGE_MAX)
     @Range(min = 1L, max = 4294967295L)
     @Column(nullable = false, updatable = false)
     protected Long id;
 
     @NotNull
-//    @Range(min = BaseEntity.ID_RANGE_MIN, max = BaseEntity.ID_RANGE_MAX)
-    @Range(min = 1L, max = 4294967295L)
-    protected Long parentId;
-    ;
+    @Range(min = 0L, max = 4294967295L)
+    protected Long parentId = 0L;
+
     protected String operation;
 
     @PreUpdate private void onPreUpdate() {

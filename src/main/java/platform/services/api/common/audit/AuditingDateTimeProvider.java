@@ -25,7 +25,7 @@ public class AuditingDateTimeProvider implements DateTimeProvider {
 
         log.trace("getNow(): {}",  GregorianCalendar.from(dateTimeService.getCurrentDateAndTime()).toString());
 
-        return Optional.of((TemporalAccessor) GregorianCalendar.from(dateTimeService.getCurrentDateAndTime()));
+       return Optional.of(GregorianCalendar.from(dateTimeService.getCurrentDateAndTime()).toZonedDateTime().toLocalDate());
 
     }
 

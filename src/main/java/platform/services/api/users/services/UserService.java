@@ -58,14 +58,6 @@ public class UserService extends GenericServiceImpl<User> {
 
     }
 
-//    public User save(final User entity) {
-//
-//        entity.setPassword(SecurityCryptor.encode(entity.getPassword()));
-//
-//        return this.saveEntity(entity);
-//
-//    }
-
     public User getUserByUsername(final String username) {
 
         return userRepository.getUserByUsername(username);
@@ -78,18 +70,6 @@ public class UserService extends GenericServiceImpl<User> {
 
     }
 
-    public Page<User> getAll(final Pageable pageable) {
-
-        return userRepository.findAll(pageable);
-
-    }
-
-    public BaseEntity getById(final Long id) {
-
-        return userRepository.getById(id);
-
-    }
-
     public User saveEntity(final User entity) {
 
         User result = null;
@@ -99,16 +79,19 @@ public class UserService extends GenericServiceImpl<User> {
             entity.setPassword(entity.getPassword());
 
             result = userRepository.save(entity);
-            ;
 
         } catch(final DataIntegrityViolationException e) {
 
             final Throwable t = e.getRootCause();
 
+            log.trace("saveEntity->DataIntegrityViolationException: {}", e.toString());
+
             if(t != null) {
 
                 if(t.getMessage()
                     .contains("Duplicate entry")) {
+
+                    log.trace("saveEntity->DataIntegrityViolationException: duplicate entry");
 
                     throw new DuplicateKeyException("DUPLICATE", e);
 
@@ -123,6 +106,18 @@ public class UserService extends GenericServiceImpl<User> {
         }
 
         return result;
+
+    }
+
+    public Page<User> getAll(final Pageable pageable) {
+
+        return userRepository.findAll(pageable);
+
+    }
+
+    public BaseEntity getById(final Long id) {
+
+        return userRepository.getById(id);
 
     }
 

@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.Host;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
@@ -41,21 +42,43 @@ public class EntityRandomizer {
 
     public EnhancedRandom setUp() {
 
-//        builder.randomize(FieldDefinitionBuilder.field()
-//                                                .named("id")
-//                                                .ofType(Long.class)
-//                                                .get(), id);
-
+        // region [Exclusions]
         builder.exclude(FieldDefinitionBuilder.field()
                                               .named("id")
                                               .ofType(Long.class)
                                               .get());
 
-//        builder.exclude(FieldDefinitionBuilder.field()
-//                                              .named("parentId")
-//                                              .ofType(Long.class)
-//                                              .get());
-//
+        builder.exclude(FieldDefinitionBuilder.field()
+                                              .named("createdBy")
+                                              .ofType(String.class)
+                                              .get());
+
+        builder.exclude(FieldDefinitionBuilder.field()
+                                              .named("createdDate")
+                                              .ofType(Date.class)
+                                              .get());
+
+        builder.exclude(FieldDefinitionBuilder.field()
+                                              .named("lastModifiedBy")
+                                              .ofType(String.class)
+                                              .get());
+
+        builder.exclude(FieldDefinitionBuilder.field()
+                                              .named("lastModifiedDate")
+                                              .ofType(Date.class)
+                                              .get());
+
+        builder.exclude(FieldDefinitionBuilder.field()
+                                              .named("operation")
+                                              .ofType(String.class)
+                                              .get());
+
+        builder.exclude(FieldDefinitionBuilder.field()
+                                              .named("parentId")
+                                              .ofType(Long.class)
+                                              .get());
+        // endregion
+        // region [Fields]
         builder.randomize(FieldDefinitionBuilder.field()
                                                 .named("parentId")
                                                 .ofType(Long.class)
@@ -80,6 +103,7 @@ public class EntityRandomizer {
                                                 .named("password")
                                                 .ofType(String.class)
                                                 .get(), password);
+        // endregion
 
         return builder.build();
 

@@ -9,7 +9,7 @@ import org.junit.*;
 import org.junit.runner.*;
 
 import platform.platform.api.common.BaseTests;
-import platform.platform.api.users.UserConfig;
+import platform.services.api.users.UserConfig;
 import platform.services.api.common.security.SecurityCryptor;
 
 import static org.assertj.core.api.Assertions.assertThat;

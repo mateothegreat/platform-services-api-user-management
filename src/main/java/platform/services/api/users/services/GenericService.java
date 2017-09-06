@@ -49,7 +49,7 @@ public interface GenericService<T> {
     boolean delete(final BaseEntity entity);
     boolean deleteById(final long entityId);
 //    BaseEntity<?> saveEntity(BaseEntity<?> entity);
-    T saveEntity(final T entity);
+//    T saveEntity(final T entity);
 
 //        T save(T entity) throws DuplicateKeyException;
 //    Object save(BaseEntity entity) throws DuplicateKeyException;

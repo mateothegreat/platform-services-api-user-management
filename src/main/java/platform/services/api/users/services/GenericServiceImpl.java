@@ -63,40 +63,40 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 //    }
 
 //    public T saveEntity(final BaseEntity entity) {
-    public T saveEntity(final T entity) {
-
-        log.fatal("saveEntity: {}", entity.toString());
-
-        T result = null;
-
-        try {
-
-            result = baseRepository.save(entity);;
-
-        } catch(final DataIntegrityViolationException e) {
-
-            final Throwable t = e.getRootCause();
-
-            if(t != null) {
-
-                if(t.getMessage()
-                    .contains("Duplicate entry")) {
-
-                    throw new DuplicateKeyException("DUPLICATE", e);
-
-                }
-
-            } else {
-
-                throw new InternalError(e);
-
-            }
-
-        }
-
-        return result;
-
-    }
+//    public T saveEntity(final T entity) {
+//
+//        log.fatal("saveEntity: {}", entity.toString());
+//
+//        T result = null;
+//
+//        try {
+//
+//            result = baseRepository.save(entity);;
+//
+//        } catch(final DataIntegrityViolationException e) {
+//
+//            final Throwable t = e.getRootCause();
+//
+//            if(t != null) {
+//
+//                if(t.getMessage()
+//                    .contains("Duplicate entry")) {
+//
+//                    throw new DuplicateKeyException("DUPLICATE", e);
+//
+//                }
+//
+//            } else {
+//
+//                throw new InternalError(e);
+//
+//            }
+//
+//        }
+//
+//        return result;
+//
+//    }
 
 //    public BaseRepositoryPage<User> getAll(final BasePageable pageable) {
     public Page<User> getAll(final Pageable pageable) {

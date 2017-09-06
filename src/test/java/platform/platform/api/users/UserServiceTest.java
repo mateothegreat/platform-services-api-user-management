@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.*;
 import org.junit.runner.*;
@@ -18,6 +16,7 @@ import platform.services.api.common.authentication.Authenticated;
 import platform.services.api.common.authentication.AuthenticationAuthorities;
 import platform.services.api.common.jpa.repositories.BaseRepositoryOperations;
 import platform.services.api.common.utilities.Tracing;
+import platform.services.api.users.UserConfig;
 import platform.services.api.users.jpa.User;
 import platform.services.api.users.services.UserService;
 
@@ -26,8 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Log4j2
 @Profile("test")
 @RunWith(SpringRunner.class)
-@EnableTransactionManagement
-@Transactional
+//@EnableTransactionManagement
+//@Transactional
 @ContextConfiguration(classes = { UserConfig.class, UserService.class }, loader = AnnotationConfigContextLoader.class)
 public class UserServiceTest extends BaseTests<User> {
 
@@ -45,19 +44,25 @@ public class UserServiceTest extends BaseTests<User> {
         setGenericService(userService);
         setUserService(userService);
 
-        create();
+        final User user = r.get(User.class);
+
+        setUp_created_User = userService.saveEntity(user);
+
+        baseEntity_isValid(setUp_created_User);
+        baseEntity_isValid(userService.getById(setUp_created_User.getId()));
 
     }
 
     @Test
     public void create() throws Exception {
 
-        final User user = r.get(User.class);
+        final User user   = r.get(User.class);
+        final User result = userService.saveEntity(user);
 
-        setUp_created_User = baseEntity_save(user);
+        baseEntity_isValid(user);
+        baseEntity_isValid(result);
 
-        baseEntity_isValid(userService.getById(user.getId()));
-        baseEntity_compare(setUp_created_User, user);
+        baseEntity_isValidAndCompare(user, userService.getById(result.getId()));
 
     }
 
@@ -99,11 +104,26 @@ public class UserServiceTest extends BaseTests<User> {
 
     @Test public void save() throws Exception {
 
-        final User result = userService.saveEntity((User) setUp_created_User);
+        final User exists = userService.getUserByUsername(setUp_created_User.getUsername());
+        final User result;
 
-        baseEntity_isValid(userService.getById(setUp_created_User.getId()));
+        if(exists == null) {
 
-//        baseEntity_compare(result, user);
+            result = userService.saveEntity((User) setUp_created_User);
+
+        } else {
+
+            baseEntity_isValid(exists);
+            ;
+
+            result = userService.saveEntity((User) setUp_created_User);
+
+        }
+
+        baseEntity_isValid(result);
+        ;
+
+        baseEntity_isValidAndCompare(result, exists);
 
     }
 

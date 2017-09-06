@@ -10,7 +10,7 @@ import org.junit.*;
 import org.junit.runner.*;
 
 import platform.platform.api.common.BaseTests;
-import platform.platform.api.users.UserConfig;
+import platform.services.api.users.UserConfig;
 import platform.services.api.common.security.SecurityConfiguration;
 import platform.services.api.users.jpa.User;
 import platform.services.api.users.services.UserService;

@@ -50,10 +50,12 @@ package platform.services.api.common.datasources;
  */
 
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -61,16 +63,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateExceptionTranslator;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManagerFactory;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import platform.services.api.common.audit.AuditingDateTimeProvider;
@@ -84,8 +88,9 @@ import platform.services.api.users.ApplicationConfig;
 //@Import({SecurityConfiguration.class})
 @EnableJpaRepositories(basePackages = ApplicationConfig.PLATFORM_SERVICES_API_USERS_JPA)
 //@EnableJpaAuditing(dateTimeProviderRef = "dateTimeProvider")
-@EnableTransactionManagement
-@EnableSpringDataWebSupport
+//@EnableTransactionManagement
+//@EnableSpringDataWebSupport
+//@Transactional
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 //@EnableJpaAuditing(auditorAwareRef = "auditorProvider", dateTimeProviderRef = "dateTimeProvider")
 //@EnableJpaAuditing(dateTimeProviderRef = "dateTimeProvider")
@@ -99,43 +104,70 @@ import platform.services.api.users.ApplicationConfig;
 //@ComponentScan(basePackages = { "platform.services.api.users", "platform.services.api.*", "platform.services.api.users.services"})
 public class DataSourceConfig {
 
-    private final Environment env;
+    @Autowired
+    protected Environment environment;
 
-    @Autowired public DataSourceConfig(final Environment env) {
+//    public DataSourceConfig(final Environment env) {
+//
+//        this.env = env;
+//
+//    }
 
-        this.env = env;
+//    public final class HibernatePropertiesTable extends Properties {
+//
+//        private static final long serialVersionUID = 4587335114731065424L;
+//
+//        private HibernatePropertiesTable() {
+//
+//            setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+//            setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+//            setProperty("hibernate.globally_quoted_identifiers", "true");
+//
+//            log.trace("HibernatePropertiesTable(): {}", this);
+//
+//        }
+//
+//    }
 
-    }
+//    @Bean
+//    public SessionFactory sessionFactory() {
+////    public LocalSessionFactoryBean sessionFactory() {
+//
+//        final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//
+//        sessionFactory.setDataSource(platformBaseDataSource());
+//        sessionFactory.setPackagesToScan(ApplicationConfig.PLATFORM_SERVICES_API);
+//        sessionFactory.setHibernateProperties(hibernateProperties());
+//
+//        try {
+//
+//            sessionFactory.afterPropertiesSet();
+//
+//        } catch(IOException e) {
+//
+//            e.printStackTrace();
+//
+//        }
+//
+//        return sessionFactory.getObject();
+//
+//    }
 
-    @Bean
-    public LocalSessionFactoryBean sessionFactory() {
+    //    protected Properties hibernateProperties() {
+//
+//        return new HibernatePropertiesTable();
+//
+//    }
+    private static Properties hibernateProperties() {
 
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        final Properties properties = new Properties();
 
-        sessionFactory.setDataSource(platformBaseDataSource());
-        sessionFactory.setPackagesToScan(ApplicationConfig.PLATFORM_SERVICES_API_USERS_JPA);
-        sessionFactory.setHibernateProperties(hibernateProperties());
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.ddl-auto", "create");
 
-        return sessionFactory;
-
-    }
-
-    private Properties hibernateProperties() {
-
-        log.trace("hibernateProperties()");
-
-        final Properties hibernateProperties = new Properties();
-
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
-
-        // Envers properties
-        hibernateProperties.setProperty("org.hibernate.envers.audit_table_suffix", env.getProperty("envers.audit_table_suffix"));
-
-        return hibernateProperties;
-
+        return properties;
     }
 
     @Bean(name = ApplicationConfig.DATA_SOURCE_PLATFORM_BASE_BEAN_NAME)
@@ -150,6 +182,24 @@ public class DataSourceConfig {
 
         return managerDataSource;
 
+    }
+
+//    @Bean
+//    @Autowired
+//    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+//
+//        HibernateTransactionManager txManager = new HibernateTransactionManager();
+//
+//        txManager.setSessionFactory(sessionFactory);
+//
+//        return txManager;
+//
+//    }
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 
     @Bean
@@ -178,13 +228,6 @@ public class DataSourceConfig {
         factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
 
         return factory.getObject();
-
-    }
-
-    @Bean
-    public HibernateExceptionTranslator hibernateExceptionTranslator() {
-
-        return new HibernateExceptionTranslator();
 
     }
 

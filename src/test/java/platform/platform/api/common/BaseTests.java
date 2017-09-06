@@ -20,6 +20,28 @@ public class BaseTests<T> implements BaseTest<T> {
 
     }
 
+    protected static void baseEntity_isValidAndCompare(final BaseEntity left, final BaseEntity right) {
+
+//        Tracing.trace("baseEntity_isValidAndCompare: LEFT: {}, RIGHT: {}", Tracing.toString(left), Tracing.toString(right));
+
+        assertThat(left).isEqualToIgnoringGivenFields(right, "createdDate", "createdBy", "lastModifiedBy", "lastModifiedDate", "operation");
+
+    }
+
+    public GenericService getGenericService() {
+
+        return genericService;
+
+    }
+
+    public void setGenericService(final GenericService genericService) {
+
+        assertThat(genericService).isNotNull();
+
+        this.genericService = genericService;
+
+    }
+
     public void baseEntity_getById_exists(final Long id) {
 
         final boolean exists = genericService.existsById(id);
@@ -40,45 +62,23 @@ public class BaseTests<T> implements BaseTest<T> {
 
     }
 
-    public GenericService getGenericService() {
-
-        return genericService;
-
-    }
-
-    public void setGenericService(final GenericService genericService) {
-
-        assertThat(genericService).isNotNull();
-
-        this.genericService = genericService;
-
-    }
-
     public String getUrl(final int localServerPort, final String path) {
 
         return "http://localhost:" + localServerPort + path;
 
     }
 
-    protected void baseEntity_compare(final T left, final T right) {
-
-//        Tracing.trace("baseEntity_compare: LEFT: {}, RIGHT: {}", Tracing.toString(left), Tracing.toString(right));
-
-        assertThat(left).isEqualToIgnoringGivenFields(right);
-
-    }
-
-//    protected BaseEntity<T> baseEntity_save(final BaseEntity baseEntity) {
-    protected <T> T baseEntity_save(final BaseEntity baseEntity) {
+    //    protected BaseEntity<T> baseEntity_save(final BaseEntity baseEntity) {
 //    protected BaseEntity<? extends User> baseEntity_save(final BaseEntity baseEntity) {
-
-        final BaseEntity<T> result = (BaseEntity<T>) genericService.saveEntity(baseEntity);
-
-        baseEntity_isValid(result);
-
-        return (T) result;
-
-    }
+//    protected <T> T baseEntity_save(final BaseEntity baseEntity) {
+//
+//        final BaseEntity<T> result = (BaseEntity<T>) genericService.saveEntity(baseEntity);
+//
+//        baseEntity_isValid(result);
+//
+//        return (T) result;
+//
+//    }
 
     protected void baseEntity_deleteByObj(final BaseEntity<T> entity) {
 
@@ -93,7 +93,6 @@ public class BaseTests<T> implements BaseTest<T> {
         assertThat(baseEntity.getId()).isGreaterThanOrEqualTo(0L);
 
         Tracing.trace("baseEntity_isValid: {}", Tracing.toString(baseEntity));
-
 
     }
 

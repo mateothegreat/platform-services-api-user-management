@@ -1,38 +1,28 @@
 package platform.services.api.users;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
+import org.apache.catalina.startup.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import platform.services.api.users.jpa.User;
 import platform.services.api.users.services.UserService;
 
-//@Log4j2
-//@Configuration
-@EnableAutoConfiguration
-@ComponentScan
+@Log4j2
+//@EnableAutoConfiguration
+//@ComponentScan
 @Component
 public class UserRepositoryInitializer implements ApplicationRunner {
 
-//    @Autowired
-//    protected UserRepository userRepository;
+    protected final UserService userService;
 
-    @Autowired
-    protected UserService    userService;
+    @Autowired public UserRepositoryInitializer(final UserService userService) {
 
-    private static final Logger log = LoggerFactory.getLogger(UserRepositoryInitializer.class);
+        this.userService = userService;
 
-//    @Autowired public UserRepositoryInitializer(final UserRepository userRepository, final UserService userService) {
-//
-//        this.userRepository = userRepository;
-//        this.userService = userService;
-//
-//    }
+    }
 
     @Override
     public void run(final ApplicationArguments arguments) throws Exception {
@@ -43,17 +33,19 @@ public class UserRepositoryInitializer implements ApplicationRunner {
 
         log.trace("getUserByUsername: {}", result);
 
-        if(result == null) {
+//        if(result == null) {
 
-            User admin   = new User("integration-admin1@integration-admin1.com", "integration-admin1", "password", 1L);
+//            User admin = new User("integration-admin1@integration-admin1.com", "integration-admin1", "password", 1L);
+            User admin = platform.services.api.users.UserConfig.buildUser();
+
 
             admin.setParentId(1L);
 
             User created = userService.saveEntity(admin);
 
-            log.trace("created: {}", created);
+            log.trace("run: {}", created);
 
-        }
+//        }
 
     }
 
