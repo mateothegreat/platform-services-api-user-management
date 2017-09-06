@@ -117,6 +117,19 @@
 
     <dependencies>
 
+        <!-- region javaee -->
+
+        <dependency>
+
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+
+        </dependency>
+
+
+        <!-- endregion -->
+
         <!-- region spring-boot -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
         <dependency>
@@ -219,6 +232,24 @@
 
         </dependency>
         <!--endregion-->
+
+        <!-- region data tools -->
+
+        <dependency>
+
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+
+        </dependency>
+
+        <!-- endregion -->
 
         <!-- region testing -->
         <dependency>
@@ -389,6 +420,44 @@
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
             <optional>true</optional>
+        </dependency>
+
+        <!-- endregion -->
+
+        <!-- region tracing -->
+
+        <dependency>
+
+            <groupId>io.opentracing</groupId>
+            <artifactId>opentracing-api</artifactId>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>io.opentracing</groupId>
+            <artifactId>opentracing-impl</artifactId>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.hawkular.apm</groupId>
+            <artifactId>hawkular-apm-api</artifactId>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.hawkular.apm</groupId>
+            <artifactId>hawkular-apm-client-api</artifactId>
+
+        </dependency>
+
+        <dependency>
+            <groupId>org.hawkular.apm</groupId>
+            <artifactId>hawkular-apm-tests-common</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- endregion -->

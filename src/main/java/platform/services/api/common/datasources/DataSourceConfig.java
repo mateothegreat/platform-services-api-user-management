@@ -75,6 +75,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManagerFactory;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Properties;
 
 import platform.services.api.common.audit.AuditingDateTimeProvider;
@@ -82,6 +83,7 @@ import platform.services.api.common.audit.AuditorAwareable;
 import platform.services.api.common.audit.CurrentTimeDateTimeService;
 import platform.services.api.common.audit.DateTimeService;
 import platform.services.api.users.ApplicationConfig;
+import org.springframework.security.core.userdetails.User;
 
 @Log4j2
 @Configuration

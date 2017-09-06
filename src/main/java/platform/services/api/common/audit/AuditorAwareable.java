@@ -2,34 +2,37 @@ package platform.services.api.common.audit;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.security.Principal;
 import java.util.Optional;
+
+import platform.services.api.common.authentication.CustomUserDetails;
+import org.springframework.security.core.userdetails.User;
+
 
 @Log4j2
 public class AuditorAwareable implements AuditorAware<String> {
 
     public Optional<String> getCurrentAuditor() {
-        log.trace("getCurrentAuditor()");
-        return Optional.of("asdf");
 
-//
-//        final Authentication authentication = SecurityContextHolder.getContext()
-//                                                                   .getAuthentication();
-//
-//        if(authentication == null || !authentication.isAuthenticated()) {
-//
-//            return Optional.empty();
-//
-//        }
-//
-//        final CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
-//
+        final Authentication authentication = SecurityContextHolder.getContext()
+                                                                   .getAuthentication();
+
+        if(authentication == null || !authentication.isAuthenticated()) {
+
+            return Optional.empty();
+
+        }
+
+        String username = ((User) authentication.getPrincipal()).getUsername();
+
 //        final User user = principal.getUser();
-//
-//        log.error(authentication.toString());
 
+        log.trace("getCurrentAuditor(): {}", username);;
 
-//        return Optional.ofNullable(user);
+        return Optional.ofNullable(username);
 
     }
 

@@ -72,7 +72,7 @@ import platform.services.api.common.audit.AuditableAction;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Getter @Setter @ToString
-public class BaseEntity<S> {
+public class BaseEntity<User> {
 
     public static final Long ID_RANGE_MIN     = 1L;
     public static final Long ID_RANGE_MAX     = 4294967295L;

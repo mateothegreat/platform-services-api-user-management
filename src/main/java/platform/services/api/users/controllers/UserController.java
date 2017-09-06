@@ -60,13 +60,17 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import platform.services.api.common.authentication.Authorities;
 import platform.services.api.common.controller.BaseRestController;
 import platform.services.api.common.exception.RestResponse;
 import platform.services.api.common.utilities.Tracing;
@@ -81,8 +85,7 @@ public class UserController extends BaseRestController {
 
     private final UserService service;
 
-    @Autowired
-    public UserController(final UserService service) {
+    @Autowired public UserController(final UserService service) {
 
         this.service = service;
 
@@ -103,39 +106,22 @@ public class UserController extends BaseRestController {
 
         } catch(final DataAccessException e) {
 
-            return new ResponseEntity<>(new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, "username", "email address", "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
+            return new ResponseEntity<>(
+                    new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, "username", "email address",
+                            "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
 
         }
 
     }
 
-    @PreAuthorize("hasAuthority('ROLE_USER_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-//    public ResponseEntity<BaseRepositoryPage<User>> getAll(final Pageable pageable) throws NotFoundException {
-//    public ResponseEntity<Page<User>> getAll(final Pageable pageable) throws NotFoundException {
-//
-//        final Page<User> results = service.getAll(pageable);
-//
-//        return new ResponseEntity<Page<User>> (results, HttpStatus.OK);
-//
-//    }
-
-//    public BaseRepositoryPage<BaseEntity> getAll(final Pageable pageable) throws NotFoundException {
+    @PreAuthorize("hasAuthority('ROLE_USER_ADMIN')")
     public HttpEntity<PagedResources<User>> getAll(final Pageable pageable, PagedResourcesAssembler assembler) {
-//     public Page<User> getAll(final Pageable pageable) throws NotFoundException {
 
-//        final BaseRepositoryPage<BaseEntity> results = service.getAll(pageable);
-
-        final Page<User> results = service.getAll(pageable);;
+        final Page<User> results = service.getAll(pageable);
+        ;
 
         return new ResponseEntity<PagedResources<User>>(assembler.toResource(results), HttpStatus.OK);
-
-//        return new PageImpl<>(results, pageable, (long) results.size());
-
-
-
-
-        //        return service.getAll(pageable);
 
     }
 
@@ -166,6 +152,19 @@ public class UserController extends BaseRestController {
         }
 
         return new ResponseEntity<>(user, HttpStatus.OK);
+
+    }
+
+    @Secured({ Authorities.ROLE_ADMIN })
+    @RequestMapping(method = RequestMethod.GET, path = "/escalate")
+    public String escalateRole() {
+
+        Authentication auth = SecurityContextHolder.getContext()
+                                                   .getAuthentication();
+
+        return "Current User Authorities inside this RunAS method only " +
+                auth.getAuthorities()
+                    .toString();
 
     }
 

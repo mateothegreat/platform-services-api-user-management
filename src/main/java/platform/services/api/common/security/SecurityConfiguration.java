@@ -49,6 +49,7 @@ package platform.services.api.common.security;
  * streaming-platform.com
  */
 
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -57,6 +58,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -79,7 +82,7 @@ import platform.services.api.users.ApplicationConfig;
 @EnableWebSecurity(debug = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @ComponentScan(basePackages = "platform.services.api.common.authentication")
-//@ComponentScan(basePackages = ApplicationConfig.PLATFORM_SERVICES_API)
+@ToString
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -93,9 +96,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //    public AuthenticationProvider authenticationProvider;
 
     @Bean
+    public AuthenticationProvider runAsAuthenticationProvider() {
+
+        final RunAsImplAuthenticationProvider authProvider = new RunAsImplAuthenticationProvider();
+
+        authProvider.setKey("ROLE_INTEGRATION");
+
+        return authProvider;
+
+    }
+
+    @Bean
     public static BCryptPasswordEncoder bCryptPasswordEncoder() {
 
-        return new BCryptPasswordEncoder(10);
+        return new BCryptPasswordEncoder();
 
     }
 
@@ -128,6 +142,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authoritiesByUsernameQuery(ApplicationConfig.SELECT_FROM_USER_ROLES_WHERE_USERNAME)
             .passwordEncoder(bCryptPasswordEncoder);
 
+        auth.authenticationProvider(runAsAuthenticationProvider());
+
 //        auth.userDetailsService(authService)
 
     }
@@ -156,12 +172,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override
-    public String toString() {
-
-        return "SecurityConfiguration{" +
-                "platformDataSource=" + platformDataSource +
-                ", authenticationEntryPoint=" + authenticationEntryPoint +
-                '}';
-    }
 }
