@@ -9,7 +9,7 @@ import java.util.Optional;
 public class AuditorAwareable implements AuditorAware<String> {
 
     public Optional<String> getCurrentAuditor() {
-        log.fatal("getCurrentAuditor()");
+        log.trace("getCurrentAuditor()");
         return Optional.of("asdf");
 
 //

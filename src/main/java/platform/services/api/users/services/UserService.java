@@ -115,7 +115,7 @@ public class UserService extends GenericServiceImpl<User> {
 
     }
 
-    public BaseEntity getById(final Long id) {
+    public User getById(final Long id) {
 
         return userRepository.getById(id);
 

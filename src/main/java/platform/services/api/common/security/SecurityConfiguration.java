@@ -95,7 +95,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public static BCryptPasswordEncoder bCryptPasswordEncoder() {
 
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
 
     }
 
@@ -120,13 +120,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(final AuthenticationManagerBuilder auth, final BCryptPasswordEncoder passwordEncoder) throws Exception {
+    public void configureGlobal(final AuthenticationManagerBuilder auth, final BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
 
         auth.jdbcAuthentication()
             .dataSource(platformDataSource)
             .usersByUsernameQuery(ApplicationConfig.SELECT_FROM_USER_WHERE_USERNAME)
             .authoritiesByUsernameQuery(ApplicationConfig.SELECT_FROM_USER_ROLES_WHERE_USERNAME)
-            .passwordEncoder(passwordEncoder);
+            .passwordEncoder(bCryptPasswordEncoder);
 
 //        auth.userDetailsService(authService)
 

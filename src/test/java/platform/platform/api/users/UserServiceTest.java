@@ -1,20 +1,20 @@
 package platform.platform.api.users;
 
 import lombok.extern.log4j.Log4j2;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.*;
 import org.junit.runner.*;
 
 import platform.platform.api.common.BaseTests;
-import platform.services.api.common.authentication.Authenticated;
-import platform.services.api.common.authentication.AuthenticationAuthorities;
-import platform.services.api.common.jpa.repositories.BaseRepositoryOperations;
 import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.UserConfig;
 import platform.services.api.users.jpa.User;
@@ -25,134 +25,100 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Log4j2
 @Profile("test")
 @RunWith(SpringRunner.class)
-//@EnableTransactionManagement
-//@Transactional
-@ContextConfiguration(classes = { UserConfig.class, UserService.class }, loader = AnnotationConfigContextLoader.class)
-public class UserServiceTest extends BaseTests<User> {
+@Transactional
+@ContextConfiguration(
+  classes = {UserConfig.class, UserService.class},
+  loader = AnnotationConfigContextLoader.class
+)
+public class UserServiceTest extends BaseTests {
 
-    @Autowired
-    protected UserService      userService;
-    protected EntityRandomizer r;
-    protected User             setUp_created_User;
+  @Autowired protected UserService userService;
+  protected EntityRandomizer r;
 
-    @Before public void setUp() throws Exception {
+  @Before
+  public void setUp() throws Exception {
 
-        Authenticated.runAs("gibson", "password123", AuthenticationAuthorities.ADMIN, AuthenticationAuthorities.USER);
+    //    AuthenticatedRunAsRole.runAs(
+    //        "gibson", "password123", AuthenticationAuthorities.ADMIN,
+    // AuthenticationAuthorities.USER);
 
-        r = new EntityRandomizer();
+    this.r = new EntityRandomizer();
 
-        setGenericService(userService);
-        setUserService(userService);
+    assertThat(this.userService).isNotNull();
 
-        final User user = r.get(User.class);
+    this.userService = this.userService;
+  }
 
-        setUp_created_User = userService.saveEntity(user);
+  @Test
+  public void create() throws Exception {
 
-        baseEntity_isValid(setUp_created_User);
-        baseEntity_isValid(userService.getById(setUp_created_User.getId()));
+    final User user = this.r.get(User.class);
+    final User result = this.userService.saveEntity(user);
 
-    }
+    baseEntity_isValidAndCompare(user, this.userService.getById(result.getId()), "id");
+  }
 
-    @Test
-    public void create() throws Exception {
+  @Test
+  public void getAll() throws Exception {
 
-        final User user   = r.get(User.class);
-        final User result = userService.saveEntity(user);
+    final Page<User> results = this.userService.getAll(PageRequest.of(0, 5));
 
-        baseEntity_isValid(user);
-        baseEntity_isValid(result);
+    Tracing.trace("getAll: {}", Tracing.toString(results));
 
-        baseEntity_isValidAndCompare(user, userService.getById(result.getId()));
+    assertThat(results.getTotalElements()).isGreaterThan(0L);
 
-    }
+    baseEntity_isValid((User) results.getContent().get(0));
 
-    @After public void tearDown() throws Exception {
+    baseEntity_isValid((User) results.getContent().get(results.getNumberOfElements() - 1));
+  }
 
-//        baseEntity_deleteByObj(user);
-//        baseEntity_getById_doesNotExist(user.getId());
+  @Test
+  public void getUserByUsername() throws Exception {
 
-    }
+    final User user = this.userService.saveEntity(this.r.get(User.class));
+    final User result = this.userService.getUserByUsername(user.getUsername());
 
-    @Test public void getAll() throws Exception {
+    baseEntity_isValidAndCompare(user, result);
+  }
 
-        final Page<?> results = userService.getAll(BaseRepositoryOperations.pageRequestFactory());
+  @Test
+  public void getUserByEmail() throws Exception {
 
-        Tracing.trace("getAll: {}", Tracing.toString(results));
+    final User user = this.userService.saveEntity(this.r.get(User.class));
+    final User result = this.userService.getUserByEmail(user.getEmail());
 
-        assertThat(results.getTotalElements()).isGreaterThan(0L);
+    baseEntity_isValidAndCompare(user, result);
+  }
 
-        baseEntity_isValid((User) results.getContent()
-                                         .get(0));
+  @Test
+  public void save() throws Exception {
 
-    }
+    final User user = this.userService.saveEntity(this.r.get(User.class));
+    final User previous = this.userService.getById(user.getId());
 
-    @Test public void getUserByUsername() throws Exception {
+    previous.setPassword(RandomString.make(User.PASSWORD_LEGNTH_MAX));
+    previous.setStatus(2L);
 
-        final User result = userService.getUserByUsername(UserConfig.USER_VALID_USERNAME);
+    final User current = this.userService.saveEntity(previous);
 
-        baseEntity_isValid(result);
+    baseEntity_isValidAndCompare(previous, current, "id");
+  }
 
-    }
+  @Test
+  public void delete() throws Exception {
 
-    @Test public void getUserByEmail() throws Exception {
+    final User user = this.userService.saveEntity(this.r.get(User.class));
 
-        final User result = userService.getUserByEmail(UserConfig.USER_VALID_EMAIL);
+    baseEntity_isValid(user);
 
-        baseEntity_isValid(userService.getUserByEmail(UserConfig.USER_VALID_EMAIL));
+    assertThat(this.userService.deleteById(user.getId())).isTrue();
+  }
 
-    }
+  @Test
+  public void getById() throws Exception {
 
-    @Test public void save() throws Exception {
+    final User user = this.userService.saveEntity(this.r.get(User.class));
 
-        final User exists = userService.getUserByUsername(setUp_created_User.getUsername());
-        final User result;
-
-        if(exists == null) {
-
-            result = userService.saveEntity((User) setUp_created_User);
-
-        } else {
-
-            baseEntity_isValid(exists);
-            ;
-
-            result = userService.saveEntity((User) setUp_created_User);
-
-        }
-
-        baseEntity_isValid(result);
-        ;
-
-        baseEntity_isValidAndCompare(result, exists);
-
-    }
-
-    @Test
-    public void delete() throws Exception {
-
-    }
-
-    @Test
-    public void getById() throws Exception {
-
-        baseEntity_isValid(userService.getById(setUp_created_User.getId()));
-
-    }
-
-    public UserService getUserService() {
-
-        assertThat(userService).isNotNull();
-
-        return userService;
-
-    }
-
-    public void setUserService(final UserService userService) {
-
-        assertThat(userService).isNotNull();
-
-        this.userService = userService;
-
-    }
-
+    baseEntity_isValid(user);
+  }
 }

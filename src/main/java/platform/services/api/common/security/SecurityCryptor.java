@@ -1,14 +1,17 @@
 package platform.services.api.common.security;
 
+import lombok.extern.log4j.Log4j2;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import platform.services.api.common.utilities.Tracing;
 
+@Log4j2
 @Service
 public class SecurityCryptor {
 
-    private static boolean trace = false;
+    private static boolean trace = true;
 
     public static String encode(final String str) {
 
@@ -18,7 +21,7 @@ public class SecurityCryptor {
 
             if(trace) {
 
-                Tracing.trace("encode: {} = (already encoded)", str);
+                log.trace("encode: {} = (already encoded)", str);
 
             }
 
@@ -26,15 +29,15 @@ public class SecurityCryptor {
 
         } else {
 
-            final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
+
+            result = bCryptPasswordEncoder.encode(str);
 
             if(trace) {
 
-                Tracing.trace("encode: {} = {}", str, bCryptPasswordEncoder.encode(str));
+                log.trace("encode: {} = {} ({})", str, result, result.length());
 
             }
-
-            result = bCryptPasswordEncoder.encode(str);
 
         }
 
@@ -47,7 +50,7 @@ public class SecurityCryptor {
 
         if(trace) {
 
-            Tracing.trace("isEncoded: {} = TRUE", str);
+//            log.trace("isEncoded: {} = {} (len: {})", Boolean.valueOf(str.startsWith("$2a$")), str, str.length());
 
         }
 
@@ -57,7 +60,7 @@ public class SecurityCryptor {
 
     public static boolean matches(String rawPassword, String encodedPassword) {
 
-        final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder( 10);
 
         return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
 

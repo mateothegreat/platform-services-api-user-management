@@ -91,7 +91,7 @@ public class User extends BaseEntity<String> {
     @NotEmpty @Length(min = USERNAME_LENGTH_MIN, max = USERNAME_LENGTH_MAX)
     private String username;
 
-    @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
+//    @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
     private String password;
 
     @NotNull @Range(min = 1L, max = 200L)

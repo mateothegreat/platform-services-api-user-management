@@ -49,6 +49,7 @@ package platform.services.api.common.jpa.repositories;
  * streaming-platform.com
  */
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -69,7 +70,7 @@ public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingReposi
 
     //    BaseEntity findById(Long id);
 
-    BaseRepositoryPage<BaseEntity> findAll(Pageable pageable);
+    Page<BaseEntity> findAll(Pageable pageable);
 
 //    /**s
 //     * Returns all entities sorted by the given options.

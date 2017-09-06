@@ -29,15 +29,15 @@ public class UserRepositoryInitializer implements ApplicationRunner {
 
         log.trace("run(final ApplicationArguments arguments): {}", arguments.toString());
 
-        User result = userService.getUserByUsername("integration-admin1");
+        try {
+            User result = userService.getUserByUsername("integration-admin1");
 
-        log.trace("getUserByUsername: {}", result);
+            log.trace("getUserByUsername: {}", result);
 
 //        if(result == null) {
 
 //            User admin = new User("integration-admin1@integration-admin1.com", "integration-admin1", "password", 1L);
             User admin = platform.services.api.users.UserConfig.buildUser();
-
 
             admin.setParentId(1L);
 
@@ -46,6 +46,12 @@ public class UserRepositoryInitializer implements ApplicationRunner {
             log.trace("run: {}", created);
 
 //        }
+
+        } catch(Exception e) {
+
+            log.warn(e.toString());
+
+        }
 
     }
 
