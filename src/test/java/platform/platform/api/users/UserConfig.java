@@ -62,9 +62,12 @@ import platform.services.api.users.jpa.User;
 @ComponentScan({ ApplicationConfig.PLATFORM_SERVICES_API_COMMON, ApplicationConfig.PLATFORM_SERVICES_API_USERS, })
 public class UserConfig {
 
-    public static final Long   USER_VALID_ID               = null;
-    public static final Long   USER_VALID_PARENT_ID        = 1L;
-    public static final int    USER_VALID_STATUS           = 1;
+    public static final Long USER_VALID_ID        = null;
+    public static final Long USER_VALID_PARENT_ID = 1L;
+
+    public static final Long USER_VALID_STATUS = 1L;
+    ;
+
     public static final String USER_VALID_EMAIL            = "test-user1@test-user1.com";
     public static final String USER_VALID_USERNAME         = "test-user1";
     public static final String USER_VALID_PASSWORD         = "test-password";
@@ -96,10 +99,14 @@ public class UserConfig {
         return user;
 
     }
-//    public TestingConfig(final UserRepository userRepository, final UserService userService) {
-//
-//        this.userRepository = userRepository;
-//        this.userService = userService;
-//
-//    }
+
+    public static User buildRandomized() {
+
+//        RandomStringUtils
+//        User user = new User();
+
+        return null;
+
+    }
+
 }

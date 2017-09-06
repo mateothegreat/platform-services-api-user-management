@@ -31,6 +31,7 @@ package platform.services.api.users.services;
  * streaming-platform.com
  */
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -42,13 +43,14 @@ import platform.services.api.common.jpa.repositories.BaseRepository;
 import platform.services.api.common.utilities.Tracing;
 import platform.services.api.users.jpa.User;
 
+@Log4j2
 //@Service
-public class GenericServiceImpl implements GenericService {
+public class GenericServiceImpl<T> implements GenericService<T> {
 
-    private final BaseRepository baseRepository;
+    private final BaseRepository<T, Long> baseRepository;
 
     @Autowired
-    public GenericServiceImpl(final BaseRepository baseRepository) {
+    public GenericServiceImpl(final BaseRepository<T, Long> baseRepository) {
 
         this.baseRepository = baseRepository;
 
@@ -60,15 +62,16 @@ public class GenericServiceImpl implements GenericService {
 //
 //    }
 
-    public BaseEntity saveEntity(final BaseEntity entity) {
+//    public T saveEntity(final BaseEntity entity) {
+    public T saveEntity(final T entity) {
 
-        Tracing.trace("saveEntity: {}", entity.toString());
+        log.fatal("saveEntity: {}", entity.toString());
 
-        Object result = null;
+        T result = null;
 
         try {
 
-            result = baseRepository.save(entity);
+            result = baseRepository.save(entity);;
 
         } catch(final DataIntegrityViolationException e) {
 
@@ -91,14 +94,14 @@ public class GenericServiceImpl implements GenericService {
 
         }
 
-        return (BaseEntity) result;
+        return result;
 
     }
 
 //    public BaseRepositoryPage<User> getAll(final BasePageable pageable) {
     public Page<User> getAll(final Pageable pageable) {
 
-        return baseRepository.findAll(pageable);
+        return (Page<User>) baseRepository.findAll(pageable);
 
     }
 
@@ -118,8 +121,6 @@ public class GenericServiceImpl implements GenericService {
 
     public boolean delete(final BaseEntity entity) {
 
-        Tracing.trace("GenericServiceImpl->delete: {}", entity.toString());
-
         return deleteById(entity.getId());
 
     }
@@ -135,6 +136,7 @@ public class GenericServiceImpl implements GenericService {
         return !baseRepository.existsById(entityId);
 
     }
+
 
 //    //    @Autowired
 //    public GenericServiceImpl(BaseRepository baseRepository) {

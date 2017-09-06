@@ -49,24 +49,27 @@ package platform.services.api.common.jpa.repositories;
  * streaming-platform.com
  */
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.Repository;
 
 //@Repository
 @NoRepositoryBean
 //public interface BaseRepository<T, ID extends Serializable> extends PagingAndSortingRepository<T, ID> {//public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
 //public interface BaseRepository extends org.springframework.data.repository.Repository<BaseEntity, Long> {
 //public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
-public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
 //public interface BaseRepository extends PagingAndSortingRepository {
 //public interface BaseRepository<BaseEntity, ID extends Serializable> extends PagingAndSortingRepository<platform.services.api.common.jpa.entities.BaseEntity, ID> {
+//public interface BaseRepository<T, Long> extends PagingAndSortingRepository<BaseEntity, Long> {
+public interface BaseRepository<BaseEntity, Long> extends Repository<BaseEntity, Long> {
 
 
     BaseEntity getById(Long id);
+//    T getById(Long id);
 
-//    BaseEntity findById(Long id);
+    //    BaseEntity findById(Long id);
 
-//    BaseRepositoryPage<BaseEntity> findAll(BasePageable pageable);
+    BaseRepositoryPage<BaseEntity> findAll(Pageable pageable);
 
 //    /**s
 //     * Returns all entities sorted by the given options.
@@ -128,7 +131,7 @@ public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingReposi
 //     *
 //     * @throws IllegalArgumentException if {@code id} is {@literal null}.
 //     */
-//    boolean existsById(Long entityId);
+    boolean existsById(Long entityId);
 //
 //    /**
 //     * Returns all instances of the type.
@@ -189,8 +192,8 @@ public interface BaseRepository<BaseEntity, Long> extends PagingAndSortingReposi
     //    Object save(Object persisted);
 
     //    Object save(Object persisted);
-//    BaseEntity save(BaseEntity entity);
+    BaseEntity save(BaseEntity entity);
 
-//    void deleteById(Long id);
+    void deleteById(Long id);
 
 }

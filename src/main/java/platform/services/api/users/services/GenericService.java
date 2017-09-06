@@ -38,7 +38,7 @@ import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.users.jpa.User;
 
 //@Service
-public interface GenericService {
+public interface GenericService<T> {
 
     //    BaseRepositoryPage<User> getAll(BasePageable pageable);
     Page<User> getAll(Pageable pageable);
@@ -48,6 +48,8 @@ public interface GenericService {
 
     boolean delete(final BaseEntity entity);
     boolean deleteById(final long entityId);
+//    BaseEntity<?> saveEntity(BaseEntity<?> entity);
+    T saveEntity(final T entity);
 
 //        T save(T entity) throws DuplicateKeyException;
 //    Object save(BaseEntity entity) throws DuplicateKeyException;

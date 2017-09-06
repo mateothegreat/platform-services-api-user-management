@@ -21,6 +21,7 @@
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -30,6 +31,7 @@
         <relativePath/>
     </parent>
 
+    <!-- region package info -->
     <groupId>com.streaming-platform.api</groupId>
     <artifactId>platform-api-users</artifactId>
     <version>1.0.0</version>
@@ -42,6 +44,7 @@
         <name>streamnvr</name>
         <url>https://streamnvr.com</url>
     </organization>
+    <!-- endregion -->
 
     <properties>
 
@@ -114,7 +117,7 @@
 
     <dependencies>
 
-        <!-- Spring Boot -->
+        <!-- region spring-boot -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -139,70 +142,199 @@
             <version>${version.spring.boot}</version>
         </dependency>
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${version.spring.boot}</version>
+
         </dependency>
+
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
             <version>${version.spring.boot}</version>
+
         </dependency>
+
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
             <version>${version.spring.boot}</version>
+
         </dependency>
+
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <!--<version>1.4.1.RELEASE</version>-->
             <version>${version.spring.boot}</version>
             <optional>true</optional>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-entitymanager</artifactId>-->
-        <!--<version>5.2.10.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.data</groupId>-->
-        <!--<artifactId>spring-data-releasetrain</artifactId>-->
-        <!--<version>RELEASE</version>-->
-        <!--<scope>import</scope>-->
-        <!--<type>pom</type>-->
-        <!--</dependency>-->
 
-        <!-- Spring Data -->
+        </dependency>
+
+
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.0.Final</version>
+
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${version.spring.boot}</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.0.0.M3</version>
+
+        </dependency>
+
+        <!-- endregion -->
+        <!--region spring-data -->
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-hal-browser</artifactId>
+            <version>2.6.6.RELEASE</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+        <!--endregion-->
+        <!-- region spring-session -->
+        <dependency>
+
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-core</artifactId>
+            <version>2.0.0.M3</version>
+
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>6.0.2.Final</version>
+
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>2.0.0.M3</version>
+
+        </dependency>
+        <!--endregion-->
+
+        <!-- region testing -->
+        <dependency>
+
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.0.3</version>
+            <scope>test</scope>
+
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.data</groupId>-->
-        <!--<artifactId>spring-data-rest-core</artifactId>-->
-        <!--<version>3.0.0.RC2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.data</groupId>-->
-        <!--<artifactId>spring-data-rest-webmvc</artifactId>-->
-        <!--<version>3.0.0.RC2</version>-->
-        <!--</dependency>-->
+        <dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.data</groupId>-->
-        <!--<artifactId>spring-data-jpa</artifactId>-->
-        <!--<version>2.0.0.RC2</version>-->
-        <!--</dependency>-->
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>3.0.3</version>
+            <scope>test</scope>
 
-        <!-- Spring JDBC -->
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>1.0.0-RC3</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>1.0.0-RC3</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>4.12.0-RC3</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.0-RC3</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.0.0-RC3</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0-android</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>io.github.benas</groupId>
+            <artifactId>random-beans</artifactId>
+            <version>3.7.0</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>io.github.benas</groupId>
+            <artifactId>random-beans-randomizers</artifactId>
+            <version>3.7.0</version>
+            <scope>test</scope>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.13</version>
+            <scope>test</scope>
+
+        </dependency>
+        <!-- endregion -->
+        <!-- region persistence -->
 
         <dependency>
             <groupId>mysql</groupId>
@@ -210,230 +342,56 @@
             <version>${version.mysql-connector}</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-        <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
-        <!--<version>1.0.0.Final</version>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; JPA Provider (Hibernate) &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-core</artifactId>-->
-        <!--<version>5.2.10.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.hibernate</groupId>-->
-        <!--<artifactId>hibernate-entitymanager</artifactId>-->
-        <!--<version>5.2.10.Final</version>-->
-        <!--</dependency>-->
-
-        <!-- Spring Security -->
-
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.authentication</groupId>-->
-        <!--<artifactId>spring-authentication-core</artifactId>-->
-        <!--<version>${version.spring.authentication}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.authentication</groupId>-->
-        <!--<artifactId>spring-authentication-web</artifactId>-->
-        <!--<version>${version.spring.authentication}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.authentication</groupId>-->
-        <!--<artifactId>spring-authentication-config</artifactId>-->
-        <!--<version>${version.spring.authentication}</version>-->
-        <!--</dependency>-->
-
-        <!-- Spring Testing -->
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${version.spring.boot}</version>
-            <scope>test</scope>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.assertj</groupId>-->
-        <!--<artifactId>assertj-core</artifactId>-->
-        <!--<version>3.8.0</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-        <!--<groupId>org.junit</groupId>-->
-        <!--<artifactId>junit4-runner</artifactId>-->
-        <!--<version>5.0.0-ALPHA</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework</groupId>-->
-        <!--<artifactId>spring-test</artifactId>-->
-        <!--<version>5.0.0.RC3</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-test</artifactId>-->
-        <!--<version>${version.spring.boot}</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.authentication</groupId>-->
-        <!--<artifactId>spring-authentication-test</artifactId>-->
-        <!--<version>${version.spring.authentication}</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!-- Redis -->
-
-        <!--<dependency>-->
-        <!--<groupId>org.jredis</groupId>-->
-        <!--<artifactId>jredis-core-ri</artifactId>-->
-        <!--<version>RELEASE</version>-->
-        <!--<scope>compile</scope>-->
-        <!--<optional>true</optional>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.jredis</groupId>-->
-        <!--<artifactId>jredis-core-api</artifactId>-->
-        <!--<version>RELEASE</version>-->
-        <!--<scope>compile</scope>-->
-        <!--<optional>true</optional>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>redis.clients</groupId>-->
-        <!--<artifactId>jedis</artifactId>-->
-        <!--<version>2.9.0</version>-->
-        <!--<scope>compile</scope>-->
-        <!--<optional>true</optional>-->
-        <!--</dependency>-->
-
-        <!-- Spring Logging -->
-
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-api</artifactId>-->
-        <!--<version>1.7.25</version>-->
-        <!--<scope>compile</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-log4j12</artifactId>-->
-        <!--<version>1.7.25</version>-->
-        <!--<scope>compile</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--&lt;!&ndash;https://logging.apache.org/log4j/2.x/maven-artifacts.html&ndash;&gt;-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-api</artifactId>-->
-        <!--<version>${version.log4j}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-core</artifactId>-->
-        <!--<version>${version.log4j}</version>-->
-        <!--</dependency>-->
-
-        <!-- Sessions -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.0.0.M3</version>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.0.Final</version>
         </dependency>
 
-        <!-- Utilities -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.2.Final</version>
+        </dependency>
 
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>5.2.10.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>5.2.10.Final</version>
+            <!--<version>5.1.10.Final</version>-->
+        </dependency>
+
+        <!-- endregion -->
+        <!-- region utilities -->
+
+        <dependency>
+
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>${version.commons-codec}</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.session</groupId>-->
-        <!--<artifactId>spring-session-data-redis</artifactId>-->
-        <!--<version>2.0.0.M3</version>-->
-        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-core</artifactId>
-            <version>2.0.0.M3</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-            <version>2.0.0.M3</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.data</groupId>-->
-        <!--<artifactId>spring-data-redis</artifactId>-->
-        <!--<version>2.0.0.M3</version>-->
-        <!--</dependency>-->
-        <!-- Metrics -->
 
-        <!--<dependency>-->
-        <!--<groupId>io.dropwizard.metrics</groupId>-->
-        <!--<artifactId>metrics-core</artifactId>-->
-        <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>io.dropwizard.metrics</groupId>-->
-        <!--<artifactId>metrics-healthchecks</artifactId>-->
-        <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>io.dropwizard.metrics</groupId>-->
-        <!--<artifactId>metrics-graphite</artifactId>-->
-        <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>io.dropwizard.metrics</groupId>-->
-        <!--<artifactId>metrics-annotation</artifactId>-->
-        <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>io.dropwizard.metrics</groupId>-->
-        <!--<artifactId>metrics-jvm</artifactId>-->
-        <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.ryantenney.metrics</groupId>-->
-        <!--<artifactId>metrics-spring</artifactId>-->
-        <!--<version>3.1.0</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>3.0.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>3.0.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>RELEASE</version>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.0</version>
         </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-rest-hal-browser</artifactId>
-            </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- endregion -->
 
     </dependencies>
 
@@ -453,9 +411,11 @@
         <plugins>
 
             <plugin>
+
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
+
                 <configuration>
 
                     <useDefaultDelimiters>false</useDefaultDelimiters>
@@ -467,12 +427,15 @@
                     </delimiters>
 
                 </configuration>
+
             </plugin>
 
             <plugin><!--http://docs.spring.io/spring-boot/docs/1.4.1.RELEASE/maven-plugin/usage.html-->
+
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${version.spring.boot}</version>
+
                 <configuration>
 
                     <executable>true</executable>
@@ -523,67 +486,71 @@
                     </execution>
 
                 </executions>
+
             </plugin>
 
-            <plugin><!--http://www.mojohaus.org/license-maven-plugin/update-file-header-mojo.html-->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tidy-maven-plugin</artifactId>
-                <version>${project.version}</version>
-                <executions>
+            <!--<plugin>&lt;!&ndash;http://www.mojohaus.org/license-maven-plugin/update-file-header-mojo.html&ndash;&gt;-->
 
-                    <execution>
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>tidy-maven-plugin</artifactId>-->
+                <!--<version>${project.version}</version>-->
 
-                        <id>validate</id>
-                        <phase>validate</phase>
+                <!--<executions>-->
 
-                        <goals>
+                    <!--<execution>-->
 
-                            <goal>check</goal>
+                        <!--<id>validate</id>-->
+                        <!--<phase>validate</phase>-->
 
-                        </goals>
+                        <!--<goals>-->
 
-                    </execution>
+                            <!--<goal>check</goal>-->
 
-                </executions>
-            </plugin>
+                        <!--</goals>-->
 
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Sets the path to the file which contains the execution data. -->
+                    <!--</execution>-->
 
-                            <dataFile>target/jacoco.exec</dataFile>
-                            <!-- Sets the output directory for the code coverage report. -->
-                            <outputDirectory>target/jacoco-ut</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <destFile>target/jacoco.exec</destFile>
-                </configuration>
-            </plugin>
+                <!--</executions>-->
+
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.jacoco</groupId>-->
+                <!--<artifactId>jacoco-maven-plugin</artifactId>-->
+                <!--<version>0.7.9</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>prepare-agent</id>-->
+                        <!--<goals>-->
+                            <!--<goal>prepare-agent</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                        <!--<id>report</id>-->
+                        <!--<phase>prepare-package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>report</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                        <!--<id>post-unit-test</id>-->
+                        <!--<phase>test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>report</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--&lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;-->
+
+                            <!--<dataFile>target/jacoco.exec</dataFile>-->
+                            <!--&lt;!&ndash; Sets the output directory for the code coverage report. &ndash;&gt;-->
+                            <!--<outputDirectory>target/jacoco-ut</outputDirectory>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<destFile>target/jacoco.exec</destFile>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
 
             <!--<plugin>-->
             <!--<groupId>org.codehaus.mojo</groupId>-->
@@ -653,4 +620,5 @@
         </profile>
 
     </profiles>
+
 </project>

@@ -59,8 +59,9 @@ import java.util.List;
 import platform.services.api.users.jpa.User;
 
 public class CustomUserDetails implements UserDetails {
-    
-    private User                   user;
+
+    private static final long serialVersionUID = 4210423759792532407L;
+    private User user;
     private List<GrantedAuthority> authorities;
     
     public CustomUserDetails(User user, List<GrantedAuthority> authorities) {

@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -18,7 +16,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.common.authentication;
+package platform.services.api.common.audit;
 
 /*-
  * $$SoftwareLicense
@@ -50,39 +48,28 @@ package platform.services.api.common.authentication;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.actuate.audit.AuditEvent;
+import org.springframework.boot.actuate.audit.listener.AuditApplicationEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import platform.services.api.users.jpa.User;
-
+@Log4j2
 @Component
-public class AuthenticationCheck {
-    
-    public User getLoggedInUser() {
-        
-        User user = null;
-        
-        Authentication authentication = SecurityContextHolder.getContext()
-                                                             .getAuthentication();
-        
-        if(authentication != null) {
-            
-            Object principal = authentication.getPrincipal();
-            
-            // principal can be "anonymousUser" (String)
-            if(principal instanceof CustomUserDetails) {
-                
-                CustomUserDetails userDetails = (CustomUserDetails) principal;
-                
-                user = userDetails.getUser();
-                
-            }
-            
-        }
-        
-        return user;
-        
+public class AuditListenerApplication implements AuditListener {
+
+    @EventListener
+    static void onApplicationEvent(AuditApplicationEvent event) {
+
+        final AuditEvent actualAuditEvent = event.getAuditEvent();
+
+        log.trace("onAuditEvent: timestamp: {}, principal: {}, type: {}, data: {}",
+                actualAuditEvent.getTimestamp(),
+                actualAuditEvent.getPrincipal(),
+                actualAuditEvent.getType(),
+                actualAuditEvent.getData());
+
     }
-    
+
 }

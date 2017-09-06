@@ -49,80 +49,87 @@ package platform.services.api.common.jpa.entities;
  * streaming-platform.com
  */
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//@EntityListeners(AuditingEntityListener.class)
-@MappedSuperclass
-public class BaseEntity {
-//public class BaseEntity {
-//public class BaseEntity implements Serializable {
+import java.util.Date;
 
-    public BaseEntity() {}
+import platform.services.api.common.audit.AuditableAction;
+
+@Log4j2
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+@Getter @Setter @ToString
+public class BaseEntity<S> {
+
+    public static final Long ID_RANGE_MIN     = 1L;
+    public static final Long ID_RANGE_MAX     = 4294967295L;
+    public static final Long STATUS_RANGE_MIN = 1L;
+    public static final Long STATUS_RANGE_MAX = 200L;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    protected Date createdDate;
+
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    protected Date lastModifiedDate;
+
+    @CreatedBy
+    protected String createdBy;
+
+    @LastModifiedBy
+    protected String lastModifiedBy;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+//    @Range(min = BaseEntity.ID_RANGE_MIN, max = BaseEntity.ID_RANGE_MAX)
+    @Range(min = 1L, max = 4294967295L)
+    @Column(nullable = false, updatable = false)
     protected Long id;
 
-    protected @NotNull @Range(min = 0) Long parentId;
+    @NotNull
+//    @Range(min = BaseEntity.ID_RANGE_MIN, max = BaseEntity.ID_RANGE_MAX)
+    @Range(min = 1L, max = 4294967295L)
+    protected Long parentId;
+    ;
+    protected String operation;
 
-//    @Version
-//    private Integer version;
+    @PreUpdate private void onPreUpdate() {
 
-    public Long getParentId() {
+        log.trace("onPreUpdate");
 
-        return parentId;
-    }
-
-    public void setParentId(final Long parentId) {
-
-        this.parentId = parentId;
-
-    }
-
-    public Long getId() {
-
-        return id;
+        setOperation(AuditableAction.UPDATED.value());
 
     }
 
-    public void setId(final Long id) {
+    @PreRemove private void onPreRemove() {
 
-        this.id = id;
+        log.trace("onPreRemove");
+        setOperation(AuditableAction.DELETED.value());
 
     }
 
-//    public Integer getVersion() {
-//
-//        return version;
-//    }
+    @PrePersist private void onPrePersist() {
 
-//    public void setVersion(final Integer version) {
-//
-//        this.version = version;
-//
-//    }
+        log.trace("onPrePersist");
+        setOperation(AuditableAction.INSERTED.value());
 
-    // @Column(name = "createdByUser", nullable = false)
-    // @CreatedBy
-    // private String createdByUser;
-    //
-//    @Temporal(TemporalType.DATE) private Date
-    // @Column(name = "creationTime", nullable = false)
-    // @CreatedDate
-    // private ZonedDateTime creationTime;
-    //
-    // @Column(name = "modifiedByUser", nullable = false)
-    // @LastModifiedBy
-    // private String modifiedByUser;
-    //
-    // @Column(name = "modificationTime", nullable = false)
-    // @LastModifiedDate
-    // private ZonedDateTime modificationTime;
+    }
 
 }

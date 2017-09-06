@@ -54,6 +54,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -94,7 +97,7 @@ public class UserController extends BaseRestController {
 
         try {
 
-            final User created = service.save(user);
+            final User created = service.saveEntity(user);
 
             return new ResponseEntity<>(created, HttpStatus.OK);
 
@@ -118,11 +121,21 @@ public class UserController extends BaseRestController {
 //    }
 
 //    public BaseRepositoryPage<BaseEntity> getAll(final Pageable pageable) throws NotFoundException {
-     public Page<User> getAll(final Pageable pageable) throws NotFoundException {
+    public HttpEntity<PagedResources<User>> getAll(final Pageable pageable, PagedResourcesAssembler assembler) {
+//     public Page<User> getAll(final Pageable pageable) throws NotFoundException {
 
 //        final BaseRepositoryPage<BaseEntity> results = service.getAll(pageable);
 
-        return service.getAll(pageable);
+        final Page<User> results = service.getAll(pageable);;
+
+        return new ResponseEntity<PagedResources<User>>(assembler.toResource(results), HttpStatus.OK);
+
+//        return new PageImpl<>(results, pageable, (long) results.size());
+
+
+
+
+        //        return service.getAll(pageable);
 
     }
 

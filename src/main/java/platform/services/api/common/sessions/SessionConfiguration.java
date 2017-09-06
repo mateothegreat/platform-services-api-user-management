@@ -50,8 +50,7 @@ package platform.services.api.common.sessions;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -67,26 +66,25 @@ import javax.annotation.PostConstruct;
 // http://docs.spring.io/spring-data/data-redis/docs/current/reference/html/#redis:connectors:lettuce
 //
 
+@Log4j2
 @ConditionalOnProperty(name = "spring.session.store-type", havingValue = "redis")
 @EnableRedisHttpSession
 public class SessionConfiguration extends AbstractHttpSessionApplicationInitializer {
-    
-    private Logger logger = LogManager.getLogger(SessionConfiguration.class);
-    
+
     @Value("${spring.session.store-type}")
     private String sessionStoreType;
     
     @PostConstruct
     public void init() {
         
-        logger.trace("Redis Session Replication is turned {}.", sessionStoreType.equals("redis") ? "ON" : "OFF");
+        log.trace("Redis Session Replication is turned {}.", sessionStoreType.equals("redis") ? "ON" : "OFF");
         
     }
     
     @Bean
     public ConfigureRedisAction configureRedisAction() {
-        
-        logger.trace("Preventing auto-configuration in secured environments.");
+
+        log.trace("Preventing auto-configuration in secured environments.");
         
         return ConfigureRedisAction.NO_OP;
         
@@ -94,7 +92,9 @@ public class SessionConfiguration extends AbstractHttpSessionApplicationInitiali
     
     @Bean
     public HttpSessionStrategy httpSessionStrategy() {
-        
+
+        log.trace("httpSessionStrategy()");
+
         return new HeaderHttpSessionStrategy();
         
     }

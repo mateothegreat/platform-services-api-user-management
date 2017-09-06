@@ -29,7 +29,7 @@ import platform.services.api.users.jpa.User;
 
 @Profile("test")
 @RunWith(SpringRunner.class)
-//@ContextConfiguration(classes = { ApplicationConfig.class }, loader = AnnotationConfigContextLoader.class)
+//@ContextConfiguration(classes = { DataSourceConfig.class,ApplicationConfig.class }, loader = AnnotationConfigContextLoader.class)
 @SpringBootTest(classes = { Application.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserControllerTest extends BaseTests {
 
@@ -103,7 +103,10 @@ public class UserControllerTest extends BaseTests {
 
 
 //        final ResponseEntity<BaseRepositoryPage<User>> result = requestClient.getClient().exchange(uri.toUri(), HttpMethod.GET, requestClient.getHttpEntity(), responseType);
-        final ResponseEntity<BaseRepositoryPage<User>> result = requestClient.getClient().exchange(uri.toUri(), HttpMethod.GET, requestClient.getHttpEntity(), responseType);
+
+//        final ResponseEntity<BaseRepositoryPage<User>> result = requestClient.getClient().exchange(uri.toUri(), HttpMethod.GET, requestClient.getHttpEntity(), responseType);
+
+        final ResponseEntity<?> result = requestClient.getClient().exchange(uri.toUri(), HttpMethod.GET, requestClient.getHttpEntity(), Object.class);
 
         Tracing.trace(result.toString());
 //        final ResponseEntity<String> responseEntity = new RequestClientBuilder(,

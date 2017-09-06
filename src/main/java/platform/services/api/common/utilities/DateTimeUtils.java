@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -16,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.common.audit;
+package platform.services.api.common.utilities;
 
 /*-
  * $$SoftwareLicense
@@ -48,28 +50,58 @@ package platform.services.api.common.audit;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-platform.com
  */
+import org.springframework.format.annotation.DateTimeFormat;
 
-import org.springframework.boot.actuate.audit.AuditEvent;
-import org.springframework.boot.actuate.audit.listener.AuditApplicationEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import platform.services.api.common.utilities.Tracing;
+//https://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string?answertab=votes#tab-top
 
-@Component
-public class AuditApplicationEventListener {
-
-    @EventListener
-    public static void onAuditEvent(final AuditApplicationEvent event) {
-
-        final AuditEvent actualAuditEvent = event.getAuditEvent();
-
-        Tracing.trace("onAuditEvent: timestamp: {}, principal: {}, type: {}, data: {}",
-                actualAuditEvent.getTimestamp(),
-                actualAuditEvent.getPrincipal(),
-                actualAuditEvent.getType(),
-                actualAuditEvent.getData());
-
+public final class DateTimeUtils implements Serializable {
+    
+    private static final long serialVersionUID = -3301695478208950415L;
+    
+    public static final String FORMAT_MYSQL_TIMESTAMP = "yyyy-MM-dd hh:mm:ss";
+    
+    public static String getMYSQL() {
+        
+        return getFormatted(FORMAT_MYSQL_TIMESTAMP);
+        
     }
-
+    
+    public static String getFormatted(String formatPattern) {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formatPattern);
+        
+        return dateFormat.format(now());
+        
+    }
+    
+    public static Date now() {
+        
+        return new Date();
+        
+    }
+    
+    public static Date getISO(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date date) {
+        
+        return date;
+        
+    }
+    
+    public static Date parseDateStr(SimpleDateFormat simpleDateFormat, final String dateString) {
+        
+        try {
+            
+            return simpleDateFormat.parse(dateString);
+            
+        } catch (final ParseException e) {
+            
+            return new Date();
+            
+        }
+    }
+    
 }

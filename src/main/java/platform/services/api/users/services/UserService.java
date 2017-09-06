@@ -31,18 +31,21 @@ package platform.services.api.users.services;
  * streaming-platform.com
  */
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import platform.services.api.common.jpa.entities.BaseEntity;
-import platform.services.api.common.security.SecurityCryptor;
 import platform.services.api.users.jpa.User;
 import platform.services.api.users.jpa.UserRepository;
 
+@Log4j2
 @Service
-public class UserService extends GenericServiceImpl {
+public class UserService extends GenericServiceImpl<User> {
 
     private final UserRepository userRepository;
 
@@ -55,13 +58,13 @@ public class UserService extends GenericServiceImpl {
 
     }
 
-    public User save(final User entity) {
-
-        entity.setPassword(SecurityCryptor.encode(entity.getPassword()));
-
-        return (User) this.saveEntity(entity);
-
-    }
+//    public User save(final User entity) {
+//
+//        entity.setPassword(SecurityCryptor.encode(entity.getPassword()));
+//
+//        return this.saveEntity(entity);
+//
+//    }
 
     public User getUserByUsername(final String username) {
 
@@ -84,6 +87,42 @@ public class UserService extends GenericServiceImpl {
     public BaseEntity getById(final Long id) {
 
         return userRepository.getById(id);
+
+    }
+
+    public User saveEntity(final User entity) {
+
+        User result = null;
+
+        try {
+
+            entity.setPassword(entity.getPassword());
+
+            result = userRepository.save(entity);
+            ;
+
+        } catch(final DataIntegrityViolationException e) {
+
+            final Throwable t = e.getRootCause();
+
+            if(t != null) {
+
+                if(t.getMessage()
+                    .contains("Duplicate entry")) {
+
+                    throw new DuplicateKeyException("DUPLICATE", e);
+
+                }
+
+            } else {
+
+                throw new InternalError(e);
+
+            }
+
+        }
+
+        return result;
 
     }
 

@@ -49,6 +49,10 @@ package platform.services.api.users.jpa;
  * streaming-platform.com
  */
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.lang.Nullable;
@@ -68,29 +72,42 @@ import java.text.MessageFormat;
 import platform.services.api.common.jpa.entities.BaseEntity;
 import platform.services.api.common.security.SecurityCryptor;
 
+@Log4j2
+//@Audited
 @Entity
+@Getter @Setter @ToString
 @Table(name = "user")
-public class User extends BaseEntity {
+//public class User extends BaseEntity {
+public class User extends BaseEntity<String> {
 
-    @Column(unique = true) private @NotEmpty @Email String email;
+    public static final int USERNAME_LENGTH_MIN = 4;
+    public static final int USERNAME_LENGTH_MAX = 32;
+    public static final int PASSWORD_LEGNTH_MIN = 8;
+    public static final int PASSWORD_LEGNTH_MAX = 60;
 
-    private @NotEmpty @Length(min = 4, max = 32) String username;
-    private @NotEmpty @Length(min = 8, max = 60) String password;
-    private @NotNull @Range(min = 0, max = 9)    int    status;
+    @Column(unique = true) @NotEmpty @Email
+    private String email;
 
-//    @JsonCreator
-//    public User(@JsonProperty("email") String email,
-//                @JsonProperty("username") String username,
-//                @JsonProperty("password") String password,
-//                @JsonProperty("status") int status) {
-//
-//        this.email = email;
-//        this.username = username;
-//        this.password = password;
-//        this.status = status;
-//    }
+    @NotEmpty @Length(min = USERNAME_LENGTH_MIN, max = USERNAME_LENGTH_MAX)
+    private String username;
+
+    @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
+    private String password;
+
+    @NotNull @Range(min = 1L, max = 200L)
+//    @NotNull @Range(min = BaseEntity.STATUS_RANGE_MIN, max = BaseEntity.STATUS_RANGE_MAX)
+    private Long status;
 
     public User() {
+
+    }
+
+    public User(@NotEmpty @Email final String email, @NotEmpty @Length(min = 4, max = 32) final String username, @NotEmpty @Length(min = 8, max = 60) final String password, @NotNull @Range(min = 0, max = 9) final Long status) {
+
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.status = status;
 
     }
 
@@ -110,17 +127,6 @@ public class User extends BaseEntity {
 
     }
 
-    public String getUsername() {
-
-        return username;
-
-    }
-
-    public void setUsername(final String username) {
-
-        this.username = username;
-    }
-
     public String getPassword() {
 
         return SecurityCryptor.encode(password);
@@ -131,36 +137,6 @@ public class User extends BaseEntity {
 
         this.password = SecurityCryptor.encode(password);
 
-    }
-
-    public int getStatus() {
-
-        return status;
-    }
-
-    public void setStatus(final int status) {
-
-        this.status = status;
-    }
-
-    public String getEmail() {
-
-        return email;
-    }
-
-    public void setEmail(final String email) {
-
-        this.email = email;
-    }
-
-    @Override public String toString() {
-
-        return MessageFormat.format("User'{'email=''{0}'', username=''{1}'', password=''{2}'', status={3}, id={4}, parentId={5}'}'",
-                email,
-                username,
-                password,
-                status, id,
-                parentId);
     }
 
 }

@@ -1,0 +1,480 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Platform API",
+		"_postman_id": "16e53603-b1f2-1d1d-f8b7-c981e8c597b0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "Users: getAll (200 OK)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"More that one result entity (has \" + jsonData.content.length + \")\"] = jsonData.content.length > 0;",
+									"tests[\"Valid id for result[0] (has \" + jsonData.content[0].id + \")\"] = jsonData.content[0].id > 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users?size=5&page=1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Users: getByUsername (200 OK)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Valid id for result (has \" + jsonData.id + \")\"] = jsonData.id > 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users?username={{LOGIN_VALID_USERNAME}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{LOGIN_VALID_USERNAME}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Users: getUserByEmail (404 Not Found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users?email=invalid@invalid.com",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "invalid@invalid.com",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Users: getUserByEmail (409 Conflict)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 409\"] = responseCode.code === 409",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users?email=",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Users: getUserByEmail (200 OK)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"Valid id for result (has \" + jsonData.id + \")\"] = jsonData.id > 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users?email={{LOGIN_VALID_EMAIL}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "{{LOGIN_VALID_EMAIL}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Users: getByUsername (404 Not Found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users?username=invalid",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "invalid",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Users: create (200 OK)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"tests[\"More that one result entity (has \" + jsonData.content.length + \")\"] = jsonData.content.length > 0;",
+									"tests[\"Valid id for result[0] (has \" + jsonData.content[0].id + \")\"] = jsonData.content[0].id > 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "{{API_URL}}/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 100,\n    \"parent_id\": 101,\n    \"username\": \"newuser1\",\n    \"password\": \"newpass1\",\n    \"status\": 1,\n    \"email\": \"newuser1@newuser1.com\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actuator",
+			"description": "",
+			"item": [
+				{
+					"name": "/application/health",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "{{LOGIN_VALID_USERNAME}}",
+								"password": "{{LOGIN_VALID_PASSWORD}}",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "{{ACTUATOR_URL}}/application/health",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic amxvbmc6YWJjMTI1",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/application/auditevents",
+					"request": {
+						"url": "{{ACTUATOR_URL}}/application",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/application/info",
+					"request": {
+						"url": "{{ACTUATOR_URL}}/info",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/application/trace",
+					"request": {
+						"url": "{{ACTUATOR_URL}}/application/trace",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
