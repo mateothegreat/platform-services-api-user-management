@@ -72,7 +72,6 @@ import org.springframework.web.bind.annotation.RestController;
 import platform.services.api.authentication.AuthenticatedRunAsRole;
 import platform.services.api.commons.controller.BaseRestController;
 import platform.services.api.commons.exception.RestResponse;
-import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.utilities.Tracing;
 
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;

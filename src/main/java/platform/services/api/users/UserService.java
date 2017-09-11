@@ -37,8 +37,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.jpa.repositories.BaseRepository;
 import platform.services.api.commons.services.GenericServiceImpl;
 
 @Log4j2

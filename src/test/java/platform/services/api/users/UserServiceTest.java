@@ -4,32 +4,37 @@ import lombok.extern.log4j.Log4j2;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.*;
-import org.junit.runner.*;
+import org.junit.jupiter.api.Test;
 
+import platform.services.api.authentication.SecurityConfiguration;
 import platform.services.api.commons.BaseTests;
 import platform.services.api.commons.utilities.Tracing;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-@Profile("test")
-@RunWith(SpringRunner.class)
+//@Profile("test")
+//@RunWith(SpringRunner.class)
 @Transactional
-@ComponentScan("platform.services.api.*")
-@ContextConfiguration(classes = { UserConfig.class, UserService.class }, loader = AnnotationConfigContextLoader.class)
+@ComponentScan({ "platform.services.api.common.*", "platform.services.api.authentication.*", "platform.services.api.users.*" })
+@ContextConfiguration(classes = {
+
+    UserApplication.class,
+    SecurityConfiguration.class,
+    UsersConfig.class,
+    UserService.class
+
+}, loader = AnnotationConfigContextLoader.class)
 public class UserServiceTest extends BaseTests {
 
-    @Autowired protected UserRepository userRepository;
-    @Autowired protected UserService    userService;
+    @Autowired protected UserService userService;
 
     protected EntityRandomizer r;
 

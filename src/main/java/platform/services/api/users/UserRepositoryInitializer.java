@@ -33,7 +33,7 @@ public class UserRepositoryInitializer implements ApplicationRunner {
 //        if(result == null) {
 
 //            User admin = new User("integration-admin1@integration-admin1.com", "integration-admin1", "password", 1L);
-            User admin = platform.services.api.users.UserConfig.buildUser();
+            User admin = platform.services.api.users.UsersConfig.buildUser();
 
             admin.setParentId(1L);
 

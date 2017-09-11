@@ -1,5 +1,6 @@
 .editorconfig
 logs/
+lib/
 
 ### STS ###
 .apt_generated

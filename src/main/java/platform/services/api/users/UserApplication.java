@@ -49,62 +49,19 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import platform.services.api.commons.CommonsConfig;
-import platform.services.api.commons.utilities.Tracing;
+import platform.services.api.commons.ApplicationConfig;
 
-@Configuration
-@EnableJpaRepositories(basePackages = { UsersConfig.PLATFORM_SERVICES_API_USERS })
-@ComponentScan({ CommonsConfig.PLATFORM_SERVICES_API_COMMONS, UsersConfig.PLATFORM_SERVICES_API_USERS, })
-public class UserConfig {
+@ComponentScan(ApplicationConfig.PLATFORM_SERVICES_API)
+@SpringBootApplication(scanBasePackages = { ApplicationConfig.PLATFORM_SERVICES_API })
+public class UserApplication {
 
-    public static final Long USER_VALID_ID        = null;
-    public static final Long USER_VALID_PARENT_ID = 1L;
+    public static void main(final String[] args) {
 
-    public static final Long USER_VALID_STATUS = 1L;
-    ;
-
-    public static final String USER_VALID_EMAIL            = "test-user1@test-user1.com";
-    public static final String USER_VALID_USERNAME         = "test-user1";
-    public static final String USER_VALID_PASSWORD         = "test-password";
-    public static final String USER_VALID_PASSWORD_ENCODED = "$2a$10$atc5W7EVviaucgev1/LgWu3fIcOH0S9dYPzX0cUgYQE6fHIshL4.q";
-    public static final Long   USER_INVALID_ID             = 0L;
-    public static final Long   USER_INVALID_PARENT_ID      = -1L;
-    public static final int    USER_INVALID_STATUS         = -1;
-    public static final String USER_INVALID_EMAIL          = "invalid@invalid.com";
-    public static final String USER_INVALID_USERNAME       = "invalid";
-    public static final String USER_INVALID_PASSWORD       = "invalid";
-
-    public UserConfig() {
-
-        Tracing.trace("TestingConfig: ");
-
-    }
-
-    public static User buildUser() {
-
-        final User user = new User();
-
-//        user.setId(USER_VALID_ID);
-        user.setParentId(USER_VALID_PARENT_ID);
-        user.setStatus(USER_VALID_STATUS);
-        user.setEmail(USER_VALID_EMAIL);
-        user.setUsername(USER_VALID_USERNAME);
-        user.setPassword(USER_VALID_PASSWORD);
-
-        return user;
-
-    }
-
-    public static User buildRandomized() {
-
-//        RandomStringUtils
-//        User user = new User();
-
-        return null;
+        SpringApplication.run(UserApplication.class, args);
 
     }
 

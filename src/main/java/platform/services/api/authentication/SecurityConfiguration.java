@@ -16,7 +16,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.users;
+package platform.services.api.authentication;
 
 /*-
  * $$SoftwareLicense
@@ -75,15 +75,21 @@ import javax.sql.DataSource;
 
 import platform.services.api.commons.ApplicationConfig;
 import platform.services.api.commons.CommonsConfig;
-import platform.services.api.authentication.AuthenticationEntryPoint;
 import platform.services.api.commons.sessions.SessionEventListener;
+import platform.services.api.users.UsersConfig;
 
 @ToString
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity(debug = true)
-//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@ComponentScan(basePackages = { CommonsConfig.PLATFORM_SERVICES_API, CommonsConfig.PLATFORM_SERVICES_API_COMMONS })
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+@ComponentScan(basePackages = {
+
+    UsersConfig.PLATFORM_SERVICES_API_AUTHENTICATION,
+    CommonsConfig.PLATFORM_SERVICES_API,
+    CommonsConfig.PLATFORM_SERVICES_API_COMMONS
+
+})
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public static final String SELECT_FROM_USER_WHERE_USERNAME       = "select username,password, status from user where username=?";

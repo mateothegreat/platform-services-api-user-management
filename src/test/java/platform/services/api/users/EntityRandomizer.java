@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.users.User;
 
 @Log4j2
 public class EntityRandomizer {
@@ -25,7 +26,7 @@ public class EntityRandomizer {
     protected LongRangeRandomizer status   = new LongRangeRandomizer(BaseEntity.STATUS_RANGE_MIN, BaseEntity.STATUS_RANGE_MAX);
     protected EmailRandomizer     email    = new EmailRandomizer(EntityRandomizerSeed.getLong());
     protected StringRandomizer    username = new StringRandomizer(User.USERNAME_LENGTH_MIN, User.USERNAME_LENGTH_MAX,
-            EntityRandomizerSeed.getLong());
+                                                                  EntityRandomizerSeed.getLong());
     protected StringRandomizer    password = new StringRandomizer(User.PASSWORD_LEGNTH_MIN, User.PASSWORD_LEGNTH_MAX,
             EntityRandomizerSeed.getLong());
 
