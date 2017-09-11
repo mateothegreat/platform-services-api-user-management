@@ -9,15 +9,6 @@
         <fileset id="web dispatcher servlet context" name="MVC dispatcher servlet context" removed="true">
           <file>file://$MODULE_DIR$/../platform-service-users/web/WEB-INF/dispatcher-servlet.xml</file>
         </fileset>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/../platform-services-commons/src/java/platform/services/api/commons/ApplicationConfig.java</file>
-          <file>file://$MODULE_DIR$/../platform-services-commons/src/java/platform/services/api/commons/CommonsConfig.java</file>
-          <file>file://$MODULE_DIR$/../platform-services-commons/src/java/platform/services/api/commons/datasources/DataSourceConfig.java</file>
-          <file>file://$MODULE_DIR$/src/java/platform/services/api/authentication/SecurityConfiguration.java</file>
-          <file>file://$MODULE_DIR$/src/java/platform/services/api/users/UserApplication.java</file>
-          <file>file://$MODULE_DIR$/src/java/platform/services/api/users/UsersConfig.java</file>
-          <file>file://$MODULE_DIR$/../platform-services-commons/src/java/platform/services/api/commons/sessions/SessionConfiguration.java</file>
-        </fileset>
       </configuration>
     </facet>
   </component>
@@ -167,10 +158,10 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.google.errorprone:error_prone_annotations:2.0.18" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.github.benas:random-beans:3.7.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.objenesis:objenesis:2.5.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.github.lukehutch:fast-classpath-scanner:2.2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.github.benas:random-beans-randomizers:3.7.0" level="project" />
+    <orderEntry type="library" name="Maven: io.github.benas:random-beans:3.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.objenesis:objenesis:2.5.1" level="project" />
+    <orderEntry type="library" name="Maven: io.github.lukehutch:fast-classpath-scanner:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.github.benas:random-beans-randomizers:3.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.javafaker:javafaker:0.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.github.mifmif:generex:1.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: dk.brics.automaton:automaton:1.11-8" level="project" />
@@ -184,6 +175,5 @@
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.18" level="project" />
-    <orderEntry type="module" module-name="platform-services-commons" />
   </component>
 </module>

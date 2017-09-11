@@ -11,7 +11,7 @@ import org.junit.*;
 import org.junit.runner.*;
 
 import platform.services.api.authentication.SecurityConfiguration;
-import platform.services.api.commons.BaseTests;
+import platform.services.api.commons.testing.BaseTests;
 
 @Log4j2
 @Profile("test")

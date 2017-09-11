@@ -1,44 +1,40 @@
 package platform.services.api.users;
 
-import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import org.junit.jupiter.api.*;
+import org.junit.*;
 
-import platform.services.api.commons.BaseTests;
+import platform.services.api.UsersConfig;
 import platform.services.api.commons.security.SecurityCryptor;
+import platform.services.api.commons.testing.BaseTests;
+import platform.services.api.commons.testing.EntityRandomizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@Profile("test")
-//@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {
-
-    UserService.class,
-    UsersConfig.class
-
-}, loader = AnnotationConfigContextLoader.class)
-@Log4j2
+@Profile("testing")
+@ContextConfiguration(classes = { UsersConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class UserTest extends BaseTests {
 
     private User user;
 
-    @Test
-    @Disabled
-    // TODO: Implement
-    public void getAuthenticationUserDetails() throws Exception {
-
-        log.trace(User.getAuthenticationUserDetails());
-        assertThat(User.getAuthenticationUserDetails()).isNull();
-
-    }
-
-    @BeforeEach public void setUp() {
+    @Before public void setUp() {
 
         SecurityCryptor.setTrace(false);
 
         user = UsersConfig.buildUser();
+
+    }
+
+    @Test public void userConstructorWithArgs() {
+
+        EntityRandomizer r = new EntityRandomizer();
+
+        final User user = r.get(User.class);
+
+        assertThat(user.getUsername()).isNotEmpty();
+        assertThat(user.getStatus()).isNotNull();
 
     }
 

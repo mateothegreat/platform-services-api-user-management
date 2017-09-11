@@ -1,4 +1,4 @@
-package platform.services.api.commons;
+package platform.services.api.commons.testing;
 
 import platform.services.api.commons.services.GenericService;
 

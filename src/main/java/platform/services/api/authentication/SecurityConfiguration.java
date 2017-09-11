@@ -58,6 +58,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -73,30 +74,51 @@ import org.springframework.session.web.http.HttpSessionStrategy;
 import javax.servlet.http.HttpSessionListener;
 import javax.sql.DataSource;
 
-import platform.services.api.commons.ApplicationConfig;
-import platform.services.api.commons.CommonsConfig;
+import platform.services.api.UsersConfig;
 import platform.services.api.commons.sessions.SessionEventListener;
-import platform.services.api.users.UsersConfig;
 
-@ToString
+//@ToString
+//@Configuration
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableWebSecurity(debug = true)
+//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//@ComponentScan(basePackages = {
+//
+//    UsersConfig.PLATFORM_SERVICES_API_AUTHENTICATION,
+//    CommonsConfig.PLATFORM_SERVICES_API,
+//    CommonsConfig.PLATFORM_SERVICES_API_COMMONS
+//
+//})
+
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity(debug = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @ComponentScan(basePackages = {
 
-    UsersConfig.PLATFORM_SERVICES_API_AUTHENTICATION,
-    CommonsConfig.PLATFORM_SERVICES_API,
-    CommonsConfig.PLATFORM_SERVICES_API_COMMONS
+    "platform.services.api.commons.datasources",
+    "platform.services.api.authentication",
+//    "platform.services.api.commons.security",
+//    "platform.services.api.commons.jpa.repositories",
+
+//    "platform.services.api.users",
 
 })
+@EnableJpaRepositories(basePackages = {
+
+//    "platform.services.api.commons.jpa.repositories",
+    "platform.services.api.users",
+
+})
+@ToString
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public static final String SELECT_FROM_USER_WHERE_USERNAME       = "select username,password, status from user where username=?";
     public static final String SELECT_FROM_USER_ROLES_WHERE_USERNAME = "select username, role from user_roles where username=?";
 
     @Autowired
-    @Qualifier(ApplicationConfig.DATA_SOURCE_PLATFORM_BASE_BEAN_NAME)
+    @Qualifier(UsersConfig.DATA_SOURCE_PLATFORM_BASE_BEAN_NAME)
     private DataSource platformDataSource;
 
     @Autowired

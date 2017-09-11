@@ -1,9 +1,9 @@
-package platform.services.api.commons;
+package platform.services.api.commons.testing;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.ArrayUtils;
 
-import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.jpa.BaseEntity;
 import platform.services.api.commons.utilities.Tracing;
 
 import static org.assertj.core.api.Assertions.assertThat;

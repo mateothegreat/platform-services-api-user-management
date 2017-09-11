@@ -52,28 +52,22 @@ package platform.services.api.users;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.extern.log4j.Log4j2;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.lang.Nullable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.jpa.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
 
-@Log4j2
-//@Audited
+@Setter @Getter
+@ToString
 @Entity
-@Getter @Setter @ToString
 @Table(name = "user")
 public class User extends BaseEntity {
 
@@ -81,48 +75,28 @@ public class User extends BaseEntity {
     public static final int USERNAME_LENGTH_MAX = 32;
     public static final int PASSWORD_LEGNTH_MIN = 8;
     public static final int PASSWORD_LEGNTH_MAX = 60;
-
     @Column(unique = true) @NotEmpty @Email
     private String email;
-
     @NotEmpty @Length(min = USERNAME_LENGTH_MIN, max = USERNAME_LENGTH_MAX)
     private String username;
-
     //    @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
     private String password;
-
     @NotNull @Range(min = 1L, max = 200L)
 //    @NotNull @Range(min = BaseEntity.STATUS_RANGE_MIN, max = BaseEntity.STATUS_RANGE_MAX)
-    private Long status;
+    private Long   status;
 
     public User() {
 
     }
 
-    public User(@NotEmpty @Email final String email, @NotEmpty @Length(min = 4, max = 32) final String username, @NotEmpty @Length(min = 8, max = 60) final String password, @NotNull @Range(min = 0, max = 9) final Long status) {
-
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.status = status;
-
-    }
-
-    @Nullable
-    public static UserDetails getAuthenticationUserDetails() {
-
-        final Authentication authentication = SecurityContextHolder.getContext()
-                                                                   .getAuthentication();
-
-        if(authentication == null || !authentication.isAuthenticated()) {
-
-            return null;
-
-        }
-
-        return (UserDetails) authentication.getPrincipal();
-
-    }
+//    public User(@NotEmpty @Email final String email, @NotEmpty @Length(min = 4, max = 32) final String username, @NotEmpty @Length(min = 8, max = 60) final String password, @NotNull @Range(min = 0, max = 9) final Long status) {
+//
+//        this.email = email;
+//        this.username = username;
+//        this.password = password;
+//        this.status = status;
+//
+//    }
 
     public String getPassword() {
 

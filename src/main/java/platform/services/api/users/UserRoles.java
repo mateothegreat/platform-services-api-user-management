@@ -50,11 +50,12 @@ package platform.services.api.users;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * streaming-main.platform.com
  */
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.jpa.BaseEntity;
 
 @Entity
 @Table(name = "user_roles")

@@ -6,6 +6,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import platform.services.api.UsersConfig;
+
 @Log4j2
 //@EnableAutoConfiguration
 //@ComponentScan
@@ -33,7 +35,7 @@ public class UserRepositoryInitializer implements ApplicationRunner {
 //        if(result == null) {
 
 //            User admin = new User("integration-admin1@integration-admin1.com", "integration-admin1", "password", 1L);
-            User admin = platform.services.api.users.UsersConfig.buildUser();
+            User admin = UsersConfig.buildUser();
 
             admin.setParentId(1L);
 

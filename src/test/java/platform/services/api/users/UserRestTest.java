@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 
 import org.junit.jupiter.api.*;
 
+import platform.services.api.UsersConfig;
 import platform.services.api.authentication.AuthenticatedRunAsManager;
 import platform.services.api.authentication.Authorities;
 
@@ -30,8 +31,8 @@ public class UserRestTest extends BaseRestTests {
 
         given().when()
                .auth()
-               .basic(platform.services.api.users.UsersConfig.USER_VALID_USERNAME,
-                      platform.services.api.users.UsersConfig.USER_VALID_PASSWORD)
+               .basic(UsersConfig.USER_VALID_USERNAME,
+                      UsersConfig.USER_VALID_PASSWORD)
                .get()
                .then()
                .statusCode(200)
@@ -45,8 +46,8 @@ public class UserRestTest extends BaseRestTests {
 
         final Response response = given().when()
                                          .auth()
-                                         .basic(platform.services.api.users.UsersConfig.USER_VALID_USERNAME,
-                                                platform.services.api.users.UsersConfig.USER_VALID_PASSWORD)
+                                         .basic(UsersConfig.USER_VALID_USERNAME,
+                                                UsersConfig.USER_VALID_PASSWORD)
                                          .get("/users");
 
         final ResponseBody responseBody = response.getBody();
@@ -71,9 +72,9 @@ public class UserRestTest extends BaseRestTests {
 
         final Response response = given().when()
                                          .auth()
-                                         .basic(platform.services.api.users.UsersConfig.USER_VALID_USERNAME,
-                                                platform.services.api.users.UsersConfig.USER_VALID_PASSWORD)
-                                         .get("/users?username=test-user1");
+                                         .basic(UsersConfig.USER_VALID_USERNAME,
+                                                UsersConfig.USER_VALID_PASSWORD)
+                                         .get("/users?username=testing-user1");
 
         final ResponseBody responseBody = response.getBody();
 
@@ -94,8 +95,8 @@ public class UserRestTest extends BaseRestTests {
 
         final Response response = given().when()
                                          .auth()
-                                         .basic(platform.services.api.users.UsersConfig.USER_VALID_USERNAME,
-                                                platform.services.api.users.UsersConfig.USER_VALID_PASSWORD)
+                                         .basic(UsersConfig.USER_VALID_USERNAME,
+                                                UsersConfig.USER_VALID_PASSWORD)
                                          .get("/users?username=newuser4");
 
         response.then()
@@ -113,8 +114,8 @@ public class UserRestTest extends BaseRestTests {
 
         final Response response = given().when()
                                          .auth()
-                                         .basic(platform.services.api.users.UsersConfig.USER_VALID_USERNAME,
-                                                platform.services.api.users.UsersConfig.USER_VALID_PASSWORD)
+                                         .basic(UsersConfig.USER_VALID_USERNAME,
+                                                UsersConfig.USER_VALID_PASSWORD)
                                          .get("/users/escalate");
 
         final ResponseBody responseBody = response.getBody();

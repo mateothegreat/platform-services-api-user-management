@@ -3,35 +3,37 @@ package platform.services.api.users;
 import lombok.extern.log4j.Log4j2;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.*;
-import org.junit.jupiter.api.Test;
+import org.junit.runner.*;
 
+import platform.services.api.UsersConfig;
 import platform.services.api.authentication.SecurityConfiguration;
-import platform.services.api.commons.BaseTests;
+import platform.services.api.commons.testing.BaseTests;
+import platform.services.api.commons.testing.EntityRandomizer;
 import platform.services.api.commons.utilities.Tracing;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-//@Profile("test")
-//@RunWith(SpringRunner.class)
+@Profile("testing")
+@RunWith(SpringRunner.class)
 @Transactional
-@ComponentScan({ "platform.services.api.common.*", "platform.services.api.authentication.*", "platform.services.api.users.*" })
+//@ComponentScan({ "platform.services.api.*", "platform.services.api.authentication", "platform.services.api.users" })
 @ContextConfiguration(classes = {
 
-    UserApplication.class,
     SecurityConfiguration.class,
     UsersConfig.class,
-    UserService.class
 
 }, loader = AnnotationConfigContextLoader.class)
+
 public class UserServiceTest extends BaseTests {
 
     @Autowired protected UserService userService;
@@ -70,9 +72,9 @@ public class UserServiceTest extends BaseTests {
 
         assertThat(results.getTotalElements()).isGreaterThan(0L);
 
-        baseEntity_isValid((User) results.getContent().get(0));
+        baseEntity_isValid(results.getContent().get(0));
+        baseEntity_isValid(results.getContent().get(results.getNumberOfElements() - 1));
 
-        baseEntity_isValid((User) results.getContent().get(results.getNumberOfElements() - 1));
     }
 
     @Test
@@ -82,6 +84,7 @@ public class UserServiceTest extends BaseTests {
         final User result = this.userService.getUserByUsername(user.getUsername());
 
         baseEntity_isValidAndCompare(user, result);
+
     }
 
     @Test
@@ -91,6 +94,7 @@ public class UserServiceTest extends BaseTests {
         final User result = this.userService.getUserByEmail(user.getEmail());
 
         baseEntity_isValidAndCompare(user, result);
+
     }
 
     @Test
@@ -105,6 +109,7 @@ public class UserServiceTest extends BaseTests {
         final User current = this.userService.saveEntity(previous);
 
         baseEntity_isValidAndCompare(previous, current, "id");
+
     }
 
     @Test
@@ -115,6 +120,7 @@ public class UserServiceTest extends BaseTests {
         baseEntity_isValid(user);
 
         assertThat(this.userService.deleteById(user.getId())).isTrue();
+
     }
 
     @Test
@@ -123,5 +129,7 @@ public class UserServiceTest extends BaseTests {
         final User user = this.userService.saveEntity(this.r.get(User.class));
 
         baseEntity_isValid(user);
+
     }
+
 }

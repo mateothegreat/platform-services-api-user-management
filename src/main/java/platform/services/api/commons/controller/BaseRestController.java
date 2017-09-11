@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -16,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.users;
+package platform.services.api.commons.controller;
 
 /*-
  * $$SoftwareLicense
@@ -49,20 +51,16 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+public class BaseRestController {
+    
 
-import platform.services.api.commons.ApplicationConfig;
-
-@ComponentScan(ApplicationConfig.PLATFORM_SERVICES_API)
-@SpringBootApplication(scanBasePackages = { ApplicationConfig.PLATFORM_SERVICES_API })
-public class UserApplication {
-
-    public static void main(final String[] args) {
-
-        SpringApplication.run(UserApplication.class, args);
-
-    }
-
+    // @RequestMapping(method = RequestMethod.GET)
+    // public ResponseEntity<Page<User>> findAll(Pageable pageable) throws NotFoundException {
+    //
+    //     Page<User> page = service.findAll(pageable);
+    //
+    //     return new ResponseEntity<Page<User>>(page, HttpStatus.OK);
+    //
+    // }
+    
 }

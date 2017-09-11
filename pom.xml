@@ -239,7 +239,7 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-hal-browser</artifactId>
             <version>2.6.6.RELEASE</version>
-            <!--<scope>test</scope>-->
+            <!--<scope>testing</scope>-->
         </dependency>
         <!--endregion-->
         <!-- region spring-session -->
@@ -277,7 +277,7 @@
 
         <!-- endregion -->
 
-        <!-- region test -->
+        <!-- region testing -->
         <dependency>
 
             <groupId>io.rest-assured</groupId>
@@ -369,7 +369,7 @@
             <groupId>io.github.benas</groupId>
             <artifactId>random-beans</artifactId>
             <version>3.7.0</version>
-            <scope>test</scope>
+            <!--<scope>test</scope>-->
 
         </dependency>
 
@@ -378,7 +378,7 @@
             <groupId>io.github.benas</groupId>
             <artifactId>random-beans-randomizers</artifactId>
             <version>3.7.0</version>
-            <scope>test</scope>
+            <!--<scope>test</scope>-->
 
         </dependency>
 
@@ -452,12 +452,12 @@
 
         </dependency>
 
-        <dependency>
-            <groupId>streaming-platform.services</groupId>
-            <artifactId>platform-services-commons</artifactId>
-            <version>1.0.1</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>streaming-platform.services</groupId>-->
+            <!--<artifactId>platform-services-commons</artifactId>-->
+            <!--<version>1.0.1</version>-->
+        <!--</dependency>-->
+
 
 
         <!-- endregion -->
@@ -602,8 +602,8 @@
                         <!--</goals>-->
                     <!--</execution>-->
                     <!--<execution>-->
-                        <!--<id>post-unit-test</id>-->
-                        <!--<phase>test</phase>-->
+                        <!--<id>post-unit-testing</id>-->
+                        <!--<phase>testing</phase>-->
                         <!--<goals>-->
                             <!--<goal>report</goal>-->
                         <!--</goals>-->

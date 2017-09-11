@@ -1,4 +1,4 @@
-package platform.services.api.users;
+package platform.services.api.commons.testing;
 
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.FieldDefinitionBuilder;
@@ -12,23 +12,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.users.User;
+import platform.services.api.commons.jpa.BaseEntity;
 
 @Log4j2
 public class EntityRandomizer {
 
-    private final EnhancedRandomBuilder builder;
+    protected LongRangeRandomizer id       = new LongRangeRandomizer(BaseEntity.ID_RANGE_MIN, BaseEntity.ID_RANGE_MAX);
 
     //region Custom Randomizers
-
-    protected LongRangeRandomizer id       = new LongRangeRandomizer(BaseEntity.ID_RANGE_MIN, BaseEntity.ID_RANGE_MAX);
     protected LongRangeRandomizer status   = new LongRangeRandomizer(BaseEntity.STATUS_RANGE_MIN, BaseEntity.STATUS_RANGE_MAX);
     protected EmailRandomizer     email    = new EmailRandomizer(EntityRandomizerSeed.getLong());
-    protected StringRandomizer    username = new StringRandomizer(User.USERNAME_LENGTH_MIN, User.USERNAME_LENGTH_MAX,
+    protected StringRandomizer    username = new StringRandomizer(4, 32,
                                                                   EntityRandomizerSeed.getLong());
-    protected StringRandomizer    password = new StringRandomizer(User.PASSWORD_LEGNTH_MIN, User.PASSWORD_LEGNTH_MAX,
-            EntityRandomizerSeed.getLong());
+    protected StringRandomizer    password = new StringRandomizer(8, 60,
+                                                                  EntityRandomizerSeed.getLong());
+    private final EnhancedRandomBuilder builder;
 
     //endregion
 
@@ -36,6 +34,29 @@ public class EntityRandomizer {
 
         builder = new EnhancedRandomBuilder();
 
+    }
+
+    public <T> List<T> getList(final int max, final Class<T> type, final String... excludedFields) {
+
+        final List<T> list = new ArrayList<>(max);
+
+        for(int i = 1; i < max; i++) {
+
+            final T t = get(type, excludedFields);
+
+            log.trace("i: {}, t: {}", i, t.toString());
+
+            list.add(t);
+
+        }
+
+        return list;
+
+    }
+
+    public <T> T get(final Class<T> type, final String... excludedFields) {
+
+        return setUp().nextObject(type, excludedFields);
 
     }
 
@@ -105,30 +126,6 @@ public class EntityRandomizer {
         // endregion
 
         return builder.build();
-
-    }
-
-    public <T> T get(final Class<T> type, final String... excludedFields) {
-
-        return setUp().nextObject(type, excludedFields);
-
-    }
-
-    public <T> List<T> getList(final int max, final Class<T> type, final String... excludedFields) {
-
-        final List<T> list = new ArrayList<>(max);
-
-        for(int i = 1; i < max; i++) {
-
-            final T t = get(type, excludedFields);
-
-            log.trace("i: {}, t: {}", i, t.toString());
-
-            list.add(t);
-
-        }
-
-        return list;
 
     }
 
