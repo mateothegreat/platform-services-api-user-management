@@ -4,12 +4,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import platform.services.api.UsersConfig;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseTests;
-import platform.services.api.commons.testing.EntityRandomizer;
+import platform.services.api.commons.testing.ClassWellFormed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +19,7 @@ public class UserTest extends BaseTests {
 
     private User user;
 
-    @Before public void setUp() {
+    @BeforeEach public void setUp() {
 
         SecurityCryptor.setTrace(false);
 
@@ -27,14 +27,10 @@ public class UserTest extends BaseTests {
 
     }
 
-    @Test public void userConstructorWithArgs() {
+    @Test public void publicClassWithOnePublicConstructorTest() throws ReflectiveOperationException {
 
-        EntityRandomizer r = new EntityRandomizer();
-
-        final User user = r.get(User.class);
-
-        assertThat(user.getUsername()).isNotEmpty();
-        assertThat(user.getStatus()).isNotNull();
+        assertThat(ClassWellFormed.classHasOneConstructor(User.class)).isTrue();
+        assertThat(ClassWellFormed.classHasPublicConstructor(User.class)).isTrue();
 
     }
 

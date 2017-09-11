@@ -10,13 +10,13 @@ public class ClassWellFormed {
 
     private static final ResourceBundle R = ResourceBundle.getBundle("ClassWellFormedTestMessages");
 
-    protected static Integer classCountConstructors(final Class<?> clazz) {
+    public static Integer classCountConstructors(final Class<?> clazz) {
 
         return clazz.getDeclaredConstructors().length;
 
     }
 
-    protected static Boolean classHasOneConstructor(final Class<?> clazz) throws ReflectiveOperationException {
+    public static Boolean classHasOneConstructor(final Class<?> clazz) throws ReflectiveOperationException {
 
         final int total = classCountConstructors(clazz);
 
@@ -30,7 +30,7 @@ public class ClassWellFormed {
         return true;
     }
 
-    protected static Boolean classHasMoreThanOneConstructor(final Class<?> clazz) throws ReflectiveOperationException {
+    public static Boolean classHasMoreThanOneConstructor(final Class<?> clazz) throws ReflectiveOperationException {
 
         final int total = classCountConstructors(clazz);
 
@@ -45,7 +45,7 @@ public class ClassWellFormed {
 
     }
 
-    protected static Boolean classHasPrivateConstructor(final Class<?> clazz) throws ReflectiveOperationException {
+    public static Boolean classHasPrivateConstructor(final Class<?> clazz) throws ReflectiveOperationException {
 
         final Constructor<?> constructor = clazz.getDeclaredConstructor();
 
@@ -59,7 +59,7 @@ public class ClassWellFormed {
 
     }
 
-    protected static Boolean classHasPublicConstructor(final Class<?> clazz) throws ReflectiveOperationException {
+    public static Boolean classHasPublicConstructor(final Class<?> clazz) throws ReflectiveOperationException {
 
         final Constructor<?> constructor = clazz.getDeclaredConstructor();
 
@@ -73,7 +73,7 @@ public class ClassWellFormed {
 
     }
 
-    protected static Boolean classHasFinalConstructor(final Class<?> clazz) {
+    public static Boolean classHasFinalConstructor(final Class<?> clazz) {
 
         if(!Modifier.isFinal(clazz.getModifiers())) {
 
@@ -85,7 +85,7 @@ public class ClassWellFormed {
 
     }
 
-    protected static Boolean classHasAllStaticMethods(final Class<?> clazz) {
+    public static Boolean classHasAllStaticMethods(final Class<?> clazz) {
 
         for(final Method method : clazz.getMethods()) {
 
