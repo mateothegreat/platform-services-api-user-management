@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Default Scope" pattern="src:com.streamingplatform.api.users.UsersApplication||src:*..*||test:*..*" />
+</component>

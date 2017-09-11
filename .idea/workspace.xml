@@ -1,0 +1,1966 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b0f9a5f4-0378-4022-9621-9db6fe9054d6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/audit/AuditApplicationEventListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/audit/AuditApplicationEventListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/controller/AbstractRestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/controller/AbstractRestController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/domain/AbstractDomainClass.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/domain/AbstractDomainClass.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/domain/DomainObject.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/domain/DomainObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/exception/GlobalRestExceptionHandlers.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/exception/GlobalRestExceptionHandlers.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/exception/RestErrorResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/exception/RestErrorResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/exception/RestException.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/exception/RestException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/BaseEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/BaseEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/base/ModelBase.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/base/ModelBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/json/request/AuthenticationRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/json/request/AuthenticationRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/json/response/AuthenticationResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/json/response/AuthenticationResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/AuditOperations.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/AuditOperations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/BaseRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/BaseRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/GenericDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/GenericDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/Operations.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/Operations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/utils/DateTime.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/utils/DateTime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/utils/logging/Log.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/utils/logging/Log.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/AuthenticationEntryPoint.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/AuthenticationEntryPoint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/LoggedInChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/LoggedInChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/SpringSecurityInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/SpringSecurityInitializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/config/SecurityAuthoritiesConstants.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/config/SecurityAuthoritiesConstants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/config/SecurityConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/config/SecurityConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/services/AuthenticationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/services/AuthenticationService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/services/CustomUserDetails.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/services/CustomUserDetails.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionApplicationInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionApplicationInitializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionEventListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionEventListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/UsersApplication.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/UsersApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/UsersApplicationConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/UsersApplicationConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models/UserRoles.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models/UserRoles.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/repos/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/repos/UserRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/BaseEntityInterface.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/BaseEntityInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/BaseEntityService.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/BaseEntityService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/GenericRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/GenericRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/GenericServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/GenericServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserRolesService.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserRolesService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/streamingplatform/api/common/config/TestingConfig.java" afterPath="$PROJECT_DIR$/src/test/java/com/streamingplatform/api/common/config/TestingConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UserControllerUnitTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UserControllerUnitTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/streamingplatform/integration/utilities/RequestClient.java" afterPath="$PROJECT_DIR$/src/test/java/com/streamingplatform/integration/utilities/RequestClient.java" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$WORKSPACE$/spring/demo/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="false" show_ignored="true" />
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="resources">
+      <favorite_root url="file://$PROJECT_DIR$/src/main/resources/log4j2.xml" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+    </favorites_list>
+    <favorites_list name="Unnamed1">
+      <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/security/SecurityConfig.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers" module="streaming-platform-api-users" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/RootController.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/UserController.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      </favorite_root>
+      <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/config" module="streaming-platform-api-users" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/UserDao.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/UserDaoImpl.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/LoggedInChecker.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/services/CustomUserDetails.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/WebSecurityConfig.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/AuthFailureHandler.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/AuthSuccessHandler.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/UserDetailServiceImpl.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/security/services/AuthenticationService.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/common/security/HttpLogoutSuccessHandler.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      </favorite_root>
+      <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models" module="streaming-platform-api-users" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+        <favorite_root url="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models/User.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      </favorite_root>
+    </favorites_list>
+    <favorites_list name="testing">
+      <favorite_root url="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions" module="streaming-platform-api-users" type="directory" klass="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode">
+        <favorite_root url="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UsersSessionTests.java" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      </favorite_root>
+      <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest" module="streaming-platform-api-users" type="class" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.ClassSmartPointerNode">
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest void setup()" module="streaming-platform-api-users" type="method" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.MethodSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest void loginInvalidUser_is4xxClientError()" module="streaming-platform-api-users" type="method" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.MethodSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest void loginWithHttpAuthorizationHeader()" module="streaming-platform-api-users" type="method" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.MethodSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest void getUsersSessionLoggedIn()" module="streaming-platform-api-users" type="method" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.MethodSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest void getUsersFindAll()" module="streaming-platform-api-users" type="method" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.MethodSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest;PASSWORD" module="streaming-platform-api-users" type="field" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.FieldSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest;USERNAME" module="streaming-platform-api-users" type="field" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.FieldSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest;logger" module="streaming-platform-api-users" type="field" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.FieldSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest;context" module="streaming-platform-api-users" type="field" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.FieldSmartPointerNode" />
+        <favorite_root url="com.streamingplatform.api.users.sessions.UserControllerUnitTest;mockMvc" module="streaming-platform-api-users" type="field" klass="com.intellij.ide.favoritesTreeView.smartPointerPsiNodes.FieldSmartPointerNode" />
+      </favorite_root>
+    </favorites_list>
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5852843">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1197">
+                  <caret line="63" column="1" lean-forward="false" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="836">
+                  <caret line="60" column="4" lean-forward="false" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/UserController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1026">
+                  <caret line="70" column="13" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="InvocableHandlerMethod.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.0.RC3/spring-web-5.0.0.RC3.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="456">
+                  <caret line="25" column="283" lean-forward="false" selection-start-line="25" selection-start-column="283" selection-end-line="25" selection-end-column="283" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ServletInvocableHandlerMethod.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.0.RC3/spring-webmvc-5.0.0.RC3.jar!/org/springframework/web/servlet/mvc/method/annotation/ServletInvocableHandlerMethod.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="17" column="239" lean-forward="false" selection-start-line="17" selection-start-column="239" selection-end-line="17" selection-end-column="239" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RequestMappingHandlerAdapter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.0.RC3/spring-webmvc-5.0.0.RC3.jar!/org/springframework/web/servlet/mvc/method/annotation/RequestMappingHandlerAdapter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2603">
+                  <caret line="138" column="263" lean-forward="false" selection-start-line="138" selection-start-column="263" selection-end-line="138" selection-end-column="263" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="FrameworkServlet.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.0.RC3/spring-webmvc-5.0.0.RC3.jar!/org/springframework/web/servlet/FrameworkServlet.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2337">
+                  <caret line="124" column="196" lean-forward="false" selection-start-line="124" selection-start-column="196" selection-end-line="124" selection-end-column="196" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="FilterSecurityInterceptor.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/access/intercept/FilterSecurityInterceptor.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="17" column="196" lean-forward="false" selection-start-line="17" selection-start-column="196" selection-end-line="17" selection-end-column="196" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SessionManagementFilter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/session/SessionManagementFilter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="323">
+                  <caret line="18" column="187" lean-forward="false" selection-start-line="18" selection-start-column="187" selection-end-line="18" selection-end-column="187" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BasicAuthenticationFilter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/authentication/www/BasicAuthenticationFilter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="361">
+                  <caret line="20" column="225" lean-forward="false" selection-start-line="20" selection-start-column="225" selection-end-line="20" selection-end-column="225" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="HeaderWriterFilter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/header/HeaderWriterFilter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="190">
+                  <caret line="11" column="231" lean-forward="false" selection-start-line="11" selection-start-column="231" selection-end-line="11" selection-end-column="231" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="HttpPutFormContentFilter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.0.RC3/spring-web-5.0.0.RC3.jar!/org/springframework/web/filter/HttpPutFormContentFilter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="17" column="231" lean-forward="false" selection-start-line="17" selection-start-column="231" selection-end-line="17" selection-end-column="231" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="FilterChainProxy.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/FilterChainProxy.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1045">
+                  <caret line="56" column="167" lean-forward="false" selection-start-line="56" selection-start-column="167" selection-end-line="56" selection-end-column="167" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AuthenticatorBase.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/catalina/authenticator/AuthenticatorBase.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="4902">
+                  <caret line="477" column="0" lean-forward="false" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RedisMessageListenerContainer.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.0.0.RC2/spring-data-redis-2.0.0.RC2.jar!/org/springframework/data/redis/listener/RedisMessageListenerContainer.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2565">
+                  <caret line="136" column="27" lean-forward="false" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CoyoteAdapter.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/catalina/connector/CoyoteAdapter.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="5795">
+                  <caret line="341" column="0" lean-forward="false" selection-start-line="341" selection-start-column="0" selection-end-line="341" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AbstractProcessorLight.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/coyote/AbstractProcessorLight.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="874">
+                  <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SessionRepositoryFilter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/session/spring-session-core/2.0.0.M3/spring-session-core-2.0.0.M3.jar!/org/springframework/session/web/http/SessionRepositoryFilter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="437">
+                  <caret line="24" column="231" lean-forward="false" selection-start-line="24" selection-start-column="231" selection-end-line="24" selection-end-column="231" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ApplicationFilterChain.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/catalina/core/ApplicationFilterChain.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2584">
+                  <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DebugFilter.class" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/debug/DebugFilter.class">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="266">
+                  <caret line="15" column="237" lean-forward="false" selection-start-line="15" selection-start-column="237" selection-end-line="15" selection-end-column="237" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TaskThread.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/tomcat/util/threads/TaskThread.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="627">
+                  <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="pom.xml" pinned="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/pom.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="247">
+                  <caret line="33" column="28" lean-forward="false" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+                  <folding>
+                    <element signature="n#profiles#0;n#configuration#0;n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" expanded="false" />
+                    <element signature="n#executions#0;n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" expanded="false" />
+                    <element signature="n#plugin#2;n#plugins#0;n#build#0;n#project#0;n#!!top" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="streaming-platform-api-users.iml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/streaming-platform-api-users.iml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="209">
+                  <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UsersCRUDTests.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/database/UsersCRUDTests.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="760">
+                  <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UsersSessionTests.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UsersSessionTests.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1824">
+                  <caret line="96" column="2" lean-forward="false" selection-start-line="96" selection-start-column="2" selection-end-line="96" selection-end-column="2" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LICENSE.txt" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/LICENSE.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="380">
+                  <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="491">
+                  <caret line="77" column="51" lean-forward="false" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserRepository.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/repos/UserRepository.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="988">
+                  <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/models/User.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="817">
+                  <caret line="59" column="31" lean-forward="false" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SessionConfiguration.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/sessions/SessionConfiguration.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1292">
+                  <caret line="84" column="9" lean-forward="false" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BaseEntity.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/BaseEntity.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1064">
+                  <caret line="72" column="4" lean-forward="false" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="779">
+                  <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserServiceImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1311">
+                  <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+                  <folding>
+                    <element signature="e#0#5037#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserControllerUnitTest.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UserControllerUnitTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2565">
+                  <caret line="151" column="33" lean-forward="false" selection-start-line="151" selection-start-column="33" selection-end-line="151" selection-end-column="33" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ModelBase.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/base/ModelBase.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="722">
+                  <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BaseRepository.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/BaseRepository.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1083">
+                  <caret line="73" column="6" lean-forward="false" selection-start-line="73" selection-start-column="6" selection-end-line="73" selection-end-column="6" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Log.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/utils/logging/Log.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1767">
+                  <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/UserController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1349">
+                  <caret line="87" column="20" lean-forward="false" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="streaming-platform-api-users.iml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/streaming-platform-api-users.iml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="209">
+                  <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DemoApplication.java" pinned="false" current-in-tab="true">
+            <entry file="file://$WORKSPACE$/spring/demo/src/main/java/com/example/demo/DemoApplication.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="190">
+                  <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>demo</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Matthew Davis &lt;matthew@appsoa.io&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenRunner">
+    <option name="vmOptions" value="-XX:+TieredCompilation -XX:TieredStopAtLevel=1" />
+  </component>
+  <component name="NamedScopeManager">
+    <order>
+      <scope name="Default Scope" />
+      <scope name="Unnamed" />
+    </order>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1928" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages Scope="false" PackagesPane="false" ProjectPane="false" />
+      <showMembers Scope="false" />
+      <showModules Scope="true" />
+      <showLibraryContents />
+      <hideEmptyPackages Scope="false" PackagesPane="true" ProjectPane="false" />
+      <abbreviatePackageNames PackagesPane="false" />
+      <autoscrollToSource PackagesPane="true" />
+      <autoscrollFromSource Scope="true" ProjectPane="true" />
+      <sortByType Scope="true" />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="streamingplatform" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="streamingplatform" type="1f31426a:PackageElementNode" />
+              <item name="api" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="streamingplatform" type="1f31426a:PackageElementNode" />
+              <item name="api" type="1f31426a:PackageElementNode" />
+              <item name="users" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="streamingplatform" type="1f31426a:PackageElementNode" />
+              <item name="api" type="1f31426a:PackageElementNode" />
+              <item name="users" type="1f31426a:PackageElementNode" />
+              <item name="common" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="users" type="58d84e3e:PackageViewProjectNode" />
+              <item name="streaming-platform-api-users" type="616d4139:PackageViewModuleNode" />
+              <item name="com" type="1f31426a:PackageElementNode" />
+              <item name="streamingplatform" type="1f31426a:PackageElementNode" />
+              <item name="api" type="1f31426a:PackageElementNode" />
+              <item name="users" type="1f31426a:PackageElementNode" />
+              <item name="common" type="1f31426a:PackageElementNode" />
+              <item name="security" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Unnamed">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="common" type="cbb8eebc:String" user="common" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="common" type="cbb8eebc:String" user="common" />
+              <item name="audit" type="cbb8eebc:String" user="audit" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="common" type="cbb8eebc:String" user="common" />
+              <item name="exception" type="cbb8eebc:String" user="exception" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="common" type="cbb8eebc:String" user="common" />
+              <item name="security" type="cbb8eebc:String" user="security" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="sessions" type="cbb8eebc:String" user="sessions" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="integration" type="cbb8eebc:String" user="integration" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="integration" type="cbb8eebc:String" user="integration" />
+              <item name="utilities" type="cbb8eebc:String" user="utilities" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Production">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="common" type="cbb8eebc:String" user="common" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="common" type="cbb8eebc:String" user="common" />
+              <item name="security" type="cbb8eebc:String" user="security" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="#1 Users API CRUD Functionality">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="src/main" type="cbb8eebc:String" user="src/main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="controllers" type="cbb8eebc:String" user="controllers" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Tests">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="test" type="cbb8eebc:String" user="test" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Default Scope">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="streaming-platform-api-users" type="cbb8eebc:String" user="streaming-platform-api-users" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="main" type="cbb8eebc:String" user="main" />
+              <item name="java" type="cbb8eebc:String" user="java" />
+              <item name="com" type="cbb8eebc:String" user="com" />
+              <item name="streamingplatform" type="cbb8eebc:String" user="streamingplatform" />
+              <item name="api" type="cbb8eebc:String" user="api" />
+              <item name="users" type="cbb8eebc:String" user="users" />
+              <item name="controllers" type="cbb8eebc:String" user="controllers" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Streaming Platform API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="streaming-platform-api-users" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+            <path>
+              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="com.intellij.database" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.38525346" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Maven.users tests [dev]">
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <module name="demo" />
+      <envs />
+    </configuration>
+    <configuration name="UsersApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" show_console_on_std_out="true" show_console_on_std_err="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" track_test_folders="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.streamingplatform.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.streamingplatform.api.users.UsersApplication" />
+      <option name="DEBUG_MODE" value="true" />
+      <option name="HIDE_BANNER" value="true" />
+      <option name="SHOW_IN_DASHBOARD" value="true" />
+      <option name="ACTIVE_PROFILES" value="test" />
+      <option name="VM_PARAMETERS" value="-XX:+TieredCompilation -XX:TieredStopAtLevel=1" />
+      <option name="WORKING_DIRECTORY" value="file://$WORKSPACE$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <module name="streaming-platform-api-users" />
+      <envs />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration name="UsersSessionTests" type="JUnit" factoryName="JUnit" show_console_on_std_out="true" show_console_on_std_err="true">
+      <log_file path="$PROJECT_DIR$/logs/traces.log" checked="true" skipped="true" show_all="true" alias="traces.log" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" track_test_folders="true" runner="idea" />
+      <module name="streaming-platform-api-users" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.streamingplatform.api.users.sessions" />
+      <option name="MAIN_CLASS_NAME" value="com.streamingplatform.api.users.sessions.UsersSessionTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <module name="platform-api-users" />
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" value="" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" value="" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" value="" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration name="asdf" type="Remote" factoryName="Remote">
+      <module name="platform-api-users" />
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="5005" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+    </configuration>
+    <configuration name="users spring-boot:run [test]" type="MavenRunConfiguration" factoryName="Maven" singleton="true">
+      <log_file path="$PROJECT_DIR$/logs/stdout.log" checked="true" skipped="true" show_all="true" alias="stdout.log" />
+      <log_file path="$PROJECT_DIR$/logs/com.streamingplatform.log" checked="true" skipped="true" show_all="false" alias="om.streamingplatform" />
+      <output_file path="$PROJECT_DIR$/logs/run.spring-boot.log" is_save="true" />
+      <MavenSettings>
+        <option name="myGeneralSettings">
+          <MavenGeneralSettings>
+            <option name="alwaysUpdateSnapshots" value="false" />
+            <option name="checksumPolicy" value="NOT_SET" />
+            <option name="failureBehavior" value="NOT_SET" />
+            <option name="localRepository" value="" />
+            <option name="mavenHome" value="E:/bin/apache-maven-3.5.0" />
+            <option name="nonRecursive" value="false" />
+            <option name="outputLevel" value="INFO" />
+            <option name="pluginUpdatePolicy" value="UPDATE" />
+            <option name="printErrorStackTraces" value="false" />
+            <option name="threads" value="1" />
+            <option name="usePluginRegistry" value="true" />
+            <option name="userSettingsFile" value="" />
+            <option name="workOffline" value="false" />
+          </MavenGeneralSettings>
+        </option>
+        <option name="myRunnerSettings">
+          <MavenRunnerSettings>
+            <option name="environmentProperties">
+              <map />
+            </option>
+            <option name="jreName" value="#USE_PROJECT_JDK" />
+            <option name="mavenProperties">
+              <map>
+                <entry key="logging.level.root" value="info" />
+              </map>
+            </option>
+            <option name="passParentEnv" value="true" />
+            <option name="runMavenInBackground" value="true" />
+            <option name="skipTests" value="false" />
+            <option name="vmOptions" value="-XX:+TieredCompilation -XX:TieredStopAtLevel=1" />
+          </MavenRunnerSettings>
+        </option>
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map>
+                <entry key="test" value="true" />
+              </map>
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+    </configuration>
+    <list size="8">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.UserControllerUnitTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.UsersSessionTests" />
+      <item index="2" class="java.lang.String" itemvalue="Maven.users tests [dev]" />
+      <item index="3" class="java.lang.String" itemvalue="Maven.users spring-boot:run [test]" />
+      <item index="4" class="java.lang.String" itemvalue="Remote.asdf" />
+      <item index="5" class="java.lang.String" itemvalue="Remote.Remote Debug Localhost:5005" />
+      <item index="6" class="java.lang.String" itemvalue="Spring Boot.UsersApplication" />
+      <item index="7" class="java.lang.String" itemvalue="Spring Boot.DemoApplication" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0f9a5f4-0378-4022-9621-9db6fe9054d6" name="Default" comment="" />
+      <created>1503575214826</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1503575214826</updated>
+      <workItem from="1503575223419" duration="557000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="581000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1928" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5021322" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937434" sideWeight="0.5063966" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20729166" sideWeight="0.54211086" order="23" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15191898" sideWeight="0.42792794" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5063966" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.50364965" sideWeight="0.673774" order="13" side_tool="false" content_ui="tabs" x="237" y="86" width="1571" height="940" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33645833" sideWeight="0.4936034" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.73134327" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20362474" sideWeight="0.5661218" order="4" side_tool="true" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32846716" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Tail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IntelliTail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.425" sideWeight="0.4946695" order="20" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22707888" sideWeight="0.53517586" order="10" side_tool="true" content_ui="tabs" x="-1920" y="23" width="1920" height="1027" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.2496" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16204691" sideWeight="0.4457478" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51666665" sideWeight="0.4936034" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.596875" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Connector for AWS Lambda" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.3296" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="21" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.425" sideWeight="0.50319827" order="7" side_tool="true" content_ui="tabs" x="-994" y="820" width="775" height="354" />
+      <window_info id="OpenShift Origin" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32916668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="GitLabIntegration" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32916668" sideWeight="0.4978678" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.425" sideWeight="0.5053305" order="19" side_tool="true" content_ui="tabs" x="9" y="-10" width="686" height="196" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="REST Services" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Time Tracking" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15991472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven test results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.4978678" order="22" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5021322" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14765458" sideWeight="0.47594503" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Connector for AWS Lambda" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.3296" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11940298" sideWeight="0.31862068" order="5" side_tool="true" content_ui="tabs" x="22" y="389" width="1876" height="272" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2496" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5021322" order="6" side_tool="true" content_ui="tabs" x="-994" y="820" width="775" height="354" />
+      <window_info id="OpenShift Origin" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20729166" sideWeight="0.77665246" order="12" side_tool="false" content_ui="combo" />
+      <window_info id="GitLabIntegration" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.4978678" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5063966" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.50364965" sideWeight="0.673774" order="14" side_tool="false" content_ui="tabs" x="0" y="23" width="1920" height="1027" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3368092" sideWeight="0.4978678" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33368093" sideWeight="0.73773986" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26332623" sideWeight="0.6813793" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.334375" sideWeight="0.46002132" order="18" side_tool="true" content_ui="tabs" x="9" y="-10" width="686" height="196" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295099" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="REST Services" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Time Tracking" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15991472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnloadedModulesList">
+    <module name="platform-api-users" />
+    <module name="platform-api-users (1)" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myShow1" value="true" />
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="10" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Remote">
+        <watch expression="((SaveToSessionResponseWrapper)res).httpSessionExistedAtStartOfRequest" custom="org.springframework.security.web.context.HttpSessionSecurityContextRepository.SaveToSessionResponseWrapper" />
+        <watch expression="header" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/AbstractRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/config/MetricsConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/GenericService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserRolesInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/license/platform/header.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/database/UsersCRUDTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UsersSessionTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1824">
+          <caret line="96" column="2" lean-forward="false" selection-start-line="96" selection-start-column="2" selection-end-line="96" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/tomcat/util/threads/TaskThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/tomcat/util/net/NioEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="1454" column="0" lean-forward="false" selection-start-line="1454" selection-start-column="0" selection-end-line="1454" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/catalina/connector/CoyoteAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5795">
+          <caret line="341" column="0" lean-forward="false" selection-start-line="341" selection-start-column="0" selection-end-line="341" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/coyote/AbstractProcessorLight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/catalina/core/ApplicationFilterChain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2584">
+          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/debug/DebugFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="15" column="237" lean-forward="false" selection-start-line="15" selection-start-column="237" selection-end-line="15" selection-end-column="237" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/bin/jdk/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class" />
+    <entry file="jar://E:/bin/jdk/src.zip!/java/lang/reflect/Method.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.0.RC3/spring-webmvc-5.0.0.RC3.jar!/org/springframework/web/servlet/mvc/method/annotation/ServletInvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="17" column="239" lean-forward="false" selection-start-line="17" selection-start-column="239" selection-end-line="17" selection-end-column="239" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.0.RC3/spring-webmvc-5.0.0.RC3.jar!/org/springframework/web/servlet/FrameworkServlet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2337">
+          <caret line="124" column="196" lean-forward="false" selection-start-line="124" selection-start-column="196" selection-end-line="124" selection-end-column="196" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/access/intercept/FilterSecurityInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="17" column="196" lean-forward="false" selection-start-line="17" selection-start-column="196" selection-end-line="17" selection-end-column="196" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/FilterChainProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1045">
+          <caret line="56" column="167" lean-forward="false" selection-start-line="56" selection-start-column="167" selection-end-line="56" selection-end-column="167" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/session/SessionManagementFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="18" column="187" lean-forward="false" selection-start-line="18" selection-start-column="187" selection-end-line="18" selection-end-column="187" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/header/HeaderWriterFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="11" column="231" lean-forward="false" selection-start-line="11" selection-start-column="231" selection-end-line="11" selection-end-column="231" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.0.RC3/spring-web-5.0.0.RC3.jar!/org/springframework/web/filter/HttpPutFormContentFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="17" column="231" lean-forward="false" selection-start-line="17" selection-start-column="231" selection-end-line="17" selection-end-column="231" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.0.RC3/spring-webmvc-5.0.0.RC3.jar!/org/springframework/web/servlet/mvc/method/annotation/RequestMappingHandlerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2603">
+          <caret line="138" column="263" lean-forward="false" selection-start-line="138" selection-start-column="263" selection-end-line="138" selection-end-column="263" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.0.RC3/spring-web-5.0.0.RC3.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="25" column="283" lean-forward="false" selection-start-line="25" selection-start-column="283" selection-end-line="25" selection-end-column="283" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/5.0.0.M3/spring-security-web-5.0.0.M3.jar!/org/springframework/security/web/authentication/www/BasicAuthenticationFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="20" column="225" lean-forward="false" selection-start-line="20" selection-start-column="225" selection-end-line="20" selection-end-column="225" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/session/spring-session-core/2.0.0.M3/spring-session-core-2.0.0.M3.jar!/org/springframework/session/web/http/SessionRepositoryFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="24" column="231" lean-forward="false" selection-start-line="24" selection-start-column="231" selection-end-line="24" selection-end-column="231" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.16/tomcat-embed-core-8.5.16-sources.jar!/org/apache/catalina/authenticator/AuthenticatorBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4902">
+          <caret line="477" column="0" lean-forward="false" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/bin/jdk/src.zip!/java/net/DualStackPlainSocketImpl.java" />
+    <entry file="jar://E:/bin/jdk/src.zip!/java/net/SocketInputStream.java" />
+    <entry file="jar://E:/bin/jdk/src.zip!/java/lang/Thread.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.0.0.RC2/spring-data-redis-2.0.0.RC2.jar!/org/springframework/data/redis/connection/jedis/JedisConnection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="108" column="116" lean-forward="false" selection-start-line="108" selection-start-column="116" selection-end-line="108" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.0.0.RC2/spring-data-redis-2.0.0.RC2.jar!/org/springframework/data/redis/listener/RedisMessageListenerContainer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2565">
+          <caret line="136" column="27" lean-forward="false" selection-start-line="136" selection-start-column="27" selection-end-line="136" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="60" column="4" lean-forward="false" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/services/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#5037#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/streamingplatform/api/users/sessions/UserControllerUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2565">
+          <caret line="151" column="33" lean-forward="false" selection-start-line="151" selection-start-column="33" selection-end-line="151" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/models/base/ModelBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="54" column="6" lean-forward="false" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/repository/BaseRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1083">
+          <caret line="73" column="6" lean-forward="false" selection-start-line="73" selection-start-column="6" selection-end-line="73" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/common/utils/logging/Log.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1767">
+          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="63" column="1" lean-forward="false" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/streamingplatform/api/users/controllers/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="70" column="13" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath" />
+    <entry file="file://$PROJECT_DIR$/LICENSE.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/platform-api-users.iml" />
+    <entry file="file://$PROJECT_DIR$/platform-api-users (1).iml" />
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="380" column="24" lean-forward="true" selection-start-line="380" selection-start-column="24" selection-end-line="380" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$WORKSPACE$/spring/demo/src/main/java/com/example/demo/DemoApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml.bak">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streaming-platform-api-users.eml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/streaming-platform-api-users.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="33" column="28" lean-forward="false" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+          <folding>
+            <element signature="n#profiles#0;n#configuration#0;n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" expanded="false" />
+            <element signature="n#executions#0;n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" expanded="false" />
+            <element signature="n#plugin#2;n#plugins#0;n#build#0;n#project#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring (demo)|Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.38525346" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>demo</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.38525346" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>annotations-java8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.38525346" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

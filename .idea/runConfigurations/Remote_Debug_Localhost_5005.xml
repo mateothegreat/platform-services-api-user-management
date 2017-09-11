@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Remote Debug Localhost:5005" type="Remote" factoryName="Remote" singleton="true">
+    <module name="platform-api-users" />
+    <option name="USE_SOCKET_TRANSPORT" value="true" />
+    <option name="SERVER_MODE" value="false" />
+    <option name="SHMEM_ADDRESS" value="javadebug" />
+    <option name="HOST" value="localhost" />
+    <option name="PORT" value="5005" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="5005" />
+      <option name="LOCAL" value="false" />
+    </RunnerSettings>
+    <method>
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="users spring-boot:run [test]" run_configuration_type="MavenRunConfiguration" />
+    </method>
+  </configuration>
+</component>
