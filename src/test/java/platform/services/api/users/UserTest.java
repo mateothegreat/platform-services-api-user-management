@@ -10,6 +10,7 @@ import platform.services.api.UsersConfig;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseTests;
 import platform.services.api.commons.testing.ClassWellFormed;
+import platform.services.api.commons.testing.EntityRandomizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,13 +18,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = { UsersConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class UserTest extends BaseTests {
 
+    private EntityRandomizer r = new EntityRandomizer();
     private User user;
+    private User dirty;
 
     @BeforeEach public void setUp() {
 
-        SecurityCryptor.setTrace(false);
-
-        user = UsersConfig.buildUser();
+        user = r.get(User.class);
+        dirty = r.get(User.class);
 
     }
 
@@ -71,21 +73,53 @@ public class UserTest extends BaseTests {
     @Test
     public void setStatus() {
 
-        assertThat(user.getStatus()).isEqualTo(UsersConfig.USER_VALID_STATUS);
+        user.setStatus(dirty.getStatus());
+
+        assertThat(user.getStatus()).isEqualTo(dirty.getStatus());
 
     }
 
     @Test
     public void getEmail() {
 
-        assertThat(user.getEmail()).isEqualTo(UsersConfig.USER_VALID_EMAIL);
+        assertThat(user.getEmail()).isNotEmpty();
 
     }
 
     @Test
     public void setEmail() {
 
-        assertThat(user.getEmail()).isEqualTo(UsersConfig.USER_VALID_EMAIL);
+        user.setEmail(dirty.getEmail());
+
+        assertThat(user.getEmail()).isEqualTo(dirty.getEmail());
+
+    }
+
+    @Test
+    public void getParentId() {
+
+        assertThat(user.getParentId()).isGreaterThanOrEqualTo(0L);
+
+    }
+
+    @Test
+    public void setParentId() {
+
+        assertThat(user.getParentId()).isGreaterThanOrEqualTo(0L);
+
+    }
+
+    @Test
+    public void getId() {
+
+        assertThat(user.getId()).isGreaterThanOrEqualTo(0L);
+
+    }
+
+    @Test
+    public void setId() {
+
+        assertThat(user.getId()).isGreaterThanOrEqualTo(0L);
 
     }
 
@@ -93,34 +127,6 @@ public class UserTest extends BaseTests {
     public void toStringTest() {
 
         assertThat(user.toString()).isNotBlank();
-
-    }
-
-    @Test
-    public void getParentId() {
-
-        assertThat(user.getParentId()).isEqualTo(UsersConfig.USER_VALID_PARENT_ID);
-
-    }
-
-    @Test
-    public void setParentId() {
-
-        assertThat(user.getParentId()).isEqualTo(UsersConfig.USER_VALID_PARENT_ID);
-
-    }
-
-    @Test
-    public void getId() {
-
-        assertThat(user.getId()).isEqualTo(UsersConfig.USER_VALID_ID);
-
-    }
-
-    @Test
-    public void setId() {
-
-        assertThat(user.getId()).isEqualTo(UsersConfig.USER_VALID_ID);
 
     }
 

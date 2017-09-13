@@ -90,7 +90,7 @@ public class UserController extends BaseRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('ROLE_USER_ADMIN') OR #user.username == authentication.name")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
     public ResponseEntity<?> save(@RequestBody final User user) {
 
         Tracing.trace("create: {}", user);
@@ -106,33 +106,33 @@ public class UserController extends BaseRestController {
         } catch(final DataAccessException e) {
 
             return new ResponseEntity<>(
-                    new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, "username", "email address",
-                                     "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
+                new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, "username", "email address",
+                                 "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
 
         }
 
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_USER_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
     public HttpEntity<PagedResources<User>> getAll(final Pageable pageable, PagedResourcesAssembler assembler) {
 
         final Page<User> results = service.getAll(pageable);
-        ;
 
         return new ResponseEntity<PagedResources<User>>(assembler.toResource(results), HttpStatus.OK);
 
     }
 
     @RequestMapping(params = "username", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_USER_ADMIN') OR #username == authentication.name")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
     public ResponseEntity<User> getByUsername(@RequestParam final String username) throws NotFoundException {
 
         final User user = service.getUserByUsername(username);
 
         if(user == null || user.getId() <= 0L) {
 
-            throw new NotFoundException();
+//            throw new NotFoundException();
+            return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
 
         }
 
@@ -141,7 +141,7 @@ public class UserController extends BaseRestController {
     }
 
     @RequestMapping(params = "email", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_USER_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
     public ResponseEntity<User> getByEmail(@RequestParam final String email) throws DataAccessException, NotFoundException {
 
         final User user = service.getUserByEmail(email);
@@ -165,8 +165,8 @@ public class UserController extends BaseRestController {
                                                    .getAuthentication();
 
         return "Current User Authorities inside this RunAS method only " +
-                auth.getAuthorities()
-                    .toString();
+            auth.getAuthorities()
+                .toString();
 
     }
 

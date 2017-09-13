@@ -5,10 +5,14 @@ import io.restassured.RestAssured;
 import org.junit.*;
 import org.junit.jupiter.api.*;
 
-public class BaseRestTests {
+import platform.services.api.commons.testing.BaseTests;
+import platform.services.api.commons.testing.EntityRandomizer;
 
-    @BeforeClass
-    void setUp_BeforeClass() {
+public class BaseControllerTest extends BaseTests {
+
+    protected EntityRandomizer r;
+
+    @BeforeClass public static void beforeClass() {
 
         //        String port = System.getProperty("server.port");
         //
@@ -29,8 +33,11 @@ public class BaseRestTests {
     }
 
     @BeforeEach
-    void setUp_BeforeEeach() {
+    public void beforeEach() {
+
+        r = new EntityRandomizer();
 
     }
+
 
 }

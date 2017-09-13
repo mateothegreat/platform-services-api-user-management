@@ -14,10 +14,10 @@ import platform.services.api.authentication.Authorities;
 import static io.restassured.RestAssured.given;
 
 @Log4j2
-public class UserRestTest extends BaseRestTests {
+public class UserRestTest extends BaseControllerTest {
 
     @Test
-    void getBasePathWithNoAuthentication() {
+    void getBasePathWithNoAuthenticationReturns401() {
 
         given().when()
                .get()
@@ -27,7 +27,7 @@ public class UserRestTest extends BaseRestTests {
     }
 
     @Test
-    void getBasePathWithAuthentication() {
+    void getBasePathWithAuthReturns200() {
 
         given().when()
                .auth()
@@ -42,7 +42,7 @@ public class UserRestTest extends BaseRestTests {
     }
 
     @Test
-    void getAll() {
+    void getAllReturnsPageable200() {
 
         final Response response = given().when()
                                          .auth()
@@ -68,7 +68,7 @@ public class UserRestTest extends BaseRestTests {
     }
 
     @Test
-    void getByUsername_matchUsername() {
+    void getByUsernameReturns200() {
 
         final Response response = given().when()
                                          .auth()
@@ -78,7 +78,7 @@ public class UserRestTest extends BaseRestTests {
 
         final ResponseBody responseBody = response.getBody();
 
-        log.fatal(responseBody.prettyPeek());
+        log.trace(response.getBody().print());
 
         response.then()
                 .statusCode(200)
@@ -88,26 +88,25 @@ public class UserRestTest extends BaseRestTests {
     }
 
     @Test
-    void getByUsername_failUsername() {
-
-//        AuthenticatedRunAsManager.runAs("gibson", "password123",
-//                                        Authorities.ROLE_ADMIN, Authorities.ROLE_USER);
+    void getByUsernameIs404() {
 
         final Response response = given().when()
                                          .auth()
                                          .basic(UsersConfig.USER_VALID_USERNAME,
                                                 UsersConfig.USER_VALID_PASSWORD)
-                                         .get("/users?username=newuser4");
+                                         .get("/users?username=newuser4123123");
 
-        response.then()
-                .statusCode(403)
-                .and()
-                .contentType(ContentType.JSON);
+        log.trace(response.getBody().prettyPeek());
+        log.trace(response.andReturn().getBody().toString());
+        log.trace(response.andReturn().getBody().print());
+        log.trace(response.andReturn().getBody().prettyPeek());
+
+        response.then().statusCode(404);
 
     }
 
     @Test
-    void escalate_fail() {
+    void escalateReturns403() {
 
         AuthenticatedRunAsManager.runAs("gibson", "password123",
                                         Authorities.ROLE_USER);

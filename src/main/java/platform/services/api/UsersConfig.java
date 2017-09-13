@@ -55,9 +55,9 @@ public class UsersConfig {
     public static final Long   USER_VALID_ID               = null;
     public static final Long   USER_VALID_PARENT_ID        = 1L;
     public static final Long   USER_VALID_STATUS           = 1L;
-    public static final String USER_VALID_EMAIL            = "testing-user1@testing-user1.com";
-    public static final String USER_VALID_USERNAME         = "testing-user1";
-    public static final String USER_VALID_PASSWORD         = "testing-password";
+    public static final String USER_VALID_EMAIL            = "test-user1@testing-user1.com";
+    public static final String USER_VALID_USERNAME         = "test-user1";
+    public static final String USER_VALID_PASSWORD         = "test-password";
     public static final String USER_VALID_PASSWORD_ENCODED = "$2a$10$atc5W7EVviaucgev1/LgWu3fIcOH0S9dYPzX0cUgYQE6fHIshL4.q";
     public static final Long   USER_INVALID_ID             = 0L;
     public static final Long   USER_INVALID_PARENT_ID      = -1L;

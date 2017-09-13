@@ -86,10 +86,6 @@ public class User extends BaseEntity {
 //    @NotNull @Range(min = BaseEntity.STATUS_RANGE_MIN, max = BaseEntity.STATUS_RANGE_MAX)
     private Long status;
 
-    public User() {
-
-    }
-
     public String getEmail() {
 
         return email;

@@ -54,5 +54,6 @@ public interface Authorities {
     String ROLE_USER        = "ROLE_USER";
     String ROLE_ANONYMOUS   = "ROLE_ANONYMOUS";
     String ROLE_INTEGRATION = "ROLE_INTEGRATION";
+    String ROLE_SUPER       = "ROLE_SUPER";
 
 }

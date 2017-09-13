@@ -2,16 +2,20 @@ package platform.services.api.users;
 
 import lombok.extern.log4j.Log4j2;
 import net.bytebuddy.utility.RandomString;
+import org.assertj.core.api.SoftAssertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.*;
+import org.junit.platform.runner.*;
 import org.junit.runner.*;
 
 import platform.services.api.UsersConfig;
@@ -24,35 +28,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
 @Profile("testing")
-@RunWith(SpringRunner.class)
 @Transactional
-//@ComponentScan({ "platform.services.api.*", "platform.services.api.authentication", "platform.services.api.users" })
-@ContextConfiguration(classes = {
-
-    SecurityConfiguration.class,
-    UsersConfig.class,
-
-}, loader = AnnotationConfigContextLoader.class)
-
+@RunWith(JUnitPlatform.class)
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { SecurityConfiguration.class, UsersConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class UserServiceTest extends BaseTests {
-
-    @Autowired protected UserService userService;
 
     protected EntityRandomizer r;
 
-    @Before
-    public void setUp() throws Exception {
 
-        //    AuthenticatedRunAsRole.runAs(
-        //        "gibson", "password123", AuthenticationAuthorities.ADMIN,
-        // AuthenticationAuthorities.USER);
+    @Autowired
+    private final UserService userService;
+
+    @Autowired
+    private UserServiceTest(@Autowired final UserService userService) {
+
+        this.userService = userService;
+
+    }
+
+    @BeforeEach
+    public void beforeEach() {
+
 
         this.r = new EntityRandomizer();
 
-        assertThat(this.userService).isNotNull();
+        assertThat(this.userService).as("UserService bean is null").isNotNull();
 
-        this.userService = this.userService;
     }
+
 
     @Test
     public void create() throws Exception {
@@ -67,8 +72,6 @@ public class UserServiceTest extends BaseTests {
     public void getAll() throws Exception {
 
         final Page<User> results = this.userService.getAll(PageRequest.of(0, 5));
-
-        Tracing.trace("getAll: {}", Tracing.toString(results));
 
         assertThat(results.getTotalElements()).isGreaterThan(0L);
 
