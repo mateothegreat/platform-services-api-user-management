@@ -1,24 +1,24 @@
 package platform.services.api.users;
 
+import io.github.benas.randombeans.randomizers.text.StringRandomizer;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import platform.services.api.UsersConfig;
+import platform.services.api.commons.jpa.enums.Status;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseTests;
 import platform.services.api.commons.testing.ClassWellFormed;
 import platform.services.api.commons.testing.EntityRandomizer;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @Profile("testing")
 @ContextConfiguration(classes = { UsersConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class UserTest extends BaseTests {
-
-    private EntityRandomizer r = new EntityRandomizer();
 
     private User user;
 
@@ -26,8 +26,8 @@ public class UserTest extends BaseTests {
 
     @BeforeEach public void setUp() {
 
-        user = r.get(User.class);
-        dirty = r.get(User.class);
+        user = (User) EntityRandomizer.get(User.class);
+        dirty = (User) EntityRandomizer.get(User.class);
 
     }
 
@@ -72,18 +72,18 @@ public class UserTest extends BaseTests {
     @Test
     public void getStatus() {
 
-        user.setStatus(UsersConfig.USER_VALID_STATUS);
+        user.setStatus(Status.ACTIVE);
 
-        assertThat(user.getStatus()).isEqualTo(UsersConfig.USER_VALID_STATUS);
+        assertThat(user.getStatus()).isEqualTo(Status.ACTIVE);
 
     }
 
     @Test
     public void setStatus() {
 
-        user.setStatus(dirty.getStatus());
+        user.setStatus(Status.ACTIVE);
 
-        assertThat(user.getStatus()).isEqualTo(dirty.getStatus());
+        assertThat(user.getStatus()).isEqualTo(Status.ACTIVE);
 
     }
 
@@ -139,5 +139,19 @@ public class UserTest extends BaseTests {
         assertThat(user.toString()).isNotBlank();
 
     }
+
+//    @Test
+//    void setProfile() {
+//
+//
+//        final String avatar = StringRandomizer.aNewStringRandomizer(32).getRandomValue();
+//
+//        final UserProfile profile = new UserProfile(avatar);
+//
+//        user.setProfile(profile);
+//
+//        assertThat(user.getProfile().getAvatar()).isEqualToIgnoringCase(avatar);
+//
+//    }
 
 }

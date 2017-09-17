@@ -3,6 +3,7 @@ package platform.services.api;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import platform.services.api.commons.jpa.enums.Status;
 import platform.services.api.users.User;
 
 @Configuration
@@ -68,7 +69,7 @@ public class UsersConfig {
         final User user = new User();
 
         user.setParentId(USER_VALID_PARENT_ID);
-        user.setStatus(USER_VALID_STATUS);
+        user.setStatus(Status.ACTIVE);
         user.setEmail(USER_VALID_EMAIL);
         user.setUsername(USER_VALID_USERNAME);
         user.setPassword(USER_VALID_PASSWORD);

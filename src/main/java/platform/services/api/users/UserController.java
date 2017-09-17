@@ -59,6 +59,7 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -69,12 +70,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import platform.services.api.users.authentication.AuthenticatedRunAsRole;
+import java.util.Optional;
+
 import platform.services.api.commons.controller.BaseRestController;
 import platform.services.api.commons.exception.RestResponse;
 import platform.services.api.commons.utilities.Tracing;
-
-import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
+import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 
 @RestController
 @RequestMapping("/users")
@@ -116,7 +117,7 @@ public class UserController extends BaseRestController<User> {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
     public HttpEntity<PagedResources<User>> getAll(final Pageable pageable, PagedResourcesAssembler assembler) {
 
-        final Page<User> results = service.getAll(pageable);
+        final Page<User> results = service.findAll(pageable);
 
         return new ResponseEntity<PagedResources<User>>(assembler.toResource(results), HttpStatus.OK);
 
@@ -126,16 +127,9 @@ public class UserController extends BaseRestController<User> {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
     public ResponseEntity<User> getByUsername(@RequestParam final String username) throws NotFoundException {
 
-        final User user = service.getUserByUsername(username);
+        final Optional<User> result = service.findByUserUsername(username);
 
-        if(user == null || user.getId() <= 0L) {
-
-//            throw new NotFoundException();
-            return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
-
-        }
-
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return result.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
@@ -143,15 +137,9 @@ public class UserController extends BaseRestController<User> {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
     public ResponseEntity<User> getByEmail(@RequestParam final String email) throws DataAccessException, NotFoundException {
 
-        final User user = service.getUserByEmail(email);
+        final Optional<User> result = service.findByEmail(email);
 
-        if(user == null || user.getId() <= 0L) {
-
-            throw new NotFoundException();
-
-        }
-
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return result.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 

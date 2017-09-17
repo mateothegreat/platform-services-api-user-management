@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (C) 2017 Matthew Davis <matthew@appsoa.io>
  *
@@ -49,14 +51,51 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
-import org.springframework.stereotype.Repository;
+import lombok.Getter;
+import lombok.Setter;
 
-import platform.services.api.commons.jpa.repositories.BaseRepository;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-@Repository
-public interface UserRepository extends BaseRepository<User, Long> {
+import java.io.Serializable;
 
-    User getUserByEmail(String email);
-    User getUserByUsername(String username);
+import platform.services.api.commons.jpa.BaseEntity;
+import platform.services.api.commons.jpa.enums.Role;
+
+@Entity @Getter @Setter
+@Table(name = "user_role")
+public class UserRole extends BaseEntity  {
+
+    private static final long serialVersionUID = -2382305738428874768L;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+//    @ManyToOne
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "parentId", referencedColumnName = "parentId", insertable = false, updatable = false)
+//    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
+//    private User user;
+//    private Long parentId;
+
+//    private String username;
+
+    public UserRole() {
+
+    }
+
+//    public UserRole(@NotNull final Role role, final Long parentId) {
+    public UserRole(@NotNull final Role role) {
+
+        this.role = role;
+//        this.parentId = parentId;
+
+    }
 
 }

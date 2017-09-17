@@ -58,6 +58,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import platform.services.api.commons.utilities.Tracing;
 import platform.services.api.users.User;
@@ -79,13 +80,15 @@ public class AuthenticationService implements UserDetailsService {
 
         Tracing.trace("loadUserByUsername: {}", username);
 
-        final User user = service.getUserByUsername(username);
+        final Optional<User> result = service.findByUserUsername(username);
 
-        if(user == null) {
+        if(!result.isPresent()) {
 
             throw new UsernameNotFoundException(username);
 
         }
+
+        final User user = result.get();
 
 //        final List<String> permissions = UserService.getPermissions(user.getUsername());
 
