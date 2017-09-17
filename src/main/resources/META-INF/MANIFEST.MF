@@ -1,0 +1,66 @@
+Manifest-Version: 1.0
+Class-Path: spring-expression-5.0.0.RC3.jar spring-boot-starter-aop-2.
+ 0.0.M3.jar spring-security-web-5.0.0.M3.jar spring-jcl-5.0.0.RC3.jar 
+ jackson-datatype-jsr310-2.9.0.pr4.jar jedis-2.9.0.jar groovy-json-2.5
+ .0-beta-1.jar spring-aspects-5.0.0.RC3.jar spring-orm-5.0.0.RC3.jar s
+ pring-data-keyvalue-2.0.0.RC2.jar byte-buddy-agent-1.6.14.jar spring-
+ boot-starter-security-2.0.0.M3.jar hamcrest-core-1.3.jar objenesis-2.
+ 6.jar junit-platform-launcher-1.0.0-RC3.jar lombok-1.16.18.jar javafa
+ ker-0.13.jar jackson-core-2.9.0.pr4.jar guava-23.0-android.jar access
+ ors-smart-1.2.jar jackson-databind-2.9.0.jar junit-jupiter-engine-5.0
+ .0-RC3.jar gson-2.8.1.jar json-schema-core-1.2.5.jar random-beans-3.7
+ .0.jar evo-inflector-1.2.2.jar xml-path-3.0.3.jar spring-boot-autocon
+ figure-2.0.0.M3.jar spring-boot-starter-tomcat-2.0.0.M3.jar spring-be
+ ans-5.0.0.RC3.jar spring-aop-5.0.0.RC3.jar tomcat-embed-core-8.5.16.j
+ ar spring-boot-actuator-2.0.0.M3.jar retrofit-2.3.0.jar javassist-3.2
+ 1.0-GA.jar jandex-2.0.3.Final.jar hibernate-validator-6.0.2.Final.jar
+  validation-api-2.0.0.Final.jar btf-1.2.jar commons-lang3-3.6.jar spr
+ ing-webmvc-5.0.0.RC3.jar jackson-coreutils-1.8.jar slf4j-api-1.7.25.j
+ ar junit-platform-commons-1.0.0-RC3.jar spring-tx-5.0.0.RC3.jar sprin
+ g-web-5.0.0.RC3.jar rhino-1.7R4.jar json-path-2.4.0.jar spring-core-5
+ .0.0.RC3.jar spring-boot-starter-data-redis-2.0.0.M3.jar jul-to-slf4j
+ -1.7.25.jar rest-assured-common-3.0.3.jar spring-boot-starter-data-jp
+ a-2.0.0.M3.jar pubnub-gson-4.9.1.jar spring-boot-starter-web-2.0.0.M3
+ .jar spring-context-5.0.0.RC3.jar junit-vintage-engine-4.12.0-RC3.jar
+  httpcore-4.4.6.jar msg-simple-1.1.jar opentest4j-1.0.0-RC1.jar asser
+ tj-core-3.8.0.jar httpclient-4.5.3.jar hibernate-core-5.2.10.Final.ja
+ r spring-plugin-core-1.2.0.RELEASE.jar spring-data-rest-core-3.0.0.RC
+ 2.jar mysql-connector-java-5.1.43.jar android-json-0.0.20131108.vaadi
+ n1.jar tagsoup-1.2.1.jar spring-boot-test-2.0.0.M3.jar groovy-xml-2.5
+ .0-beta-1.jar automaton-1.11-8.jar spring-boot-starter-log4j2-2.0.0.M
+ 3.jar logging-interceptor-3.8.1.jar dom4j-1.6.1.jar jboss-logging-3.3
+ .1.Final.jar spring-data-redis-2.0.0.RC2.jar javax.transaction-api-1.
+ 2.jar httpmime-4.5.3.jar hibernate-commons-annotations-5.0.1.Final.ja
+ r random-beans-randomizers-3.7.0.jar commons-pool2-2.4.2.jar mailapi-
+ 1.4.3.jar jcl-over-slf4j-1.7.25.jar jackson-module-kotlin-2.9.0.pr4.j
+ ar spring-context-support-5.0.0.RC3.jar spring-data-rest-hal-browser-
+ 2.6.6.RELEASE.jar commons-codec-1.10.jar groovy-2.5.0-beta-1.jar jack
+ son-module-parameter-names-2.9.0.pr4.jar json-smart-2.3.jar hibernate
+ -jpa-2.1-api-1.0.0.Final.jar aspectjweaver-1.8.10.jar log4j-api-2.8.2
+ .jar hibernate-envers-5.2.10.Final.jar junit-platform-runner-1.0.0-RC
+ 3.jar mockito-core-2.10.0.jar jopt-simple-4.6.jar converter-gson-2.3.
+ 0.jar uri-template-0.9.jar spring-data-commons-2.0.0.RC2.jar spring-b
+ oot-starter-2.0.0.M3.jar okio-1.13.0.jar error_prone_annotations-2.0.
+ 18.jar fast-classpath-scanner-2.2.1.jar libphonenumber-6.2.jar spring
+ -jdbc-5.0.0.RC3.jar spring-boot-starter-json-2.0.0.M3.jar spring-data
+ -jpa-2.0.0.RC2.jar generex-1.0.2.jar spring-boot-starter-jdbc-2.0.0.M
+ 3.jar HikariCP-2.6.3.jar json-schema-validator-2.2.6.jar log4j-slf4j-
+ impl-2.8.2.jar tomcat-embed-websocket-8.5.16.jar jackson-annotations-
+ 2.9.0.pr4.jar okhttp-3.8.0.jar classmate-1.3.3.jar junit-platform-eng
+ ine-1.0.0-RC3.jar spring-oxm-5.0.0.RC3.jar spring-boot-starter-actuat
+ or-2.0.0.M3.jar jackson-datatype-jdk8-2.9.0.pr4.jar hamcrest-library-
+ 1.3.jar json-path-3.0.3.jar log4j-core-2.8.2.jar spring-data-rest-web
+ mvc-3.0.0.RC2.jar spring-security-core-5.0.0.M3.jar junit-jupiter-api
+ -5.0.0-M6.jar j2objc-annotations-1.1.jar hibernate-java8-5.2.10.Final
+ .jar spring-boot-test-autoconfigure-2.0.0.M3.jar spring-boot-starter-
+ test-2.0.0.M3.jar antlr-2.7.7.jar jsonassert-1.5.0.jar tomcat-embed-e
+ l-8.5.16.jar junit-platform-suite-api-1.0.0-RC3.jar junit-4.12.jar sp
+ ring-session-data-redis-2.0.0.M3.jar animal-sniffer-annotations-1.14.
+ jar byte-buddy-1.6.14.jar spring-boot-2.0.0.M3.jar junit-jupiter-para
+ ms-5.0.0-RC2.jar spring-hateoas-0.23.0.RELEASE.jar asm-5.0.4.jar acti
+ vation-1.1.jar spring-test-5.0.0.RC3.jar snakeyaml-1.18.jar jsr305-1.
+ 3.9.jar joda-time-2.9.9.jar spring-boot-devtools-2.0.0.M3.jar json-sc
+ hema-validator-3.0.3.jar rest-assured-3.0.3.jar spring-security-confi
+ g-5.0.0.M3.jar spring-session-core-2.0.0.M3.jar
+Main-Class: platform.services.api.commons.CommonsApplication
+

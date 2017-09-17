@@ -16,7 +16,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.authentication;
+package platform.services.api.users.authentication;
 
 /*-
  * $$SoftwareLicense
@@ -49,59 +49,49 @@ package platform.services.api.authentication;
  * streaming-main.platform.com
  */
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.MessageFormat;
+
+import platform.services.api.UsersConfig;
+import platform.services.api.commons.request.HttpHeader;
 import platform.services.api.commons.utilities.Tracing;
-import platform.services.api.users.User;
-import platform.services.api.users.UserService;
 
-@Service
-public class AuthenticationService implements UserDetailsService {
+@Component
+public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
-    private final UserService service;
+    @Override
+    public void afterPropertiesSet() throws Exception {
 
-    @Autowired
-    public AuthenticationService(final UserService service) {
+        this.setRealmName(UsersConfig.AUTHENTICATION_REALM_NAME);
 
-        this.service = service;
+        super.afterPropertiesSet();
 
     }
 
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    @Override
+    public void commence(final HttpServletRequest request, final HttpServletResponse response,
+                         final AuthenticationException authException) throws IOException, ServletException {
 
-        Tracing.trace("loadUserByUsername: {}", username);
+        Tracing.trace("commence: realm: {}", this.getRealmName());
+        Tracing.trace(request.getHeader(HttpHeader.AUTHORIZATION_NAME));
+        Tracing.trace(authException.getMessage());
 
-        final User user = service.getUserByUsername(username);
+        response.addHeader(HttpHeader.HEADER_WWW_AUTHENTICATE, String.format("%s=%s", HttpHeader.BASIC_REALM, this.getRealmName()));
 
-        if(user == null) {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-            throw new UsernameNotFoundException(username);
+        final PrintWriter writer = response.getWriter();
 
-        }
-
-//        final List<String> permissions = UserService.getPermissions(user.getUsername());
-
-//        Tracing.trace("loadUserByUsername->service.getPermissions({}): {}", user.getUsername(), permissions.toString());
-
-        final List<GrantedAuthority> grantedAuthorities = new ArrayList<>(0);
-
-//        for(final String permission : permissions) {
-//
-//            Tracing.trace("loadUserByUsername->grantedAuthorities.add: {}", permission);
-//
-//            grantedAuthorities.add(new SimpleGrantedAuthority(permission));
-//
-//        }
-
-        return new CustomUserDetails(user, grantedAuthorities);
+        writer.println(MessageFormat.format("HTTP Status 401 - {0}", authException.getMessage()));
 
     }
 

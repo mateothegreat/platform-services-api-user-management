@@ -1,4 +1,4 @@
-package platform.services.api.authentication;
+package platform.services.api.users.authentication;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.aop.framework.ReflectiveMethodInvocation;

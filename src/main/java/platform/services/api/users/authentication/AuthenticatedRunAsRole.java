@@ -1,4 +1,4 @@
-package platform.services.api.authentication;
+package platform.services.api.users.authentication;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

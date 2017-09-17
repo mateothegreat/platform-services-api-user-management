@@ -19,7 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserTest extends BaseTests {
 
     private EntityRandomizer r = new EntityRandomizer();
+
     private User user;
+
     private User dirty;
 
     @BeforeEach public void setUp() {
@@ -38,12 +40,16 @@ public class UserTest extends BaseTests {
 
     @Test public void getUsername() {
 
+        user.setUsername(UsersConfig.USER_VALID_USERNAME);
+
         assertThat(user.getUsername()).isEqualTo(UsersConfig.USER_VALID_USERNAME);
 
     }
 
     @Test
     public void setUsername() {
+
+        user.setUsername(UsersConfig.USER_VALID_USERNAME);
 
         assertThat(user.getUsername()).isEqualTo(UsersConfig.USER_VALID_USERNAME);
 
@@ -65,6 +71,8 @@ public class UserTest extends BaseTests {
 
     @Test
     public void getStatus() {
+
+        user.setStatus(UsersConfig.USER_VALID_STATUS);
 
         assertThat(user.getStatus()).isEqualTo(UsersConfig.USER_VALID_STATUS);
 
@@ -118,6 +126,8 @@ public class UserTest extends BaseTests {
 
     @Test
     public void setId() {
+
+        user.setId(1L);
 
         assertThat(user.getId()).isGreaterThanOrEqualTo(0L);
 

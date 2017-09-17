@@ -16,7 +16,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.authentication;
+package platform.services.api.users.authentication;
 
 /*-
  * $$SoftwareLicense
@@ -98,19 +98,14 @@ import platform.services.api.commons.sessions.SessionEventListener;
 @ComponentScan(basePackages = {
 
     "platform.services.api.commons.datasources",
-    "platform.services.api.authentication",
+    "platform.services.api.users.authentication",
 //    "platform.services.api.commons.security",
 //    "platform.services.api.commons.jpa.repositories",
 
 //    "platform.services.api.users",
 
 })
-@EnableJpaRepositories(basePackages = {
 
-//    "platform.services.api.commons.jpa.repositories",
-    "platform.services.api.users",
-
-})
 @ToString
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 

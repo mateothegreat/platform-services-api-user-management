@@ -55,11 +55,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@ComponentScan(ApplicationConfig.PLATFORM_SERVICES_API)
 //@SpringBootApplication(scanBasePackages = { ApplicationConfig.PLATFORM_SERVICES_API })
 @SpringBootApplication
-public class Application {
+public class UsersApplication {
 
     public static void main(final String[] args) {
 
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(UsersApplication.class, args);
 
     }
 

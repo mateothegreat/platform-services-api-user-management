@@ -49,7 +49,9 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -63,14 +65,16 @@ import javax.validation.constraints.NotNull;
 import platform.services.api.commons.jpa.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
 
-@ToString
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
 
-    public static final int USERNAME_LENGTH_MIN = 4;
+    public static  final int USERNAME_LENGTH_MIN = 4;
+
     public static final int USERNAME_LENGTH_MAX = 32;
+
     public static final int PASSWORD_LEGNTH_MIN = 8;
+
     public static final int PASSWORD_LEGNTH_MAX = 60;
 
     @Column(unique = true) @NotEmpty @Email
@@ -82,9 +86,7 @@ public class User extends BaseEntity {
     //    @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
     private String password;
 
-    @NotNull @Range(min = 1L, max = 200L)
-//    @NotNull @Range(min = BaseEntity.STATUS_RANGE_MIN, max = BaseEntity.STATUS_RANGE_MAX)
-    private Long status;
+
 
     public String getEmail() {
 
@@ -106,15 +108,7 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    public Long getStatus() {
 
-        return status;
-    }
-
-    public void setStatus(final Long status) {
-
-        this.status = status;
-    }
 
     public String getPassword() {
 

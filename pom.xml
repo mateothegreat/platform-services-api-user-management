@@ -77,6 +77,12 @@
 
     </properties>
 
+    <!--<modules>-->
+
+        <!--<module>../platform-services-commons</module>-->
+
+    <!--</modules>-->
+
     <repositories>
 
         <repository>
@@ -326,15 +332,6 @@
         <dependency>
 
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.0.0-RC3</version>
-            <scope>test</scope>
-
-        </dependency>
-
-        <dependency>
-
-            <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.0.0-RC3</version>
             <scope>test</scope>
@@ -454,6 +451,18 @@
             <groupId>streaming-platform.services</groupId>
             <artifactId>platform-services-commons</artifactId>
             <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.0-M6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.0.0-RC2</version>
+            <scope>test</scope>
         </dependency>
 
         <!--<dependency>-->

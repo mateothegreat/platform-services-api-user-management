@@ -43,7 +43,6 @@ import platform.services.api.commons.services.GenericServiceImpl;
 @Service
 public class UserService extends GenericServiceImpl<User> {
 
-    //    private final UserRepository<User, Long> userRepository;
     private final UserRepository userRepository;
 
     @Autowired
