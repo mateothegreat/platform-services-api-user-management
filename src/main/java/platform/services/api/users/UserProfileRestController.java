@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import platform.services.api.commons.controller.BaseRestController;
 
 @RestController
-@RequestMapping("/users/profile")
+@RequestMapping("/profile")
 public class UserProfileRestController extends BaseRestController<UserProfile> {
 
     private final UserProfileService service;

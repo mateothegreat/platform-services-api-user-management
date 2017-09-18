@@ -1,11 +1,21 @@
 package platform.services.api;
 
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.AWSXRayRecorderBuilder;
+import com.amazonaws.xray.javax.servlet.AWSXRayServletFilter;
+import com.amazonaws.xray.plugins.EC2Plugin;
+import com.amazonaws.xray.strategy.sampling.LocalizedSamplingStrategy;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import platform.services.api.commons.jpa.enums.Status;
+import javax.servlet.Filter;
+
+import platform.services.api.commons.enums.Status;
 import platform.services.api.users.User;
 
+@Log4j2
 @Configuration
 @ComponentScan(basePackages = {
 
@@ -51,6 +61,25 @@ public class UsersConfig {
         user.setPassword(USER_VALID_PASSWORD);
 
         return user;
+
+    }
+
+    @Bean
+    public Filter TracingFilter() {
+
+        log.fatal("tracing filter");
+        return new AWSXRayServletFilter("Scorekeep");
+
+    }
+    static {
+
+        AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withPlugin(new EC2Plugin());
+
+//        URL ruleFile = UsersConfig.class.getResource("file://sampling-rules.json");
+//        builder.withSamplingStrategy(new LocalizedSamplingStrategy(ruleFile));
+        builder.withSamplingStrategy(new LocalizedSamplingStrategy());
+
+        AWSXRay.setGlobalRecorder(builder.build());
 
     }
 

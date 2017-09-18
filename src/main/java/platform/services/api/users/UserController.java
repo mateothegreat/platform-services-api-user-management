@@ -52,11 +52,6 @@ package platform.services.api.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
@@ -74,9 +69,6 @@ import java.util.Optional;
 
 import platform.services.api.commons.controller.BaseRestController;
 import platform.services.api.commons.exception.RestResponse;
-import platform.services.api.commons.jpa.BaseEntity;
-import platform.services.api.commons.jpa.repositories.BaseRestRepository;
-import platform.services.api.commons.services.GenericService;
 import platform.services.api.commons.utilities.Tracing;
 import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 
@@ -115,16 +107,6 @@ public class UserController extends BaseRestController<User> {
                                  "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
 
         }
-
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
-    public HttpEntity<PagedResources<User>> getAll(final Pageable pageable, PagedResourcesAssembler assembler) {
-
-        final Page<User> results = service.findAll(pageable);
-
-        return new ResponseEntity<PagedResources<User>>(assembler.toResource(results), HttpStatus.OK);
 
     }
 

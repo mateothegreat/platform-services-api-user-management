@@ -58,7 +58,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -97,7 +96,7 @@ import platform.services.api.commons.sessions.SessionEventListener;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @ComponentScan(basePackages = {
 
-    "platform.services.api.commons.datasources",
+    "platform.services.api.commons.jpa.datasources",
     "platform.services.api.users.authentication",
 //    "platform.services.api.commons.security",
 //    "platform.services.api.commons.jpa.repositories",

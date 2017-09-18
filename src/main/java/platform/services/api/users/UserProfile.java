@@ -4,25 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import platform.services.api.commons.jpa.BaseEntity;
+import platform.services.api.commons.jpa.entities.BaseEntity;
 
 @Log4j2
-@Entity @Getter @Setter @ToString
+@Entity
+@Getter @Setter @ToString
 @Table(name = "user_profile")
-//@IdClass(UserProfileFK.class)
 public class UserProfile extends BaseEntity<UserProfile> {
-//public class UserProfile implements Serializable {
+
 
     //    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
 //    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
@@ -61,32 +54,32 @@ public class UserProfile extends BaseEntity<UserProfile> {
 //    public User user;
 //@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 
-    private static final long serialVersionUID = 2861993966732630305L;
-
-    private User user;
-
+//    private static final long serialVersionUID = 2861993966732630305L;
+//
+//    private User user;
+//
     private String avatar;
-    private Long   userId;
-
-    public UserProfile() {
-
-    }
-
-    public UserProfile(final String avatar) {
-
-        this.avatar = avatar;
-
-    }
-
-    public UserProfile(final String avatar, final Long parentId) {
-
-        this.avatar = avatar;
-//        this.parentId = parentId;
-
-    }
-
+//    private Long   userId;
+//
+//    public UserProfile() {
+//
+//    }
+//
+//    public UserProfile(final String avatar) {
+//
+//        this.avatar = avatar;
+//
+//    }
+//
+//    public UserProfile(final String avatar, final Long parentId) {
+//
+//        this.avatar = avatar;
+////        this.parentId = parentId;
+//
+//    }
+//
 //    @Id
-//    @Column(name = "user_id")
+//    @Column(name = "userId")
 //    @GeneratedValue(generator = "gen")
 //    @GenericGenerator(name = "gen", strategy = "foreign",
 //                      parameters = @Parameter(name = "property", value = "user"))
@@ -94,45 +87,23 @@ public class UserProfile extends BaseEntity<UserProfile> {
 
 //    @OneToOne(cascade = { javax.persistence.CascadeType.ALL })
 //    @JoinColumn(name = "userId")
-    public User getUser() {
-
-        return user;
-
-    }
-
-    public void setUser(final User user) {
-
-        this.user = user;
-
-        if(user != null) {
-
-            this.userId = user.getId();
-
-        }
-
-    }
-
-    @Id
-    @GeneratedValue(generator = "myGenerator")
-    @GenericGenerator(name = "myGenerator", strategy = "foreign", parameters = @Parameter(value = "user", name = "property"))
-    @Column(unique = true, nullable = false)
-    public Long getUserId() {
-
-        return userId;
-
-    }
 
 //    @Id
-//    @GeneratedValue(generator = "foreignGenerator")
-//    @org.hibernate.annotations.GenericGenerator(name = "foreignGenerator", strategy = "foreign", parameters = @Parameter(name = "property", value = "atData"))
-//    @Column(name = "userId")
-//    private Long userId;
+//    @GeneratedValue(generator = "myGenerator")
+//    @GenericGenerator(name = "myGenerator", strategy = "foreign", parameters = @Parameter(value = "user", name = "property"))
+//    @Column(unique = true, nullable = false)
+//    public Long getUserId() {
 //
-
-    public void setUserId(final Long userId) {
-
-        this.userId = userId;
-
-    }
+//        return userId;
+//
+//    }
+//
+////    @Id
+////    @GeneratedValue(generator = "foreignGenerator")
+////    @org.hibernate.annotations.GenericGenerator(name = "foreignGenerator", strategy = "foreign", parameters = @Parameter(name = "property", value = "atData"))
+////    @Column(name = "userId")
+////    private Long userId;
+////
+//
 
 }

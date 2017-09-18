@@ -11,11 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import platform.services.api.commons.testing.BaseTests;
 
 @Log4j2
-@ContextConfiguration(
-    classes = { UserConfig.class },
-    loader = AnnotationConfigContextLoader.class
-)
-public class AuthenticatedRunAsManagerTest extends BaseTests {
+@ContextConfiguration(classes = { UserConfig.class }, loader = AnnotationConfigContextLoader.class)
+public class AuthenticateTest extends BaseTests {
 
     @BeforeEach
     public void setUp() throws Exception {

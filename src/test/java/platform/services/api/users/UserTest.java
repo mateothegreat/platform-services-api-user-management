@@ -1,6 +1,5 @@
 package platform.services.api.users;
 
-import io.github.benas.randombeans.randomizers.text.StringRandomizer;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import platform.services.api.UsersConfig;
-import platform.services.api.commons.jpa.enums.Status;
+import platform.services.api.commons.enums.Status;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseTests;
 import platform.services.api.commons.testing.ClassWellFormed;

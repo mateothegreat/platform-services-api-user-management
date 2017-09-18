@@ -49,14 +49,14 @@ package platform.services.api;
  * streaming-main.platform.com
  */
 
-import org.apache.catalina.startup.UserConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(UsersConfig.PLATFORM_SERVICES_API_USERS)
 //@SpringBootApplication(scanBasePackages = { ApplicationConfig.PLATFORM_SERVICES_API })
-@SpringBootApplication
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class UsersApplication {
 
     public static void main(final String[] args) {

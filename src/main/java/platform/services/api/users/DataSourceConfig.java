@@ -50,10 +50,13 @@ package platform.services.api.users;
  */
 
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.auditing.DateTimeProvider;
@@ -66,78 +69,56 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 
 import java.util.Properties;
 
 import platform.services.api.commons.CommonsConfig;
-import platform.services.api.commons.audit.AuditableInterceptor;
 import platform.services.api.commons.audit.AuditingDateTimeProvider;
 import platform.services.api.commons.audit.AuditorAwareable;
 import platform.services.api.commons.audit.CurrentTimeDateTimeService;
 import platform.services.api.commons.audit.DateTimeService;
-import platform.services.api.commons.datasources.HibernateUpperCaseNamingStrategy;
 
 @Log4j2
-@org.springframework.context.annotation.Configuration
+@Configuration
+//@Import({SecurityConfiguration.class})
+//@EnableJpaRepositories(basePackages = { CommonsConfig.PLATFORM_SERVICES_API })
 //@EnableJpaAuditing(dateTimeProviderRef = "dateTimeProvider")
-//@EnableTransactionManagement
+@EnableTransactionManagement
 //@EnableSpringDataWebSupport
 //@Transactional
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
-@EnableJpaRepositories(basePackages = { CommonsConfig.PLATFORM_SERVICES_API })
+@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = { CommonsConfig.PLATFORM_SERVICES_API })
+//@EnableJpaRepositories(basePackages = { CommonsConfig.PLATFORM_SERVICES_API_USERS })
+//
+@EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+
+//@ComponentScan(basePackages = { "platform.services.api.users", "platform.services.api.*", "platform.services.api.users.services"})
 public class DataSourceConfig {
 
     public static final String DATA_SOURCE_PLATFORM_BASE_BEAN_NAME = "platformBaseDataSource";
     public static final String DATA_SOURCE_PLATFORM_BASE_DRIVER    = "com.mysql.jdbc.Driver";
     public static final String DATA_SOURCE_PLATFORM_BASE_USER      = "root";
     public static final String DATA_SOURCE_PLATFORM_BASE_PASS      = "asdfasdf";
-    public static final String DATA_SOURCE_PLATFORM_BASE_URL       = "jdbc:mysql://localhost:3306/platform_base";
-    public static final String DATA_SOURCE_PLATFORM_BASE_URL_OPTS  = "serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    public static final String DATA_SOURCE_PLATFORM_BASE_URL       = "jdbc:mysql://localhost:3306/platform_base?useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     public static final String AUTHENTICATION_REALM_NAME           = "PlatformAPI";
 
-    protected final Environment env;
-
-    @Autowired public DataSourceConfig(final Environment env) {
-
-        this.env = env;
-    }
-
-    public static Properties hibernateProperties() {
-
-        final Configuration configuration = new Configuration();
-
-        configuration.setPhysicalNamingStrategy(new HibernateUpperCaseNamingStrategy());
-        configuration.setInterceptor(new AuditableInterceptor());
-
-        configuration.addAnnotatedClass(User.class);
-        configuration.addAnnotatedClass(UserProfile.class);
-        configuration.addAnnotatedClass(UserRole.class);
-
-        configuration.setProperty(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL5Dialect")
-                     .setProperty(AvailableSettings.SHOW_SQL, "true")
-                     .setProperty(AvailableSettings.FORMAT_SQL, "true")
-                     .setProperty(AvailableSettings.GENERATE_STATISTICS, "true")
-                     .setProperty(AvailableSettings.USE_SQL_COMMENTS, "true")
-                     .setProperty(AvailableSettings.HBM2DDL_AUTO, "create-drop")
-                     .setProperty(AvailableSettings.POOL_SIZE, "5")
-                     .setProperty(AvailableSettings.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
-        return configuration.getProperties();
-
-    }
+    @Autowired
+    protected Environment environment;
 
     @Bean(name = DATA_SOURCE_PLATFORM_BASE_BEAN_NAME) public DriverManagerDataSource platformBaseDataSource() {
 
         final DriverManagerDataSource managerDataSource = new DriverManagerDataSource();
 
-        log.error(env.getProperty("jdbc.driverClassName"));
-
         managerDataSource.setDriverClassName(DATA_SOURCE_PLATFORM_BASE_DRIVER);
-        managerDataSource.setUrl(String.format("%s?%s", DATA_SOURCE_PLATFORM_BASE_URL, DATA_SOURCE_PLATFORM_BASE_URL_OPTS));
+        managerDataSource.setUrl(DATA_SOURCE_PLATFORM_BASE_URL);
         managerDataSource.setUsername(DATA_SOURCE_PLATFORM_BASE_USER);
         managerDataSource.setPassword(DATA_SOURCE_PLATFORM_BASE_PASS);
+
+//        TomcatDataSourceConfiguration p = new TomcatDataSourceConfiguration();
+
 
         return managerDataSource;
 
@@ -146,7 +127,6 @@ public class DataSourceConfig {
     @Bean public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 
         return new PersistenceExceptionTranslationPostProcessor();
-
     }
 
     @Bean public PlatformTransactionManager transactionManager() {
@@ -157,17 +137,8 @@ public class DataSourceConfig {
 
     }
 
-//    @Bean @Autowired public HibernateTransactionManager transactionManager(final SessionFactory sessionFactory) {
-//
-//        final HibernateTransactionManager txManager = new HibernateTransactionManager();
-//
-//        txManager.setSessionFactory(sessionFactory);
-//
-//        return txManager;
-//
-//    }
-
-    @Bean public EntityManagerFactory entityManagerFactory() {
+    @Bean
+    public EntityManagerFactory entityManagerFactory() {
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
@@ -187,31 +158,31 @@ public class DataSourceConfig {
 
     }
 
-//    @Bean public LocalSessionFactoryBean sessionFactory() {
-//
-//        final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-//
-//        sessionFactory.setDataSource(platformBaseDataSource());
-//        sessionFactory.setPackagesToScan(CommonsConfig.PLATFORM_SERVICES_API_USERS, CommonsConfig.PLATFORM_SERVICES_API_STREAMS);
-//        sessionFactory.setHibernateProperties(hibernateProperties());
-//
-//        return sessionFactory;
-//
-//    }
+    private static Properties hibernateProperties() {
 
-    @Bean static AuditorAware<String> auditorProvider() {
+        final Properties properties = new Properties();
+
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.ddl-auto", "create");
+
+        return properties;
+    }
+
+    @Bean AuditorAware<String> auditorProvider() {
 
         return new AuditorAwareable();
 
     }
 
-    @Bean static DateTimeProvider dateTimeProvider(final DateTimeService dateTimeService) {
+    @Bean DateTimeProvider dateTimeProvider(DateTimeService dateTimeService) {
 
         return new AuditingDateTimeProvider(dateTimeService);
 
     }
 
-    @Bean static DateTimeService currentTimeDateTimeService() {
+    @Bean DateTimeService currentTimeDateTimeService() {
 
         return new CurrentTimeDateTimeService();
 

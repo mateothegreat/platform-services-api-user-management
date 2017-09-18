@@ -23,10 +23,10 @@ public class UserProfileService extends GenericServiceImpl<UserProfileRestReposi
 
     }
 
-    public Optional<UserProfile> getByUserId(final Long userId) {
-
-        return repository.getByUserId(userId);
-
-    }
+//    public Optional<UserProfile> getByUserId(final Long userId) {
+//
+////        return repository.getByUserId(userId);
+//return null
+//    }
 
 }

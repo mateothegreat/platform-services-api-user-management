@@ -55,20 +55,16 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
-import platform.services.api.commons.jpa.BaseEntity;
+import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
 
 @Entity @Getter @Setter
@@ -89,6 +85,11 @@ public class User extends BaseEntity {
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
     public Set<UserRole> roles;
+
+    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "parentId")
+    public Set<UserProfile> profiles;
+
 
     //    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "parentId", referencedColumnName = "parentId")

@@ -80,26 +80,26 @@ public class UserService extends GenericServiceImpl<UserRestRepository, User> {
 
         User ret = null;
 
-        if(result.isPresent()) {
-
-            profile.setUser(result.get());
-
-            userProfileService.saveEntity(profile);
-
-            final Optional<UserProfile> result2 = userProfileService.getByUserId(saved.getId());
-
-            if(result2.isPresent()) {
-
-                ret = result2.get().getUser();
-
-            }
-
-        } else {
-
-            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR,
-                                             ServiceResultCode.INTERNAL_ERROR_DB_TRANSACTION_FAILURE);
-
-        }
+//        if(result.isPresent()) {
+//
+//            profile.setUser(result.get());
+//
+//            userProfileService.saveEntity(profile);
+//
+//            final Optional<UserProfile> result2 = userProfileService.getByUserId(saved.getId());
+//
+//            if(result2.isPresent()) {
+//
+//                ret = result2.get().getUser();
+//
+//            }
+//
+//        } else {
+//
+//            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR,
+//                                             ServiceResultCode.INTERNAL_ERROR_DB_TRANSACTION_FAILURE);
+//
+//        }
 
         return ret;
 
