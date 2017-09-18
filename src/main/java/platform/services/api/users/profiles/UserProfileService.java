@@ -1,4 +1,4 @@
-package platform.services.api.users;
+package platform.services.api.users.profiles;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

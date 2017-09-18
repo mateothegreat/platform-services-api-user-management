@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api.users;
+package platform.services.api.users.roles;
 
 /*-
  * $$SoftwareLicense

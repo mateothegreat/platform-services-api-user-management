@@ -1,4 +1,4 @@
-package platform.services.api.users;
+package platform.services.api.users.roles;
 
 import org.springframework.stereotype.Repository;
 

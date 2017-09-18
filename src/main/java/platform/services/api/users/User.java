@@ -66,6 +66,8 @@ import java.util.Set;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
+import platform.services.api.users.profiles.UserProfile;
+import platform.services.api.users.roles.UserRole;
 
 @Entity @Getter @Setter
 @Table(name = "user")

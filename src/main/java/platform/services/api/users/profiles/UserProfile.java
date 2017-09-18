@@ -1,4 +1,4 @@
-package platform.services.api.users;
+package platform.services.api.users.profiles;
 
 import lombok.Getter;
 import lombok.Setter;

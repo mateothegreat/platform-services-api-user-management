@@ -25,6 +25,7 @@ import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.enums.Status;
 import platform.services.api.commons.testing.BaseControllerTest;
 import platform.services.api.commons.testing.ComposedJUnit5BootTest;
+import platform.services.api.users.roles.UserRole;
 
 @Log4j2
 @ComposedJUnit5BootTest

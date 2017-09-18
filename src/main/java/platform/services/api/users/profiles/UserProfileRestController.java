@@ -1,4 +1,4 @@
-package platform.services.api.users;
+package platform.services.api.users.profiles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

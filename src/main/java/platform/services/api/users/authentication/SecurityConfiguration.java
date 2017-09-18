@@ -83,7 +83,7 @@ import platform.services.api.commons.sessions.SessionEventListener;
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 //@ComponentScan(basePackages = {
 //
-//    UsersConfig.PLATFORM_SERVICES_API_AUTHENTICATION,
+//    UsersConfig.PLATFORM_SERVICES_API_COMMONS_AUTHENTICATION,
 //    CommonsConfig.PLATFORM_SERVICES_API,
 //    CommonsConfig.PLATFORM_SERVICES_API_COMMONS
 //

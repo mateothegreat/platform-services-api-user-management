@@ -1,9 +1,7 @@
-package platform.services.api.users;
+package platform.services.api.users.roles;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import platform.services.api.commons.services.GenericServiceImpl;

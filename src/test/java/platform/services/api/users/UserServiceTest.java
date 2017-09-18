@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import platform.services.api.UsersConfig;
+import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.BaseRestRepositoryTest;
 import platform.services.api.commons.testing.ComposedJUnit5BootTest;
 import platform.services.api.commons.testing.EntityRandomizer;

@@ -35,14 +35,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import platform.services.api.commons.exception.ServiceResultCode;
-import platform.services.api.commons.exception.ServiceResultException;
 import platform.services.api.commons.services.GenericServiceImpl;
+import platform.services.api.users.profiles.UserProfile;
+import platform.services.api.users.profiles.UserProfileService;
 
 @Log4j2
 @Service

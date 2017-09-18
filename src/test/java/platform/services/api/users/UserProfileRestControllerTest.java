@@ -9,8 +9,10 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.junit.jupiter.api.BeforeEach;
 
 import platform.services.api.UsersConfig;
+import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.BaseRestRepositoryTest;
 import platform.services.api.commons.testing.ComposedJUnit5BootTest;
+import platform.services.api.users.profiles.UserProfileRestController;
 
 @Log4j2
 @ComposedJUnit5BootTest
