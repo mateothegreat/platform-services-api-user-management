@@ -1,0 +1,100 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GenericService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.commons.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GenericService (platform.services.api.commons.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GenericService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package platform.services.api.commons.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;    /*-
+<i>4</i>&nbsp;     * $$SoftwareLicense
+<i>5</i>&nbsp;     * Streaming Platform Users API
+<i>6</i>&nbsp;     * %%
+<i>7</i>&nbsp;     * Copyright (C) 2017 streamnvr
+<i>8</i>&nbsp;     * %%
+<i>9</i>&nbsp;     * __
+<i>10</i>&nbsp;     *       /\ \__
+<i>11</i>&nbsp;     *   ____\ \ ,_\  _ __    __     __      ___ ___     ___   __  __   _ __
+<i>12</i>&nbsp;     *  /&#39;,__\\ \ \/ /\`&#39;__\/&#39;__`\ /&#39;__`\  /&#39; __` __`\ /&#39; _ `\/\ \/\ \ /\`&#39;__\
+<i>13</i>&nbsp;     * /\__, `\\ \ \_\ \ \//\  __//\ \L\.\_/\ \/\ \/\ \/\ \/\ \ \ \_/ |\ \ \/
+<i>14</i>&nbsp;     * \/\____/ \ \__\\ \_\\ \____\ \__/.\_\ \_\ \_\ \_\ \_\ \_\ \___/  \ \_\
+<i>15</i>&nbsp;     *  \/___/   \/__/ \/_/ \/____/\/__/\/_/\/_/\/_/\/_/\/_/\/_/\/__/    \/_/
+<i>16</i>&nbsp;     *
+<i>17</i>&nbsp;     *
+<i>18</i>&nbsp;     * This program is free software: you can redistribute it and/or modify
+<i>19</i>&nbsp;     * it under the terms of the GNU General Public License as
+<i>20</i>&nbsp;     * published by the Free Software Foundation, either version 3 of the
+<i>21</i>&nbsp;     * License, or (at your option) any later version.
+<i>22</i>&nbsp;     *
+<i>23</i>&nbsp;     * This program is distributed in the hope that it will be useful,
+<i>24</i>&nbsp;     * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<i>25</i>&nbsp;     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<i>26</i>&nbsp;     * GNU General Public License for more details.
+<i>27</i>&nbsp;     *
+<i>28</i>&nbsp;     * You should have received a copy of the GNU General Public
+<i>29</i>&nbsp;     * License along with this program.  If not, see
+<i>30</i>&nbsp;     * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+<i>31</i>&nbsp;     * streaming-main.platform.com
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;import org.springframework.data.domain.Page;
+<i>35</i>&nbsp;import org.springframework.data.domain.Pageable;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;import java.util.Optional;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;import platform.services.api.commons.jpa.entities.BaseEntity;
+<i>40</i>&nbsp;import platform.services.api.commons.jpa.repositories.BaseRestRepository;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;public interface GenericService&lt;R extends BaseRestRepository, E extends BaseEntity&gt; {
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    Page&lt;E&gt; findAll(Pageable pageable);
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    Optional&lt;E&gt; findById(Long id);
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    boolean existsById(Long entityId);
+<i>49</i>&nbsp;    void deleteById(final long entityId);
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    E saveEntity(E entity);
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>

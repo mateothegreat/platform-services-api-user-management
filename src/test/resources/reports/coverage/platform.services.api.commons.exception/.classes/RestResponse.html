@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RestResponse</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.commons.exception</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RestResponse (platform.services.api.commons.exception)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RestResponse</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package platform.services.api.commons.exception;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;public class RestResponse {
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;    public static final int    ENTITY_EXISTS_CODE    = 1001;
+<i>6</i>&nbsp;    public static final String ENTITY_EXISTS_MESSAGE = &quot;A %s already exists with the %s \&quot;%s\&quot;&quot;;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;    private int    errorCode;
+<i>9</i>&nbsp;    private String message;
+<i>10</i>&nbsp;
+<b class="nc"><i>11</i>&nbsp;    public RestResponse(final int code, final String message, final Object... args) {</b>
+<i>12</i>&nbsp;
+<b class="nc"><i>13</i>&nbsp;        this.errorCode = code;</b>
+<b class="nc"><i>14</i>&nbsp;        this.message = format(message, args);</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;//    public RestResponse(int resultCode, String message) {
+<i>18</i>&nbsp;//
+<i>19</i>&nbsp;//        this.resultCode = resultCode;
+<i>20</i>&nbsp;//        this.message = message;
+<i>21</i>&nbsp;//
+<i>22</i>&nbsp;////        return new ResponseEntity&lt;RestErrorResponse&gt;(new RestErrorResponse(resultCode, message));
+<i>23</i>&nbsp;////        return new ResponseEntity&lt;RestErrorResponse&gt;(new RestErrorResponse(resultCode, message));
+<i>24</i>&nbsp;//
+<i>25</i>&nbsp;//    }
+<i>26</i>&nbsp;    public static String format(final String message, final Object... args) {
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;        return String.format(message, args);</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Override public String toString() {
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;        return String.format(&quot;RestResponse{resultCode=%d, message=&#39;%s&#39;}&quot;, errorCode, message);</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;//    @Override public String toString() {
+<i>37</i>&nbsp;//
+<i>38</i>&nbsp;//        return MessageFormat.format(&quot;RestResponse&#39;{&#39;resultCode={0}, message=&#39;&#39;{1}&#39;&#39;&#39;}&#39;&quot;, resultCode, message);
+<i>39</i>&nbsp;//
+<i>40</i>&nbsp;//    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    public int getCode() {
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        return errorCode;</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    private void setCode(final int errorCode) {
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;        this.errorCode = errorCode;</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public String getMessage() {
+<i>55</i>&nbsp;
+<b class="nc"><i>56</i>&nbsp;        return message;</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    private void setMessage(final String message) {
+<i>61</i>&nbsp;
+<b class="nc"><i>62</i>&nbsp;        this.message = message;</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>

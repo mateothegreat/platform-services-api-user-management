@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CurrentUser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.commons.audit</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CurrentUser (platform.services.api.commons.audit)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CurrentUser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package platform.services.api.commons.audit;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.security.core.userdetails.User;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class CurrentUser extends org.springframework.security.core.userdetails.User {
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    private static final long serialVersionUID = 7828419298616811182L;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    private User user;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    public CurrentUser(User user) {
+<i>12</i>&nbsp;
+<b class="nc"><i>13</i>&nbsp;        super(user.getUsername(), user.getPassword(),</b>
+<b class="nc"><i>14</i>&nbsp;                user.getAuthorities());</b>
+<b class="nc"><i>15</i>&nbsp;        this.user = user;</b>
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public User getUser() {
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;        return user;</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public String getFullName() {
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;        return user.getUsername();</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;//    public Long getId() {
+<i>29</i>&nbsp;//
+<i>30</i>&nbsp;//        return user.getId();
+<i>31</i>&nbsp;//    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;//    public String getProfileIconUrl() {
+<i>34</i>&nbsp;//
+<i>35</i>&nbsp;//        String iconUrl = &quot;/images/user32x32.png&quot;;
+<i>36</i>&nbsp;//        if(this.user.hasAvatar()) {
+<i>37</i>&nbsp;//            iconUrl = applicationSettings.getProfileIconUrlRoot() + user.getUserKey();
+<i>38</i>&nbsp;//        }
+<i>39</i>&nbsp;//        return iconUrl;
+<i>40</i>&nbsp;//    }
+<i>41</i>&nbsp;//
+<i>42</i>&nbsp;//    public String getProfileImageUrl() {
+<i>43</i>&nbsp;//
+<i>44</i>&nbsp;//        String iconUrl = &quot;/images/user.png&quot;;
+<i>45</i>&nbsp;//        if(this.user.hasAvatar()) {
+<i>46</i>&nbsp;//            iconUrl = applicationSettings.getProfileImageUrlRoot() + user.getUserKey();
+<i>47</i>&nbsp;//        }
+<i>48</i>&nbsp;//        return iconUrl;
+<i>49</i>&nbsp;//    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public String toString() {
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;        return &quot;CurrentUser{&quot; +</b>
+<i>55</i>&nbsp;                &quot;user=&quot; + user +
+<b class="nc"><i>56</i>&nbsp;                &#39;}&#39; + super.toString();</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>

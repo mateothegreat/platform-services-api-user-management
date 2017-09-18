@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BaseRestRepositoryTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.commons.testing</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BaseRestRepositoryTest (platform.services.api.commons.testing)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseRestRepositoryTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package platform.services.api.commons.testing;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.apache.commons.lang3.ArrayUtils;
+<i>4</i>&nbsp;import static org.assertj.core.api.Assertions.assertThat;
+<i>5</i>&nbsp;import static org.junit.jupiter.api.Assertions.*;
+<i>6</i>&nbsp;import org.springframework.data.domain.Page;
+<i>7</i>&nbsp;import org.springframework.data.domain.PageRequest;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import org.junit.jupiter.api.BeforeEach;
+<i>10</i>&nbsp;import org.junit.jupiter.api.Test;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import java.util.Optional;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;import platform.services.api.commons.jpa.entities.BaseEntity;
+<i>15</i>&nbsp;import platform.services.api.commons.jpa.repositories.BaseRestRepository;
+<i>16</i>&nbsp;import platform.services.api.commons.services.GenericService;
+<i>17</i>&nbsp;
+<b class="nc"><i>18</i>&nbsp;public class BaseRestRepositoryTest&lt;R extends BaseRestRepository, E extends BaseEntity&gt; {</b>
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;    protected static final String[] fieldsToIgnore = {</b>
+<i>21</i>&nbsp;        &quot;profile&quot;, &quot;user_id&quot;, &quot;createdDate&quot;, &quot;createdBy&quot;, &quot;lastModifiedBy&quot;, &quot;lastModifiedDate&quot;, &quot;operation&quot;
+<i>22</i>&nbsp;    };
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    protected EntityRandomizer r;
+<i>25</i>&nbsp;    protected Class&lt;E&gt;         entityClass;
+<i>26</i>&nbsp;    protected GenericService   genericService;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public BaseEntity baseEntity_createAndCompareDbResult() {
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;        final BaseEntity entity   = EntityRandomizer.get(entityClass);</b>
+<b class="nc"><i>31</i>&nbsp;        final BaseEntity result   = genericService.saveEntity(entity);</b>
+<b class="nc"><i>32</i>&nbsp;        final Optional&lt;E&gt;   findById = genericService.findById(result.getId());</b>
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;        baseEntity_isValidAndCompare(entity, findById.get(), &quot;id&quot;);</b>
+<i>35</i>&nbsp;//        baseEntity_isValidAndCompare(entity, optionalToBaseEntity(this.genericService.findById(result.getId())), &quot;id&quot;);
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;        return result;</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    @Test
+<i>42</i>&nbsp;    public void baseEntity_getAllMoreThanOne() {
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        final Page&lt;BaseEntity&gt; results = this.genericService.findAll(PageRequest.of(0, 5));</b>
+<i>45</i>&nbsp;
+<b class="nc"><i>46</i>&nbsp;        assertThat(results.getTotalElements()).isGreaterThan(0L);</b>
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;        baseEntity_isValid(results.getContent().get(0));</b>
+<b class="nc"><i>49</i>&nbsp;        baseEntity_isValid(results.getContent().get(results.getNumberOfElements() - 1));</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    public void baseEntity_save(final BaseEntity entityToSave) {
+<i>54</i>&nbsp;
+<b class="nc"><i>55</i>&nbsp;        final BaseEntity saved   = this.genericService.saveEntity(entityToSave);</b>
+<b class="nc"><i>56</i>&nbsp;        final BaseEntity current = this.genericService.saveEntity(entityToSave);</b>
+<i>57</i>&nbsp;
+<b class="nc"><i>58</i>&nbsp;        baseEntity_isValidAndCompare(saved, current, &quot;id&quot;);</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public void baseEntity_deleteByIdReturnsTrue(final Long entityId) throws Exception {
+<i>63</i>&nbsp;
+<b class="nc"><i>64</i>&nbsp;        this.genericService.deleteById(entityId);</b>
+<i>65</i>&nbsp;
+<b class="nc"><i>66</i>&nbsp;        assertThat(this.genericService.existsById(entityId)).isTrue();</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public BaseEntity baseEntity_createThenGetByIdIsValid() throws Exception {
+<i>71</i>&nbsp;
+<b class="nc"><i>72</i>&nbsp;        final BaseEntity  entity     = EntityRandomizer.get(entityClass);</b>
+<b class="nc"><i>73</i>&nbsp;        final BaseEntity  saveResult = genericService.saveEntity(entity);</b>
+<b class="nc"><i>74</i>&nbsp;        final Optional&lt;BaseEntity&gt; findResult = genericService.findById(saveResult.getId());</b>
+<b class="nc"><i>75</i>&nbsp;        final BaseEntity  found      = optionalToBaseEntity(findResult);</b>
+<i>76</i>&nbsp;
+<b class="nc"><i>77</i>&nbsp;        assertTrue(baseEntity_isValid(entity));</b>
+<b class="nc"><i>78</i>&nbsp;        assertTrue(baseEntity_isValid(saveResult));</b>
+<i>79</i>&nbsp;
+<b class="nc"><i>80</i>&nbsp;        baseEntity_isValidAndCompare(entity, found, &quot;id&quot;);</b>
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;        return found;</b>
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public static BaseEntity optionalToBaseEntity(final Optional&lt;BaseEntity&gt; entity) {
+<i>87</i>&nbsp;
+<b class="nc"><i>88</i>&nbsp;        return entity.orElse(null);</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @Test public void baseEntity_createThenDeleteById() throws Exception {
+<i>93</i>&nbsp;
+<b class="nc"><i>94</i>&nbsp;        baseEntity_deleteByIdReturnsTrue(baseEntity_createAndCompareDbResult().getId());</b>
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    protected static void baseEntity_isValidAndCompare(final BaseEntity left, final BaseEntity right, final String moreFieldsToIgnore) {
+<i>99</i>&nbsp;
+<b class="nc"><i>100</i>&nbsp;        String[] fields = fieldsToIgnore;</b>
+<i>101</i>&nbsp;
+<b class="nc"><i>102</i>&nbsp;        if(!moreFieldsToIgnore.isEmpty()) {</b>
+<i>103</i>&nbsp;
+<b class="nc"><i>104</i>&nbsp;            fields = ArrayUtils.addAll(fieldsToIgnore, moreFieldsToIgnore);</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;        }
+<i>107</i>&nbsp;
+<b class="nc"><i>108</i>&nbsp;        assertThat(left).isEqualToIgnoringGivenFields(right, fields);</b>
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    protected static boolean baseEntity_isValid(final BaseEntity baseEntity) {
+<i>113</i>&nbsp;
+<b class="nc"><i>114</i>&nbsp;        assertThat(baseEntity.getId()).isGreaterThanOrEqualTo(0L);</b>
+<i>115</i>&nbsp;
+<b class="nc"><i>116</i>&nbsp;        return true;</b>
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;//    protected static boolean baseEntity_isValid(final Optional&lt;BaseEntity&gt; baseEntity) {
+<i>121</i>&nbsp;//
+<i>122</i>&nbsp;//        assertThat(baseEntity.getId()).isGreaterThanOrEqualTo(0L);
+<i>123</i>&nbsp;//
+<i>124</i>&nbsp;//        return true;
+<i>125</i>&nbsp;//
+<i>126</i>&nbsp;//    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @BeforeEach protected void beforeEach() {
+<i>129</i>&nbsp;
+<b class="nc"><i>130</i>&nbsp;        this.r = new EntityRandomizer();</b>
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;//    protected Optional&lt;E&gt; newRandomizedEntity() {
+<i>135</i>&nbsp;//
+<i>136</i>&nbsp;//        return EntityRandomizer.get(entityClass);
+<i>137</i>&nbsp;//
+<i>138</i>&nbsp;//    }
+<i>139</i>&nbsp;//
+<i>140</i>&nbsp;//    protected Optional&lt;E&gt; newRandomizedEntity(final Class&lt;Optional&gt; entityClass) {
+<i>141</i>&nbsp;//
+<i>142</i>&nbsp;//        return EntityRandomizer.get(entityClass);
+<i>143</i>&nbsp;//
+<i>144</i>&nbsp;//    }
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserRestRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.users</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserRestRepository (platform.services.api.users)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UserRestRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (C) 2017 Matthew Davis &lt;matthew@appsoa.io&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This library is free software: you can redistribute it and/or
+<i>5</i>&nbsp; * modify it under the terms of the GNU Lesser General Public
+<i>6</i>&nbsp; * License as published by the Free Software Foundation; either
+<i>7</i>&nbsp; * version 3 of the License, or (at your option) any later version.
+<i>8</i>&nbsp; *
+<i>9</i>&nbsp; * This library is distributed in the hope that it will be useful,
+<i>10</i>&nbsp; * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<i>11</i>&nbsp; * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<i>12</i>&nbsp; * Library General Public License for more details.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * You should have received a copy of the GNU Lesser General Public
+<i>15</i>&nbsp; * License along with this library.  If not, see
+<i>16</i>&nbsp; * &lt;http://www.gnu.org/licenses/&gt;.
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;package platform.services.api.users;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;/*-
+<i>22</i>&nbsp; * $$SoftwareLicense
+<i>23</i>&nbsp; * Streaming Platform Users API
+<i>24</i>&nbsp; * %%
+<i>25</i>&nbsp; * Copyright (C) 2017 streamnvr
+<i>26</i>&nbsp; * %%
+<i>27</i>&nbsp; * __
+<i>28</i>&nbsp; *       /\ \__
+<i>29</i>&nbsp; *   ____\ \ ,_\  _ __    __     __      ___ ___     ___   __  __   _ __
+<i>30</i>&nbsp; *  /&#39;,__\\ \ \/ /\`&#39;__\/&#39;__`\ /&#39;__`\  /&#39; __` __`\ /&#39; _ `\/\ \/\ \ /\`&#39;__\
+<i>31</i>&nbsp; * /\__, `\\ \ \_\ \ \//\  __//\ \L\.\_/\ \/\ \/\ \/\ \/\ \ \ \_/ |\ \ \/
+<i>32</i>&nbsp; * \/\____/ \ \__\\ \_\\ \____\ \__/.\_\ \_\ \_\ \_\ \_\ \_\ \___/  \ \_\
+<i>33</i>&nbsp; *  \/___/   \/__/ \/_/ \/____/\/__/\/_/\/_/\/_/\/_/\/_/\/_/\/__/    \/_/
+<i>34</i>&nbsp; *
+<i>35</i>&nbsp; *
+<i>36</i>&nbsp; * This program is free software: you can redistribute it and/or modify
+<i>37</i>&nbsp; * it under the terms of the GNU General Public License as
+<i>38</i>&nbsp; * published by the Free Software Foundation, either version 3 of the
+<i>39</i>&nbsp; * License, or (at your option) any later version.
+<i>40</i>&nbsp; *
+<i>41</i>&nbsp; * This program is distributed in the hope that it will be useful,
+<i>42</i>&nbsp; * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<i>43</i>&nbsp; * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<i>44</i>&nbsp; * GNU General Public License for more details.
+<i>45</i>&nbsp; *
+<i>46</i>&nbsp; * You should have received a copy of the GNU General Public
+<i>47</i>&nbsp; * License along with this program.  If not, see
+<i>48</i>&nbsp; * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+<i>49</i>&nbsp; * streaming-main.platform.com
+<i>50</i>&nbsp; */
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;import java.util.Optional;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;import platform.services.api.commons.jpa.repositories.BaseRestRepository;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;@Repository
+<i>59</i>&nbsp;public interface UserRestRepository extends BaseRestRepository&lt;User, Long&gt; {
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    Optional&lt;User&gt; getUserByEmail(String email);
+<i>62</i>&nbsp;    Optional&lt;User&gt; getUserByUsername(String username);
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>

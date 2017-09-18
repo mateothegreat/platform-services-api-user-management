@@ -1,0 +1,328 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GlobalRestExceptionHandlers</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.commons.exception</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GlobalRestExceptionHandlers (platform.services.api.commons.exception)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GlobalRestExceptionHandlers</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (2/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.9%
+  </span>
+  <span class="absValue">
+    (2/ 51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (C) 2017 Matthew Davis &lt;matthew@appsoa.io&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This library is free software: you can redistribute it and/or
+<i>5</i>&nbsp; * modify it under the terms of the GNU Lesser General Public
+<i>6</i>&nbsp; * License as published by the Free Software Foundation; either
+<i>7</i>&nbsp; * version 3 of the License, or (at your option) any later version.
+<i>8</i>&nbsp; *
+<i>9</i>&nbsp; * This library is distributed in the hope that it will be useful,
+<i>10</i>&nbsp; * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<i>11</i>&nbsp; * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<i>12</i>&nbsp; * Library General Public License for more details.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * You should have received a copy of the GNU Lesser General Public
+<i>15</i>&nbsp; * License along with this library.  If not, see
+<i>16</i>&nbsp; * &lt;http://www.gnu.org/licenses/&gt;.
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;package platform.services.api.commons.exception;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;/*-
+<i>22</i>&nbsp; * $$SoftwareLicense
+<i>23</i>&nbsp; * Streaming Platform Users API
+<i>24</i>&nbsp; * %%
+<i>25</i>&nbsp; * Copyright (C) 2017 streamnvr
+<i>26</i>&nbsp; * %%
+<i>27</i>&nbsp; * __
+<i>28</i>&nbsp; *       /\ \__
+<i>29</i>&nbsp; *   ____\ \ ,_\  _ __    __     __      ___ ___     ___   __  __   _ __
+<i>30</i>&nbsp; *  /&#39;,__\\ \ \/ /\`&#39;__\/&#39;__`\ /&#39;__`\  /&#39; __` __`\ /&#39; _ `\/\ \/\ \ /\`&#39;__\
+<i>31</i>&nbsp; * /\__, `\\ \ \_\ \ \//\  __//\ \L\.\_/\ \/\ \/\ \/\ \/\ \ \ \_/ |\ \ \/
+<i>32</i>&nbsp; * \/\____/ \ \__\\ \_\\ \____\ \__/.\_\ \_\ \_\ \_\ \_\ \_\ \___/  \ \_\
+<i>33</i>&nbsp; *  \/___/   \/__/ \/_/ \/____/\/__/\/_/\/_/\/_/\/_/\/_/\/_/\/__/    \/_/
+<i>34</i>&nbsp; * 
+<i>35</i>&nbsp; * 
+<i>36</i>&nbsp; * This program is free software: you can redistribute it and/or modify
+<i>37</i>&nbsp; * it under the terms of the GNU General Public License as
+<i>38</i>&nbsp; * published by the Free Software Foundation, either version 3 of the
+<i>39</i>&nbsp; * License, or (at your option) any later version.
+<i>40</i>&nbsp; * 
+<i>41</i>&nbsp; * This program is distributed in the hope that it will be useful,
+<i>42</i>&nbsp; * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<i>43</i>&nbsp; * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<i>44</i>&nbsp; * GNU General Public License for more details.
+<i>45</i>&nbsp; * 
+<i>46</i>&nbsp; * You should have received a copy of the GNU General Public
+<i>47</i>&nbsp; * License along with this program.  If not, see
+<i>48</i>&nbsp; * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+<i>49</i>&nbsp; * streaming-main.platform.com
+<i>50</i>&nbsp; */
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;import lombok.extern.log4j.Log4j2;
+<i>53</i>&nbsp;import org.springframework.boot.context.config.ResourceNotFoundException;
+<i>54</i>&nbsp;import org.springframework.dao.IncorrectResultSizeDataAccessException;
+<i>55</i>&nbsp;import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+<i>56</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>57</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i>58</i>&nbsp;import org.springframework.security.authentication.InsufficientAuthenticationException;
+<i>59</i>&nbsp;import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
+<i>60</i>&nbsp;import org.springframework.web.bind.annotation.ControllerAdvice;
+<i>61</i>&nbsp;import org.springframework.web.bind.annotation.ExceptionHandler;
+<i>62</i>&nbsp;import org.springframework.web.bind.annotation.RestControllerAdvice;
+<i>63</i>&nbsp;import org.springframework.web.client.HttpClientErrorException;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;import javax.persistence.NonUniqueResultException;
+<i>66</i>&nbsp;import javax.servlet.http.HttpServletRequest;
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
+<i>69</i>&nbsp;
+<b class="fc"><i>70</i>&nbsp;@Log4j2</b>
+<i>71</i>&nbsp;@ControllerAdvice
+<i>72</i>&nbsp;@RestControllerAdvice
+<b class="fc"><i>73</i>&nbsp;public class GlobalRestExceptionHandlers {</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @ExceptionHandler(value = { NotFoundException.class })
+<i>76</i>&nbsp;    public ResponseEntity&lt;RestErrorResponse&gt; handleNotFoundException(NotFoundException notFoundException) {
+<i>77</i>&nbsp;
+<b class="nc"><i>78</i>&nbsp;        log.trace(&quot;handleNotFoundException&quot;);</b>
+<i>79</i>&nbsp;
+<b class="nc"><i>80</i>&nbsp;        return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;//    @ExceptionHandler(value = { DataAccessException.class })
+<i>85</i>&nbsp;//    public ResponseEntity&lt;Object&gt; handleDataAccessException(final DataAccessException dataAccessEx) {
+<i>86</i>&nbsp;//
+<i>87</i>&nbsp;//        log.trace(&quot;handleDataAccessException&quot;);
+<i>88</i>&nbsp;//        log.trace(dataAccessEx.getMessage());
+<i>89</i>&nbsp;//        log.trace(dataAccessEx.toString());
+<i>90</i>&nbsp;//
+<i>91</i>&nbsp;////        RestErrorResponse restErrorResponse = new RestErrorResponse(444, &quot;There is a {} that already exists&quot;);
+<i>92</i>&nbsp;//
+<i>93</i>&nbsp;////        return new RestErrorResponse(444, &quot;There is a {} that already exists&quot;);
+<i>94</i>&nbsp;//        ;
+<i>95</i>&nbsp;////        return new ResponseEntity&lt;RestErrorResponse&gt;(new RestErrorResponse(&quot;There is a {} that already exists&quot;, 444));
+<i>96</i>&nbsp;//
+<i>97</i>&nbsp;////        String msg = RestResponse.format(RestResponse.ENTITY_EXISTS_MESSAGE, &quot;username&quot;, &quot;email address&quot;, &quot;asdfasdf&quot;);
+<i>98</i>&nbsp;////        String msg = RestResponse.format(RestResponse.ENTITY_EXISTS_MESSAGE, &quot;username&quot;, &quot;email address&quot;, &quot;asdfasdf&quot;);
+<i>99</i>&nbsp;//
+<i>100</i>&nbsp;////        final RestResponse restResponse = new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, &quot;username&quot;, &quot;email address&quot;, &quot;asdfasdf&quot;);
+<i>101</i>&nbsp;//
+<i>102</i>&nbsp;////        final RestResponse restResponse = new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE);
+<i>103</i>&nbsp;//
+<i>104</i>&nbsp;//        return new ResponseEntity&lt;&gt;(new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, &quot;asdusername&quot;, &quot;email address&quot;, &quot;asdfasdf&quot;), new HttpHeaders(), PRECONDITION_FAILED);
+<i>105</i>&nbsp;////        return new ResponseEntity&lt;&gt;(, new HttpHeaders(), PRECONDITION_FAILED);
+<i>106</i>&nbsp;//
+<i>107</i>&nbsp;//    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    @ExceptionHandler(value = { InsufficientAuthenticationException.class })
+<i>110</i>&nbsp;    public ResponseEntity&lt;RestErrorResponse&gt; handleInsufficientAuthenticationException(
+<i>111</i>&nbsp;            InsufficientAuthenticationException e) {
+<i>112</i>&nbsp;
+<b class="nc"><i>113</i>&nbsp;        log.trace(&quot;handleInsufficientAuthenticationException&quot;);</b>
+<b class="nc"><i>114</i>&nbsp;        log.trace(e.getMessage());</b>
+<b class="nc"><i>115</i>&nbsp;        log.trace(e.toString());</b>
+<i>116</i>&nbsp;
+<b class="nc"><i>117</i>&nbsp;        e.printStackTrace();</b>
+<i>118</i>&nbsp;
+<b class="nc"><i>119</i>&nbsp;        return new ResponseEntity&lt;&gt;(PRECONDITION_FAILED);</b>
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    @ExceptionHandler(value = { UnsatisfiedServletRequestParameterException.class })
+<i>124</i>&nbsp;    public ResponseEntity&lt;RestErrorResponse&gt; handleUnsatisfiedServletRequestParameterException(
+<i>125</i>&nbsp;            UnsatisfiedServletRequestParameterException e) {
+<i>126</i>&nbsp;
+<b class="nc"><i>127</i>&nbsp;        log.trace(&quot;handleUnsatisfiedServletRequestParameterException&quot;);</b>
+<b class="nc"><i>128</i>&nbsp;        log.trace(&quot;handleUnsatisfiedServletRequestParameterException&quot;);</b>
+<b class="nc"><i>129</i>&nbsp;        log.trace(&quot;handleUnsatisfiedServletRequestParameterException&quot;);</b>
+<b class="nc"><i>130</i>&nbsp;        log.trace(&quot;handleUnsatisfiedServletRequestParameterException&quot;);</b>
+<b class="nc"><i>131</i>&nbsp;        log.trace(&quot;handleUnsatisfiedServletRequestParameterException&quot;);</b>
+<b class="nc"><i>132</i>&nbsp;        log.trace(&quot;handleUnsatisfiedServletRequestParameterException&quot;);</b>
+<b class="nc"><i>133</i>&nbsp;        log.trace(e.getMessage());</b>
+<i>134</i>&nbsp;
+<b class="nc"><i>135</i>&nbsp;        return new ResponseEntity&lt;&gt;(PRECONDITION_FAILED);</b>
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    @ExceptionHandler(value = { HttpClientErrorException.class })
+<i>140</i>&nbsp;    public ResponseEntity&lt;?&gt; handleHttpClientErrorException(HttpServletRequest request, Throwable e) {
+<i>141</i>&nbsp;
+<b class="nc"><i>142</i>&nbsp;        HttpStatus status = getStatus(request);</b>
+<b class="nc"><i>143</i>&nbsp;        log.trace(status.toString());</b>
+<b class="nc"><i>144</i>&nbsp;        log.trace(status.toString());</b>
+<b class="nc"><i>145</i>&nbsp;        log.trace(status.toString());</b>
+<b class="nc"><i>146</i>&nbsp;        log.trace(status.toString());</b>
+<b class="nc"><i>147</i>&nbsp;        log.trace(status.toString());</b>
+<b class="nc"><i>148</i>&nbsp;        log.trace(status.toString());</b>
+<b class="nc"><i>149</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>150</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>151</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>152</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>153</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>154</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>155</i>&nbsp;        log.trace(&quot;HttpClientErrorException&quot;);</b>
+<b class="nc"><i>156</i>&nbsp;        log.trace(e.getMessage());</b>
+<b class="nc"><i>157</i>&nbsp;        log.error(e.getStackTrace());</b>
+<b class="nc"><i>158</i>&nbsp;        e.printStackTrace();</b>
+<b class="nc"><i>159</i>&nbsp;        return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</b>
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    private HttpStatus getStatus(HttpServletRequest request) {
+<i>164</i>&nbsp;
+<b class="nc"><i>165</i>&nbsp;        Integer statusCode = (Integer) request.getAttribute(&quot;javax.servlet.error.status_code&quot;);</b>
+<b class="nc"><i>166</i>&nbsp;        if(statusCode == null) {</b>
+<b class="nc"><i>167</i>&nbsp;            return HttpStatus.INTERNAL_SERVER_ERROR;</b>
+<i>168</i>&nbsp;        }
+<b class="nc"><i>169</i>&nbsp;        return HttpStatus.valueOf(statusCode);</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    @ExceptionHandler(value = { ResourceNotFoundException.class })
+<i>173</i>&nbsp;    public ResponseEntity&lt;RestErrorResponse&gt; handleResourceNotFoundException(ResourceNotFoundException e) {
+<i>174</i>&nbsp;
+<b class="nc"><i>175</i>&nbsp;        log.trace(&quot;handleResourceNotFoundException&quot;);</b>
+<b class="nc"><i>176</i>&nbsp;        log.trace(e.getMessage());</b>
+<b class="nc"><i>177</i>&nbsp;        log.error(e.getStackTrace());</b>
+<b class="nc"><i>178</i>&nbsp;        return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</b>
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    }
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;    @ExceptionHandler(value = { NonUniqueResultException.class })
+<i>183</i>&nbsp;    public ResponseEntity&lt;RestErrorResponse&gt; handleNonUniqueResultException(NonUniqueResultException e) {
+<i>184</i>&nbsp;
+<b class="nc"><i>185</i>&nbsp;        log.trace(&quot;NonUniqueResultException&quot;);</b>
+<b class="nc"><i>186</i>&nbsp;        log.trace(e.getMessage());</b>
+<b class="nc"><i>187</i>&nbsp;        log.error(e.getStackTrace());</b>
+<b class="nc"><i>188</i>&nbsp;        return new ResponseEntity&lt;&gt;(HttpStatus.CONFLICT);</b>
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;    }
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    @ExceptionHandler(value = { IncorrectResultSizeDataAccessException.class })
+<i>193</i>&nbsp;    public ResponseEntity&lt;RestErrorResponse&gt; handleIncorrectResultSizeDataAccessException(
+<i>194</i>&nbsp;            IncorrectResultSizeDataAccessException e) {
+<i>195</i>&nbsp;
+<b class="nc"><i>196</i>&nbsp;        log.trace(&quot;IncorrectResultSizeDataAccessException&quot;);</b>
+<b class="nc"><i>197</i>&nbsp;        log.trace(e.getMessage());</b>
+<b class="nc"><i>198</i>&nbsp;        log.error(e.getStackTrace());</b>
+<b class="nc"><i>199</i>&nbsp;        return new ResponseEntity&lt;&gt;(HttpStatus.CONFLICT);</b>
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;    }
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;    // @ExceptionHandler(value = {Exception.class})
+<i>204</i>&nbsp;    // public ResponseEntity&lt;RestErrorResponse&gt; exceptionHandler(Exception e) {
+<i>205</i>&nbsp;    //
+<i>206</i>&nbsp;    //     //        RestErrorResponse error = new RestErrorResponse();
+<i>207</i>&nbsp;    //     //
+<i>208</i>&nbsp;    //     //        error.setResultCode(HttpStatus.BAD_REQUEST.value());
+<i>209</i>&nbsp;    //     //        error.setMessage(&quot;The request could not be understood by the server due to malformed syntax.&quot;);
+<i>210</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>211</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>212</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>213</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>214</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>215</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>216</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>217</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>218</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>219</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>220</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>221</i>&nbsp;    //     log.trace(&quot;exceptionHandler&quot;);
+<i>222</i>&nbsp;    //
+<i>223</i>&nbsp;    //     log.trace(e.getMessage());
+<i>224</i>&nbsp;    //     log.trace(e.toString());
+<i>225</i>&nbsp;    //     log.error(e.getStackTrace());
+<i>226</i>&nbsp;    //     e.printStackTrace();
+<i>227</i>&nbsp;    //     return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);
+<i>228</i>&nbsp;    //
+<i>229</i>&nbsp;    // }
+<i>230</i>&nbsp;    // @ExceptionHandler(value = {RepositoryConstraintViolationException.class})
+<i>231</i>&nbsp;    // public ResponseEntity&lt;Object&gt; handleAccessDeniedException(Exception ex, WebRequest request) {
+<i>232</i>&nbsp;    //
+<i>233</i>&nbsp;    //     RepositoryConstraintViolationException nevEx = (RepositoryConstraintViolationException) ex;
+<i>234</i>&nbsp;    //
+<i>235</i>&nbsp;    //     String errors = nevEx.getErrors()
+<i>236</i>&nbsp;    //                          .getAllErrors()
+<i>237</i>&nbsp;    //                          .stream()
+<i>238</i>&nbsp;    //                          .map(ObjectError::toString)
+<i>239</i>&nbsp;    //                          .collect(Collectors.joining(&quot;\n&quot;));
+<i>240</i>&nbsp;    //
+<i>241</i>&nbsp;    //     return new ResponseEntity&lt;&gt;(errors, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+<i>242</i>&nbsp;    //
+<i>243</i>&nbsp;    // }
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>

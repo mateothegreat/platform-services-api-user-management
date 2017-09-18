@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Profiles</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">platform.services.api.commons.configuration</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Profiles (platform.services.api.commons.configuration)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Profiles</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Profiles$ProfileType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package platform.services.api.commons.configuration;
+<i>2</i>&nbsp;
+<b class="nc"><i>3</i>&nbsp;public enum Profiles {</b>
+<i>4</i>&nbsp;
+<b class="nc"><i>5</i>&nbsp;    PROFILE_PRODUCTION_RUNNER(ProfileType.PRODUCTION_RUNNER),</b>
+<b class="nc"><i>6</i>&nbsp;    PROFILE_PRODUCTION_SERVICE(ProfileType.PRODUCTION_SERVICE),</b>
+<b class="nc"><i>7</i>&nbsp;    PROFILE_DEVQA_LOCALHOST(ProfileType.DEVQA_LOCALHOST),</b>
+<b class="nc"><i>8</i>&nbsp;    PROFILE_DEVQA_INTEGRATION(ProfileType.DEVQA_INTEGRATION);</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    private final String value;
+<i>11</i>&nbsp;
+<b class="nc"><i>12</i>&nbsp;    Profiles(final String value) {</b>
+<i>13</i>&nbsp;
+<b class="nc"><i>14</i>&nbsp;        this.value = value;</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public static final class ProfileType {
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;        public static final String PRODUCTION_RUNNER  = &quot;PRODUCTION_RUNNER&quot;;
+<i>21</i>&nbsp;        public static final String PRODUCTION_SERVICE = &quot;PRODUCTION_SERVICE&quot;;
+<i>22</i>&nbsp;        public static final String DEVQA_LOCALHOST    = &quot;DEVQA_LOCALHOST&quot;;
+<i>23</i>&nbsp;        public static final String DEVQA_INTEGRATION  = &quot;DEVQA_INTEGRATION&quot;;
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;        private ProfileType() {}</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2017-09-18 07:00</div>
+</div>
+</body>
+</html>
