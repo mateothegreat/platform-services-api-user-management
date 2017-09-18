@@ -25,9 +25,9 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/streaming-platform/platform-services-users .
+  - docker build -t registry.gitlab.com/streaming-platform/platform-services/platform-services-users .
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  - docker push registry.gitlab.com/streaming-platform/platform-services-users
+  - docker push registry.gitlab.com/streaming-platform/platform-services/platform-services-users
 
 #k8s-deploy:
 #  image: google/cloud-sdk
