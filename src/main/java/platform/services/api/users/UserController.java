@@ -74,6 +74,9 @@ import java.util.Optional;
 
 import platform.services.api.commons.controller.BaseRestController;
 import platform.services.api.commons.exception.RestResponse;
+import platform.services.api.commons.jpa.BaseEntity;
+import platform.services.api.commons.jpa.repositories.BaseRestRepository;
+import platform.services.api.commons.services.GenericService;
 import platform.services.api.commons.utilities.Tracing;
 import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 
@@ -81,11 +84,13 @@ import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 @RequestMapping("/users")
 public class UserController extends BaseRestController<User> {
 
-    private final UserService service;
+    private UserService service;
 
-    @Autowired public UserController(final UserService service) {
+    public UserController(@Autowired final UserService service) {
 
-        this.service = service;
+        super(service);
+
+//        this.genericService = service;
 
     }
 

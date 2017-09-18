@@ -15,14 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import java.io.Serializable;
+import platform.services.api.commons.jpa.BaseEntity;
 
 @Log4j2
 @Entity @Getter @Setter @ToString
 @Table(name = "user_profile")
 //@IdClass(UserProfileFK.class)
-//public class UserProfile extends BaseEntity<UserProfile> {
-public class UserProfile implements Serializable {
+public class UserProfile extends BaseEntity<UserProfile> {
+//public class UserProfile implements Serializable {
 
     //    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
 //    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
@@ -66,7 +66,7 @@ public class UserProfile implements Serializable {
     private User user;
 
     private String avatar;
-    private Long userId;
+    private Long   userId;
 
     public UserProfile() {
 
@@ -92,8 +92,8 @@ public class UserProfile implements Serializable {
 //                      parameters = @Parameter(name = "property", value = "user"))
 //    private Long userId;
 
-    @OneToOne(cascade={javax.persistence.CascadeType.ALL})
-    @JoinColumn(name = "userId")
+//    @OneToOne(cascade = { javax.persistence.CascadeType.ALL })
+//    @JoinColumn(name = "userId")
     public User getUser() {
 
         return user;

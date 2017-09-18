@@ -9,8 +9,6 @@ import org.hibernate.boot.SessionFactoryBuilder;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import platform.services.api.DataSourceConfig;
-
 /**
  * https://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/session-configuration.html
  */
@@ -58,7 +56,7 @@ public class HibernateUtility {
 //        final Configuration configuration = new Configuration().addClass(User.class).setProperty("");
 
 //        final StandardServiceRegistry standardRegistry      = new StandardServiceRegistryBuilder().applySettings()configure("hibernate.cfg.xml").build();
-        final StandardServiceRegistry standardRegistry      =  new StandardServiceRegistryBuilder().applySettings(DataSourceConfig.buildHibernateConfiguration()).build();
+        final StandardServiceRegistry standardRegistry      =  new StandardServiceRegistryBuilder().applySettings(DataSourceConfig.hibernateProperties()).build();
         final Metadata                metadata              = new MetadataSources(standardRegistry).getMetadataBuilder().build();
         final SessionFactoryBuilder   sessionFactoryBuilder = metadata.getSessionFactoryBuilder();
         final SessionFactory          sessionFactory        = sessionFactoryBuilder.build();

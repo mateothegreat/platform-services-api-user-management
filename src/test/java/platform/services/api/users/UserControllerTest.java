@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import platform.services.api.UsersApplication;
 import platform.services.api.UsersConfig;
+import platform.services.api.commons.jpa.enums.Role;
 import platform.services.api.commons.testing.BaseControllerTest;
 import platform.services.api.commons.testing.ComposedJUnit5BootTest;
 import platform.services.api.users.authentication.AuthenticatedRunAsManager;
@@ -94,7 +95,7 @@ public class UserControllerTest extends BaseControllerTest {
     @Test
     void escalateReturns200() {
 
-        AuthenticatedRunAsManager.runAs("gibson", "password123", Authorities.ROLE_USER.name());
+        AuthenticatedRunAsManager.runAs("gibson", Role.ROLE_USER);
 
         given().when()
                .auth()

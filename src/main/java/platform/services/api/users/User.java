@@ -65,6 +65,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import platform.services.api.commons.jpa.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
@@ -86,7 +88,7 @@ public class User extends BaseEntity {
 //    @JoinColumn(name = "USER_ROLE_ID", referencedColumnName = "id")
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
-    public Collection<UserRole> roles;
+    public Set<UserRole> roles;
 
     //    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
@@ -122,10 +124,10 @@ public class User extends BaseEntity {
 //        orphanRemoval = true,
 //        fetch = FetchType.EAGER
 //    )
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-//    @OneToOne(cascade={javax.persistence.CascadeType.ALL})
+//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+////    @OneToOne(cascade={javax.persistence.CascadeType.ALL})
 //    @JoinColumn(name = "userId")
-    private UserProfile profile;
+//    private UserProfile profile;
 
     private static final long serialVersionUID = -5533099429327139558L;
 

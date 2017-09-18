@@ -35,10 +35,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import platform.services.api.commons.exception.ServiceResultCode;
+import platform.services.api.commons.exception.ServiceResultException;
 import platform.services.api.commons.services.GenericServiceImpl;
 
 @Log4j2
@@ -46,13 +49,15 @@ import platform.services.api.commons.services.GenericServiceImpl;
 public class UserService extends GenericServiceImpl<UserRestRepository, User> {
 
     private final UserRestRepository userRepository;
+    private final UserProfileService userProfileService;
 
     @Autowired
-    public UserService(final UserRestRepository userRepository) {
+    public UserService(final UserRestRepository userRepository, final UserProfileService userProfileService) {
 
         super(userRepository);
 
         this.userRepository = userRepository;
+        this.userProfileService = userProfileService;
 
     }
 
@@ -65,6 +70,38 @@ public class UserService extends GenericServiceImpl<UserRestRepository, User> {
     public Optional<User> findByEmail(final String email) {
 
         return userRepository.getUserByEmail(email);
+
+    }
+
+    public User saveEntityThenProfile(final User entity, final UserProfile profile) {
+
+        final User           saved  = userRepository.save(entity);
+        final Optional<User> result = userRepository.findById(saved.getId());
+
+        User ret = null;
+
+        if(result.isPresent()) {
+
+            profile.setUser(result.get());
+
+            userProfileService.saveEntity(profile);
+
+            final Optional<UserProfile> result2 = userProfileService.getByUserId(saved.getId());
+
+            if(result2.isPresent()) {
+
+                ret = result2.get().getUser();
+
+            }
+
+        } else {
+
+            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR,
+                                             ServiceResultCode.INTERNAL_ERROR_DB_TRANSACTION_FAILURE);
+
+        }
+
+        return ret;
 
     }
 

@@ -18,8 +18,35 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import platform.services.api.commons.jpa.enums.Role;
+
 @Log4j2
 public class AuthenticatedRunAsManager extends RunAsManagerImpl {
+
+    public static void runAs(final String username, final Role... roles) {
+
+        Assert.notNull(username, "Username must not be null!");
+
+        log.trace("runAs(String username, String password, String... roles): {}, {}", username, roles);
+
+
+        SecurityContextHolder.getContext().setAuthentication(buildAuthToken(username, roles));
+
+    }
+
+    protected static UsernamePasswordAuthenticationToken buildAuthToken(final String username, final Role... roles) {
+
+        String[] list = new String[roles.length];
+
+        for(int i = 0, length = roles.length; i < length; i++) {
+
+            list[i] =roles[i].name();
+
+        }
+
+        return new UsernamePasswordAuthenticationToken(username, "asdfasdf", AuthorityUtils.createAuthorityList(list));
+
+    }
 
     @Override
     @Nullable
@@ -27,7 +54,7 @@ public class AuthenticatedRunAsManager extends RunAsManagerImpl {
 
         if(!(object instanceof ReflectiveMethodInvocation) || ((ReflectiveMethodInvocation) object).getMethod().getAnnotation(
 
-                AuthenticatedRunAsRole.class) == null) {
+            AuthenticatedRunAsRole.class) == null) {
 
             return super.buildRunAs(authentication, object, attributes);
 
@@ -52,26 +79,12 @@ public class AuthenticatedRunAsManager extends RunAsManagerImpl {
 
         return new RunAsUserToken(
 
-                getKey(),
-                authentication.getPrincipal(),
-                authentication.getCredentials(), newAuthorities,
-                authentication.getClass()
+            getKey(),
+            authentication.getPrincipal(),
+            authentication.getCredentials(), newAuthorities,
+            authentication.getClass()
 
         );
-
-    }
-
-    public static void runAs(final String username, final String password, final String... roles) {
-
-        Assert.notNull(username, "Username must not be null!");
-        Assert.notNull(password, "Password must not be null!");
-
-        log.trace("runAs(String username, String password, String... roles): {}, {}, {}", username, password, roles);
-
-        SecurityContextHolder.getContext()
-                             .setAuthentication(
-                                     new UsernamePasswordAuthenticationToken(username, password,
-                                                                             AuthorityUtils.createAuthorityList(roles)));
 
     }
 //
