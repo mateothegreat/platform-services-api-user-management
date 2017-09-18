@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: platform-services-users
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: platform-services-users
+    spec:
+      containers:
+      - name: platform-services-users
+        image: registry.gitlab.com/streaming-platform/platform-services-users
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: registry.gitlab.com
