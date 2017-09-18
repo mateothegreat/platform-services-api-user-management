@@ -54,6 +54,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,7 +62,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import java.util.Collection;
 import java.util.Set;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
@@ -84,14 +87,13 @@ public class User extends BaseEntity {
 //    @OneToMany(mappedBy = "id")
 //    @OneToMany
 //    @JoinColumn(name = "USER_ROLE_ID", referencedColumnName = "id")
-    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "parentId")
-    public Set<UserRole> roles;
-
-    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "parentId")
-    public Set<UserProfile> profiles;
-
+//    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "parentId")
+//    public Set<UserRole> roles;
+//
+//    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "parentId")
+//    public Set<UserProfile> profiles;
 
     //    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
@@ -143,6 +145,15 @@ public class User extends BaseEntity {
     @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
     private String password;
 
+
+    @Transient private boolean accountNonExpired;
+    @Transient private boolean accountNonLocked;
+    @Transient private boolean credentialsNonExpired;
+    @Transient private String  name;
+    @Transient private boolean enabled;
+
+    @Transient private Collection<? extends GrantedAuthority> authorities;
+
     public String getPassword() {
 
         return SecurityCryptor.encode(password);
@@ -155,4 +166,34 @@ public class User extends BaseEntity {
 
     }
 
+    public boolean isAccountNonExpired() {
+
+        return accountNonExpired;
+
+    }
+
+    public boolean isAccountNonLocked() {
+
+        return accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+
+        return credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+
+        return enabled;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return authorities;
+    }
 }

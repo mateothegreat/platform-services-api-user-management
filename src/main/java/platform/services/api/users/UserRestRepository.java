@@ -60,5 +60,6 @@ public interface UserRestRepository extends BaseRestRepository<User, Long> {
 
     Optional<User> getUserByEmail(String email);
     Optional<User> getUserByUsername(String username);
+    Optional<User> findByUsername(String username);
 
 }

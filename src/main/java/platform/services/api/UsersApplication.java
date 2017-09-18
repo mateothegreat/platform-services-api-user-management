@@ -31,18 +31,18 @@ package platform.services.api;
  * /\__, `\\ \ \_\ \ \//\  __//\ \L\.\_/\ \/\ \/\ \/\ \/\ \ \ \_/ |\ \ \/
  * \/\____/ \ \__\\ \_\\ \____\ \__/.\_\ \_\ \_\ \_\ \_\ \_\ \___/  \ \_\
  *  \/___/   \/__/ \/_/ \/____/\/__/\/_/\/_/\/_/\/_/\/_/\/_/\/__/    \/_/
- * 
- * 
+ *
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -52,11 +52,32 @@ package platform.services.api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.session.SessionAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
 
-@ComponentScan(UsersConfig.PLATFORM_SERVICES_API_USERS)
-//@SpringBootApplication(scanBasePackages = { ApplicationConfig.PLATFORM_SERVICES_API })
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+import platform.services.api.commons.configuration.CommonsConfig;
+import platform.services.api.commons.sessions.SessionConfiguration;
+
+//@ComponentScan(UsersConfig.PLATFORM_SERVICES_API_USERS)
+@SpringBootApplication(
+
+    scanBasePackages = {
+
+        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
+        UsersConfig.PLATFORM_SERVICES_API_COMMONS
+
+    },
+
+    exclude = {
+
+        DataSourceAutoConfiguration.class,
+        SessionAutoConfiguration.class
+
+    }
+
+)
+@ContextConfiguration(classes = { SessionConfiguration.class })
 public class UsersApplication {
 
     public static void main(final String[] args) {

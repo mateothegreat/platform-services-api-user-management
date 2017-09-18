@@ -62,6 +62,7 @@ import java.io.PrintWriter;
 import java.text.MessageFormat;
 
 import platform.services.api.UsersConfig;
+import platform.services.api.commons.configuration.CommonsConfig;
 import platform.services.api.commons.request.HttpHeader;
 import platform.services.api.commons.utilities.Tracing;
 
@@ -71,7 +72,7 @@ public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        this.setRealmName(UsersConfig.AUTHENTICATION_REALM_NAME);
+        this.setRealmName(CommonsConfig.AUTHENTICATION_REALM_NAME);
 
         super.afterPropertiesSet();
 

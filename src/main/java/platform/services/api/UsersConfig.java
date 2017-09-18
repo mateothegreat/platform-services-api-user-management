@@ -1,16 +1,8 @@
 package platform.services.api;
 
-import com.amazonaws.xray.AWSXRay;
-import com.amazonaws.xray.AWSXRayRecorderBuilder;
-import com.amazonaws.xray.javax.servlet.AWSXRayServletFilter;
-import com.amazonaws.xray.plugins.EC2Plugin;
-import com.amazonaws.xray.strategy.sampling.LocalizedSamplingStrategy;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import javax.servlet.Filter;
 
 import platform.services.api.commons.enums.Status;
 import platform.services.api.users.User;
@@ -30,12 +22,6 @@ public class UsersConfig {
     public static final String PLATFORM_SERVICES_API_USERS_AUTHENTICATION = "platform.services.api.users.authentication";
     public static final String PLATFORM_SERVICES_API_USERS                = "platform.services.api.users";
     public static final String PLATFORM_SERVICES_API_STREAMS              = "platform.services.api.streams";
-    public static final String DATA_SOURCE_PLATFORM_BASE_BEAN_NAME        = "platformBaseDataSource";
-    public static final String DATA_SOURCE_PLATFORM_BASE_DRIVER           = "com.mysql.jdbc.Driver";
-    public static final String DATA_SOURCE_PLATFORM_BASE_USER             = "root";
-    public static final String DATA_SOURCE_PLATFORM_BASE_PASS             = "asdfasdf";
-    public static final String DATA_SOURCE_PLATFORM_BASE_URL              = "jdbc:mysql://localhost:3306/platform_base?useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
-    public static final String AUTHENTICATION_REALM_NAME                  = "PlatformAPI";
     public static final Long   USER_VALID_ID                              = null;
     public static final Long   USER_VALID_PARENT_ID                       = 1L;
     public static final Long   USER_VALID_STATUS                          = 1L;
@@ -61,25 +47,6 @@ public class UsersConfig {
         user.setPassword(USER_VALID_PASSWORD);
 
         return user;
-
-    }
-
-    @Bean
-    public Filter TracingFilter() {
-
-        log.fatal("tracing filter");
-        return new AWSXRayServletFilter("Scorekeep");
-
-    }
-    static {
-
-        AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withPlugin(new EC2Plugin());
-
-//        URL ruleFile = UsersConfig.class.getResource("file://sampling-rules.json");
-//        builder.withSamplingStrategy(new LocalizedSamplingStrategy(ruleFile));
-        builder.withSamplingStrategy(new LocalizedSamplingStrategy());
-
-        AWSXRay.setGlobalRecorder(builder.build());
 
     }
 
