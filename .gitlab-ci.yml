@@ -5,4 +5,9 @@ maven-build:
   artifacts:
     paths:
       - target/*.jar
-  
+    
+test:  
+
+    script:
+        - rm public/*
+        - mv src/test/resources/reports/coverage/* public/
