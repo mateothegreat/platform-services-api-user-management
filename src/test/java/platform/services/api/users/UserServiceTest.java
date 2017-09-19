@@ -10,15 +10,12 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import java.util.List;
 import java.util.Optional;
 
 import platform.services.api.UsersConfig;
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.enums.Status;
+import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseRestRepositoryTest;
 import platform.services.api.commons.testing.ComposedJUnit5BootTest;
@@ -32,7 +29,7 @@ import platform.services.api.users.roles.UserRole;
 @ContextConfiguration(classes = {
 
     UsersConfig.class,
-    platform.services.api.users.DataSourceConfig.class
+    DataSourceConfig.class
 
 }, loader = AnnotationConfigContextLoader.class)
 @ComposedJUnit5BootTest

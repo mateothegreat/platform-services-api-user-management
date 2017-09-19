@@ -107,9 +107,9 @@ public class UserControllerTest extends BaseControllerTest<User> {
     @AfterEach
     public void afterEach() {
 
-//        userService.deleteById(user.getId());
-//
-//        assertThat(userService.existsById(user.getId())).isFalse();
+        userService.deleteById(user.getId());
+
+        assertThat(userService.existsById(user.getId())).isFalse();
 
     }
 

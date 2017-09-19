@@ -485,6 +485,24 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.2.10.Final</version>
         </dependency>
+
+
+        <!--<dependency>-->
+            <!--<groupId>io.projectreactor</groupId>-->
+            <!--<artifactId>reactor-core</artifactId>-->
+            <!--<version>3.1.0.M3</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot.experimental</groupId>-->
+            <!--<artifactId>spring-boot-starter-web-reactive</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.jadira.usertype</groupId>-->
+            <!--<artifactId>usertype.core</artifactId>-->
+            <!--<version>5.0.0.GA</version>-->
+        <!--</dependency>-->
+
         <!--<dependency>-->
             <!--<groupId>org.springframework.cloud</groupId>-->
             <!--<artifactId>spring-cloud-netflix-eureka-client</artifactId>-->
@@ -513,6 +531,14 @@
             <!--<artifactId>spring-cloud-starter-zuul</artifactId>-->
         <!--</dependency>-->
         <!-- endregion -->
+
+
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -52,11 +52,6 @@ public class UserAuthenticationPrincipal implements UserDetails {
 
     }
 
-    @Override public String getName() {
-
-        return getUsername();
-
-    }
 
 //
 //    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
