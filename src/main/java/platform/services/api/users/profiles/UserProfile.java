@@ -16,6 +16,7 @@ import platform.services.api.commons.jpa.entities.BaseEntity;
 @Table(name = "user_profile")
 public class UserProfile extends BaseEntity<UserProfile> {
 
+    private static final long serialVersionUID = -3819230086950978823L;
 
     //    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
 //    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
@@ -61,15 +62,15 @@ public class UserProfile extends BaseEntity<UserProfile> {
     private String avatar;
 //    private Long   userId;
 //
-//    public UserProfile() {
-//
-//    }
-//
-//    public UserProfile(final String avatar) {
-//
-//        this.avatar = avatar;
-//
-//    }
+    public UserProfile() {
+
+    }
+
+    public UserProfile(final String avatar) {
+
+        this.avatar = avatar;
+
+    }
 //
 //    public UserProfile(final String avatar, final Long parentId) {
 //

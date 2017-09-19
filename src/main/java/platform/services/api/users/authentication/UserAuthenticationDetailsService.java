@@ -2,15 +2,14 @@ package platform.services.api.users.authentication;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
+import platform.services.api.commons.exception.ServiceResultCode;
+import platform.services.api.commons.exception.ServiceResultException;
 import platform.services.api.users.User;
 import platform.services.api.users.UserRestRepository;
 
@@ -21,31 +20,22 @@ public class UserAuthenticationDetailsService implements UserDetailsService {
     @Autowired
     private UserRestRepository userRepository;
 
-//    private final User                   user;
-//    private final List<GrantedAuthority> authorities;
-
-//    public UserAuthenticationDetailsService(final User user, final List<GrantedAuthority> authorities) {
-//
-//        this.user = user;
-//        this.authorities = authorities;
-//    }
-
     @Override
-    public UserDetails loadUserByUsername(final String username) {
+    public UserAuthenticationPrincipal loadUserByUsername(final String username) {
 
-        log.fatal("loadUserByUsername: {}", username);
         final Optional<User> result = userRepository.findByUsername(username);
-log.fatal(result.get());
+
         if(!result.isPresent()) {
 
-            throw new UsernameNotFoundException(username);
+            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR, ServiceResultCode.INTERNAL_ERROR_AUTHENTICATION_AUTHORITIES_FAILURE);
 
         }
 
         final User user = result.get();
 
+        log.trace("loadUserByUsername: {}, {}", username, user.toString());
 
-        return new UserAuthenticationPrincipal(user);
+        return new UserAuthenticationPrincipal(user.getUsername(), user.getPasswordNotEncrypted(), user.getRoles());
 
     }
 

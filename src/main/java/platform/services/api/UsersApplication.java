@@ -51,33 +51,33 @@ package platform.services.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.session.SessionAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 
 import platform.services.api.commons.configuration.CommonsConfig;
 import platform.services.api.commons.sessions.SessionConfiguration;
+import platform.services.api.users.UserService;
 
-//@ComponentScan(UsersConfig.PLATFORM_SERVICES_API_USERS)
+//@EnableZuulProxy
+//@EnableDiscoveryClient
 @SpringBootApplication(
 
     scanBasePackages = {
 
+        CommonsConfig.PLATFORM_SERVICES_API,
         CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
         UsersConfig.PLATFORM_SERVICES_API_COMMONS
 
-    },
-
-    exclude = {
-
-        DataSourceAutoConfiguration.class,
-        SessionAutoConfiguration.class
-
     }
 
-)
-@ContextConfiguration(classes = { SessionConfiguration.class })
+//    exclude = {
+//
+//        DataSourceAutoConfiguration.class,
+//        SessionAutoConfiguration.class
+//
+//    }
+
+    )
+@ContextConfiguration(classes = { UserService.class, SessionConfiguration.class })
 public class UsersApplication {
 
     public static void main(final String[] args) {

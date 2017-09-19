@@ -65,8 +65,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
+import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.users.profiles.UserProfile;
@@ -87,13 +89,13 @@ public class User extends BaseEntity {
 //    @OneToMany(mappedBy = "id")
 //    @OneToMany
 //    @JoinColumn(name = "USER_ROLE_ID", referencedColumnName = "id")
-//    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "parentId")
-//    public Set<UserRole> roles;
-//
-//    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "parentId")
-//    public Set<UserProfile> profiles;
+    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "parentId")
+    public Set<UserRole> roles = new HashSet<>(0);
+
+    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "parentId")
+    public Set<UserProfile> profiles = new HashSet<>(0);
 
     //    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
@@ -144,6 +146,8 @@ public class User extends BaseEntity {
 
     @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
     private String password;
+
+    @Transient private String passwordNotEncrypted;
 
 
     @Transient private boolean accountNonExpired;

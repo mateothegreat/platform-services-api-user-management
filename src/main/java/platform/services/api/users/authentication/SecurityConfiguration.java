@@ -50,6 +50,7 @@ package platform.services.api.users.authentication;
  */
 
 import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -59,6 +60,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -66,56 +68,49 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSessionListener;
 import javax.sql.DataSource;
+
+import java.io.IOException;
 
 import platform.services.api.commons.configuration.CommonsConfig;
 import platform.services.api.commons.jpa.datasources.DataSourceProperties;
 import platform.services.api.commons.sessions.SessionEventListener;
 
-//@ToString
-//@Configuration
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableWebSecurity(debug = true)
-//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-//@ComponentScan(basePackages = {
-//
-//    UsersConfig.PLATFORM_SERVICES_API_COMMONS_AUTHENTICATION,
-//    CommonsConfig.PLATFORM_SERVICES_API,
-//    CommonsConfig.PLATFORM_SERVICES_API_COMMONS
-//
-//})
-
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @EnableWebSecurity(debug = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @ComponentScan(basePackages = {
 
     CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
-    CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION,
-    "platform.services.api.commons.security",
-    "platform.services.api.commons.jpa.repositories",
-//
-    "platform.services.api.users",
+    CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
 
 })
-
+@Log4j2
 @ToString
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier(DataSourceProperties.DATA_SOURCE_BEAN_NAME)
-    private            DataSource                       platformDataSource;
+    private DataSource platformDataSource;
 
     @Autowired
-    private            AuthenticationEntryPoint         authenticationEntryPoint;
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired private UserAuthenticationDetailsService userAuthenticationDetailsService;
 
@@ -143,7 +138,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
 
         final DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
+        authProvider.setForcePrincipalAsString(true);
         authProvider.setUserDetailsService(userAuthenticationDetailsService);
         authProvider.setPasswordEncoder(encoder());
 
@@ -184,6 +179,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
+    private AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> authenticationDetailsSource() {
+
+        log.fatal("AuthenticationDetailsSource");
+
+        return new AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails>() {
+
+            @Override
+            public WebAuthenticationDetails buildDetails(HttpServletRequest request) {
+
+                log.fatal("AuthenticationDetailsSource->buildDetails: {}, {}", request, request.toString());
+
+                return new WebAuthenticationDetails(request);
+
+            }
+
+        };
+
+    }
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
@@ -191,8 +205,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .anyRequest()
             .authenticated();
 
-        http.httpBasic()
-            .authenticationEntryPoint(authenticationEntryPoint);
+        http.authenticationProvider(authenticationProvider())
+            .httpBasic()
+            .authenticationEntryPoint(authenticationEntryPoint)
+            .authenticationDetailsSource(authenticationDetailsSource());
 
         http.logout()
             .disable();
@@ -205,6 +221,43 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.anonymous()
             .disable();
+
+    }
+
+    @Bean
+    AuthenticationFailureHandler failureHandler() {
+
+        return new AuthenticationFailureHandler() {
+
+            @Override
+            public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse res, AuthenticationException arg2) throws IOException, ServletException {
+
+                req.setAttribute("error", "forward");
+                req.getRequestDispatcher("/homedefault").forward(req, res);
+
+                log.fatal("AuthenticationFailureHandler->onAuthenticationFailure: {}, {}, {}", req, res, arg2);
+
+            }
+
+        };
+
+    }
+
+    @Bean
+    AuthenticationSuccessHandler authenticationSuccessHandler() {
+
+        return new AuthenticationSuccessHandler() {
+
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication arg2) throws IOException, ServletException {
+
+                log.fatal("AuthenticationFailureHandler->onAuthenticationFailure: {}, {}, {}", req, res, arg2);
+
+                res.sendRedirect("homedefault");
+
+            }
+
+        };
 
     }
 

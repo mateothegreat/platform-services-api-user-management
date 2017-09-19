@@ -56,6 +56,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -73,7 +74,7 @@ import platform.services.api.commons.utilities.Tracing;
 import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(value = "/users", produces = "application/hal+json")
 public class UserController extends BaseRestController<User> {
 
     private UserService service;
@@ -87,7 +88,9 @@ public class UserController extends BaseRestController<User> {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
+//    @PostAuthorize("returnObject.username == authentication.name")
     public ResponseEntity<?> save(@RequestBody final User user) {
 
         Tracing.trace("create: {}", user);
@@ -111,7 +114,10 @@ public class UserController extends BaseRestController<User> {
     }
 
     @RequestMapping(params = "username", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
+
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
+//    @PostAuthorize("returnObject.username == authentication.name")
     public ResponseEntity<User> getByUsername(@RequestParam final String username) throws NotFoundException {
 
         final Optional<User> result = service.findByUserUsername(username);
@@ -121,7 +127,9 @@ public class UserController extends BaseRestController<User> {
     }
 
     @RequestMapping(params = "email", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #user.username == authentication.name")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
+//    @PostAuthorize("returnObject.username == authentication.name")
     public ResponseEntity<User> getByEmail(@RequestParam final String email) throws DataAccessException, NotFoundException {
 
         final Optional<User> result = service.findByEmail(email);

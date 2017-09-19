@@ -19,17 +19,18 @@ import java.util.Collection;
 import java.util.List;
 
 import platform.services.api.commons.enums.Role;
+import platform.services.api.users.User;
 
 @Log4j2
 public class Authenticate extends RunAsManagerImpl {
 
-    public static CustomUserDetails assumeAdminProfile() {
+    public static UserAuthenticationPrincipal SUDO_INTEGRATION() {
 
-        return runAs("gibson", Role.ROLE_ADMIN, Role.ROLE_USER, Role.ROLE_POSTS);
+        return runAs("SUDO_INTEGRATION", Role.ROLE_ADMIN, Role.ROLE_USER, Role.ROLE_POSTS);
 
     }
 
-    public static CustomUserDetails runAs(final String username, final Role... roles) {
+    public static UserAuthenticationPrincipal runAs(final String username, final Role... roles) {
 
         Assert.notNull(username, "Username must not be null!");
 
@@ -41,22 +42,24 @@ public class Authenticate extends RunAsManagerImpl {
 
     }
 
-    public static CustomUserDetails getUserDetails() {
+    public static UserAuthenticationPrincipal getUserDetails() {
 
-        CustomUserDetails userDetails = null;
+        final UserAuthenticationPrincipal userAuthenticationPrincipal;
 
         final Authentication authentication = SecurityContextHolder.getContext()
                                                                    .getAuthentication();
 
         if(authentication != null) {
 
-            final Object principal = authentication.getPrincipal();
+            final User user = new User();
 
-            userDetails = (CustomUserDetails) principal;
+            return new UserAuthenticationPrincipal(authentication.getPrincipal().toString(),
+                                                   authentication.getCredentials().toString(),
+                                                   authentication.getAuthorities());
 
         }
 
-        return userDetails;
+        return null;
 
     }
 
@@ -103,7 +106,7 @@ public class Authenticate extends RunAsManagerImpl {
 
     protected static UsernamePasswordAuthenticationToken buildAuthToken(final String username, final Role... roles) {
 
-        String[] list = new String[roles.length];
+        final String[] list = new String[roles.length];
 
         for(int i = 0, length = roles.length; i < length; i++) {
 
@@ -111,7 +114,7 @@ public class Authenticate extends RunAsManagerImpl {
 
         }
 
-        return new UsernamePasswordAuthenticationToken(username, "asdfasdf", AuthorityUtils.createAuthorityList(list));
+        return new UsernamePasswordAuthenticationToken(username, "_empty_", AuthorityUtils.createAuthorityList(list));
 
     }
 

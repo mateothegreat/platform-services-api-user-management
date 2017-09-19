@@ -35,10 +35,14 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
+import platform.services.api.commons.exception.ServiceResultCode;
+import platform.services.api.commons.exception.ServiceResultException;
 import platform.services.api.commons.services.GenericServiceImpl;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.profiles.UserProfileService;
@@ -72,33 +76,23 @@ public class UserService extends GenericServiceImpl<UserRestRepository, User> {
 
     }
 
-    public User saveEntityThenProfile(final User entity, final UserProfile profile) {
+    public User saveEntityThenProfile(final User entity, final Set<UserProfile> profile) {
 
         final User           saved  = userRepository.save(entity);
         final Optional<User> result = userRepository.findById(saved.getId());
 
-        User ret = null;
+        final User ret;
 
-//        if(result.isPresent()) {
-//
-//            profile.setUser(result.get());
-//
-//            userProfileService.saveEntity(profile);
-//
-//            final Optional<UserProfile> result2 = userProfileService.getByUserId(saved.getId());
-//
-//            if(result2.isPresent()) {
-//
-//                ret = result2.get().getUser();
-//
-//            }
-//
-//        } else {
-//
-//            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR,
-//                                             ServiceResultCode.INTERNAL_ERROR_DB_TRANSACTION_FAILURE);
-//
-//        }
+        if(result.isPresent()) {
+
+            ret = result.get();
+
+        } else {
+
+            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR,
+                                             ServiceResultCode.INTERNAL_ERROR_DB_TRANSACTION_FAILURE);
+
+        }
 
         return ret;
 

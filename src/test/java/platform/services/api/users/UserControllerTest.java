@@ -4,13 +4,8 @@ import lombok.extern.log4j.Log4j2;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,31 +13,31 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import platform.services.api.UsersConfig;
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.enums.Status;
+import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseControllerTest;
 import platform.services.api.commons.testing.ComposedJUnit5BootTest;
 import platform.services.api.commons.testing.EntityRandomizer;
+import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
 
 @Log4j2
 @ComposedJUnit5BootTest
 //@Transactional
-@EnableAutoConfiguration(exclude = {
+@EnableAutoConfiguration
 
-    DataSourceAutoConfiguration.class,
-    DataSourceTransactionManagerAutoConfiguration.class,
-    HibernateJpaAutoConfiguration.class
-
-})
 @ContextConfiguration(classes = { UsersConfig.class, UserController.class }, loader = AnnotationConfigContextLoader.class)
 public class UserControllerTest extends BaseControllerTest<User> {
 
     private    User        user;
     @Autowired UserService userService;
+
+    String passwordPlainText;
 
     public static Set<UserRole> UserRoleSet() {
 
@@ -59,30 +54,53 @@ public class UserControllerTest extends BaseControllerTest<User> {
     @BeforeEach
     public void beforeEach() {
 
-        final String plaintextPassword ="asdfasdf";
-//        final String plaintextPassword = EntityRandomizer.password.getRandomValue();
-        final User   u                 = new User();
+        user = create();
 
-//        u.setUsername(EntityRandomizer.username.getRandomValue());
-        u.setUsername("asdfasdf");
-        u.setPassword(plaintextPassword);
-        u.setEmail(EntityRandomizer.email.getRandomValue());
-        u.setStatus(Status.ACTIVE);
+    }
 
-        log.error(u.getUsername());
-        log.error(u.getPassword());
-        log.error(plaintextPassword);
+    public User create() {
 
-//        u.setRoles(UserRoleSet());
+        final User r    = (User) EntityRandomizer.get(User.class);
+        final User user = new User();
 
-        user = userService.saveEntity(u);
+        passwordPlainText = EntityRandomizer.password.getRandomValue();
 
-        assertThat(user.getId()).isGreaterThan(0L);
-        log.warn(u);
-        log.warn(user);
+        user.setUsername(EntityRandomizer.username.getRandomValue());
+        user.setPasswordNotEncrypted(passwordPlainText);
+        user.setPassword(passwordPlainText);
+        user.setParentId(r.getParentId());
+        user.setStatus(Status.ACTIVE_TESTING);
+        user.setEmail(r.getEmail());
 
-        this.setUsername(user.getUsername());
-        this.setPassword(plaintextPassword);
+
+        user.getRoles().add(new UserRole(Role.ROLE_ADMIN));
+        user.getRoles().add(new UserRole(Role.ROLE_USER_ADMIN));
+
+//        user.getRoles().add(new UserRole(Role.ROLE_ADMIN));
+//        user.getRoles().add(new UserRole(Role.ROLE_POSTS));
+//        user.getRoles().add(new UserRole(Role.ROLE_USER));
+//        user.getRoles().add(new UserRole(Role.ROLE_USER_ADMIN));
+
+        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
+        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
+        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
+        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
+        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
+
+        final User created = userService.saveEntity(user);
+
+        created.setPasswordNotEncrypted(passwordPlainText);
+
+        assertThat(created.getId()).isGreaterThan(0L);
+        assertThat(created.getUsername()).isEqualTo(user.getUsername());
+        assertThat(SecurityCryptor.isEncoded(created.getPassword())).isTrue();
+        assertThat(created.getEmail()).isEqualTo(user.getEmail());
+        assertThat(created.getStatus()).isEqualTo(user.getStatus());
+
+        assertThat(created.getProfiles().isEmpty()).isFalse();
+        assertThat(created.getProfiles().size()).isEqualTo(user.getProfiles().size());
+
+        return created;
 
     }
 
@@ -103,9 +121,18 @@ public class UserControllerTest extends BaseControllerTest<User> {
 //    }
 
     @Test
+    void getUser() {
+
+        Optional<User> result = userService.findById(user.getId());
+
+        assertThat(result.isPresent()).isTrue();
+
+    }
+    @Test
     void getByUsernameReturns200() {
 
-        getResponseAssertJSON200OK("/users?username=testing-user1");
+//        getResponseAssertJSON200OK(user.getUsername(), passwordPlainText, "/users?username=testing-user1");
+        getResponseAssertJSON200OK(user.getUsername(), passwordPlainText, "/users");
 
     }
 //

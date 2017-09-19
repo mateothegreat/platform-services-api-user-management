@@ -53,6 +53,7 @@ package platform.services.api.users.roles;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -64,8 +65,8 @@ import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.enums.Role;
 
 @Entity @Getter @Setter
-@Table(name = "user_role")
-public class UserRole extends BaseEntity  {
+@Table(name = "user_roles")
+public class UserRole extends BaseEntity implements GrantedAuthority {
 
     private static final long serialVersionUID = -2382305738428874768L;
 
@@ -91,6 +92,12 @@ public class UserRole extends BaseEntity  {
 
         this.role = role;
 //        this.parentId = parentId;
+
+    }
+
+    @Override public String getAuthority() {
+
+        return role.name();
 
     }
 
