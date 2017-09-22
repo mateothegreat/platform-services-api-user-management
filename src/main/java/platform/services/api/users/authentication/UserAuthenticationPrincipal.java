@@ -18,9 +18,18 @@ public class UserAuthenticationPrincipal implements UserDetails {
     private static final long serialVersionUID = -2303028515734000689L;
     private String        username;
     private String        password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection authorities;
+//    private Collection<? extends GrantedAuthority> authorities;
 
-    public UserAuthenticationPrincipal(final @NotEmpty String username, final String encrypted, final Collection<? extends GrantedAuthority> roles) {
+//    public UserAuthenticationPrincipal(final @NotEmpty String username, final String encrypted, final Set<UserRole> roles) {
+//
+//        this.username = username;
+//        this.password = encrypted;
+//        this.authorities = roles;
+//
+//    }
+
+    public UserAuthenticationPrincipal(final @NotEmpty String username, final String encrypted, final Collection roles) {
 
         this.username = username;
         this.password = encrypted;

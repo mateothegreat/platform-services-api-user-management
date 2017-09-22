@@ -49,33 +49,29 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
 
+@Access(AccessType.FIELD)
+@DynamicUpdate
 @Entity @Getter @Setter
-@Table(name = "user")
+@Table(name = "user",
+       indexes = @Index(name = "idx_login",
+                        columnList = "username, password, status"))
 public class User extends BaseEntity {
 
     public static final int USERNAME_LENGTH_MIN = 4;
@@ -83,81 +79,43 @@ public class User extends BaseEntity {
     public static final int PASSWORD_LEGNTH_MIN = 8;
     public static final int PASSWORD_LEGNTH_MAX = 60;
 
-    //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @OneToMany(mappedBy = "userRole", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @OneToMany(mappedBy = "id")
-//    @OneToMany
-//    @JoinColumn(name = "USER_ROLE_ID", referencedColumnName = "id")
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
+    @Column(updatable = false, nullable = false)
     public Set<UserRole> roles = new HashSet<>(0);
 
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
+    @Column(updatable = false, nullable = false)
     public Set<UserProfile> profiles = new HashSet<>(0);
-
-    //    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
-//    @JoinColumn(name = "pId", referencedColumnName = "parentId", insertable = false, updatable = false)
-//    @RestResource(path = "userProfile", rel="profile")
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @OneToOne
-//    @JoinColumn(name = "PROFILE_ID")
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    @OneToOne
-//    @JoinColumn(name = "profileId")
-//    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
-//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "parentId")
-//    @OneToOne(optional=false, mappedBy="user",cascade = CascadeType.ALL)
-//    @JoinColumn(name = "parentId", insertable = false, updatable = false)
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn(name="OWNER_ID", referencedColumnName="id")
-//    @JoinColumn(name = "parentId", insertable = false, updatable = false, referencedColumnName = "id")
-//    @OneToOne
-////    @PrimaryKeyJoinColumn
-//    @JoinColumn(name = "parentId", insertable = false, updatable = false, referencedColumnName = "id")
-//    @Cascade({ CascadeType.ALL, CascadeType.DELETE_ORPHAN })
-//    @OneToOne(cascade={javax.persistence.CascadeType.ALL})
-//    @JoinColumn(name = "id", insertable = false, updatable = false)
-//    @OneToOne(cascade={javax.persistence.CascadeType.ALL}, optional = false)
-//    @OneToOne(mappedBy = "user", cascade = javax.persistence.CascadeType.ALL, optional = false, orphanRemoval = true, fetch = FetchType.LAZY)
-//    @OneToOne @MapsId
-//    @OneToOne(
-//        mappedBy = "user",
-//        cascade = javax.persistence.CascadeType.ALL,
-//        orphanRemoval = true,
-//        fetch = FetchType.EAGER
-//    )
-//    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-////    @OneToOne(cascade={javax.persistence.CascadeType.ALL})
-//    @JoinColumn(name = "userId")
-//    private UserProfile profile;
 
     private static final long serialVersionUID = -5533099429327139558L;
 
-    @Column(unique = true) @NotEmpty @Email
+    @Column(unique = true)
+    @Email(message = "validation.email.message")
     private String email;
 
-    @NotEmpty @Length(min = USERNAME_LENGTH_MIN, max = USERNAME_LENGTH_MAX)
+    @Column(updatable = false, nullable = false)
+    @Length(min = USERNAME_LENGTH_MIN, max = USERNAME_LENGTH_MAX, message = "validation.username.length.message")
     private String username;
 
-    @NotEmpty @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX)
+    @JsonIgnore
+    @Basic(fetch = FetchType.LAZY)
+    @Column(insertable = true, updatable = false, nullable = false)
+    @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX, message = "validation.password.length.message")
     private String password;
 
-    @Transient private String passwordNotEncrypted;
+    @JsonIgnore
+    @Transient
+    private String passwordNotEncrypted;
 
-
-    @Transient private boolean accountNonExpired;
-    @Transient private boolean accountNonLocked;
-    @Transient private boolean credentialsNonExpired;
-    @Transient private String  name;
-    @Transient private boolean enabled;
-
-    @Transient private Collection<? extends GrantedAuthority> authorities;
-
+    /**
+     * asdfasdf = $2a$10$3Q3s0j.kgXqr6a7hKQgeHekRdQ3uijJuy0BcFebj4dOcBkA0so/Qi
+     *
+     * @return String encoded password
+     *
+     * @author yomateod
+     */
     public String getPassword() {
 
         return SecurityCryptor.encode(password);
@@ -170,34 +128,4 @@ public class User extends BaseEntity {
 
     }
 
-    public boolean isAccountNonExpired() {
-
-        return accountNonExpired;
-
-    }
-
-    public boolean isAccountNonLocked() {
-
-        return accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-
-        return credentialsNonExpired;
-    }
-
-    public boolean isEnabled() {
-
-        return enabled;
-    }
-
-    public String getName() {
-
-        return name;
-    }
-
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        return authorities;
-    }
 }

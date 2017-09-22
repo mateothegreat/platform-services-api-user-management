@@ -66,7 +66,8 @@ import platform.services.api.commons.enums.Role;
 
 @Entity @Getter @Setter
 @Table(name = "user_roles")
-public class UserRole extends BaseEntity implements GrantedAuthority {
+public class UserRole extends BaseEntity  {
+//public class UserRole extends BaseEntity implements GrantedAuthority {
 
     private static final long serialVersionUID = -2382305738428874768L;
 
@@ -95,10 +96,5 @@ public class UserRole extends BaseEntity implements GrantedAuthority {
 
     }
 
-    @Override public String getAuthority() {
-
-        return role.name();
-
-    }
 
 }

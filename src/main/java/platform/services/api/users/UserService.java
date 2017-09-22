@@ -43,19 +43,20 @@ import java.util.Set;
 
 import platform.services.api.commons.exception.ServiceResultCode;
 import platform.services.api.commons.exception.ServiceResultException;
-import platform.services.api.commons.services.GenericServiceImpl;
+import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.services.GenericService;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.profiles.UserProfileService;
 
 @Log4j2
 @Service
-public class UserService extends GenericServiceImpl<UserRestRepository, User> {
+public class UserService<R, E> extends GenericService<UserRepository, User> {
 
-    private final UserRestRepository userRepository;
+    private final UserRepository     userRepository;
     private final UserProfileService userProfileService;
 
     @Autowired
-    public UserService(final UserRestRepository userRepository, final UserProfileService userProfileService) {
+    public UserService(final UserRepository userRepository, final UserProfileService userProfileService) {
 
         super(userRepository);
 
@@ -64,37 +65,15 @@ public class UserService extends GenericServiceImpl<UserRestRepository, User> {
 
     }
 
-    public Optional<User> findByUserUsername(final String username) {
+    public Optional<User> findByUsername(final String username) {
 
-        return userRepository.getUserByUsername(username);
+        return userRepository.findByUsername(username);
 
     }
 
     public Optional<User> findByEmail(final String email) {
 
-        return userRepository.getUserByEmail(email);
-
-    }
-
-    public User saveEntityThenProfile(final User entity, final Set<UserProfile> profile) {
-
-        final User           saved  = userRepository.save(entity);
-        final Optional<User> result = userRepository.findById(saved.getId());
-
-        final User ret;
-
-        if(result.isPresent()) {
-
-            ret = result.get();
-
-        } else {
-
-            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR,
-                                             ServiceResultCode.INTERNAL_ERROR_DB_TRANSACTION_FAILURE);
-
-        }
-
-        return ret;
+        return userRepository.getByEmail(email);
 
     }
 
@@ -104,7 +83,11 @@ public class UserService extends GenericServiceImpl<UserRestRepository, User> {
 
         try {
 
-            entity.setPassword(entity.getPassword());
+            if(entity.getPassword() != null) {
+
+                entity.setPassword(entity.getPassword());
+
+            }
 
             result = userRepository.save(entity);
 

@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import platform.services.api.UsersConfig;
-import platform.services.api.users.authentication.Authorities;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.*;
@@ -42,13 +41,13 @@ public class UserMockTest implements TestLifecycleLogger {
 
     }
 
-    @ParameterizedTest
-    @EnumSource(Authorities.class)
-    void testWithEnumSource(final Authorities authorities) {
-
-        assertNotNull(authorities);
-
-    }
+//    @ParameterizedTest
+//    @EnumSource(Authorities.class)
+//    void testWithEnumSource(final Authorities authorities) {
+//
+//        assertNotNull(authorities);
+//
+//    }
 
     @TestFactory
     Collection<DynamicTest> dynamicTestsFromCollection() {

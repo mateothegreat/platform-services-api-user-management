@@ -13,7 +13,7 @@ import platform.services.api.users.User;
 
     UsersConfig.PLATFORM_SERVICES_API_USERS,
     UsersConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION,
-    UsersConfig.PLATFORM_SERVICES_API_COMMONS,
+    UsersConfig.PLATFORM_SERVICES_API_COMMONS
 
 })
 public class UsersConfig {

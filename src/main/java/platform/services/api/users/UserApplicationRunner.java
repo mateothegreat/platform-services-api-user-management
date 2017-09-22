@@ -33,9 +33,9 @@
 //
 //        try {
 //
-//            final Optional<User> result = userService.findByUserUsername("integration-admin1");
+//            final Optional<User> result = userService.findByUsername("integration-admin1");
 //
-//            log.trace("getUserByUsername: {}", result);
+//            log.trace("getByUsername: {}", result);
 //
 //            if(result.isPresent()) {
 //

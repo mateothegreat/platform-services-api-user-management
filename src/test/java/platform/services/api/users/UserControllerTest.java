@@ -1,153 +1,108 @@
 package platform.services.api.users;
 
+import io.restassured.http.ContentType;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
-import platform.services.api.UsersConfig;
 import platform.services.api.commons.enums.Role;
-import platform.services.api.commons.enums.Status;
-import platform.services.api.commons.security.SecurityCryptor;
-import platform.services.api.commons.testing.BaseControllerTest;
-import platform.services.api.commons.testing.ComposedJUnit5BootTest;
 import platform.services.api.commons.testing.EntityRandomizer;
-import platform.services.api.users.profiles.UserProfile;
-import platform.services.api.users.roles.UserRole;
+import platform.services.api.commons.testing.RestAssuredFactory;
+import platform.services.api.commons.testing.TestingSpringController;
 
 @Log4j2
-@ComposedJUnit5BootTest
-//@Transactional
-@EnableAutoConfiguration
-
-@ContextConfiguration(classes = { UsersConfig.class, UserController.class }, loader = AnnotationConfigContextLoader.class)
-public class UserControllerTest extends BaseControllerTest<User> {
-
-    private    User        user;
-    @Autowired UserService userService;
-
-    String passwordPlainText;
-
-    public static Set<UserRole> UserRoleSet() {
-
-        final HashSet<UserRole> set = new HashSet<>(3);
-
-        set.add(new UserRole(Role.ROLE_ADMIN));
-        set.add(new UserRole(Role.ROLE_USER));
-        set.add(new UserRole(Role.ROLE_POSTS));
-
-        return Collections.unmodifiableSet(set);
-
-    }
-
-    @BeforeEach
-    public void beforeEach() {
-
-        user = create();
-
-    }
-
-    public User create() {
-
-        final User r    = (User) EntityRandomizer.get(User.class);
-        final User user = new User();
-
-        passwordPlainText = EntityRandomizer.password.getRandomValue();
-
-        user.setUsername(EntityRandomizer.username.getRandomValue());
-        user.setPasswordNotEncrypted(passwordPlainText);
-        user.setPassword(passwordPlainText);
-        user.setParentId(r.getParentId());
-        user.setStatus(Status.ACTIVE_TESTING);
-        user.setEmail(r.getEmail());
-
-
-        user.getRoles().add(new UserRole(Role.ROLE_ADMIN));
-        user.getRoles().add(new UserRole(Role.ROLE_USER_ADMIN));
-
-//        user.getRoles().add(new UserRole(Role.ROLE_ADMIN));
-//        user.getRoles().add(new UserRole(Role.ROLE_POSTS));
-//        user.getRoles().add(new UserRole(Role.ROLE_USER));
-//        user.getRoles().add(new UserRole(Role.ROLE_USER_ADMIN));
-
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-
-        final User created = userService.saveEntity(user);
-
-        created.setPasswordNotEncrypted(passwordPlainText);
-
-        assertThat(created.getId()).isGreaterThan(0L);
-        assertThat(created.getUsername()).isEqualTo(user.getUsername());
-        assertThat(SecurityCryptor.isEncoded(created.getPassword())).isTrue();
-        assertThat(created.getEmail()).isEqualTo(user.getEmail());
-        assertThat(created.getStatus()).isEqualTo(user.getStatus());
-
-        assertThat(created.getProfiles().isEmpty()).isFalse();
-        assertThat(created.getProfiles().size()).isEqualTo(user.getProfiles().size());
-
-        return created;
-
-    }
-
-    @AfterEach
-    public void afterEach() {
-
-        userService.deleteById(user.getId());
-
-        assertThat(userService.existsById(user.getId())).isFalse();
-
-    }
-
-//    @Test
-//    void getAllReturnsPageable200() throws Exception {
+//@ComposedJUnit5BootTest
+//@EnableAutoConfiguration
+//@RunWith(SpringRunner.class)
 //
-//        getResponseAssertJSON200OK("/users");
+//@SpringBootTest(
+//    webEnvironment = WebEnvironment.RANDOM_PORT,
+//    classes = {
 //
-//    }
+//        UsersApplication.class,
+//        UsersConfig.class,
+//        UserController.class
+//
+//    })
+//
+//
+//@ContextConfiguration(classes = { UsersApplication.class, UserService.class, SessionConfiguration.class })
+@TestingSpringController
+public class UserControllerTest extends UserBaseTest<User> {
+
+    private static final String PATH_BASE         = "/users";
+    private static final String PATH_GET_FIND_ALL = "/users";
+    private static final String PATH_GET_BY_ID    = "/users/{id}";
+    private static final String PATH_DELETE_BY_ID = "/users/{id}";
+    private static final String PATH_SAVE_BY_ID   = "/users/{id}";
+
+    private static final RoleMethod METHOD_GET_BY_ID    = new RoleMethod(Role.ROLE_USER_GET, HttpMethod.GET, PATH_GET_BY_ID);
+    private static final RoleMethod METHOD_DELETE_BY_ID = new RoleMethod(Role.ROLE_USER_DELETE, HttpMethod.GET, PATH_DELETE_BY_ID);
+    private static final RoleMethod METHOD_SAVE_BY_ID   = new RoleMethod(Role.ROLE_USER_POST, HttpMethod.GET, PATH_SAVE_BY_ID);
+
+    public UserControllerTest() {
+
+        super(User.class, PATH_BASE);
+
+    }
 
     @Test
-    void getUser() {
+    public void getByIdReturns200() {
 
-        Optional<User> result = userService.findById(user.getId());
-
-        assertThat(result.isPresent()).isTrue();
+        getAndAssertJSONandStatusCode(String.format("/users/%d", this.getUser().getId()), HttpStatus.OK);
 
     }
+
     @Test
-    void getByUsernameReturns200() {
+    public void getByIdReturns404() {
 
-//        getResponseAssertJSON200OK(user.getUsername(), passwordPlainText, "/users?username=testing-user1");
-        getResponseAssertJSON200OK(user.getUsername(), passwordPlainText, "/users");
+        getAndAssertJSONandStatusCode(String.format("/users/%d", EntityRandomizer.id.getRandomValue()), HttpStatus.NOT_FOUND);
 
     }
-//
-//    @Test
-//    void getByUsernameIs404() {
-//
-//        getResponseAssertJSONandStatusCode("/users?username=newuser4123123", HttpStatus.NOT_FOUND);
-//
-//    }
-//
-//    @Test
-//    void escalateReturns200() {
-//
-//        getResponseAssertJSON200OK("/users/escalate");
-//
-//    }
+
+    @Test
+    public void findByUsernameReturns200() {
+
+        final ExtractableResponse<Response> response = getAndAssertJSONandStatusCode(String.format("/users?username=%s", this.getUser().getUsername()), HttpStatus.OK);
+
+        final User result = response.body().as(User.class);
+
+        assertThat(result.getId()).isEqualTo(this.getUser().getId());
+        assertThat(result.getRoles()).hasSameSizeAs(this.getUser().getRoles());
+        assertThat(result.getProfiles()).hasSameSizeAs(this.getUser().getProfiles());
+
+    }
+
+    @Test
+    public void findByUsernameReturns404() {
+
+        getAndAssertJSONandStatusCode(String.format("/users?username=%s", EntityRandomizer.username.getRandomValue()), HttpStatus.NOT_FOUND);
+
+    }
+
+    @Test
+    public void saveUserReturns200andChangesMatch() {
+
+        final String newEmail = EntityRandomizer.email.getRandomValue();
+//        final User   target   = this.getUser();
+        final User target = getAndAssertJSONandStatusCode(String.format("/users/%d", this.getUser().getId()), HttpStatus.OK).body().as(User.class);
+
+        target.setEmail(newEmail);
+
+        final Response response = RestAssuredFactory.request()
+                                                    .contentType(ContentType.JSON)
+                                                    .body(target)
+                                                    .post("/users");
+
+        final User result = response.then().contentType(ContentType.JSON).extract().as(User.class);
+
+        assertThat(result.getEmail()).isEqualTo(newEmail);
+
+    }
 
 }

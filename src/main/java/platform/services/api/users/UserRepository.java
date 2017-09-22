@@ -16,7 +16,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-package platform.services.api;
+package platform.services.api.users;
 
 /*-
  * $$SoftwareLicense
@@ -49,41 +49,23 @@ package platform.services.api;
  * streaming-main.platform.com
  */
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.stereotype.Repository;
 
-import platform.services.api.commons.configuration.CommonsConfig;
-import platform.services.api.commons.sessions.SessionConfiguration;
-import platform.services.api.users.UserService;
+import java.util.Optional;
+import java.util.UUID;
 
-//@EnableZuulProxy
-//@EnableDiscoveryClient
-@SpringBootApplication(
+import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.jpa.repositories.BaseRepository;
 
-    scanBasePackages = {
+@Repository
+public interface UserRepository extends BaseRepository<User, Long> {
 
-        CommonsConfig.PLATFORM_SERVICES_API,
-        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
-        UsersConfig.PLATFORM_SERVICES_API_COMMONS,
+    Optional<User> getByEmail(String email);
+    Optional<User> getByUsername(String username);
 
-    }
+    Optional<User> findByEmail(String email);
+    Optional<User> findByUsername(String username);
 
-//    exclude = {
-//
-//        DataSourceAutoConfiguration.class,
-//        SessionAutoConfiguration.class
-//
-//    }
-
-    )
-//@ContextConfiguration(classes = { UserService.class, SessionConfiguration.class })
-public class UsersApplication {
-
-    public static void main(final String[] args) {
-
-        SpringApplication.run(UsersApplication.class, args);
-
-    }
+    User save(User entity);
 
 }

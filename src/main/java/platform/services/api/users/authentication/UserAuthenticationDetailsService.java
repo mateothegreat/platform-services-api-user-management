@@ -11,14 +11,14 @@ import java.util.Optional;
 import platform.services.api.commons.exception.ServiceResultCode;
 import platform.services.api.commons.exception.ServiceResultException;
 import platform.services.api.users.User;
-import platform.services.api.users.UserRestRepository;
+import platform.services.api.users.UserRepository;
 
 @Log4j2
 @Service
 public class UserAuthenticationDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRestRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserAuthenticationPrincipal loadUserByUsername(final String username) {

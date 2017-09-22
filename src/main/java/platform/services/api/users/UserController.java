@@ -56,9 +56,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,22 +68,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-import platform.services.api.commons.controller.BaseRestController;
+import platform.services.api.commons.controller.BaseController;
 import platform.services.api.commons.exception.RestResponse;
-import platform.services.api.commons.utilities.Tracing;
 import platform.services.api.users.authentication.AuthenticatedRunAsRole;
+import platform.services.api.users.authentication.UserAuthenticationPrincipal;
 
 @RestController
 @RequestMapping(value = "/users", produces = "application/hal+json")
-public class UserController extends BaseRestController<User> {
+public class UserController extends BaseController<UserRepository, User> {
 
-    private UserService service;
+    private final UserService<UserRepository, User> service;
 
-    public UserController(@Autowired final UserService service) {
+    public UserController(@Autowired final UserService<UserRepository, User> service) {
 
-        super(service);
+        super(service, "user");
 
-//        this.genericService = service;
+        this.service = service;
 
     }
 
@@ -92,10 +92,6 @@ public class UserController extends BaseRestController<User> {
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
 //    @PostAuthorize("returnObject.username == authentication.name")
     public ResponseEntity<?> save(@RequestBody final User user) {
-
-        Tracing.trace("create: {}", user);
-
-        user.setParentId(0L);
 
         try {
 
@@ -106,8 +102,13 @@ public class UserController extends BaseRestController<User> {
         } catch(final DataAccessException e) {
 
             return new ResponseEntity<>(
-                new RestResponse(RestResponse.ENTITY_EXISTS_CODE, RestResponse.ENTITY_EXISTS_MESSAGE, "username", "email address",
-                                 "asdfasdf"), new HttpHeaders(), PRECONDITION_FAILED);
+
+                new RestResponse(RestResponse.ENTITY_EXISTS_CODE,
+                                 RestResponse.ENTITY_EXISTS_MESSAGE,
+                                 "username", "email address",
+                                 "asdfasdf"),
+                new HttpHeaders(),
+                PRECONDITION_FAILED);
 
         }
 
@@ -120,7 +121,7 @@ public class UserController extends BaseRestController<User> {
 //    @PostAuthorize("returnObject.username == authentication.name")
     public ResponseEntity<User> getByUsername(@RequestParam final String username) throws NotFoundException {
 
-        final Optional<User> result = service.findByUserUsername(username);
+        final Optional<User> result = service.findByUsername(username);
 
         return result.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
@@ -143,12 +144,18 @@ public class UserController extends BaseRestController<User> {
     @RequestMapping(method = RequestMethod.GET, path = "/escalate")
     public String escalateRole() {
 
-        Authentication auth = SecurityContextHolder.getContext()
-                                                   .getAuthentication();
+        final Authentication auth = SecurityContextHolder.getContext()
+                                                         .getAuthentication();
 
-        return "Current User Authorities inside this RunAS method only " +
-            auth.getAuthorities()
-                .toString();
+        return String.format("Current User Authorities inside this RunAS method only %s", auth.getAuthorities());
+
+    }
+
+    @RequestMapping(value = "/_current/principal", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<UserAuthenticationPrincipal> getAuthenticationPrincipal(@AuthenticationPrincipal final UserAuthenticationPrincipal principal) {
+
+        return new ResponseEntity<>(principal, HttpStatus.OK);
 
     }
 

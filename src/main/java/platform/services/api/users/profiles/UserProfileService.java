@@ -4,18 +4,16 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-import platform.services.api.commons.services.GenericServiceImpl;
+import platform.services.api.commons.services.GenericService;
 
 @Log4j2
 @Service
-public class UserProfileService extends GenericServiceImpl<UserProfileRestRepository, UserProfile> {
+public class UserProfileService extends GenericService<UserProfileRepository, UserProfile> {
 
-    private final UserProfileRestRepository repository;
+    private final UserProfileRepository repository;
 
     @Autowired
-    public UserProfileService(final UserProfileRestRepository repository) {
+    public UserProfileService(final UserProfileRepository repository) {
 
         super(repository);
 

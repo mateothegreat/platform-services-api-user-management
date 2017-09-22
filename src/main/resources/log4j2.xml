@@ -91,9 +91,9 @@
             <PatternLayout pattern="%-5p | %d{HH:mm:ss} | [%t] %c (%F:%L) - %m%n"/>
         </File>
 
-        <File name="stdout" fileName="${log-path}/stdout.log">
-            <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss.SSS} | [%t] %c (%F:%L) - %m%n"/>
-        </File>
+        <!--<File name="stdout" fileName="${log-path}/stdout.log">-->
+            <!--<PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss.SSS} | [%t] %c (%F:%L) - %m%n"/>-->
+        <!--</File>-->
 
         <File name="org.springframework.test" fileName="${log-path}/org.springframework.test.log">
 
@@ -106,7 +106,7 @@
 
     <Loggers>
 
-        <Logger name="org.hibernate" level="trace" additivity="false">
+        <Logger name="org.hibernate" level="debug" additivity="false">
             <AppenderRef ref="org.hibernate"/>
         </Logger>
 
@@ -114,50 +114,48 @@
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 
-        <Logger name="org.springframework.web.client" level="trace">
+        <Logger name="org.springframework.web.client" level="info">
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 
-        <Logger name="org.springframework.security.authentication" level="trace">
+        <Logger name="org.springframework.security.authentication" level="info">
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 
-        <Logger name="org.springframework.security.web" level="trace" additivity="false">
+        <Logger name="org.springframework.security.web" level="debug" additivity="info">
             <AppenderRef ref="com.streamingplatform"/>
         </Logger>
 
-        <Logger name="org.springframework.test.context" level="trace" additivity="false">
+        <Logger name="org.springframework.test.context" level="debug" additivity="info">
             <AppenderRef ref="org.springframework.test"/>
         </Logger>
 
-        <Logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="trace" additivity="false">>
+        <Logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="info" additivity="false">>
             <AppenderRef ref="RequestMappingHandlerMapping"/>
         </Logger>
 
-        <Logger name="org.springframework.boot.actuate.endpoint.mvc.EndpointHandlerMapping" level="trace" additivity="false">>
+        <Logger name="org.springframework.boot.actuate.endpoint.mvc.EndpointHandlerMapping" level="info" additivity="false">>
             <AppenderRef ref="RequestMappingHandlerMapping"/>
         </Logger>
 
-        <Logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="info"
-                additivity="false">
-            <AppenderRef ref="stdout" level="info"/>
-        </Logger>
+        <!--<Logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="info"-->
+                <!--additivity="false">-->
+            <!--<AppenderRef ref="stdout" level="info"/>-->
+        <!--</Logger>-->
 
-        <Logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"
-                level="info" additivity="false">
-            <AppenderRef ref="stdout" level="trace"/>
-        </Logger>
+        <!--<Logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" level="info" additivity="false">-->
+            <!--<AppenderRef ref="stdout" level="info"/>-->
+        <!--</Logger>-->
 
-        <Logger name="stdout" level="trace">
-            <AppenderRef ref="stdout" level="trace"/>
-        </Logger>
+        <!--<Logger name="stdout" level="trace">-->
+            <!--<AppenderRef ref="stdout" level="trace"/>-->
+        <!--</Logger>-->
 
         <Root level="info">
 
             <AppenderRef ref="console"/>
 
         </Root>
-
     </Loggers>
 
     <!--<Appenders>-->

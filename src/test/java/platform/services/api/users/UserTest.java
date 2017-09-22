@@ -1,7 +1,6 @@
 package platform.services.api.users;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
@@ -14,19 +13,26 @@ import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseTests;
 import platform.services.api.commons.testing.ClassWellFormed;
 import platform.services.api.commons.testing.EntityRandomizer;
+import platform.services.api.commons.testing.TestingSpringEntity;
 
-@Profile("testing")
-@ContextConfiguration(classes = { UsersConfig.class }, loader = AnnotationConfigContextLoader.class)
-public class UserTest extends BaseTests {
+@TestingSpringEntity
+public class UserTest extends BaseTests<User> {
 
-    private User user;
+    protected EntityRandomizer<User> r;
+    private   User                   user;
+    private   User                   dirty;
 
-    private User dirty;
+    public UserTest() {
 
-    @BeforeEach public void setUp() {
+        this.r = new EntityRandomizer<>();
 
-        user = (User) EntityRandomizer.get(User.class);
-        dirty = (User) EntityRandomizer.get(User.class);
+    }
+
+    @BeforeEach
+    public void setUp() {
+
+        user = r.get(User.class);
+        dirty = r.get(User.class);
 
     }
 
@@ -138,19 +144,5 @@ public class UserTest extends BaseTests {
         assertThat(user.toString()).isNotBlank();
 
     }
-
-//    @Test
-//    void setProfile() {
-//
-//
-//        final String avatar = StringRandomizer.aNewStringRandomizer(32).getRandomValue();
-//
-//        final UserProfile profile = new UserProfile(avatar);
-//
-//        user.setProfile(profile);
-//
-//        assertThat(user.getProfile().getAvatar()).isEqualToIgnoringCase(avatar);
-//
-//    }
 
 }
