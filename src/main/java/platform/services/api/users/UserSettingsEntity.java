@@ -1,11 +1,10 @@
 package platform.services.api.users;
 
-import lombok.Data;
+import javax.persistence.Entity;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.jpa.entities.EntityComposed;
 
-@EntityComposed @Data
+@Entity
 public class UserSettingsEntity extends BaseEntity<UserSettingsEntity> {
 
     protected boolean ENABLE_NOTIFICATIONS;

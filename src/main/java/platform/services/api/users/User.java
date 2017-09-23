@@ -60,24 +60,23 @@ import javax.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
+import platform.services.api.commons.configuration.CommonsConfig;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
 
-@Access(AccessType.FIELD)
-@DynamicUpdate
+//@Access(AccessType.FIELD)
+//@DynamicUpdate
 @Entity @Getter @Setter
 @Table(name = "user",
        indexes = @Index(name = "idx_login",
                         columnList = "username, password, status"))
 public class User extends BaseEntity {
 
-    public static final int USERNAME_LENGTH_MIN = 4;
-    public static final int USERNAME_LENGTH_MAX = 32;
-    public static final int PASSWORD_LEGNTH_MIN = 8;
-    public static final int PASSWORD_LEGNTH_MAX = 60;
+
 
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
@@ -89,20 +88,18 @@ public class User extends BaseEntity {
     @Column(updatable = false, nullable = false)
     public Set<UserProfile> profiles = new HashSet<>(0);
 
-    private static final long serialVersionUID = -5533099429327139558L;
-
     @Column(unique = true)
     @Email(message = "validation.email.message")
     private String email;
 
     @Column(updatable = false, nullable = false)
-    @Length(min = USERNAME_LENGTH_MIN, max = USERNAME_LENGTH_MAX, message = "validation.username.length.message")
+    @Length(min = CommonsConfig.CONSTRAINT_USERNAME_LENGTH_MIN, max = CommonsConfig.CONSTRAINT_USERNAME_LENGTH_MAX, message = "validation.username.length.message")
     private String username;
 
     @JsonIgnore
     @Basic(fetch = FetchType.LAZY)
     @Column(insertable = true, updatable = false, nullable = false)
-    @Length(min = PASSWORD_LEGNTH_MIN, max = PASSWORD_LEGNTH_MAX, message = "validation.password.length.message")
+    @Length(min = CommonsConfig.CONSTRAINT_PASSWORD_LEGNTH_MIN, max = CommonsConfig.CONSTRAINT_PASSWORD_LEGNTH_MAX, message = "validation.password.length.message")
     private String password;
 
     @JsonIgnore

@@ -8,7 +8,7 @@ import platform.services.api.commons.controller.BaseController;
 
 @RestController
 @RequestMapping("/profiles")
-public class UserProfileController extends BaseController<UserProfileRepository, UserProfile> {
+public class UserProfileController extends BaseController<UserProfileRepository, UserProfile, Long> {
 
     private final UserProfileService service;
 

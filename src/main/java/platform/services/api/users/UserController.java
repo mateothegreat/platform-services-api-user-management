@@ -52,9 +52,7 @@ package platform.services.api.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -69,17 +67,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 import platform.services.api.commons.controller.BaseController;
-import platform.services.api.commons.exception.RestResponse;
+import platform.services.api.commons.exception.ThrowableResponseEntity;
+import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 import platform.services.api.users.authentication.UserAuthenticationPrincipal;
 
 @RestController
 @RequestMapping(value = "/users", produces = "application/hal+json")
-public class UserController extends BaseController<UserRepository, User> {
+public class UserController extends BaseController<UserRepository, User, Long> {
 
-    private final UserService<UserRepository, User> service;
+    private final UserService service;
 
-    public UserController(@Autowired final UserService<UserRepository, User> service) {
+    public UserController(@Autowired final UserService service) {
 
         super(service, "user");
 
@@ -91,26 +90,10 @@ public class UserController extends BaseController<UserRepository, User> {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
 //    @PostAuthorize("returnObject.username == authentication.name")
-    public ResponseEntity<?> save(@RequestBody final User user) {
+    public ResponseEntity<User> save(@RequestBody final User user) {
 
-        try {
 
-            final User created = service.saveEntity(user);
-
-            return new ResponseEntity<>(created, HttpStatus.OK);
-
-        } catch(final DataAccessException e) {
-
-            return new ResponseEntity<>(
-
-                new RestResponse(RestResponse.ENTITY_EXISTS_CODE,
-                                 RestResponse.ENTITY_EXISTS_MESSAGE,
-                                 "username", "email address",
-                                 "asdfasdf"),
-                new HttpHeaders(),
-                PRECONDITION_FAILED);
-
-        }
+            return new ResponseEntity<>(service.saveEntity(user), HttpStatus.OK);
 
     }
 
@@ -119,11 +102,9 @@ public class UserController extends BaseController<UserRepository, User> {
 
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
 //    @PostAuthorize("returnObject.username == authentication.name")
-    public ResponseEntity<User> getByUsername(@RequestParam final String username) throws NotFoundException {
+    public ThrowableResponseEntity<User> getByUsername(@RequestParam final String username) {
 
-        final Optional<User> result = service.findByUsername(username);
-
-        return result.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ThrowableResponseEntity<>(service.getByUsername(username));
 
     }
 
@@ -133,9 +114,7 @@ public class UserController extends BaseController<UserRepository, User> {
 //    @PostAuthorize("returnObject.username == authentication.name")
     public ResponseEntity<User> getByEmail(@RequestParam final String email) throws DataAccessException, NotFoundException {
 
-        final Optional<User> result = service.findByEmail(email);
-
-        return result.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ThrowableResponseEntity<>(service.getByUsername(email));
 
     }
 

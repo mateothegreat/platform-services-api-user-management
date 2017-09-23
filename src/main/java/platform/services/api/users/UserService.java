@@ -35,24 +35,20 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
 
-import platform.services.api.commons.exception.ServiceResultCode;
-import platform.services.api.commons.exception.ServiceResultException;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.services.GenericService;
-import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.profiles.UserProfileService;
 
 @Log4j2
 @Service
-public class UserService<R, E> extends GenericService<UserRepository, User> {
+//public class UserService<R extends UserRepository<User, I>, I extends Long, E extends User> extends GenericService<R, E> {
+public class UserService extends GenericService<UserRepository, User, Long> {
 
-    private final UserRepository     userRepository;
+    private final UserRepository userRepository;
     private final UserProfileService userProfileService;
 
     @Autowired
@@ -65,13 +61,13 @@ public class UserService<R, E> extends GenericService<UserRepository, User> {
 
     }
 
-    public Optional<User> findByUsername(final String username) {
+    public User getByUsername(final String username) {
 
-        return userRepository.findByUsername(username);
+        return userRepository.getByUsername(username);
 
     }
 
-    public Optional<User> findByEmail(final String email) {
+    public User getByEmail(final String email) {
 
         return userRepository.getByEmail(email);
 
@@ -117,12 +113,6 @@ public class UserService<R, E> extends GenericService<UserRepository, User> {
         }
 
         return result;
-
-    }
-
-    public Optional<User> findById(final Long id) {
-
-        return userRepository.findById(id);
 
     }
 

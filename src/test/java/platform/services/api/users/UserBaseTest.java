@@ -8,20 +8,17 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.enums.Status;
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.security.SecurityCryptor;
+import platform.services.api.commons.jpa.repositories.BaseRepository;
 import platform.services.api.commons.testing.BaseControllerTest;
-import platform.services.api.commons.testing.EntityRandomizer;
-import platform.services.api.commons.testing.TestingSpringService;
+import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
 
 @Getter
-public class UserBaseTest<E extends BaseEntity> extends BaseControllerTest<E> {
+public class UserBaseTest extends BaseControllerTest<User> {
 
     @Autowired
     private UserService userService;
@@ -29,9 +26,32 @@ public class UserBaseTest<E extends BaseEntity> extends BaseControllerTest<E> {
     private User   user;
     private String passwordPlainText;
 
-    public UserBaseTest(final Class<E> entityClass, final String pathBase) {
+    public UserBaseTest(final Class<? extends BaseEntity> entityClass, final String pathBase) {
 
         super(entityClass, pathBase);
+
+    }
+
+    public static User UserFixture() {
+
+        final User fixture = new User();
+
+        fixture.setUsername(Randomizers.username());
+
+        fixture.setPasswordNotEncrypted(Randomizers.password());
+        fixture.setPassword(fixture.getPasswordNotEncrypted());
+
+        fixture.setParentId(Randomizers.id());
+        fixture.setStatus(Status.ACTIVE_TESTING);
+        fixture.setEmail(Randomizers.email());
+
+        fixture.getRoles().add(new UserRole(Role.ROLE_ADMIN));
+        fixture.getRoles().add(new UserRole(Role.ROLE_USER));
+
+        fixture.getProfiles().add(new UserProfile(Randomizers.avatar()));
+        fixture.getProfiles().add(new UserProfile(Randomizers.avatar()));
+
+        return fixture;
 
     }
 
@@ -39,10 +59,10 @@ public class UserBaseTest<E extends BaseEntity> extends BaseControllerTest<E> {
     @Override
     public void beforeEach() {
 
-        user = createUser();
+        user = createUserFixture();
 
         this.setUsername(user.getUsername());
-        this.setPassword(passwordPlainText);
+        this.setPassword(user.getPasswordNotEncrypted());
 
         super.beforeEach();
 
@@ -57,52 +77,22 @@ public class UserBaseTest<E extends BaseEntity> extends BaseControllerTest<E> {
 
     }
 
-    public User createUser() {
-
-        final User user = new User();
-
-        passwordPlainText = EntityRandomizer.password.getRandomValue();
-
-        user.setUsername(EntityRandomizer.username.getRandomValue());
-        user.setPasswordNotEncrypted(passwordPlainText);
-        user.setPassword(passwordPlainText);
-        user.setParentId(EntityRandomizer.id.getRandomValue());
-        user.setStatus(Status.ACTIVE_TESTING);
-        user.setEmail(EntityRandomizer.email.getRandomValue());
-
-        user.getRoles().add(new UserRole(Role.ROLE_ADMIN));
-        user.getRoles().add(new UserRole(Role.ROLE_USER_ADMIN));
-
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-        user.getProfiles().add(new UserProfile(EntityRandomizer.username.getRandomValue()));
-
-        final User created = userService.saveEntity(user);
-
-        created.setPasswordNotEncrypted(passwordPlainText);
-
-        assertThat(SecurityCryptor.isEncoded(created.getPassword())).isTrue();
-
-        assertThat(created.getId()).isGreaterThan(0L);
-        assertThat(created.getUsername()).isEqualTo(user.getUsername());
-        assertThat(created.getEmail()).isEqualTo(user.getEmail());
-        assertThat(created.getStatus()).isEqualTo(user.getStatus());
-
-        assertThat(created.getProfiles().isEmpty()).isFalse();
-        assertThat(created.getProfiles().size()).isEqualTo(user.getProfiles().size());
-
-        return created;
-
-    }
-
     @Test
-    void assertUserFixtureExists() {
+    public User createUserFixture() {
 
-        final Optional<E> result = userService.findById(user.getId());
+        final User fixture = UserFixture();
+        final User result  = userService.getById(userService.saveEntity(fixture).getId());
 
-        assertThat(result.isPresent()).isTrue();
+        assertThat(result.getId()).isGreaterThan(0L);
+        assertThat(result.getUsername()).isEqualTo(fixture.getUsername());
+        assertThat(result.getEmail()).isEqualTo(fixture.getEmail());
+        assertThat(result.getStatus()).isEqualTo(fixture.getStatus());
+        assertThat(result.getProfiles().isEmpty()).isFalse();
+        assertThat(result.getProfiles().size()).isEqualTo(fixture.getProfiles().size());
+
+        result.setPasswordNotEncrypted(fixture.getPasswordNotEncrypted());
+
+        return result;
 
     }
 

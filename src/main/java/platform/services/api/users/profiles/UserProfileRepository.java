@@ -1,5 +1,6 @@
 package platform.services.api.users.profiles;
 
+import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.stereotype.Repository;
 
 import platform.services.api.commons.jpa.repositories.BaseRepository;

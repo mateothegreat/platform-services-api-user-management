@@ -383,7 +383,6 @@
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>0.13</version>
-            <scope>test</scope>
 
         </dependency>
         <!-- endregion -->
@@ -535,11 +534,6 @@
 
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
-            <version>3.3.0</version>
-        </dependency>
 
         <!--<dependency>-->
 
@@ -565,6 +559,8 @@
             <scope>test</scope>
 
         </dependency>
+
+
     </dependencies>
 
     <build>

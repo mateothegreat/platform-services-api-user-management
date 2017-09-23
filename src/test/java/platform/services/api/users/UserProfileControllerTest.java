@@ -9,6 +9,7 @@ import platform.services.api.UsersConfig;
 import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.TestingSpringService;
 import platform.services.api.users.profiles.UserProfile;
+import platform.services.api.users.profiles.UserProfileRepository;
 
 @Log4j2
 @TestingSpringService
@@ -19,7 +20,7 @@ import platform.services.api.users.profiles.UserProfile;
     DataSourceConfig.class
 
 }, loader = AnnotationConfigContextLoader.class)
-public class UserProfileControllerTest extends UserBaseTest<UserProfile>  {
+public class UserProfileControllerTest extends UserBaseTest  {
 
     private static final String PATH_BASE = "/profiles";
 

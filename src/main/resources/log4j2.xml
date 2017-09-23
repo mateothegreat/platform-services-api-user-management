@@ -102,6 +102,8 @@
 
         </File>
 
+
+
     </Appenders>
 
     <Loggers>
@@ -156,6 +158,8 @@
             <AppenderRef ref="console"/>
 
         </Root>
+
+
     </Loggers>
 
     <!--<Appenders>-->

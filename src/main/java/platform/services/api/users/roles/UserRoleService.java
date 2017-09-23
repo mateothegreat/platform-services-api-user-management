@@ -8,7 +8,7 @@ import platform.services.api.commons.services.GenericService;
 
 @Log4j2
 @Service
-public class UserRoleService<R, E> extends GenericService<UserRoleRepository, UserRole> {
+public class UserRoleService extends GenericService<UserRoleRepository, UserRole, Long> {
 
     private final UserRoleRepository repository;
 

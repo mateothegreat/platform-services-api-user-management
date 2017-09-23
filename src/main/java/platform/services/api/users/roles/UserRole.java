@@ -53,48 +53,47 @@ package platform.services.api.users.roles;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
+import org.hibernate.annotations.LazyToOne;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.enums.Role;
+import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.users.User;
 
 @Entity @Getter @Setter
 @Table(name = "user_roles")
-public class UserRole extends BaseEntity  {
-//public class UserRole extends BaseEntity implements GrantedAuthority {
-
-    private static final long serialVersionUID = -2382305738428874768L;
+public class UserRole extends BaseEntity<UserRole> {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+
+//    @LazyToOne(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @Column(updatable = false, nullable = false)
+//    @JoinColumn(name = "parentId", updatable = false, nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private User user;
+
     private Role role;
-
-//    @ManyToOne
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "parentId", referencedColumnName = "parentId", insertable = false, updatable = false)
-//    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
-//    private User user;
-//    private Long parentId;
-
-//    private String username;
 
     public UserRole() {
 
     }
 
-//    public UserRole(@NotNull final Role role, final Long parentId) {
     public UserRole(@NotNull final Role role) {
 
         this.role = role;
-//        this.parentId = parentId;
 
     }
-
 
 }

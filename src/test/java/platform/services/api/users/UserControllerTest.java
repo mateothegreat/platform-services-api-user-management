@@ -1,6 +1,5 @@
 package platform.services.api.users;
 
-import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
@@ -12,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.testing.EntityRandomizer;
+import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.commons.testing.RestAssuredFactory;
 import platform.services.api.commons.testing.TestingSpringController;
 
@@ -33,7 +33,7 @@ import platform.services.api.commons.testing.TestingSpringController;
 //
 //@ContextConfiguration(classes = { UsersApplication.class, UserService.class, SessionConfiguration.class })
 @TestingSpringController
-public class UserControllerTest extends UserBaseTest<User> {
+public class UserControllerTest extends UserBaseTest {
 
     private static final String PATH_BASE         = "/users";
     private static final String PATH_GET_FIND_ALL = "/users";
@@ -51,17 +51,29 @@ public class UserControllerTest extends UserBaseTest<User> {
 
     }
 
-    @Test
-    public void getByIdReturns200() {
+    @Test public User getByIdReturns200(final Long id) {
 
-        getAndAssertJSONandStatusCode(String.format("/users/%d", this.getUser().getId()), HttpStatus.OK);
+        assertThat(id).isNotZero();
+
+        return getAndAssertJSONandStatusCode(String.format("/users/%d", this.getUser().getId()), HttpStatus.OK).as(User.class);
 
     }
 
-    @Test
-    public void getByIdReturns404() {
+    @Test public void getByIdReturns404() {
 
-        getAndAssertJSONandStatusCode(String.format("/users/%d", EntityRandomizer.id.getRandomValue()), HttpStatus.NOT_FOUND);
+        getAndAssertJSONandStatusCode(String.format("/users/%d", Randomizers.id()), HttpStatus.NOT_FOUND);
+
+    }
+
+    @Test public void getByUUIDReturns200() {
+
+        getAndAssertJSONandStatusCode(String.format("/users/%s", this.getUser().getUuid()), HttpStatus.OK);
+
+    }
+
+    @Test public void getByUUIDReturns404() {
+
+        getAndAssertJSONandStatusCode(String.format("/users/%s", Randomizers.uuid()), HttpStatus.NOT_FOUND);
 
     }
 
@@ -88,20 +100,19 @@ public class UserControllerTest extends UserBaseTest<User> {
     @Test
     public void saveUserReturns200andChangesMatch() {
 
-        final String newEmail = EntityRandomizer.email.getRandomValue();
-//        final User   target   = this.getUser();
-        final User target = getAndAssertJSONandStatusCode(String.format("/users/%d", this.getUser().getId()), HttpStatus.OK).body().as(User.class);
+        final String newEmail = Randomizers.email();
+        final User   target   = getByIdReturns200(this.createUserFixture().getId());
 
         target.setEmail(newEmail);
 
-        final Response response = RestAssuredFactory.request()
-                                                    .contentType(ContentType.JSON)
-                                                    .body(target)
-                                                    .post("/users");
+        final User response = RestAssuredFactory.request()
+                                                .body(target)
+                                                .post("/users").then()
+                                                .statusCode(HttpStatus.OK.value())
+                                                .extract()
+                                                .as(User.class);
 
-        final User result = response.then().contentType(ContentType.JSON).extract().as(User.class);
-
-        assertThat(result.getEmail()).isEqualTo(newEmail);
+        assertThat(response.getEmail()).isEqualTo(newEmail);
 
     }
 

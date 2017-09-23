@@ -6,10 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-import platform.services.api.commons.exception.ServiceResultCode;
-import platform.services.api.commons.exception.ServiceResultException;
+import platform.services.api.commons.exception.ThrowableResponseEntity;
 import platform.services.api.users.User;
 import platform.services.api.users.UserRepository;
 
@@ -23,17 +20,7 @@ public class UserAuthenticationDetailsService implements UserDetailsService {
     @Override
     public UserAuthenticationPrincipal loadUserByUsername(final String username) {
 
-        final Optional<User> result = userRepository.findByUsername(username);
-
-        if(!result.isPresent()) {
-
-            throw new ServiceResultException(HttpStatus.INTERNAL_SERVER_ERROR, ServiceResultCode.INTERNAL_ERROR_AUTHENTICATION_AUTHORITIES_FAILURE);
-
-        }
-
-        final User user = result.get();
-
-        log.trace("loadUserByUsername: {}, {}", username, user.toString());
+        final User user = new ThrowableResponseEntity<>(userRepository.getByUsername(username), HttpStatus.INTERNAL_SERVER_ERROR).getBody();
 
         return new UserAuthenticationPrincipal(user.getUsername(), user.getPasswordNotEncrypted(), user.getRoles());
 
