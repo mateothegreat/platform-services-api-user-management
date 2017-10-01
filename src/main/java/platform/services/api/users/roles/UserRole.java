@@ -51,20 +51,17 @@ package platform.services.api.users.roles;
  * streaming-main.platform.com
  */
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
+import lombok.ToString;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.jpa.entities.BaseEntity;
@@ -74,26 +71,48 @@ import platform.services.api.users.User;
 @Table(name = "user_roles")
 public class UserRole extends BaseEntity<UserRole> {
 
-    @NotNull
+//    @NotNull
     @Enumerated(EnumType.STRING)
+    private Role role;
 
-//    @LazyToOne(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    @Column(updatable = false, nullable = false)
-//    @JoinColumn(name = "parentId", updatable = false, nullable = false)
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "parentId")
     private User user;
 
-    private Role role;
+    public UserRole setUser(final User user) {
+
+        this.user = user;
+
+        return this;
+
+    }
+//    @NotNull
+//    @Range(min = 0L, max = 4294967295L)
+//    protected Long parentId = 0L;
 
     public UserRole() {
 
     }
 
-    public UserRole(@NotNull final Role role) {
+    public UserRole(final Role role) {
 
         this.role = role;
 
     }
 
+
+    public UserRole setRole(final Role role) {
+
+        this.role = role;
+
+        return this;
+
+    }
+
+    @Override public String toString() {
+
+        return String.format("platform.services.api.users.roles.UserRole{role=%s, user=%s} %s", role, user, super.toString());
+    }
 }
+

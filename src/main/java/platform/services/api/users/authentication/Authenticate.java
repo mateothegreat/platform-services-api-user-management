@@ -54,12 +54,26 @@ public class Authenticate extends RunAsManagerImpl {
             final User user = new User();
 
             return new UserAuthenticationPrincipal(authentication.getPrincipal().toString(),
-                                                   authentication.getCredentials().toString(),
-                                                   authentication.getAuthorities());
+                    authentication.getCredentials().toString(),
+                    authentication.getAuthorities());
 
         }
 
         return null;
+
+    }
+
+    protected static UsernamePasswordAuthenticationToken buildAuthToken(final String username, final Role... roles) {
+
+        final String[] list = new String[roles.length];
+
+        for(int i = 0, length = roles.length; i < length; i++) {
+
+            list[i] = roles[i].name();
+
+        }
+
+        return new UsernamePasswordAuthenticationToken(username, "_empty_", AuthorityUtils.createAuthorityList(list));
 
     }
 
@@ -70,7 +84,7 @@ public class Authenticate extends RunAsManagerImpl {
 
         if(!(object instanceof ReflectiveMethodInvocation) || ((ReflectiveMethodInvocation) object).getMethod().getAnnotation(
 
-            AuthenticatedRunAsRole.class) == null) {
+                AuthenticatedRunAsRole.class) == null) {
 
             return super.buildRunAs(authentication, object, attributes);
 
@@ -95,26 +109,12 @@ public class Authenticate extends RunAsManagerImpl {
 
         return new RunAsUserToken(
 
-            getKey(),
-            authentication.getPrincipal(),
-            authentication.getCredentials(), newAuthorities,
-            authentication.getClass()
+                getKey(),
+                authentication.getPrincipal(),
+                authentication.getCredentials(), newAuthorities,
+                authentication.getClass()
 
         );
-
-    }
-
-    protected static UsernamePasswordAuthenticationToken buildAuthToken(final String username, final Role... roles) {
-
-        final String[] list = new String[roles.length];
-
-        for(int i = 0, length = roles.length; i < length; i++) {
-
-            list[i] = roles[i].name();
-
-        }
-
-        return new UsernamePasswordAuthenticationToken(username, "_empty_", AuthorityUtils.createAuthorityList(list));
 
     }
 

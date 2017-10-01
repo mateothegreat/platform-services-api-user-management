@@ -49,16 +49,16 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import platform.services.api.commons.jpa.repositories.BaseRepository;
 
 @Repository
-public interface UserRepository extends BaseRepository<User, Long> {
+public interface UserRepository extends BaseRepository<User> {
 
-    User getByUsername(final String valus);
-    User getByEmail(final String value);
+    User getByUsername(final String username);
+    User getByEmail(final String email);
+
+    User findByUsername(final String username);
 
 }

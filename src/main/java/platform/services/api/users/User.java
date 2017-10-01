@@ -49,80 +49,171 @@ package platform.services.api.users;
  * streaming-main.platform.com
  */
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
-import platform.services.api.commons.configuration.CommonsConfig;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
+import platform.services.api.commons.validation.ConstraintPatterns;
+import platform.services.api.organizations.Organization;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
 
 //@Access(AccessType.FIELD)
 //@DynamicUpdate
 @Entity @Getter @Setter
+
 @Table(name = "user",
        indexes = @Index(name = "idx_login",
                         columnList = "username, password, status"))
-public class User extends BaseEntity {
+@Transactional
+public class User extends BaseEntity<User> {
 
-
-
-    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
-    @Column(updatable = false, nullable = false)
-    public Set<UserRole> roles = new HashSet<>(0);
+    @JsonBackReference @JsonIgnore
+    private Organization organization;
 
-    @OneToMany(cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "parentId")
-    @Column(updatable = false, nullable = false)
-    public Set<UserProfile> profiles = new HashSet<>(0);
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<UserRole> roles = new HashSet<>(0);
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<UserProfile> profiles = new HashSet<>(0);
 
     @Column(unique = true)
     @Email(message = "validation.email.message")
     private String email;
 
-    @Column(updatable = false, nullable = false)
-    @Length(min = CommonsConfig.CONSTRAINT_USERNAME_LENGTH_MIN, max = CommonsConfig.CONSTRAINT_USERNAME_LENGTH_MAX, message = "validation.username.length.message")
+    @Column(unique = true, updatable = false, nullable = false)
+    @Length(min = ConstraintPatterns.CONSTRAINT_USERNAME_LENGTH_MIN, max = ConstraintPatterns.CONSTRAINT_USERNAME_LENGTH_MAX, message = "validation.username.length.message")
     private String username;
 
-    @JsonIgnore
-    @Basic(fetch = FetchType.LAZY)
+//    @Transient
+//    private Object _links;
+
+    //    @JsonIgnore
+//    @Basic(fetch = FetchType.LAZY)
     @Column(insertable = true, updatable = false, nullable = false)
-    @Length(min = CommonsConfig.CONSTRAINT_PASSWORD_LEGNTH_MIN, max = CommonsConfig.CONSTRAINT_PASSWORD_LEGNTH_MAX, message = "validation.password.length.message")
+//    @Length(min = ConstraintPatterns.CONSTRAINT_PASSWORD_LEGNTH_MIN, max = ConstraintPatterns.CONSTRAINT_PASSWORD_LEGNTH_MAX, message = "validation.password.length.message")
     private String password;
 
     @JsonIgnore
     @Transient
     private String passwordNotEncrypted;
 
-    /**
-     * asdfasdf = $2a$10$3Q3s0j.kgXqr6a7hKQgeHekRdQ3uijJuy0BcFebj4dOcBkA0so/Qi
-     *
-     * @return String encoded password
-     *
-     * @author yomateod
-     */
+    public User() {
+
+    }
+
+    public User setEmail(final String email) {
+
+        this.email = email;
+
+        return this;
+
+    }
+
+    public User setUsername(final String username) {
+
+        this.username = username;
+
+        return this;
+
+    }
+
+    public User setPasswordNotEncrypted(final String passwordNotEncrypted) {
+
+        setPassword(passwordNotEncrypted);
+
+        this.passwordNotEncrypted = passwordNotEncrypted;
+
+        return this;
+
+    }
+
     public String getPassword() {
+        /*
+         * asdfasdf = $2a$10$3Q3s0j.kgXqr6a7hKQgeHekRdQ3uijJuy0BcFebj4dOcBkA0so/Qi
+         *
+         * @return String encoded password
+         *
+         * @author yomateod
+         */
 
         return SecurityCryptor.encode(password);
 
     }
 
-    public void setPassword(final String password) {
+    public User setPassword(final String password) {
 
         this.password = SecurityCryptor.encode(password);
 
+        return this;
+
     }
 
+    public User addRole(final UserRole role) {
+
+//        role.setParentId(this.getId());
+
+        this.roles.add(role);
+
+        return this;
+
+    }
+
+    public User addProfile(final UserProfile profile) {
+
+//        profile.setParentId(this.getId());
+
+        this.profiles.add(profile);
+
+        return this;
+
+    }
+
+    public User setRoles(final Set<UserRole> roles) {
+
+        this.roles = roles;
+
+        return this;
+
+    }
+
+    public User setProfiles(final Set<UserProfile> profiles) {
+
+        this.profiles = profiles;
+
+        return this;
+
+    }
+
+    public User setOrganization(final Organization organization) {
+
+        this.organization = organization;
+
+        return this;
+
+    }
 }

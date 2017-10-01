@@ -3,12 +3,14 @@ package platform.services.api.users.profiles;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import platform.services.api.commons.services.GenericService;
 
 @Log4j2
 @Service
-public class UserProfileService extends GenericService<UserProfileRepository, UserProfile, Long> {
+@Transactional
+public class UserProfileService extends GenericService<UserProfileRepository, UserProfile> {
 
     private final UserProfileRepository repository;
 

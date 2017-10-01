@@ -1,67 +1,69 @@
 package platform.services.api.users;
 
 import lombok.extern.log4j.Log4j2;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import platform.services.api.commons.testing.BaseRepositoryTest;
+import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.testing.BaseServiceTest;
+import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.commons.testing.TestingSpringService;
 import platform.services.api.users.authentication.Authenticate;
+import platform.services.api.users.profiles.UserProfile;
+import platform.services.api.users.profiles.UserProfileService;
+import platform.services.api.users.roles.UserRole;
+import platform.services.api.users.roles.UserRoleService;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
 @TestingSpringService
-public class UserServiceTest extends BaseServiceTest<UserRepository, User, Long> {
+public class UserServiceTest extends BaseServiceTest<UserService, UserRepository, User> {
 
-    private final UserService userService;
-    private       User        user;
+    private final UserService        userService;
+    private final UserProfileService userProfileService;
+    private final UserRoleService    userRoleService;
 
     @Autowired
-    public UserServiceTest(final UserService userService) {
+    public UserServiceTest(final UserService userService, final UserProfileService userProfileService, final UserRoleService userRoleService) {
 
-        super(userService, User.class);
+        super(userService, UserCompositeGenerator::userFixture, User.class);
 
         this.userService = userService;
+        this.userProfileService = userProfileService;
+        this.userRoleService = userRoleService;
 
     }
 
     @BeforeEach
     public void beforeEach() {
 
-        log.trace("beforeEach: Authenticate.SUDO_INTEGRATION(): {}", Authenticate.SUDO_INTEGRATION());
+        Authenticate.SUDO_INTEGRATION();
 
-        user = createFixtureViaService();
+        super.beforeEach();
 
-        this.setBaseEntityFixture(user);
+//        getFixture().addRole(new UserRole(Role.ROLE_ADMIN))
+//                    .addRole(new UserRole(Role.ROLE_USER))
+//                    .addProfile(new UserProfile(Randomizers.avatar()))
+//                    .addProfile(new UserProfile(Randomizers.avatar()));
+//
+//        assertThat(getFixture().getRoles().size()).isNotZero();
+//        assertThat(getFixture().getProfiles().size()).isNotZero();
 
-    }
+        final User persisted = userService.getById(getFixture().getId());
 
-    @AfterEach
-    public void afterEach() {
+//        assertThat(persisted.getRoles().size()).isNotZero();
 
-        userService.deleteById(this.getBaseEntityFixture().getId());
+//        persisted.roles.stream().forEach(element -> log.error(element.toString()));
+//        log.error(persisted.getRoles().stream().collect(Collectors.groupingBy(UserRole::getParentId)));
 
-        assertThat(userService.existsById(this.getBaseEntityFixture().getId())).isFalse();
-
-    }
-
-    @Test
-    public void getById() {
-
-        final User result = this.userService.findById(user.getId());
-
-        assertThat(result.getId()).isNotZero();
-
-    }
-
-    public User createFixtureViaService() {
-
-        return userService.getByUuid(userService.save(UserBaseTest.UserFixture()).getUuid());
-
+//        persisted.getRoles().stream().filter(e -> e.getParentId() < 0L).collect(Collectors.groupingBy(UserRole::getParentId)).forEach((parentId, roles) -> {
+//
+//            log.trace("parent id: {}", parentId);
+//            log.trace("roles: {}", roles);
+//
+//        });
     }
 
 }

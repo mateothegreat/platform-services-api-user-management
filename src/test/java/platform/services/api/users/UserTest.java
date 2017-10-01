@@ -1,145 +1,111 @@
 package platform.services.api.users;
 
+import org.junit.jupiter.api.*;
+
+import platform.services.api.commons.enums.Role;
+import platform.services.api.commons.security.SecurityCryptor;
+import platform.services.api.commons.testing.BaseEntityTest;
+import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.testing.TestingSpringEntity;
+import platform.services.api.users.profiles.UserProfile;
+import platform.services.api.users.roles.UserRole;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import platform.services.api.UsersConfig;
-import platform.services.api.commons.enums.Status;
-import platform.services.api.commons.security.SecurityCryptor;
-import platform.services.api.commons.testing.BaseTests;
-import platform.services.api.commons.testing.classes.ClassWellFormed;
-import platform.services.api.commons.testing.EntityRandomizer;
-import platform.services.api.commons.testing.TestingSpringEntity;
-
 @TestingSpringEntity
-public class UserTest extends BaseTests<User> {
+public class UserTest extends BaseEntityTest<User> {
 
-    protected EntityRandomizer<User> r;
-    private   User                   user;
-    private   User                   dirty;
+    @BeforeEach public void beforeEach() {
 
-    public UserTest() {
+        baseEntity = UserCompositeGenerator.composedFixtures();
 
-        this.r = new EntityRandomizer<>();
+        super.beforeEach();
 
     }
 
-    @BeforeEach
-    public void setUp() {
+    @Test public void setUsername() {
 
-        user = r.get(User.class);
-        dirty = r.get(User.class);
+        baseEntity.setUsername(Randomizers.username());
 
-    }
-
-    @Test public void publicClassWithOnePublicConstructorTest() throws ReflectiveOperationException {
-
-        assertThat(ClassWellFormed.classHasOneConstructor(User.class)).isTrue();
-        assertThat(ClassWellFormed.classHasPublicConstructor(User.class)).isTrue();
+        getUsername();
 
     }
 
     @Test public void getUsername() {
 
-        user.setUsername(UsersConfig.USER_VALID_USERNAME);
-
-        assertThat(user.getUsername()).isEqualTo(UsersConfig.USER_VALID_USERNAME);
+        assertThat(baseEntity.getUsername()).isNotEmpty();
 
     }
 
-    @Test
-    public void setUsername() {
+    @Test public void setPassword() {
 
-        user.setUsername(UsersConfig.USER_VALID_USERNAME);
+        baseEntity.setPassword(Randomizers.password());
 
-        assertThat(user.getUsername()).isEqualTo(UsersConfig.USER_VALID_USERNAME);
-
-    }
-
-    @Test
-    public void getPassword() {
-
-        assertThat(SecurityCryptor.matches(UsersConfig.USER_VALID_PASSWORD, user.getPassword()));
+        getPassword();
 
     }
 
-    @Test
-    public void setPassword() {
+    @Test public void getPassword() {
 
-        assertThat(SecurityCryptor.matches(UsersConfig.USER_VALID_PASSWORD, user.getPassword()));
-
-    }
-
-    @Test
-    public void getStatus() {
-
-        user.setStatus(Status.ACTIVE);
-
-        assertThat(user.getStatus()).isEqualTo(Status.ACTIVE);
+        assertThat(SecurityCryptor.isEncoded(baseEntity.getPassword())).isTrue();
 
     }
 
-    @Test
-    public void setStatus() {
+    @Test public void setEmail() {
 
-        user.setStatus(Status.ACTIVE);
+        baseEntity.setEmail(Randomizers.email());
 
-        assertThat(user.getStatus()).isEqualTo(Status.ACTIVE);
-
-    }
-
-    @Test
-    public void getEmail() {
-
-        assertThat(user.getEmail()).isNotEmpty();
+        getEmail();
 
     }
 
-    @Test
-    public void setEmail() {
+    @Test public void getEmail() {
 
-        user.setEmail(dirty.getEmail());
-
-        assertThat(user.getEmail()).isEqualTo(dirty.getEmail());
+        assertThat(baseEntity.getEmail()).isNotEmpty();
 
     }
 
-    @Test
-    public void getParentId() {
+    @Test public void setRoles() {
 
-        assertThat(user.getParentId()).isGreaterThanOrEqualTo(0L);
+        baseEntity.getRoles().add(new UserRole(Role.ROLE_USER));
 
-    }
-
-    @Test
-    public void setParentId() {
-
-        assertThat(user.getParentId()).isGreaterThanOrEqualTo(0L);
+        getRoles();
 
     }
 
-    @Test
-    public void getId() {
+    @Test public void getRoles() {
 
-        assertThat(user.getId()).isGreaterThanOrEqualTo(0L);
-
-    }
-
-    @Test
-    public void setId() {
-
-        user.setId(1L);
-
-        assertThat(user.getId()).isGreaterThanOrEqualTo(0L);
+        assertThat(baseEntity.getRoles().size()).isGreaterThanOrEqualTo(1);
 
     }
 
-    @Test
-    public void toStringTest() {
+    @Test public void setProfiles() {
 
-        assertThat(user.toString()).isNotBlank();
+        baseEntity.getProfiles().add(new UserProfile(Randomizers.avatar()));
+
+        getProfiles();
+
+    }
+
+    @Test public void getProfiles() {
+
+        assertThat(baseEntity.getProfiles().size()).isGreaterThanOrEqualTo(1);
+
+    }
+
+    @Test public void setPasswordNotEncrypted() {
+
+        baseEntity.setPasswordNotEncrypted(Randomizers.password());
+
+        getPasswordNotEncrypted();
+
+    }
+
+    @Test public void getPasswordNotEncrypted() {
+
+        assertThat(baseEntity.getPasswordNotEncrypted()).isNotEmpty();
+
+        assertThat(SecurityCryptor.isEncoded(baseEntity.getPasswordNotEncrypted())).isFalse();
 
     }
 

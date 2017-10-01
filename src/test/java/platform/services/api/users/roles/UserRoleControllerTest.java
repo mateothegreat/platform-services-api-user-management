@@ -1,46 +1,66 @@
 package platform.services.api.users.roles;
 
-import org.springframework.http.HttpStatus;
+import com.google.common.collect.ImmutableMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import org.junit.jupiter.api.Test;
+import platform.services.api.commons.testing.BaseControllerTestCase;
+import platform.services.api.commons.validation.ConstraintPatterns;
+import platform.services.api.users.UserAuthenticationFixtures;
+import platform.services.api.users.UserCompositeGenerator;
 
-import platform.services.api.commons.enums.Role;
-import platform.services.api.commons.testing.RestAssuredFactory;
-import platform.services.api.commons.testing.TestingSpringController;
-import platform.services.api.users.UserBaseTest;
+@BaseControllerTestCase
+public final class UserRoleControllerTest extends UserAuthenticationFixtures<UserRole> {
 
-@TestingSpringController class UserRoleControllerTest extends UserBaseTest {
+    private static final String PATH_BASE = String.format("/users/%s/roles", ConstraintPatterns.wrap("parent_uuid", ConstraintPatterns.PATTERN_UUID));
 
-    private static final String PATH_BASE      = "/users/roles";
-    private static final String PATH_BASE_TEST = "/users/roles/check";
+    private final UserCompositeGenerator userCompositeGenerator;
 
-    UserRoleControllerTest() {
+    @Autowired
+    public UserRoleControllerTest(final UserCompositeGenerator userCompositeGenerator) {
 
-        super(UserRole.class, PATH_BASE);
+        super(UserCompositeGenerator::userRoleFixture, UserRole.class, PATH_BASE, userCompositeGenerator);
 
-    }
+        this.setPathBase(uriComponents().getPath());
 
-    @Test
-    void httpGetAndhasRoleAdmin() {
-
-        RestAssuredFactory.request(PATH_BASE_TEST).get(Role.ROLE_ADMIN.name()).then().statusCode(HttpStatus.OK.value());
-
-
-    }
-
-    @Test
-    void httpGetAndhasRoleUser() {
-
-        RestAssuredFactory.request(PATH_BASE_TEST).get(Role.ROLE_USER.name()).then().statusCode(HttpStatus.OK.value());
-
+        this.userCompositeGenerator = userCompositeGenerator;
 
     }
 
-    @Test
-    void httpGetAndhasRoleEmpty() {
+    public UriComponents uriComponents() {
 
-        RestAssuredFactory.request(PATH_BASE_TEST).get(Role.ROLE_EMPTY.name()).then().statusCode(HttpStatus.FORBIDDEN.value());
+        return UriComponentsBuilder.fromUriString(PATH_BASE)
+                                   .build()
+                                   .expand(ImmutableMap.of("parent_uuid", getUserFixture().getUuid().toString()));
 
     }
+
+    @Override public void generateFixture() {
+
+        setFixture(getFn().create());
+
+    }
+
+//    @Test
+//    void httpGetAndhasRoleAdmin() {
+//
+//        RestAssuredFactory.request(PATH_BASE).get(Role.ROLE_ADMIN.name()).then().statusCode(HttpStatus.OK.value());
+//
+//    }
+//
+//    @Test
+//    void httpGetAndhasRoleUser() {
+//
+//        RestAssuredFactory.request(PATH_BASE).get(Role.ROLE_USER.name()).then().statusCode(HttpStatus.OK.value());
+//
+//    }
+//
+//    @Test
+//    void httpGetAndhasRoleEmpty() {
+//
+//        RestAssuredFactory.request(PATH_BASE).get(Role.ROLE_EMPTY.name()).then().statusCode(HttpStatus.FORBIDDEN.value());
+//
+//    }
 
 }

@@ -51,23 +51,20 @@ package platform.services.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.test.context.ContextConfiguration;
 
 import platform.services.api.commons.configuration.CommonsConfig;
-import platform.services.api.commons.sessions.SessionConfiguration;
-import platform.services.api.users.UserService;
 
 //@EnableZuulProxy
 //@EnableDiscoveryClient
 @SpringBootApplication(
 
-    scanBasePackages = {
+        scanBasePackages = {
 
-        CommonsConfig.PLATFORM_SERVICES_API,
-        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
-        UsersConfig.PLATFORM_SERVICES_API_COMMONS,
+                CommonsConfig.PLATFORM_SERVICES_API,
+                CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
+                UsersConfig.PLATFORM_SERVICES_API_COMMONS,
 
-    }
+        }
 
 //    exclude = {
 //
@@ -76,7 +73,7 @@ import platform.services.api.users.UserService;
 //
 //    }
 
-    )
+        )
 //@ContextConfiguration(classes = { UserService.class, SessionConfiguration.class })
 public class UsersApplication {
 

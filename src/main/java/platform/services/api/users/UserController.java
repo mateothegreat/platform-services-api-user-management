@@ -58,46 +58,53 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 import platform.services.api.commons.controller.BaseController;
 import platform.services.api.commons.exception.ThrowableResponseEntity;
-import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.validation.ValidationError;
 import platform.services.api.users.authentication.AuthenticatedRunAsRole;
 import platform.services.api.users.authentication.UserAuthenticationPrincipal;
 
 @RestController
-@RequestMapping(value = "/users", produces = "application/hal+json")
-public class UserController extends BaseController<UserRepository, User, Long> {
+@RequestMapping("/users")
+public class UserController extends BaseController<UserService, UserRepository, User> {
 
     private final UserService service;
 
     public UserController(@Autowired final UserService service) {
 
-        super(service, "user");
+        super(service);
 
         this.service = service;
 
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
-//    @PostAuthorize("returnObject.username == authentication.name")
-    public ResponseEntity<User> save(@RequestBody final User user) {
+//    @RequestMapping (method = RequestMethod.POST)
+////    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
+//////    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
+//////    @PostAuthorize("returnObject.username == authentication.name")
+//    public ResponseEntity<User> save(@RequestBody final User user) {
+//
+//        return new ResponseEntity<>(service.save(user), HttpStatus.OK);
+//
+//    }
 
+    @RequestMapping(method = RequestMethod.POST, value = "")
+    @ResponseBody public ResponseEntity<User> postIndex(@RequestBody final User entity) throws ValidationError {
 
-            return new ResponseEntity<>(service.saveEntity(user), HttpStatus.OK);
+        return new ThrowableResponseEntity<>(service.save(entity), HttpStatus.CREATED);
 
     }
 
-    @RequestMapping(params = "username", method = RequestMethod.GET)
+
+    @GetMapping(params = "username")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN')")
 
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER_ADMIN') OR #username == authentication.name")
