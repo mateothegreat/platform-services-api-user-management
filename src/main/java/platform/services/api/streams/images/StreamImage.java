@@ -1,34 +1,23 @@
 package platform.services.api.streams.images;
 
-import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
 import java.time.LocalDateTime;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.streams.StreamResolution;
-import platform.services.api.streams.recordings.StreamRecording;
 
-@Entity @Data
-@Table(name = "streamimages")
-public class StreamImage extends BaseEntity<StreamImage> {
+@MappedSuperclass
+public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
 
-    @ManyToOne
-    @JoinColumn(name = "recordingId")
-    private StreamRecording recording;
-
-    private LocalDateTime      dateCreated;
-    private LocalDateTime      dateRelative;
-    private int                duration;
-    private StreamImageFormats imageFormat;
-    private int                resolutionWidth;
-    private int                resolutionHeight;
-    private String             title;
-    private String             description;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateRelative;
+    private int           duration;
+    private String        imageFormat;
+    private int           imageQuality;
+    private int           resolutionWidth;
+    private int           resolutionHeight;
+    private String        title;
+    private String        description;
 
     public static StreamImage create() {
 
@@ -38,12 +27,121 @@ public class StreamImage extends BaseEntity<StreamImage> {
         fixture.setDateRelative(LocalDateTime.now());
         fixture.setDuration(2);
 
-        fixture.setImageFormat(StreamImageFormats.JPG);
-
-        fixture.resolutionWidth = StreamResolution.PROFILE_1920x1080.getWidth();
-        fixture.resolutionHeight = StreamResolution.PROFILE_1920x1080.getHeight();
+        fixture.setImageFormat(StreamImagePreset.HD.getFormat().getFormat());
+        fixture.setImageQuality(StreamImagePreset.HD.getFormat().getQuality());
+        fixture.setResolutionHeight(StreamImagePreset.HD.getResolution().getHeight());
+        fixture.setResolutionWidth(StreamImagePreset.HD.getResolution().getWidth());
 
         return fixture;
+
+    }
+
+    public LocalDateTime getDateCreated() {
+
+        return dateCreated;
+
+    }
+    public StreamImage setDateCreated(final LocalDateTime dateCreated) {
+
+        this.dateCreated = dateCreated;
+
+        return this;
+
+    }
+    public LocalDateTime getDateRelative() {
+
+        return dateRelative;
+
+    }
+    public StreamImage setDateRelative(final LocalDateTime dateRelative) {
+
+        this.dateRelative = dateRelative;
+
+        return this;
+
+    }
+    public int getDuration() {
+
+        return duration;
+
+    }
+    public StreamImage setDuration(final int duration) {
+
+        this.duration = duration;
+
+        return this;
+
+    }
+    public String getImageFormat() {
+
+        return imageFormat;
+
+    }
+    public StreamImage setImageFormat(final String imageFormat) {
+
+        this.imageFormat = imageFormat;
+
+        return this;
+
+    }
+    public int getImageQuality() {
+
+        return imageQuality;
+
+    }
+    public StreamImage setImageQuality(final int imageQuality) {
+
+        this.imageQuality = imageQuality;
+
+        return this;
+
+    }
+    public int getResolutionWidth() {
+
+        return resolutionWidth;
+
+    }
+    public StreamImage setResolutionWidth(final int resolutionWidth) {
+
+        this.resolutionWidth = resolutionWidth;
+
+        return this;
+
+    }
+    public int getResolutionHeight() {
+
+        return resolutionHeight;
+
+    }
+    public StreamImage setResolutionHeight(final int resolutionHeight) {
+
+        this.resolutionHeight = resolutionHeight;
+
+        return this;
+
+    }
+    public String getTitle() {
+
+        return title;
+
+    }
+    public StreamImage setTitle(final String title) {
+
+        this.title = title;
+
+        return this;
+
+    }
+    public String getDescription() {
+
+        return description;
+
+    }
+    public StreamImage setDescription(final String description) {
+
+        this.description = description;
+
+        return this;
 
     }
 

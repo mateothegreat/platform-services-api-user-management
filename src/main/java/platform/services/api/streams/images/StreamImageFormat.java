@@ -16,7 +16,13 @@ public enum StreamImageFormat {
 
     private static final Map<String, StreamImageFormat> mappings = new HashMap<>(10);
 
-    StreamImageFormat(final String s, final int quality) {
+    private final String format;
+    private final int    quality;
+
+    StreamImageFormat(final String format, final int quality) {
+
+        this.format = format;
+        this.quality = quality;
 
     }
 
@@ -27,6 +33,18 @@ public enum StreamImageFormat {
             mappings.put(streamimageformat.name(), streamimageformat);
 
         }
+
+    }
+
+    public String getFormat() {
+
+        return format;
+
+    }
+
+    public int getQuality() {
+
+        return quality;
 
     }
 

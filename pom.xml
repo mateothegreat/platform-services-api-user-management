@@ -479,7 +479,7 @@
             <groupId>io.github.benas</groupId>
             <artifactId>random-beans</artifactId>
             <version>3.7.0</version>
-            <!--<scope>test</scope>-->
+            <scope>test</scope>
 
         </dependency>
 
@@ -488,7 +488,7 @@
             <groupId>io.github.benas</groupId>
             <artifactId>random-beans-randomizers</artifactId>
             <version>3.7.0</version>
-            <!--<scope>test</scope>-->
+            <scope>test</scope>
 
         </dependency>
 
@@ -549,6 +549,12 @@
         <!--<artifactId>guava</artifactId>-->
         <!--<version>20.0</version>-->
         <!--</dependency>-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.6.3</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.users.User;
 
 @Entity

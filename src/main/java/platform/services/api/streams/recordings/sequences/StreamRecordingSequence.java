@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.streams.recordings.StreamRecording;
 
 @Entity
@@ -22,10 +22,9 @@ public class StreamRecordingSequence extends BaseEntity<StreamRecordingSequence>
     private LocalDateTime dateStart;
     private LocalDateTime dateEnd;
     private ZoneOffset    dateOffset;
-
-    private Long   duration;
-    private String filename;
-    private String location;
+    private Long          duration;
+    private String        filename;
+    private String        location;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "recordingId")
@@ -116,4 +115,5 @@ public class StreamRecordingSequence extends BaseEntity<StreamRecordingSequence>
         return this;
 
     }
+
 }

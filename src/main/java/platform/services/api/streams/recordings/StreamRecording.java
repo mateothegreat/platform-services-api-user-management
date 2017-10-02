@@ -25,19 +25,16 @@ public class StreamRecording extends BaseEntity<StreamRecording> {
 
     private LocalDateTime dateStart;
     private LocalDateTime dateEnd;
-
-    private Long duration;
-
-    private int segmentLength;
-
-    private int         resolutionWidth;
-    private int         resolutionHeight;
-    private int         bitrate;
-    private int         bitrateAverage;
-    private int         bitrateMax;
-    private int         crf;
-    private StreamFPS   fps;
-    private StreamCodec codec;
+    private Long          duration;
+    private int           segmentLength;
+    private int           resolutionWidth;
+    private int           resolutionHeight;
+    private int           bitrate;
+    private int           bitrateAverage;
+    private int           bitrateMax;
+    private int           crf;
+    private StreamFPS     fps;
+    private StreamCodec   codec;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "streamId")

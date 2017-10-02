@@ -2,7 +2,7 @@ package platform.services.api.users;
 
 import platform.services.api.commons.enums.Status;
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.utilities.Randomizers;
 
 public class UserFixtureFactory {
 

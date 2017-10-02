@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
-import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.networking.hosts.NetworkHost;
 import platform.services.api.streams.recordings.StreamRecording;
 

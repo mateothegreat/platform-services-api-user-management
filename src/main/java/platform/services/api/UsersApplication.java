@@ -49,6 +49,7 @@ package platform.services.api;
  * streaming-main.platform.com
  */
 
+import com.codahale.metrics.MetricRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -77,9 +78,17 @@ import platform.services.api.commons.configuration.CommonsConfig;
 //@ContextConfiguration(classes = { UserService.class, SessionConfiguration.class })
 public class UsersApplication {
 
+    private static final MetricRegistry metrics = new MetricRegistry();
+
     public static void main(final String[] args) {
 
         SpringApplication.run(UsersApplication.class, args);
+
+//        ConsoleReporter reporter = ConsoleReporter.forRegistry(metrics)
+//                                                  .convertRatesTo(TimeUnit.SECONDS)
+//                                                  .convertDurationsTo(TimeUnit.MILLISECONDS)
+//                                                  .build();
+//        reporter.start(1, TimeUnit.SECONDS);
 
     }
 

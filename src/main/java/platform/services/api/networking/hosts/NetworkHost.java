@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 import platform.services.api.commons.networking.BaseNetworkHost;
 import platform.services.api.commons.networking.NetworkProtocol;
-import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.utilities.Randomizers;
 
 @Entity
 @Table(name = "network_hosts")

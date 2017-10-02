@@ -1,4 +1,4 @@
-package platform.services.api.streams.images;
+package platform.services.api.streams.recordings.sequences.images;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,11 +8,11 @@ import platform.services.api.commons.controller.BaseController;
 
 @RestController
 @RequestMapping("/streamimage")
-public class StreamImageController extends BaseController<StreamImageService, StreamImageRepository, StreamImage> {
+public class SequenceImageController extends BaseController<SequenceImageService, SequenceImageRepository, SequenceImage> {
 
-    private final StreamImageService service;
+    private final SequenceImageService service;
 
-    @Autowired public StreamImageController(final StreamImageService service) {
+    @Autowired public SequenceImageController(final SequenceImageService service) {
 
         super(service);
 
