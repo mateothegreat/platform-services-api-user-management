@@ -62,7 +62,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -77,6 +76,7 @@ import platform.services.api.commons.validation.ConstraintPatterns;
 import platform.services.api.organizations.Organization;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
+import platform.services.api.users.settings.UserSetting;
 
 //@Access(AccessType.FIELD)
 //@DynamicUpdate
@@ -89,28 +89,27 @@ import platform.services.api.users.roles.UserRole;
 public class User extends BaseEntity<User> {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "parentId")
     @JsonBackReference @JsonIgnore
     private Organization organization;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>(0);
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserProfile> profiles = new HashSet<>(0);
 
-    @Column(unique = true)
-    @Email(message = "validation.email.message")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<UserSetting> settings = new HashSet<>(0);
+
+    @Column(unique = true) @Email(message = "validation.email.message")
     private String email;
 
     @Column(unique = true, updatable = false, nullable = false)
     @Length(min = ConstraintPatterns.CONSTRAINT_USERNAME_LENGTH_MIN, max = ConstraintPatterns.CONSTRAINT_USERNAME_LENGTH_MAX, message = "validation.username.length.message")
     private String username;
-
-//    @Transient
-//    private Object _links;
 
     //    @JsonIgnore
 //    @Basic(fetch = FetchType.LAZY)

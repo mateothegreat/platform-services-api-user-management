@@ -138,7 +138,7 @@ public class UserController extends BaseController<UserService, UserRepository, 
     }
 
     @RequestMapping(value = "/_current/principal", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     public ResponseEntity<UserAuthenticationPrincipal> getAuthenticationPrincipal(@AuthenticationPrincipal final UserAuthenticationPrincipal principal) {
 
         return new ResponseEntity<>(principal, HttpStatus.OK);

@@ -6,11 +6,11 @@ import org.junit.jupiter.api.*;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.streams.Stream;
-import platform.services.api.users.UserAuthenticationFixtures;
+import platform.services.api.users.UserAuthenticationTestSetup;
 import platform.services.api.users.UserCompositeGenerator;
 
 @BaseControllerTestCase
-public class StreamRecordingControllerTest extends UserAuthenticationFixtures<StreamRecording> {
+public class StreamRecordingControllerTest extends UserAuthenticationTestSetup<StreamRecording> {
 
     private static final String PATH_BASE = "/";
 
@@ -30,6 +30,7 @@ public class StreamRecordingControllerTest extends UserAuthenticationFixtures<St
         setPathBase(String.format("/streams/%s/recordings", streamEntity.getUuid()));
 
         generateFixture();
+
         setEntity(create_expecting_201_CREATED(getFixture()));
 
     }

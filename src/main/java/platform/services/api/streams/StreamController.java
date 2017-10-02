@@ -11,14 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import platform.services.api.commons.controller.BaseController;
 import platform.services.api.commons.exception.ThrowableResponseEntity;
 import platform.services.api.commons.validation.ValidationError;
-import platform.services.api.streams.recordings.StreamRecording;
 
 @RestController
-@RequestMapping(value = {
-
-        "/streams",
-
-})
+@RequestMapping("/streams")
 public class StreamController extends BaseController<StreamService, StreamRepository, Stream> {
 
     @Autowired

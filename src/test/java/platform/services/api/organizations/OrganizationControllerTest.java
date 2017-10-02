@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.*;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
-import platform.services.api.users.UserAuthenticationFixtures;
+import platform.services.api.users.UserAuthenticationTestSetup;
 import platform.services.api.users.UserCompositeGenerator;
 
 @BaseControllerTestCase
-public class OrganizationControllerTest extends UserAuthenticationFixtures<Organization> {
+public class OrganizationControllerTest extends UserAuthenticationTestSetup<Organization> {
 
     @Autowired
     public OrganizationControllerTest(final UserCompositeGenerator userCompositeGenerator) {
@@ -18,10 +18,12 @@ public class OrganizationControllerTest extends UserAuthenticationFixtures<Organ
 
     }
 
-
     @BeforeEach
     public void beforeEach() {
 
+        beforeUserAuthenticationFixturesEach();
+
+        super.beforeEach();
 
     }
 

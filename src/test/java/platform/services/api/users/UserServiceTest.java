@@ -5,25 +5,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.*;
 
-import platform.services.api.commons.enums.Role;
+import javax.transaction.Transactional;
+
 import platform.services.api.commons.testing.BaseServiceTest;
-import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.commons.testing.TestingSpringService;
+import platform.services.api.commons.validation.ValidationError;
+import platform.services.api.organizations.Organization;
+import platform.services.api.organizations.OrganizationFixtureFactory;
+import platform.services.api.organizations.OrganizationService;
 import platform.services.api.users.authentication.Authenticate;
-import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.profiles.UserProfileService;
-import platform.services.api.users.roles.UserRole;
+import platform.services.api.users.roles.UserRoleFixtureFactory;
 import platform.services.api.users.roles.UserRoleService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
 @TestingSpringService
+@Transactional
 public class UserServiceTest extends BaseServiceTest<UserService, UserRepository, User> {
 
     private final UserService        userService;
     private final UserProfileService userProfileService;
     private final UserRoleService    userRoleService;
+
+    @Autowired
+    private OrganizationFixtureFactory organizationFixtureFactory;
+
+    @Autowired
+    private UserRoleFixtureFactory userRoleFixtureFactory;
+
+    @Autowired
+    private OrganizationService organizationService;
 
     @Autowired
     public UserServiceTest(final UserService userService, final UserProfileService userProfileService, final UserRoleService userRoleService) {
@@ -37,33 +50,28 @@ public class UserServiceTest extends BaseServiceTest<UserService, UserRepository
     }
 
     @BeforeEach
+    @Transactional
     public void beforeEach() {
 
         Authenticate.SUDO_INTEGRATION();
 
-        super.beforeEach();
+        try {
 
-//        getFixture().addRole(new UserRole(Role.ROLE_ADMIN))
-//                    .addRole(new UserRole(Role.ROLE_USER))
-//                    .addProfile(new UserProfile(Randomizers.avatar()))
-//                    .addProfile(new UserProfile(Randomizers.avatar()));
-//
-//        assertThat(getFixture().getRoles().size()).isNotZero();
-//        assertThat(getFixture().getProfiles().size()).isNotZero();
+            final Organization organizationFixture = Organization.create();
+            final Organization organizationEntity  = organizationService.save(organizationFixture);
+            final User         userFixture         = UserCompositeGenerator.userFixture().setOrganization(organizationEntity);
+            final User         userEntity          = userService.save(userFixture);
 
-        final User persisted = userService.getById(getFixture().getId());
+            assertThat(userEntity.getOrganization().getId()).isNotZero();
 
-//        assertThat(persisted.getRoles().size()).isNotZero();
+            setFixture(userFixture);
 
-//        persisted.roles.stream().forEach(element -> log.error(element.toString()));
-//        log.error(persisted.getRoles().stream().collect(Collectors.groupingBy(UserRole::getParentId)));
+        } catch(final ValidationError error) {
 
-//        persisted.getRoles().stream().filter(e -> e.getParentId() < 0L).collect(Collectors.groupingBy(UserRole::getParentId)).forEach((parentId, roles) -> {
-//
-//            log.trace("parent id: {}", parentId);
-//            log.trace("roles: {}", roles);
-//
-//        });
+            error.printStackTrace();
+
+        }
+
     }
 
 }

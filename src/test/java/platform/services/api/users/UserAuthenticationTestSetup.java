@@ -16,13 +16,15 @@ import platform.services.api.organizations.Organization;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @Getter @Setter
-public class UserAuthenticationFixtures<E extends BaseEntity> extends BaseControllerTest<E> {
+@Disabled
+public class UserAuthenticationTestSetup<E extends BaseEntity> extends BaseControllerTest<E> {
 
     private final UserComposite userComposite;
     private       User          userFixture;
 
-    public UserAuthenticationFixtures(final BaseEntityFixtureFunction<E> fn, final Class<E> entityClass, final String pathBase, final UserComposite userComposite) {
+    public UserAuthenticationTestSetup(final BaseEntityFixtureFunction<E> fn, final Class<E> entityClass, final String pathBase, final UserComposite userComposite) {
 
         super(fn, entityClass, pathBase);
 
@@ -53,8 +55,6 @@ public class UserAuthenticationFixtures<E extends BaseEntity> extends BaseContro
 
         RestAssuredFactory.auth(userFixture.getUsername(), userFixture.getPasswordNotEncrypted());
         RestAssuredFactory.port(getServerPort());
-
-//        super.beforeEach();
 
     }
 

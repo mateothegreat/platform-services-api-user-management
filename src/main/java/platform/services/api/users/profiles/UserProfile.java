@@ -1,9 +1,9 @@
 package platform.services.api.users.profiles;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.github.javafaker.Faker;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
+import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.users.User;
 
 @Entity
@@ -20,9 +21,10 @@ public class UserProfile extends BaseEntity<UserProfile> {
 
     @JsonBackReference
     @ManyToOne
-//    @JoinColumn(name = "parentId")
-    @JoinColumn(name = "parentId")
+    @JoinColumn(name = "userId")
     private User user;
+
+    private String displayName;
     private String avatar;
 
     public UserProfile() {
@@ -35,11 +37,14 @@ public class UserProfile extends BaseEntity<UserProfile> {
 
     }
 
-    public UserProfile setUser(final User user) {
+    public static UserProfile create() {
 
-        this.user = user;
+        final UserProfile fixture = new UserProfile();
 
-        return this;
+        fixture.setAvatar(Randomizers.avatar());
+        fixture.setDisplayName(new Faker().hacker().verb());
+
+        return fixture;
 
     }
 
@@ -51,8 +56,12 @@ public class UserProfile extends BaseEntity<UserProfile> {
 
     }
 
-    @Override public String toString() {
+    public UserProfile setUser(final User user) {
 
-        return String.format("platform.services.api.users.profiles.UserProfile{user=%s, avatar='%s'} %s", user, avatar, super.toString());
+        this.user = user;
+
+        return this;
+
     }
+
 }

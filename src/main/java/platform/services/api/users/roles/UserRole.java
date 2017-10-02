@@ -54,7 +54,6 @@ package platform.services.api.users.roles;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -113,6 +112,16 @@ public class UserRole extends BaseEntity<UserRole> {
     @Override public String toString() {
 
         return String.format("platform.services.api.users.roles.UserRole{role=%s, user=%s} %s", role, user, super.toString());
+    }
+
+    public static UserRole create() {
+
+        final UserRole fixture = new UserRole();
+
+        fixture.setRole(Role.ROLE_USER);
+
+        return fixture;
+
     }
 }
 

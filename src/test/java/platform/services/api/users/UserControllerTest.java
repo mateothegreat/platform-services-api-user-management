@@ -8,11 +8,10 @@ import javax.transaction.Transactional;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.organizations.Organization;
-import platform.services.api.streams.Stream;
 
 @Transactional
 @BaseControllerTestCase
-public class UserControllerTest extends UserAuthenticationFixtures<User> {
+public class UserControllerTest extends UserAuthenticationTestSetup<User> {
 
     private static final String PATH_BASE         = "/users";
 

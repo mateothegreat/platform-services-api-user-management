@@ -18,7 +18,7 @@ public class UserSetting extends BaseEntity {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "parentId")
+    @JoinColumn(nullable = false, name = "userId")
     private User user;
 
     private String name;

@@ -1,6 +1,5 @@
 package platform.services.api.streams.recordings.sequences;
 
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,49 +8,64 @@ import org.junit.jupiter.api.*;
 import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.BaseRepositoryTest;
 import platform.services.api.commons.testing.TestingSpringRepository;
+import platform.services.api.commons.validation.ValidationError;
+import platform.services.api.streams.Stream;
+import platform.services.api.streams.StreamService;
 import platform.services.api.streams.recordings.StreamRecording;
 import platform.services.api.streams.recordings.StreamRecordingRepository;
+import platform.services.api.streams.recordings.StreamRecordingService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Log4j2
 @TestingSpringRepository
-@SpringBootTest(classes = { DataSourceConfig.class, StreamRecordingSequenceRepository.class })
-@Tag("StreamRecordingSequence")
+@SpringBootTest(classes = {
+
+        DataSourceConfig.class,
+        StreamService.class,
+        StreamRecordingRepository.class,
+        StreamRecordingService.class,
+        StreamRecordingSequenceRepository.class
+
+})
 public class StreamRecordingSequenceRepositoryTest extends BaseRepositoryTest<StreamRecordingSequenceRepository, StreamRecordingSequence> {
 
     private final StreamRecordingSequenceRepository streamRecordingSequenceRepository;
-    private final StreamRecordingRepository         streamRecordingRepository;
 
-    @Autowired StreamRecordingSequenceRepositoryTest(final StreamRecordingSequenceRepository streamRecordingSequenceRepository, final StreamRecordingRepository streamRecordingRepository) {
+    @Autowired
+    private StreamRecordingRepository streamRecordingRepository;
+
+    @Autowired
+    private StreamService streamService;
+
+    @Autowired
+    private StreamRecordingService streamRecordingService;
+
+    @Autowired StreamRecordingSequenceRepositoryTest(final StreamRecordingSequenceRepository streamRecordingSequenceRepository) {
 
         super(streamRecordingSequenceRepository, StreamRecordingSequence::create, StreamRecordingSequence.class);
 
-        this.streamRecordingRepository = streamRecordingRepository;
         this.streamRecordingSequenceRepository = streamRecordingSequenceRepository;
 
     }
 
-    @BeforeEach public void beforeEach() {
+    @BeforeEach
+    public void beforeEach() {
 
-        persistFixture(getFn().create());
+        try {
 
-        final StreamRecording streamRecording = StreamRecording.create();
+            final Stream                  stream                  = streamService.save(Stream.create());
+            final StreamRecording         streamRecording         = streamRecordingService.save(StreamRecording.create().setStream(stream));
+            final StreamRecordingSequence streamRecordingSequence = streamRecordingSequenceRepository.getById(streamRecordingSequenceRepository.save(StreamRecordingSequence.create().setRecording(streamRecording)).getId());
 
-        streamRecording.getSequences().add(getFn().create());
+            assertThat(streamRecordingSequence.getId()).isNotZero();
 
-        final StreamRecording persistedRecording = streamRecordingRepository.getById(streamRecordingRepository.save(streamRecording).getId());
+            setFixture(streamRecordingSequence);
 
+        } catch(final ValidationError error) {
 
+            error.printStackTrace();
 
-    }
-
-    @Test
-    public void getSequencesByRecordingId() {
-
-//        final Page<StreamRecordingSequence> page = getBaseRepository().getByParentId(getFixture().getId(), new PageRequest(0, 10));
-//
-//        assertThat(page.getTotalElements()).isNotZero();
+        }
 
     }
 

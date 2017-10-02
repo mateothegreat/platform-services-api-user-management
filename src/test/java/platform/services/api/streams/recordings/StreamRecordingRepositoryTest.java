@@ -8,32 +8,53 @@ import org.junit.jupiter.api.*;
 import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.BaseRepositoryTest;
 import platform.services.api.commons.testing.TestingSpringRepository;
-import platform.services.api.streams.recordings.sequences.StreamRecordingSequence;
+import platform.services.api.commons.validation.ValidationError;
+import platform.services.api.streams.Stream;
+import platform.services.api.streams.StreamService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @TestingSpringRepository
-@SpringBootTest(classes = { DataSourceConfig.class, StreamRecordingRepository.class })
+@SpringBootTest(classes = {
+
+        DataSourceConfig.class,
+        StreamService.class,
+        StreamRecordingRepository.class
+
+})
 public class StreamRecordingRepositoryTest extends BaseRepositoryTest<StreamRecordingRepository, StreamRecording> {
 
-    @Autowired StreamRecordingRepositoryTest(final StreamRecordingRepository repository) {
+    private final StreamRecordingRepository streamRecordingRepository;
 
-        super(repository, StreamRecording::create, StreamRecording.class);
+    @Autowired
+    private StreamService streamService;
 
-    }
+    @Autowired StreamRecordingRepositoryTest(final StreamRecordingRepository streamRecordingRepository) {
 
-    @Test
-    public void createStreamRecordingSequences() {
+        super(streamRecordingRepository, StreamRecording::create, StreamRecording.class);
 
-        getFixture().getSequences().add(new StreamRecordingSequence().create());
-
-        getBaseRepository().save(getFixture());
-
-        setFixture(getBaseRepository().getById(getFixture().getId()));
-
-        assertThat(getFixture().getSequences().size()).isNotZero();
+        this.streamRecordingRepository = streamRecordingRepository;
 
     }
 
+    @BeforeEach
+    public void beforeEach() {
+
+        try {
+
+            final Stream          stream          = streamService.save(Stream.create());
+            final StreamRecording streamRecording = streamRecordingRepository.getById(streamRecordingRepository.save(StreamRecording.create().setStream(stream)).getId());
+
+            assertThat(streamRecording.getId()).isNotZero();
+
+            setFixture(streamRecording);
+
+        } catch(final ValidationError error) {
+
+            error.printStackTrace();
+
+        }
+
+    }
 
 }

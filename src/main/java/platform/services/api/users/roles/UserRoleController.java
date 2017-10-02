@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 import platform.services.api.commons.controller.BaseController;
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.exception.ThrowableResponseEntity;
@@ -33,10 +35,10 @@ public class UserRoleController extends BaseController<UserRoleService, UserRole
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/")
-    public ResponseEntity<UserRole> postIndex(@RequestBody final UserRole entity) throws ValidationError {
+    @RequestMapping(method = RequestMethod.POST, value = "")
+    public ResponseEntity<UserRole> postIndex(@PathVariable final UUID root_uuid, @RequestBody final UserRole entity) throws ValidationError {
 
-        return new ThrowableResponseEntity<>(service.save(entity), HttpStatus.CREATED);
+        return new ThrowableResponseEntity<>(service.save(root_uuid, entity), HttpStatus.CREATED);
 
     }
 

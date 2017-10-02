@@ -7,11 +7,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.commons.validation.ConstraintPatterns;
-import platform.services.api.users.UserAuthenticationFixtures;
+import platform.services.api.users.UserAuthenticationTestSetup;
 import platform.services.api.users.UserCompositeGenerator;
 
 @BaseControllerTestCase
-public final class UserProfileControllerTest extends UserAuthenticationFixtures<UserProfile> {
+public final class UserProfileControllerTest extends UserAuthenticationTestSetup<UserProfile> {
 
     private static final String PATH_BASE = String.format("/users/%s/profiles", ConstraintPatterns.wrap("parent_uuid", ConstraintPatterns.PATTERN_UUID));
 

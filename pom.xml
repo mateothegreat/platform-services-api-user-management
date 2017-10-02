@@ -534,28 +534,23 @@
         </dependency>
 
         <!-- endregion -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>20.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-swagger2</artifactId>-->
+        <!--<version>2.6.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>io.springfox</groupId>-->
+        <!--<artifactId>springfox-swagger-ui</artifactId>-->
+        <!--<version>2.4.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.google.guava</groupId>-->
+        <!--<artifactId>guava</artifactId>-->
+        <!--<version>20.0</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.speedment</groupId>
-            <artifactId>runtime</artifactId>
-            <version>3.0.14</version>
-            <type>pom</type>
-        </dependency>
+
     </dependencies>
 
 
@@ -574,11 +569,7 @@
 
         <plugins>
 
-            <plugin>
-                <groupId>com.speedment</groupId>
-                <artifactId>speedment-maven-plugin</artifactId>
-                <version>3.0.14</version>
-            </plugin>
+
             <!-- region maven-compiler-plugin -->
             <plugin>
 
@@ -610,6 +601,40 @@
                     </delimiters>
 
                 </configuration>
+
+                <!--<executions>-->
+
+                <!--<execution>-->
+
+                <!--<id>copy-resources</id>-->
+
+                <!--<phase>prepare-package</phase>-->
+
+                <!--<goals>-->
+
+                <!--<goal>copy-resources</goal>-->
+
+                <!--</goals>-->
+
+                <!--<configuration>-->
+
+                <!--<outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>-->
+
+                <!--<resources>-->
+
+                <!--<resource>-->
+
+                <!--<directory>${project.build.directory}/generated-docs</directory>-->
+
+                <!--</resource>-->
+
+                <!--</resources>-->
+
+                <!--</configuration>-->
+
+                <!--</execution>-->
+
+                <!--</executions>-->
 
             </plugin>
             <!-- endregion -->

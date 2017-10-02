@@ -1,6 +1,5 @@
 package platform.services.api.organizations;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.javafaker.Faker;
 import lombok.Data;
@@ -20,22 +19,12 @@ import platform.services.api.users.User;
 @Transactional
 @Entity @Data
 @Table(name = "organizations")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id")
-//@JsonIdentityReference(alwaysAsId = true)
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-
 public class Organization extends BaseEntity<Organization> {
 
     private String name;
     private String description;
 
-//    @JsonIgnore/**/
-//    @JsonManagedReference
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "parentId")
-//@JsonIgnoreProperties("organization")
-//@JsonManagedReference
-@JsonIgnore
-//    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>(0);
 

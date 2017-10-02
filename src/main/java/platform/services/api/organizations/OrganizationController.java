@@ -14,7 +14,8 @@ public class OrganizationController extends BaseController<OrganizationService, 
 
     private final OrganizationService service;
 
-    @Autowired public OrganizationController(final OrganizationService service) {
+    @Autowired
+    public OrganizationController(final OrganizationService service) {
 
         super(service);
 

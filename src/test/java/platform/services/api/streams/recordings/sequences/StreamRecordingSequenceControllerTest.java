@@ -7,11 +7,11 @@ import org.junit.jupiter.api.*;
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.streams.Stream;
 import platform.services.api.streams.recordings.StreamRecording;
-import platform.services.api.users.UserAuthenticationFixtures;
+import platform.services.api.users.UserAuthenticationTestSetup;
 import platform.services.api.users.UserCompositeGenerator;
 
 @BaseControllerTestCase
-public class StreamRecordingSequenceControllerTest extends UserAuthenticationFixtures<StreamRecordingSequence> {
+public class StreamRecordingSequenceControllerTest extends UserAuthenticationTestSetup<StreamRecordingSequence> {
 
 
     private static final String PATH_BASE = "/";

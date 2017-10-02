@@ -17,14 +17,13 @@ import platform.services.api.users.roles.UserRole;
 import platform.services.api.users.roles.UserRoleService;
 
 @Service
-@Transactional
 public class UserCompositeGenerator implements UserComposite {
 
     private final OrganizationService organizationService;
-    private final UserService        userService;
-    private final UserRoleService    userRoleService;
-    private final UserProfileService userProfileService;
-    private final User               userEntity;
+    private final UserService         userService;
+    private final UserRoleService     userRoleService;
+    private final UserProfileService  userProfileService;
+    private       User                userEntity;
     private       Organization        organizationEntity;
 
     public UserCompositeGenerator(final OrganizationService organizationService, final UserService userService, final UserRoleService userRoleService, final UserProfileService userProfileService) throws ValidationError {
@@ -34,17 +33,13 @@ public class UserCompositeGenerator implements UserComposite {
         this.userRoleService = userRoleService;
         this.userProfileService = userProfileService;
 
-        userEntity = persistFixtures();
+//        persistFixtures();
+        persistFixtures(Organization.create(), BaseTestConfig.USER_VALID_PARENT_ID, BaseTestConfig.USER_VALID_USERNAME, BaseTestConfig.USER_VALID_PASSWORD);
+
 
     }
-
-    public User persistFixtures() throws ValidationError {
-
-        return persistFixtures(Organization.create(), BaseTestConfig.USER_VALID_PARENT_ID, BaseTestConfig.USER_VALID_USERNAME, BaseTestConfig.USER_VALID_PASSWORD);
-
-    }
-
     @Transactional
+
     public User persistFixtures(final Organization organization, final Long parentId, final String username, final String password) throws ValidationError {
 
         final User fixture = userFixture();
@@ -56,14 +51,27 @@ public class UserCompositeGenerator implements UserComposite {
         fixture.setPassword(password);
         fixture.setOrganization(organizationService.getById(organizationEntity.getId()));
 
-        User persisted = userService.save(fixture);
+        final User saved = userService.getById(userService.save(fixture).getId());
 
-//        userService.save(persisted.setOrganization(organizationService.getById(organizationEntity.getId())));
-        userRoleService.save(new UserRole().setUser(persisted).setRole(Role.ROLE_ADMIN));
-        userProfileService.save(new UserProfile().setUser(persisted).setAvatar(Randomizers.avatar()));
+        final UserRole userRole = UserRole.create();
 
-        persisted = userService.getById(persisted.getId())
-                               .setPasswordNotEncrypted(password);
+        userRole.setUser(saved);
+//        userRole.setUser(userService.getById(saved.getId()));
+
+        userRoleService.save(userRole);
+
+        final User persisted = userService.getById(saved.getId()).setPasswordNotEncrypted(password);
+
+////        userService.save(persisted.setOrganization(organizationService.getById(organizationEntity.getId())));
+//
+//        userRoleFixtureFactory.getFixture().setUser(persisted);
+//        userRoleFixtureFactory.generate();
+
+//        userRoleService.save(new UserRoleFixtureFactory());
+//        userProfileService.save(new UserProfile().setUser(persisted).setAvatar(Randomizers.avatar()));
+
+//        persisted = userService.getById(persisted.getId())
+//                               .setPasswordNotEncrypted(password);
 
 //        persisted.getRoles().stream().map(userRoleService::save);
 //        persisted.getProfiles().stream().map(userProfileService::save);
@@ -81,25 +89,49 @@ public class UserCompositeGenerator implements UserComposite {
 //                            .filter(role -> role.getParentId() > 0L)
 //                            .count()).isEqualTo(Integer.toUnsignedLong(persisted.getProfiles().size()));
 
+        userEntity = persisted;
+
         return persisted;
 
     }
 
-//    private Long getTotalTestUsers() {
+    //    public User persistFixtures() throws ValidationError {
+//
+//        return persistFixtures(Organization.create(), BaseTestConfig.USER_VALID_PARENT_ID, BaseTestConfig.USER_VALID_USERNAME, BaseTestConfig.USER_VALID_PASSWORD);
+//
+//    }
+    public static User userFixture() {
+
+        return new User().setUsername(Randomizers.username())
+                         .setPasswordNotEncrypted(Randomizers.password())
+                         .setEmail(Randomizers.email())
+//                         .addRole(userRoleFixture())
+//                         .addProfile(userProfileFixture())
+//                         .setParentId(Randomizers.id())
+                         .setStatus(Status.ACTIVE_TESTING);
+
+    }
+
+    //    private Long getTotalTestUsers() {
 //
 //        final Long total = userService.getByParentId(BaseTestConfig.USER_VALID_PARENT_ID).getTotalElements();
 //
 //        return total;
 //
 //    }
+    public Organization newOrganization() {
 
-    public static User userFixture() {
+        try {
 
-        return new User().setUsername(Randomizers.username())
-                         .setPasswordNotEncrypted(Randomizers.password())
-                         .setEmail(Randomizers.email())
-//                         .setParentId(Randomizers.id())
-                         .setStatus(Status.ACTIVE_TESTING);
+            return organizationService.getById(organizationService.save(Organization.create()).getId());
+
+        } catch(final ValidationError error) {
+
+            error.printStackTrace();
+
+        }
+
+        return null;
 
     }
 
