@@ -6,10 +6,10 @@ import org.junit.jupiter.api.*;
 
 import platform.services.api.commons.testing.BaseServiceTest;
 import platform.services.api.commons.testing.TestingSpringService;
-import platform.services.api.users.authentication.Authenticate;
 import platform.services.api.users.User;
 import platform.services.api.users.UserCompositeGenerator;
 import platform.services.api.users.UserService;
+import platform.services.api.users.authentication.Authenticate;
 
 @TestingSpringService
 public class UserRoleServiceTest extends BaseServiceTest<UserRoleService, UserRoleRepository, UserRole> {

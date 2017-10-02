@@ -16,7 +16,6 @@ import platform.services.api.organizations.Organization;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @Getter @Setter
 @Disabled
 public class UserAuthenticationTestSetup<E extends BaseEntity> extends BaseControllerTest<E> {

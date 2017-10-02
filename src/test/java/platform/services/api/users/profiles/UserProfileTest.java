@@ -3,10 +3,8 @@ package platform.services.api.users.profiles;
 import org.junit.jupiter.api.*;
 
 import platform.services.api.commons.testing.BaseEntityTest;
-import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.commons.testing.TestingSpringEntity;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import platform.services.api.commons.utilities.Randomizers;
 
 @TestingSpringEntity public class UserProfileTest extends BaseEntityTest<UserProfile> {
 

@@ -80,6 +80,8 @@
         <version.dropwizard.metrics>3.2.2</version.dropwizard.metrics>
         <version.dropwizard.metrics-spring>3.1.3</version.dropwizard.metrics-spring>
 
+        <docker.image.prefix>streaming-platform</docker.image.prefix>
+
     </properties>
 
     <!--<modules>-->
@@ -157,13 +159,14 @@
 
     <dependencies>
 
-        <dependency>
+        <!--<dependency>-->
 
-            <groupId>streaming-platform</groupId>
-            <artifactId>platform-services-commons</artifactId>
-            <version>1.0.0-1</version>
+        <!--<groupId>streaming-platform</groupId>-->
+        <!--<artifactId>platform-services-commons</artifactId>-->
+        <!--<version>LATEST</version>-->
+        <!--&lt;!&ndash;<version>1.0.0-1</version>&ndash;&gt;-->
 
-        </dependency>
+        <!--</dependency>-->
 
         <!-- region javaee -->
 
@@ -178,7 +181,6 @@
 
 
         <!-- endregion -->
-
         <!-- region spring-boot -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
 
@@ -295,7 +297,6 @@
 
         </dependency>
         <!--endregion-->
-
         <!-- region data tools -->
 
         <dependency>
@@ -331,7 +332,6 @@
         </dependency>
 
         <!-- endregion -->
-
         <!-- region persistence -->
 
         <dependency>
@@ -380,7 +380,6 @@
 
 
         <!-- endregion -->
-
         <!-- region testing: rest-assured -->
         <dependency>
 
@@ -443,11 +442,12 @@
 
         <dependency>
 
-            <scope>test</scope>
 
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
             <version>${version.junit-platform}</version>
+
+            <scope>test</scope>
 
         </dependency>
         <!-- endregion -->
@@ -557,241 +557,440 @@
         </dependency>
 
 
+        <dependency>
+
+            <groupId>streaming-platform</groupId>
+            <artifactId>platform-services-commons</artifactId>
+
+            <version>1.0.0-4</version>
+
+            <!--<systemPath>/workspace/spring/streaming-platform/platform-services-commons/target/platform-services-commons-1.0.0-1.jar</systemPath>-->
+
+        </dependency>
+
+        <!--<dependency>-->
+
+        <!--<groupId>streaming-platform</groupId>-->
+        <!--<artifactId>platform-services-commons</artifactId>-->
+
+        <!--<version>LATEST</version>-->
+
+        <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
+        <!--<type>test-jar</type>-->
+
+        <!--&lt;!&ndash;<systemPath>/workspace/spring/streaming-platform/platform-services-commons/target/platform-services-commons-1.0.0-1-tests.jar</systemPath>&ndash;&gt;-->
+
+        <!--</dependency>-->
+
+
     </dependencies>
 
 
     <build>
 
-        <resources>
+        <!--<resources>-->
 
-            <resource>
+        <!--<resource>-->
 
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
+        <!--<directory>src/main/resources</directory>-->
+        <!--<filtering>true</filtering>-->
 
-            </resource>
+        <!--</resource>-->
 
-        </resources>
+        <!--</resources>-->
 
         <plugins>
 
+            <!--<plugin>-->
+
+            <!--&lt;!&ndash;https://spring.io/guides/gs/spring-boot-docker/&ndash;&gt;-->
+
+            <!--<groupId>com.spotify</groupId>-->
+            <!--<artifactId>dockerfile-maven-plugin</artifactId>-->
+            <!--<version>1.3.4</version>-->
+
+            <!--<configuration>-->
+
+            <!--<repository>${docker.image.prefix}/${project.artifactId}</repository>-->
+            <!--<verbose>true</verbose>-->
+
+            <!--</configuration>-->
+
+            <!--<executions>-->
+
+            <!--<execution>-->
+
+            <!--<id>default</id>-->
+            <!--<phase>install</phase>-->
+
+            <!--<goals>-->
+
+            <!--<goal>build</goal>-->
+            <!--<goal>push</goal>-->
+
+            <!--</goals>-->
+
+            <!--</execution>-->
+
+            <!--</executions>-->
+
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+
+            <!--&lt;!&ndash; Build an executable JAR &ndash;&gt;-->
+
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-jar-plugin</artifactId>-->
+            <!--<version>3.0.2</version>-->
+
+            <!--<configuration>-->
+
+            <!--<archive>-->
+
+            <!--<manifest>-->
+
+            <!--<addClasspath>true</addClasspath>-->
+            <!--<classpathPrefix>lib/</classpathPrefix>-->
+            <!--<mainClass>platform.services.api.UsersApplication</mainClass>-->
+
+            <!--</manifest>-->
+
+            <!--</archive>-->
+
+            <!--</configuration>-->
+
+            <!--</plugin>-->
 
             <!-- region maven-compiler-plugin -->
             <plugin>
 
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
+
                 <configuration>
+
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+
+                    <verbose>true</verbose>
+
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+
                 </configuration>
 
             </plugin>
             <!-- endregion -->
 
-            <!-- region maven-resources-plugin -->
-            <plugin>
+            <!--<plugin>-->
 
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-dependency-plugin</artifactId>-->
+            <!--<version>3.0.2</version>-->
 
-                <configuration>
+            <!--<configuration>-->
 
-                    <useDefaultDelimiters>false</useDefaultDelimiters>
+            <!--<artifactItems>-->
 
-                    <delimiters>
+            <!--<artifactItem>-->
 
-                        <delimiter>@</delimiter>
+            <!--<groupId>streaming-platform</groupId>-->
+            <!--<artifactId>platform-services-common</artifactId>-->
 
-                    </delimiters>
+            <!--</artifactItem>-->
 
-                </configuration>
+            <!--</artifactItems>-->
+
+            <!--<verbose>true</verbose>-->
+
+
+            <!--</configuration>-->
 
                 <!--<executions>-->
 
-                <!--<execution>-->
+            <!--<execution>-->
 
-                <!--<id>copy-resources</id>-->
+            <!--<id>copy-dependencies</id>-->
+            <!--<phase>prepare-package</phase>-->
 
-                <!--<phase>prepare-package</phase>-->
+            <!--<goals>-->
 
-                <!--<goals>-->
+            <!--<goal>copy-dependencies</goal>-->
 
-                <!--<goal>copy-resources</goal>-->
+            <!--</goals>-->
 
-                <!--</goals>-->
+            <!--<configuration>-->
 
-                <!--<configuration>-->
+            <!--<outputDirectory>${project.build.directory}/libs</outputDirectory>-->
+            <!--<overWriteReleases>true</overWriteReleases>-->
+            <!--<overWriteSnapshots>true</overWriteSnapshots>-->
+            <!--<overWriteIfNewer>true</overWriteIfNewer>-->
+            <!--<addParentPoms>true</addParentPoms>-->
 
-                <!--<outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>-->
 
-                <!--<resources>-->
+            <!--</configuration>-->
 
-                <!--<resource>-->
-
-                <!--<directory>${project.build.directory}/generated-docs</directory>-->
-
-                <!--</resource>-->
-
-                <!--</resources>-->
-
-                <!--</configuration>-->
-
-                <!--</execution>-->
+            <!--</execution>-->
 
                 <!--</executions>-->
 
-            </plugin>
-            <!-- endregion -->
+            <!--</plugin>-->
 
-            <!-- region spring-boot-maven-plugin -->
-            <plugin><!--http://docs.spring.io/spring-boot/docs/1.4.1.RELEASE/maven-plugin/usage.html-->
+            <!-- region maven-resources-plugin -->
+            <!--<plugin>-->
 
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${version.spring.boot}</version>
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-resources-plugin</artifactId>-->
+            <!--<version>3.0.2</version>-->
 
-                <configuration>
+            <!--<configuration>-->
 
-                    <executable>true</executable>
-                    <excludeDevtools>false</excludeDevtools>
+            <!--<useDefaultDelimiters>false</useDefaultDelimiters>-->
 
-                    <!--<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>-->
+            <!--<delimiters>-->
 
-                    <profiles>
+            <!--<delimiter>@</delimiter>-->
 
-                        <profile>test</profile>
-                        <profile>dev</profile>
+            <!--</delimiters>-->
 
-                    </profiles>
+            <!--</configuration>-->
 
-                </configuration>
+            <!--&lt;!&ndash;<executions>&ndash;&gt;-->
 
-                <executions>
+            <!--&lt;!&ndash;<execution>&ndash;&gt;-->
 
-                    <execution>
+            <!--&lt;!&ndash;<id>copy-resources</id>&ndash;&gt;-->
 
-                        <goals>
+            <!--&lt;!&ndash;<phase>prepare-package</phase>&ndash;&gt;-->
 
-                            <goal>build-info</goal>
+            <!--&lt;!&ndash;<goals>&ndash;&gt;-->
 
-                        </goals>
+            <!--&lt;!&ndash;<goal>copy-resources</goal>&ndash;&gt;-->
 
-                        <configuration>
+            <!--&lt;!&ndash;</goals>&ndash;&gt;-->
 
-                            <outputFile>${project.build.outputDirectory}/build-info.properties</outputFile>
+            <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
 
-                            <additionalProperties>
+            <!--&lt;!&ndash;<outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>&ndash;&gt;-->
 
-                                <project.build.finalName>${project.build.finalName}</project.build.finalName>
+            <!--&lt;!&ndash;<resources>&ndash;&gt;-->
 
-                                <project.scm.url>${project.scm.url}</project.scm.url>
-                                <project.scm.tag>${project.scm.tag}</project.scm.tag>
+            <!--&lt;!&ndash;<resource>&ndash;&gt;-->
 
-                                <encoding.source>${project.build.sourceEncoding}</encoding.source>
-                                <encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
+            <!--&lt;!&ndash;<directory>${project.build.directory}/generated-docs</directory>&ndash;&gt;-->
 
-                                <java.source>${maven.compiler.source}</java.source>
-                                <java.target>${maven.compiler.target}</java.target>
+            <!--&lt;!&ndash;</resource>&ndash;&gt;-->
 
-                            </additionalProperties>
+            <!--&lt;!&ndash;</resources>&ndash;&gt;-->
 
-                        </configuration>
+            <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
 
-                    </execution>
+            <!--&lt;!&ndash;</execution>&ndash;&gt;-->
 
-                </executions>
+            <!--&lt;!&ndash;</executions>&ndash;&gt;-->
 
-            </plugin>
-            <!-- endregion -->
+            <!--</plugin>-->
+            <!--&lt;!&ndash; endregion &ndash;&gt;-->
 
-            <!-- region maven-surefire-plugin -->
-            <plugin>
+            <!--&lt;!&ndash; region spring-boot-maven-plugin &ndash;&gt;-->
+            <!--&lt;!&ndash;<plugin>&ndash;&gt;-->
 
-                <!--http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html-->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+            <!--&lt;!&ndash;&lt;!&ndash;http://docs.spring.io/spring-boot/docs/1.4.1.RELEASE/maven-plugin/usage.html&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;mvn spring-boot:run -Drun.profiles=foo,bar&ndash;&gt;&ndash;&gt;-->
 
-                <configuration>
+            <!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>${version.spring.boot}</version>&ndash;&gt;-->
 
-                    <trimStackTrace>false</trimStackTrace>
+            <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
 
-                    <includes>
-                        <include>*/Test*.java</include>
-                        <include>**/Test*.java</include>
-                        <include>**/*Test.java</include>
-                        <include>**/*Tests.java</include>
-                        <include>**/*TestCase.java</include>
-                    </includes>
+            <!--&lt;!&ndash;<executable>true</executable>&ndash;&gt;-->
+            <!--&lt;!&ndash;<excludeDevtools>false</excludeDevtools>&ndash;&gt;-->
+            <!--&lt;!&ndash;<addResources>true</addResources>&ndash;&gt;-->
 
-                    <!--<threadCount>12</threadCount>-->
-                    <!--<forkCount>4</forkCount>-->
+            <!--&lt;!&ndash;&lt;!&ndash;<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>&ndash;&gt;&ndash;&gt;-->
 
-                    <!--&lt;!&ndash;<properties>&ndash;&gt;-->
+            <!--&lt;!&ndash;<profiles>&ndash;&gt;-->
 
-                    <!--&lt;!&ndash;<tags>StreamRecordingSequence</tags>&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;<includeTags>StreamRecordingSequence</includeTags>&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;<profile>test</profile>&ndash;&gt;-->
+            <!--&lt;!&ndash;<profile>dev</profile>&ndash;&gt;-->
 
-                    <!--&lt;!&ndash;</properties>&ndash;&gt;-->
+            <!--&lt;!&ndash;</profiles>&ndash;&gt;-->
 
-                    <!--&lt;!&ndash;<includes>&ndash;&gt;-->
+            <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
 
-                    <!--&lt;!&ndash;<include>**/StreamTest.java</include>&ndash;&gt;-->
+            <!--&lt;!&ndash;<executions>&ndash;&gt;-->
 
-                    <!--&lt;!&ndash;</includes>&ndash;&gt;-->
-                </configuration>
+            <!--&lt;!&ndash;<execution>&ndash;&gt;-->
 
-                <dependencies>
+            <!--&lt;!&ndash;<id>create-executable-jar</id>&ndash;&gt;-->
 
-                    <dependency>
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>1.0.0-M4</version>
-                    </dependency>
+            <!--&lt;!&ndash;<goals>&ndash;&gt;-->
 
-                </dependencies>
+            <!--&lt;!&ndash;<goal>repackage</goal>&ndash;&gt;-->
 
-            </plugin>
-            <!-- endregion -->
+            <!--&lt;!&ndash;</goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
+            <!--&lt;!&ndash;<classifier>exec</classifier>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<id>pre-integration-test</id>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<goal>start</goal>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<id>post-integration-test</id>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<goal>stop</goal>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<id>generate-build-info</id>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<goal>build-info</goal>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</goals>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<outputFile>${project.build.outputDirectory}/build-info.properties</outputFile>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<additionalProperties>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<project.build.finalName>${project.build.finalName}</project.build.finalName>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<project.scm.url>${project.scm.url}</project.scm.url>&ndash;&gt;-->
+            <!--&lt;!&ndash;<project.scm.tag>${project.scm.tag}</project.scm.tag>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<encoding.source>${project.build.sourceEncoding}</encoding.source>&ndash;&gt;-->
+            <!--&lt;!&ndash;<encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<java.source>${maven.compiler.source}</java.source>&ndash;&gt;-->
+            <!--&lt;!&ndash;<java.target>${maven.compiler.target}</java.target>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</additionalProperties>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</execution>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</executions>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</plugin>&ndash;&gt;-->
+            <!--&lt;!&ndash; endregion &ndash;&gt;-->
+            <!--<plugin>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>repackage</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<classifier>exec</classifier>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <!--&lt;!&ndash; region maven-surefire-plugin &ndash;&gt;-->
+            <!--<plugin>-->
+
+            <!--&lt;!&ndash;http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html&ndash;&gt;-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-surefire-plugin</artifactId>-->
+            <!--<version>2.19.1</version>-->
+
+            <!--<configuration>-->
+
+            <!--<trimStackTrace>false</trimStackTrace>-->
+
+            <!--<includes>-->
+            <!--<include>*/Test*.java</include>-->
+            <!--<include>**/Test*.java</include>-->
+            <!--<include>**/*Test.java</include>-->
+            <!--<include>**/*Tests.java</include>-->
+            <!--<include>**/*TestCase.java</include>-->
+            <!--</includes>-->
+
+            <!--&lt;!&ndash;<threadCount>12</threadCount>&ndash;&gt;-->
+            <!--&lt;!&ndash;<forkCount>4</forkCount>&ndash;&gt;-->
+
+            <!--</configuration>-->
+
+            <!--<dependencies>-->
+
+            <!--<dependency>-->
+
+            <!--<groupId>org.junit.platform</groupId>-->
+            <!--<artifactId>junit-platform-surefire-provider</artifactId>-->
+            <!--<version>1.0.0-M4</version>-->
+
+            <!--</dependency>-->
+
+            <!--</dependencies>-->
+
+            <!--</plugin>-->
+            <!--&lt;!&ndash; endregion &ndash;&gt;-->
 
         </plugins>
 
     </build>
 
-    <profiles>
+    <!--<profiles>-->
+
+    <!--&lt;!&ndash;<profile>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<id>dev</id>&ndash;&gt;-->
+    <!--&lt;!&ndash;<properties>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<spring.profiles.active>dev</spring.profiles.active>&ndash;&gt;-->
+    <!--&lt;!&ndash;<logging.level.root>info</logging.level.root>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</properties>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</profile>&ndash;&gt;-->
 
         <!--<profile>-->
 
-        <!--<id>dev</id>-->
-        <!--<properties>-->
+    <!--<id>test</id>-->
+    <!--<properties>-->
 
-        <!--<spring.profiles.active>dev</spring.profiles.active>-->
-        <!--<logging.level.root>info</logging.level.root>-->
+    <!--<spring.profiles.active>test</spring.profiles.active>-->
+    <!--<logging.level.root>trace</logging.level.root>-->
 
-        <!--</properties>-->
+    <!--</properties>-->
 
-        <!--</profile>-->
+    <!--<activation>-->
 
-        <profile>
+    <!--<activeByDefault>true</activeByDefault>-->
 
-            <id>test</id>
-            <properties>
+    <!--</activation>-->
 
-                <spring.profiles.active>test</spring.profiles.active>
-                <logging.level.root>trace</logging.level.root>
+    <!--</profile>-->
 
-            </properties>
-
-            <activation>
-
-                <activeByDefault>true</activeByDefault>
-
-            </activation>
-
-        </profile>
-
-    </profiles>
+    <!--</profiles>-->
 
 </project>

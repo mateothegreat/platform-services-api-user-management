@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.enums.Status;
 import platform.services.api.commons.testing.BaseTestConfig;
-import platform.services.api.commons.testing.Randomizers;
+import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.commons.validation.ValidationError;
 import platform.services.api.organizations.Organization;
 import platform.services.api.organizations.OrganizationService;

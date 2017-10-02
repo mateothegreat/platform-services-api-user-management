@@ -6,10 +6,10 @@ import org.junit.runner.*;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.users.profiles.UserProfileServiceTest;
+import platform.services.api.users.profiles.UserProfileTest;
 import platform.services.api.users.roles.UserRoleServiceTest;
 import platform.services.api.users.roles.UserRoleTest;
 import platform.services.api.users.settings.UserSettingTest;
-import platform.services.api.users.profiles.UserProfileTest;
 
 //@RunWith(SpringRunner.class)
 @RunWith(JUnitPlatform.class)

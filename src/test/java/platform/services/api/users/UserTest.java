@@ -5,8 +5,8 @@ import org.junit.jupiter.api.*;
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.testing.BaseEntityTest;
-import platform.services.api.commons.testing.Randomizers;
 import platform.services.api.commons.testing.TestingSpringEntity;
+import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.users.profiles.UserProfile;
 import platform.services.api.users.roles.UserRole;
 
