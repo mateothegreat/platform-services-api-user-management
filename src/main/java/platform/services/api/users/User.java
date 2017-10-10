@@ -58,6 +58,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -70,8 +71,10 @@ import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
+import platform.services.api.commons.enums.Status;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.security.SecurityCryptor;
+import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.commons.validation.ConstraintPatterns;
 import platform.services.api.organizations.Organization;
 import platform.services.api.users.profiles.UserProfile;
@@ -93,15 +96,15 @@ public class User extends BaseEntity<User> {
     private Organization organization;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<UserRole> roles = new HashSet<>(0);
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<UserProfile> profiles = new HashSet<>(0);
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<UserSetting> settings = new HashSet<>(0);
 
     @Column(unique = true) @Email(message = "validation.email.message")
@@ -124,6 +127,14 @@ public class User extends BaseEntity<User> {
     public User() {
 
     }
+    public static User create() {
+
+        return new User().setUsername(Randomizers.username())
+                         .setPasswordNotEncrypted(Randomizers.password())
+                         .setEmail(Randomizers.email())
+                         .setStatus(Status.ACTIVE_TESTING);
+
+    }
 
     public User setEmail(final String email) {
 
@@ -132,15 +143,6 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-
-    public User setUsername(final String username) {
-
-        this.username = username;
-
-        return this;
-
-    }
-
     public User setPasswordNotEncrypted(final String passwordNotEncrypted) {
 
         setPassword(passwordNotEncrypted);
@@ -150,7 +152,13 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
+    public User setUsername(final String username) {
 
+        this.username = username;
+
+        return this;
+
+    }
     public String getPassword() {
         /*
          * asdfasdf = $2a$10$3Q3s0j.kgXqr6a7hKQgeHekRdQ3uijJuy0BcFebj4dOcBkA0so/Qi
@@ -163,7 +171,6 @@ public class User extends BaseEntity<User> {
         return SecurityCryptor.encode(password);
 
     }
-
     public User setPassword(final String password) {
 
         this.password = SecurityCryptor.encode(password);
@@ -171,7 +178,6 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-
     public User addRole(final UserRole role) {
 
 //        role.setParentId(this.getId());
@@ -181,7 +187,6 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-
     public User addProfile(final UserProfile profile) {
 
 //        profile.setParentId(this.getId());
@@ -191,7 +196,6 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-
     public User setRoles(final Set<UserRole> roles) {
 
         this.roles = roles;
@@ -199,7 +203,6 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-
     public User setProfiles(final Set<UserProfile> profiles) {
 
         this.profiles = profiles;
@@ -207,7 +210,6 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-
     public User setOrganization(final Organization organization) {
 
         this.organization = organization;
@@ -215,4 +217,5 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
+
 }

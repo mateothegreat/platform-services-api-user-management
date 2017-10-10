@@ -24,4 +24,6 @@ public class UsersConfig {
     public static final String REQUEST_PATH_SETTINGS        = REQUEST_PATH + "/{userId:^[0-9]+$}/settings";
     public static final String REQUEST_PATH_SETTINGS_ENTITY = REQUEST_PATH_SETTINGS + "/{settingId:^[0-9]+$}";
 
+    public static final String TESTING_USERNAME = "test";
+    public static final String TESTING_PASSWORD = "asdfasdf";
 }

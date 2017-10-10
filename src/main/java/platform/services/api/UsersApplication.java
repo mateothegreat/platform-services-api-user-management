@@ -51,6 +51,7 @@ package platform.services.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import platform.services.api.commons.configuration.CommonsConfig;
 
@@ -62,16 +63,8 @@ import platform.services.api.commons.configuration.CommonsConfig;
                 CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
                 UsersConfig.PLATFORM_SERVICES_API_COMMONS,
 
-        }
-
-//    exclude = {
-//
-//        DataSourceAutoConfiguration.class,
-//        SessionAutoConfiguration.class
-//
-//    }
-
-        )
+        })
+@EnableDiscoveryClient
 public class UsersApplication {
 
     public static void main(final String[] args) {
