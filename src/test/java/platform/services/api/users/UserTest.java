@@ -1,6 +1,7 @@
 package platform.services.api.users;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.security.SecurityCryptor;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestingSpringEntity
 public class UserTest extends BaseEntityTest<User> {
 
-    @BeforeEach public void beforeEach() {
+    @BeforeMethod public void beforeEach() {
 
         baseEntity = UserCompositeGenerator.composedFixtures();
 

@@ -2,7 +2,6 @@ package platform.services.api.users.authentication;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.aop.framework.ReflectiveMethodInvocation;
-import org.springframework.lang.Nullable;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.intercept.RunAsManagerImpl;
 import org.springframework.security.access.intercept.RunAsUserToken;
@@ -13,6 +12,8 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.Assert;
+
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;

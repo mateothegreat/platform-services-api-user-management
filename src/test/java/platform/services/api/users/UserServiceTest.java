@@ -2,8 +2,7 @@ package platform.services.api.users;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import javax.transaction.Transactional;
 
@@ -49,7 +48,7 @@ public class UserServiceTest extends BaseServiceTest<UserService, UserRepository
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     @Transactional
     public void beforeEach() {
 

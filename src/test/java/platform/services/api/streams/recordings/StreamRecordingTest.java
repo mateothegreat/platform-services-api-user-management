@@ -1,6 +1,6 @@
 package platform.services.api.streams.recordings;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseEntityTest;
 import platform.services.api.commons.testing.TestingSpringEntity;
@@ -8,7 +8,7 @@ import platform.services.api.commons.testing.TestingSpringEntity;
 @TestingSpringEntity
 public class StreamRecordingTest extends BaseEntityTest<StreamRecording> {
 
-    @BeforeEach public void beforeEach() {
+    @BeforeMethod public void beforeEach() {
 
         baseEntity = StreamRecording.create();
 

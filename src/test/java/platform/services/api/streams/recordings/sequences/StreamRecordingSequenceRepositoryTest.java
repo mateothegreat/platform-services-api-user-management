@@ -2,8 +2,7 @@ package platform.services.api.streams.recordings.sequences;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.BaseRepositoryTest;
@@ -48,7 +47,7 @@ public class StreamRecordingSequenceRepositoryTest extends BaseRepositoryTest<St
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         try {

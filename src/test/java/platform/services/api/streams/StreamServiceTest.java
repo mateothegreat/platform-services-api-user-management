@@ -1,8 +1,7 @@
 package platform.services.api.streams;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import javax.transaction.Transactional;
 
@@ -37,7 +36,7 @@ public class StreamServiceTest extends BaseServiceTest<StreamService, StreamRepo
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         final Stream                  streamFixture           = Stream.create();

@@ -1,14 +1,17 @@
 package platform.services.api.users.profiles;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import platform.services.api.commons.testing.BaseEntityTest;
 import platform.services.api.commons.testing.TestingSpringEntity;
 import platform.services.api.commons.utilities.Randomizers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @TestingSpringEntity public class UserProfileTest extends BaseEntityTest<UserProfile> {
 
-    @BeforeEach public void beforeEach() {
+    @BeforeMethod public void beforeEach() {
 
         baseEntity = new UserProfile();
 
@@ -22,8 +25,6 @@ import platform.services.api.commons.utilities.Randomizers;
     public void setAvatar() {
 
         baseEntity.setAvatar(Randomizers.avatar());
-
-//        getParentId();
 
     }
 

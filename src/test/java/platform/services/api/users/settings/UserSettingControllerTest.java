@@ -1,8 +1,7 @@
 package platform.services.api.users.settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.commons.validation.ConstraintPatterns;
@@ -29,7 +28,7 @@ public final class UserSettingControllerTest extends UserAuthenticationTestSetup
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         final Organization organizationFixture = Organization.create();

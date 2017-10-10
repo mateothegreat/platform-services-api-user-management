@@ -1,6 +1,6 @@
 package platform.services.api.users.settings;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseEntityTest;
 import platform.services.api.commons.testing.TestingSpringEntity;
@@ -8,7 +8,7 @@ import platform.services.api.commons.testing.TestingSpringEntity;
 @TestingSpringEntity
 public class UserSettingTest extends BaseEntityTest<UserSetting> {
 
-    @BeforeEach public void beforeEach() {
+    @BeforeMethod public void beforeEach() {
 
         baseEntity = UserSettingFixture.create();
 

@@ -1,8 +1,8 @@
 package platform.services.api.users.roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import platform.services.api.commons.testing.TestingFixtureFactory;
 
@@ -14,7 +14,7 @@ public class UserRoleFixtureFactoryTest {
     @Autowired
     private UserRoleFixtureFactory factory;
 
-    @BeforeEach public void beforeEach() {
+    @BeforeMethod public void beforeEach() {
 
         assertThat(factory).isNotNull();
 

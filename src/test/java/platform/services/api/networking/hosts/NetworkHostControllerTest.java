@@ -1,8 +1,7 @@
 package platform.services.api.networking.hosts;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.users.UserAuthenticationTestSetup;
@@ -18,7 +17,7 @@ public class NetworkHostControllerTest extends UserAuthenticationTestSetup<Netwo
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         beforeUserAuthenticationFixturesEach();

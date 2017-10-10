@@ -1,6 +1,6 @@
 package platform.services.api.streams.images;
 
-import org.springframework.lang.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;

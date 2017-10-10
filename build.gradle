@@ -1,0 +1,15 @@
+dependencies {
+
+    // https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-embedded-servlet-containers
+    compile project(":platform-services-api-commons")
+    testCompile project(path: ':platform-services-api-commons', configuration: 'testOutput')
+
+    configurations {
+        compile.exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty:1.5.7.RELEASE")
+
+//    testCompile group: 'org.testng', name: 'testng', version: '6.11'
+//    testCompile group: 'org.testng', name: 'testng', version: '6.11'
+
+}

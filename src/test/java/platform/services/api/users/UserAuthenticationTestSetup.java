@@ -2,8 +2,7 @@ package platform.services.api.users;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.jpa.entities.BaseEntityFixtureFunction;
@@ -17,7 +16,6 @@ import platform.services.api.organizations.Organization;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Getter @Setter
-@Disabled
 public class UserAuthenticationTestSetup<E extends BaseEntity> extends BaseControllerTest<E> {
 
     private final UserComposite userComposite;
@@ -45,7 +43,7 @@ public class UserAuthenticationTestSetup<E extends BaseEntity> extends BaseContr
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeUserAuthenticationFixturesEach() {
 
         assertThat(userFixture.getId()).isNotZero();

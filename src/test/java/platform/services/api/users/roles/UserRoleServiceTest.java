@@ -1,8 +1,7 @@
 package platform.services.api.users.roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseServiceTest;
 import platform.services.api.commons.testing.TestingSpringService;
@@ -32,7 +31,7 @@ public class UserRoleServiceTest extends BaseServiceTest<UserRoleService, UserRo
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         Authenticate.SUDO_INTEGRATION();

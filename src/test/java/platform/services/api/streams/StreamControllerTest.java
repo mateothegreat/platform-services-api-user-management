@@ -1,8 +1,7 @@
 package platform.services.api.streams;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseControllerTestCase;
 import platform.services.api.users.UserAuthenticationTestSetup;
@@ -20,8 +19,7 @@ public class StreamControllerTest extends UserAuthenticationTestSetup<Stream> {
 
     }
 
-
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         beforeUserAuthenticationFixturesEach();

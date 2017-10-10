@@ -1,8 +1,7 @@
 package platform.services.api.streams.recordings;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import platform.services.api.commons.testing.BaseServiceTest;
 import platform.services.api.commons.testing.TestingSpringService;
@@ -34,7 +33,7 @@ public class StreamRecordingServiceTest extends BaseServiceTest<StreamRecordingS
 
     }
 
-    @BeforeEach public void beforeEach() {
+    @BeforeMethod public void beforeEach() {
 
         final Stream                  streamFixture           = Stream.create();
         final StreamRecording         streamRecording         = StreamRecording.create();

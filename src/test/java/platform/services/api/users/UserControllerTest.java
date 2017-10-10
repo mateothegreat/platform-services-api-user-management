@@ -1,8 +1,7 @@
 package platform.services.api.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
 
 import javax.transaction.Transactional;
 
@@ -26,7 +25,7 @@ public class UserControllerTest extends UserAuthenticationTestSetup<User> {
 
     }
 
-    @BeforeEach
+    @BeforeMethod
     public void beforeEach() {
 
         final Organization organizationFixture = Organization.create();

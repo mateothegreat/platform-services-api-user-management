@@ -1,7 +1,5 @@
 package platform.services.api.streams.recordings.sequences.images;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +11,7 @@ import platform.services.api.streams.images.StreamImage;
 import platform.services.api.streams.images.StreamImagePreset;
 import platform.services.api.streams.recordings.sequences.StreamRecordingSequence;
 
-@Entity @Data
+@Entity
 @Table(name = "stream_recording_sequence_images")
 public class SequenceImage extends StreamImage<SequenceImage> {
 

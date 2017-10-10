@@ -2,7 +2,6 @@ package platform.services.api.organizations;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.javafaker.Faker;
-import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +16,7 @@ import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.users.User;
 
 @Transactional
-@Entity @Data
+@Entity
 @Table(name = "organizations")
 public class Organization extends BaseEntity<Organization> {
 
