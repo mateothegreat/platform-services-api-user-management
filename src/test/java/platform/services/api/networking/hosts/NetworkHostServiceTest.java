@@ -1,21 +1,23 @@
 package platform.services.api.networking.hosts;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.testng.annotations.BeforeClass;
 
+import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.testing.BaseServiceTest;
-import platform.services.api.commons.testing.TestingSpringService;
 
-@TestingSpringService
+@SpringBootTest(classes = { DataSourceConfig.class, NetworkHostService.class, NetworkHostRepository.class })
 public class NetworkHostServiceTest extends BaseServiceTest<NetworkHostService, NetworkHostRepository, NetworkHost> {
 
-    private final NetworkHostService service;
-
     @Autowired
-    public NetworkHostServiceTest(final NetworkHostService service) {
+    private NetworkHostService service;
 
-        super(service, NetworkHost::create, NetworkHost.class);
+    @BeforeClass
+    public void beforeClass() {
 
-        this.service = service;
+        setFn(NetworkHost::create);
+        setGenericService(service);
 
     }
 

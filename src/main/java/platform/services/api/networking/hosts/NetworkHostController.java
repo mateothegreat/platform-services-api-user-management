@@ -16,7 +16,7 @@ import platform.services.api.commons.validation.ValidationError;
 @RequestMapping("/network/hosts")
 public class NetworkHostController extends BaseController<NetworkHostService, NetworkHostRepository, NetworkHost> {
 
-    public static final String PATH_BASE = "/network/hosts";
+    public static final String PATH_BASE = "network/hosts";
 
     private final NetworkHostService service;
 

@@ -1,28 +1,37 @@
 package platform.services.api.networking.hosts;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-import platform.services.api.commons.testing.BaseControllerTestCase;
-import platform.services.api.users.UserAuthenticationTestSetup;
-import platform.services.api.users.UserCompositeGenerator;
+import platform.services.api.commons.testing.BaseControllerTest;
+import platform.services.api.users.UserAuthIntercept;
+import platform.services.api.users.UserFactoryTesting;
 
-@BaseControllerTestCase
-public class NetworkHostControllerTest extends UserAuthenticationTestSetup<NetworkHost> {
+@UserFactoryTesting
+public class NetworkHostControllerTest extends BaseControllerTest<NetworkHost> {
 
     @Autowired
-    public NetworkHostControllerTest(final UserCompositeGenerator userCompositeGenerator) {
+    private UserAuthIntercept userAuthIntercept;
 
-        super(NetworkHost::create, NetworkHost.class, NetworkHostController.PATH_BASE, userCompositeGenerator);
+    @BeforeClass
+    public void beforeClass() {
+
+        setFn(NetworkHost::create);
+        setEntityClass(NetworkHost.class);
+
+        getRestTemplateFactory().setBasicAuth(userAuthIntercept.getUserEntity().getUsername(), userAuthIntercept.getUserEntity().getPassword());
+
+        getRestTemplateFactory().getUriBuilder()
+                                .pathSegment(NetworkHostController.PATH_BASE, "search", "all")
+                                .queryParam("term", "a");
+
+        getRestTemplateFactory().exchange();
 
     }
 
-    @BeforeMethod
-    public void beforeEach() {
-
-        beforeUserAuthenticationFixturesEach();
-
-        super.beforeEach();
+    @Test
+    public void getNewUserTest() {
 
     }
 
