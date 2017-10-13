@@ -1,6 +1,7 @@
 package platform.services.api.networking.hosts;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +15,13 @@ import platform.services.api.commons.validation.ValidationError;
 
 @RestController
 @RequestMapping("/network/hosts")
+@ExposesResourceFor(NetworkHost.class)
 public class NetworkHostController extends BaseController<NetworkHostService, NetworkHostRepository, NetworkHost> {
 
     public static final String PATH_BASE = "network/hosts";
 
     private final NetworkHostService service;
+
 
     @Autowired
     public NetworkHostController(final NetworkHostService service) {
@@ -32,7 +35,9 @@ public class NetworkHostController extends BaseController<NetworkHostService, Ne
     @RequestMapping(method = RequestMethod.POST, value = "")
     public ResponseEntity<NetworkHost> indexPost(@RequestBody final NetworkHost entity) throws ValidationError {
 
-        return new ThrowableResponseEntity<>(getGenericService().save(entity), HttpStatus.CREATED);
+//        return new ResponseEntity<Resource<NetworkHost>>(getGenericService().saveAndGetResourceById(entity), HttpStatus.CREATED);
+
+        return new ThrowableResponseEntity<>(getGenericService().saveAndGetById(entity), HttpStatus.CREATED);
 
     }
 

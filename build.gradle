@@ -35,7 +35,7 @@ dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.0.0.M2'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-ribbon', version: '2.0.0.M2'
 
-//    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: springBootVersion
 
 
 }

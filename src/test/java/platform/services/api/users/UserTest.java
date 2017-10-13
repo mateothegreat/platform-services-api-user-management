@@ -20,8 +20,6 @@ public class UserTest extends BaseEntityTest<User> {
 
         baseEntity = UserCompositeGenerator.composedFixtures();
 
-        super.beforeEach();
-
     }
 
     @Test public void setUsername() {
@@ -68,7 +66,7 @@ public class UserTest extends BaseEntityTest<User> {
 
     @Test public void setRoles() {
 
-        baseEntity.getRoles().add(new UserRole(Role.ROLE_USER));
+        baseEntity.getRoles().add(new UserRole().setRole(Role.ROLE_USER));
 
         getRoles();
 

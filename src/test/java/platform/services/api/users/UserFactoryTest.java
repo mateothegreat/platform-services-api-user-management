@@ -34,6 +34,6 @@ import platform.services.api.users.roles.UserRoleService;
         UserAuthIntercept.class
 
 })
-public @interface UserFactoryTesting {
+public @interface UserFactoryTest {
 
 }

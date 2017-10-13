@@ -39,7 +39,7 @@ public class UserFactoryTests extends AbstractTestNGSpringContextTests {
 
     }
 
-    @Test(priority = 0)
+    @Test(timeOut = 500, priority = 0)
     public void persistUserEntities() {
 
         final User userEntity = userFactory.persistNewUser();
@@ -54,7 +54,7 @@ public class UserFactoryTests extends AbstractTestNGSpringContextTests {
 
     }
 
-    @Test(priority = 1)
+    @Test(timeOut = 500, priority = 1)
     public void createCustomUserAndPass() {
 
         final User customUser = userFactory.getUserService().getByUsername(UsersConfig.TESTING_USERNAME);

@@ -86,8 +86,8 @@ import platform.services.api.commons.sessions.HttpSessionEventListener;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @ComponentScan(basePackages = {
 
-    CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
-    CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
+        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
+        CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
 
 })
 @Log4j2
@@ -98,10 +98,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final AuthenticationEntryPoint         authenticationEntryPoint;
     private final UserAuthenticationDetailsService userAuthenticationDetailsService;
 
-    @Autowired
-    public SecurityConfiguration(final @Qualifier(DataSourceProperties.DATA_SOURCE_BEAN_NAME) DataSource platformDataSource,
-                                 final AuthenticationEntryPoint authenticationEntryPoint,
-                                 final UserAuthenticationDetailsService userAuthenticationDetailsService) {
+    @Autowired public SecurityConfiguration(final @Qualifier(DataSourceProperties.DATA_SOURCE_BEAN_NAME) DataSource platformDataSource,
+                                            final AuthenticationEntryPoint authenticationEntryPoint,
+                                            final UserAuthenticationDetailsService userAuthenticationDetailsService) {
 
         this.platformDataSource = platformDataSource;
         this.authenticationEntryPoint = authenticationEntryPoint;
@@ -109,28 +108,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public static ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+    @Bean public static ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
 
         return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
 
     }
-
-    @Bean
-    public static HttpSessionListener httpSessionListener() {
+    @Bean public static HttpSessionListener httpSessionListener() {
 
         return new HttpSessionEventListener();
 
     }
-
-    @Bean
-    public static HttpSessionStrategy httpSessionStrategy() {
+    @Bean public static HttpSessionStrategy httpSessionStrategy() {
 
         return new HeaderHttpSessionStrategy();
     }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    @Bean public DaoAuthenticationProvider authenticationProvider() {
 
         final DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
@@ -142,14 +135,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public PasswordEncoder encoder() {
-
-        return new BCryptPasswordEncoder(11);
-    }
-
-    @Autowired
-    public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication()
             .dataSource(platformDataSource)
@@ -163,8 +149,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public AuthenticationProvider runAsAuthenticationProvider() {
+    @Bean public PasswordEncoder encoder() {
+
+        return new BCryptPasswordEncoder(11);
+    }
+
+    @Bean public AuthenticationProvider runAsAuthenticationProvider() {
 
         final RunAsImplAuthenticationProvider authProvider = new RunAsImplAuthenticationProvider();
 
@@ -174,8 +164,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    @Override protected void configure(final HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
             .anyRequest()
@@ -184,6 +173,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authenticationProvider(authenticationProvider())
             .httpBasic()
             .authenticationEntryPoint(authenticationEntryPoint);
+
+        http.authorizeRequests()
+            .antMatchers("/favicon.ico", "/browser/**")
+            .anonymous();
 
         http.logout()
             .disable();

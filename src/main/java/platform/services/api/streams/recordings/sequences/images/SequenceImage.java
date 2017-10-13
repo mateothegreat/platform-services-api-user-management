@@ -1,5 +1,7 @@
 package platform.services.api.streams.recordings.sequences.images;
 
+import lombok.Getter;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +13,7 @@ import platform.services.api.streams.images.StreamImage;
 import platform.services.api.streams.images.StreamImagePreset;
 import platform.services.api.streams.recordings.sequences.StreamRecordingSequence;
 
-@Entity
+@Entity @Getter
 @Table(name = "stream_recording_sequence_images")
 public class SequenceImage extends StreamImage<SequenceImage> {
 
@@ -33,6 +35,14 @@ public class SequenceImage extends StreamImage<SequenceImage> {
         fixture.setResolutionWidth(StreamImagePreset.HD.getResolution().getWidth());
 
         return fixture;
+
+    }
+
+    public SequenceImage setSequence(final StreamRecordingSequence sequence) {
+
+        this.sequence = sequence;
+
+        return this;
 
     }
 

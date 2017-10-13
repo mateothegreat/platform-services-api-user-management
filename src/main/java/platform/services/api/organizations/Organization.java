@@ -2,6 +2,7 @@ package platform.services.api.organizations;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.javafaker.Faker;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,13 +17,12 @@ import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.users.User;
 
 @Transactional
-@Entity
+@Entity @Getter
 @Table(name = "organizations")
 public class Organization extends BaseEntity<Organization> {
 
     private String name;
     private String description;
-
     @JsonIgnore
     @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>(0);
@@ -38,10 +38,26 @@ public class Organization extends BaseEntity<Organization> {
 
     }
 
-    @JsonIgnore
-    public Set<User> getUsers() {
+    public Organization setDescription(final String description) {
 
-        return this.users;
+        this.description = description;
+
+        return this;
 
     }
+    public Organization setName(final String name) {
+
+        this.name = name;
+
+        return this;
+
+    }
+    public Organization setUsers(final Set<User> users) {
+
+        this.users = users;
+
+        return this;
+
+    }
+
 }

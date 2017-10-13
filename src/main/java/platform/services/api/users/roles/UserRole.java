@@ -90,17 +90,6 @@ public class UserRole extends BaseEntity<UserRole> {
 //    @Range(min = 0L, max = 4294967295L)
 //    protected Long parentId = 0L;
 
-    public UserRole() {
-
-    }
-
-    public UserRole(final Role role) {
-
-        this.role = role;
-
-    }
-
-
     public UserRole setRole(final Role role) {
 
         this.role = role;

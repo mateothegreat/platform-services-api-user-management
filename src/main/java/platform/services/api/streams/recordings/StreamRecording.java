@@ -1,6 +1,7 @@
 package platform.services.api.streams.recordings;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,8 +19,7 @@ import platform.services.api.streams.Stream;
 import platform.services.api.streams.StreamResolution;
 import platform.services.api.streams.recordings.sequences.StreamRecordingSequence;
 
-@Entity
-//@Data
+@Entity @Getter
 @Table(name = "stream_recordings")
 public class StreamRecording extends BaseEntity<StreamRecording> {
 
@@ -67,62 +67,58 @@ public class StreamRecording extends BaseEntity<StreamRecording> {
         return fixture;
 
     }
-
-    public LocalDateTime getDateStart() {
-
-        return dateStart;
-    }
-
-    public StreamRecording setDateStart(final LocalDateTime dateStart) {
-
-        this.dateStart = dateStart;
-        return this;
-    }
-
     public LocalDateTime getDateEnd() {
 
         return dateEnd;
     }
+    public LocalDateTime getDateStart() {
 
+        return dateStart;
+
+    }
+    public Long getDuration() {
+
+        return duration;
+    }
+    public Set<StreamRecordingSequence> getSequences() {
+
+        return sequences;
+
+    }
+    public Stream getStream() {
+
+        return stream;
+    }
     public StreamRecording setDateEnd(final LocalDateTime dateEnd) {
 
         this.dateEnd = dateEnd;
         return this;
     }
+    public StreamRecording setDateStart(final LocalDateTime dateStart) {
 
-    public Long getDuration() {
+        this.dateStart = dateStart;
 
-        return duration;
+        return this;
+
     }
-
     public StreamRecording setDuration(final Long duration) {
 
         this.duration = duration;
         return this;
     }
+    public StreamRecording setSequences(final Set<StreamRecordingSequence> sequences) {
 
-    public Stream getStream() {
+        this.sequences = sequences;
 
-        return stream;
+        return this;
+
     }
-
     public StreamRecording setStream(final Stream stream) {
 
         this.stream = stream;
 
         return this;
 
-    }
-
-    public Set<StreamRecordingSequence> getSequences() {
-
-        return sequences;
-    }
-
-    public StreamRecording setSequences(final Set<StreamRecordingSequence> sequences) {
-
-        this.sequences = sequences;
-        return this;
     }
 
 }

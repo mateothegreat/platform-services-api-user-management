@@ -1,12 +1,14 @@
 package platform.services.api.streams.images;
 
+import lombok.Getter;
+
 import javax.persistence.MappedSuperclass;
 
 import java.time.LocalDateTime;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
 
-@MappedSuperclass
+@MappedSuperclass @Getter
 public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
 
     private LocalDateTime dateCreated;
@@ -36,21 +38,11 @@ public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
 
     }
 
-    public LocalDateTime getDateCreated() {
-
-        return dateCreated;
-
-    }
     public StreamImage setDateCreated(final LocalDateTime dateCreated) {
 
         this.dateCreated = dateCreated;
 
         return this;
-
-    }
-    public LocalDateTime getDateRelative() {
-
-        return dateRelative;
 
     }
     public StreamImage setDateRelative(final LocalDateTime dateRelative) {
@@ -60,9 +52,11 @@ public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
         return this;
 
     }
-    public int getDuration() {
+    public StreamImage setDescription(final String description) {
 
-        return duration;
+        this.description = description;
+
+        return this;
 
     }
     public StreamImage setDuration(final int duration) {
@@ -72,21 +66,11 @@ public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
         return this;
 
     }
-    public String getImageFormat() {
-
-        return imageFormat;
-
-    }
     public StreamImage setImageFormat(final String imageFormat) {
 
         this.imageFormat = imageFormat;
 
         return this;
-
-    }
-    public int getImageQuality() {
-
-        return imageQuality;
 
     }
     public StreamImage setImageQuality(final int imageQuality) {
@@ -96,9 +80,11 @@ public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
         return this;
 
     }
-    public int getResolutionWidth() {
+    public StreamImage setResolutionHeight(final int resolutionHeight) {
 
-        return resolutionWidth;
+        this.resolutionHeight = resolutionHeight;
+
+        return this;
 
     }
     public StreamImage setResolutionWidth(final int resolutionWidth) {
@@ -108,38 +94,9 @@ public class StreamImage<E extends BaseEntity> extends BaseEntity<E> {
         return this;
 
     }
-    public int getResolutionHeight() {
-
-        return resolutionHeight;
-
-    }
-    public StreamImage setResolutionHeight(final int resolutionHeight) {
-
-        this.resolutionHeight = resolutionHeight;
-
-        return this;
-
-    }
-    public String getTitle() {
-
-        return title;
-
-    }
     public StreamImage setTitle(final String title) {
 
         this.title = title;
-
-        return this;
-
-    }
-    public String getDescription() {
-
-        return description;
-
-    }
-    public StreamImage setDescription(final String description) {
-
-        this.description = description;
 
         return this;
 

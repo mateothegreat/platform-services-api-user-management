@@ -12,8 +12,6 @@ public class UserSettingTest extends BaseEntityTest<UserSetting> {
 
         baseEntity = UserSettingFixture.create();
 
-        super.beforeEach();
-
     }
 
 }

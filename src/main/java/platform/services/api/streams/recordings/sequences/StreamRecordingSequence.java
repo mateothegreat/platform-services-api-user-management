@@ -1,6 +1,7 @@
 package platform.services.api.streams.recordings.sequences;
 
 import com.github.javafaker.Faker;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,8 +15,7 @@ import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.streams.recordings.StreamRecording;
 
-@Entity
-//@Data @ToString
+@Entity @Getter
 @Table(name = "stream_recording_sequences")
 public class StreamRecordingSequence extends BaseEntity<StreamRecordingSequence> {
 
@@ -48,66 +48,48 @@ public class StreamRecordingSequence extends BaseEntity<StreamRecordingSequence>
 
     }
 
-    public LocalDateTime getDateStart() {
-
-        return dateStart;
-    }
-
-    public StreamRecordingSequence setDateStart(final LocalDateTime dateStart) {
-
-        this.dateStart = dateStart;
-        return this;
-    }
-
-    public LocalDateTime getDateEnd() {
-
-        return dateEnd;
-    }
-
     public StreamRecordingSequence setDateEnd(final LocalDateTime dateEnd) {
 
         this.dateEnd = dateEnd;
+
         return this;
+
     }
-
-    public ZoneOffset getDateOffset() {
-
-        return dateOffset;
-    }
-
     public StreamRecordingSequence setDateOffset(final ZoneOffset dateOffset) {
 
         this.dateOffset = dateOffset;
+
         return this;
+
     }
+    public StreamRecordingSequence setDateStart(final LocalDateTime dateStart) {
 
-    public Long getDuration() {
+        this.dateStart = dateStart;
 
-        return duration;
+        return this;
+
     }
-
     public StreamRecordingSequence setDuration(final Long duration) {
 
         this.duration = duration;
+
         return this;
+
     }
-
-    public String getFilename() {
-
-        return filename;
-    }
-
     public StreamRecordingSequence setFilename(final String filename) {
 
         this.filename = filename;
+
         return this;
+
     }
+    public StreamRecordingSequence setLocation(final String location) {
 
-    public StreamRecording getRecording() {
+        this.location = location;
 
-        return recording;
+        return this;
+
     }
-
     public StreamRecordingSequence setRecording(final StreamRecording streamRecording) {
 
         this.recording = streamRecording;
