@@ -51,25 +51,23 @@ package platform.services.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-import platform.services.api.commons.configuration.CommonsConfig;
-
-@SpringBootApplication(
-
-        scanBasePackages = {
-
-                CommonsConfig.PLATFORM_SERVICES_API,
-                CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
-                UsersConfig.PLATFORM_SERVICES_API_COMMONS,
-
-        })
+//@SpringBootApplication(
+//
+//        scanBasePackages = {
+//
+//                CommonsConfig.PLATFORM_SERVICES_API,
+//                CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
+//                UsersConfig.PLATFORM_SERVICES_API_COMMONS,
+//
+//        })
 @EnableDiscoveryClient
 //@EnableConfigurationProperties
-//@EnableFeignClients
-@EnableFeignClients
-
+@OverrideAutoConfiguration(enabled = true)
+@SpringBootApplication
+//@EnableAutoConfiguration
 public class UsersApplication {
 
     public static void main(final String[] args) {

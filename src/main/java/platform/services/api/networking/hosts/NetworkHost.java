@@ -1,5 +1,7 @@
 package platform.services.api.networking.hosts;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -8,6 +10,8 @@ import platform.services.api.commons.networking.NetworkProtocol;
 import platform.services.api.commons.utilities.Randomizers;
 
 @Entity
+@RequiredArgsConstructor
+
 @Table(name = "network_hosts")
 public class NetworkHost extends BaseNetworkHost {
 

@@ -56,7 +56,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
@@ -65,8 +64,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -77,19 +76,17 @@ import javax.servlet.http.HttpSessionListener;
 import javax.sql.DataSource;
 
 import platform.services.api.commons.configuration.CommonsConfig;
-import platform.services.api.commons.jpa.datasources.DataSourceProperties;
 import platform.services.api.commons.sessions.HttpSessionEventListener;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-@EnableWebSecurity(debug = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@ComponentScan(basePackages = {
-
-        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
-        CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
-
-})
+//@ComponentScan(basePackages = {
+//
+//        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
+//        CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
+//
+//})
 @Log4j2
 @ToString
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -98,7 +95,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final AuthenticationEntryPoint         authenticationEntryPoint;
     private final UserAuthenticationDetailsService userAuthenticationDetailsService;
 
-    @Autowired public SecurityConfiguration(final @Qualifier(DataSourceProperties.DATA_SOURCE_BEAN_NAME) DataSource platformDataSource,
+    @Autowired public SecurityConfiguration(final @Qualifier("platformBaseDataSource") DataSource platformDataSource,
                                             final AuthenticationEntryPoint authenticationEntryPoint,
                                             final UserAuthenticationDetailsService userAuthenticationDetailsService) {
 
@@ -178,6 +175,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/favicon.ico", "/browser/**")
             .anonymous();
 
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.logout()
             .disable();
 
