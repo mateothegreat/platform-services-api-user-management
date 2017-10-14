@@ -24,6 +24,17 @@ import platform.services.api.commons.jpa.datasources.DataSourceConfig;
         NetworkHostService.class,
 
 })
+
+//@Import({
+//
+//        DataSourceConfig.class,
+//
+//        NetworkHostFactory.class,
+//
+//        NetworkHostRepository.class,
+//        NetworkHostService.class,
+//
+//})
 public @interface NetworkHostFactorySetup {
 
 }

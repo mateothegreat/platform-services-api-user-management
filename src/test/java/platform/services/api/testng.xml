@@ -1,0 +1,61 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="All Packages" parallel="tests" thread-count="32" verbose="1">
+
+    <!--<suite-files>-->
+
+    <!--<suite-file path="organizations/testng.xml"/>-->
+    <!--<suite-file path="networking/hosts/testng.xml"/>-->
+
+    <!--</suite-files>-->
+
+    <test name="organizations">
+
+        <packages>
+
+            <package name="platform.services.api.organizations"/>
+
+        </packages>
+
+    </test>
+
+    <test name="streams">
+
+        <packages>
+
+            <package name="platform.services.api.streams"/>
+
+        </packages>
+
+    </test>
+
+    <test name="system">
+
+        <packages>
+
+            <package name="platform.services.api.system"/>
+
+        </packages>
+
+    </test>
+
+    <test name="users">
+
+        <packages>
+
+            <package name="platform.services.api.users"/>
+
+        </packages>
+
+    </test>
+
+    <test name="networking.hosts">
+
+        <packages>
+
+            <package name="platform.services.api.networking.hosts"/>
+
+        </packages>
+
+    </test>
+
+</suite>

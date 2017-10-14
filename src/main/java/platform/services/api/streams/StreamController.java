@@ -16,6 +16,7 @@ import platform.services.api.commons.validation.ValidationError;
 @RequestMapping("/streams")
 public class StreamController extends BaseController<StreamService, StreamRepository, Stream> {
 
+    public static final String PATH_BASE = "streams";
     @Autowired
     public StreamController(final StreamService service) {
 

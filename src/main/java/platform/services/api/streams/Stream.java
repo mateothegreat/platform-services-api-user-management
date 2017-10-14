@@ -17,6 +17,9 @@ import java.util.Set;
 import platform.services.api.commons.jpa.entities.BaseEntity;
 import platform.services.api.commons.utilities.Randomizers;
 import platform.services.api.networking.hosts.NetworkHost;
+import platform.services.api.streams.functions.StreamFunction;
+import platform.services.api.streams.recordings.StreamCodec;
+import platform.services.api.streams.recordings.StreamFPS;
 import platform.services.api.streams.recordings.StreamRecording;
 
 @Entity
@@ -31,17 +34,28 @@ public class Stream extends BaseEntity {
 //    @OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OneToOne
     @JoinColumn(name = "hostId")
-//    @JsonBackReference
     private NetworkHost host;
 
-    private String path;
+    private String         path;
     private StreamProtocol protcol;
-    private String username;
-    private String password;
+    private String         username;
+    private String         password;
+    private int            resolutionWidth;
+    private int            resolutionHeight;
+    private int            bitrate;
+    private int            bitrateAverage;
+    private int            bitrateMax;
+    private int            crf;
+    private StreamFPS      fps;
+    private StreamCodec    codec;
 
     @JsonIgnore
     @OneToMany(mappedBy = "stream", fetch = FetchType.EAGER)
     private Set<StreamRecording> recordings = new HashSet<>(0);
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "stream", fetch = FetchType.EAGER)
+    private Set<StreamFunction> functions = new HashSet<>(0);
 
     public static Stream create() {
 
@@ -70,15 +84,11 @@ public class Stream extends BaseEntity {
         return this;
 
     }
+    public NetworkHost getHost() {
 
-    public Stream setName(final String name) {
-
-        this.name = name;
-
-        return this;
+        return host;
 
     }
-
     public Stream setDescription(final String description) {
 
         this.description = description;
@@ -86,13 +96,6 @@ public class Stream extends BaseEntity {
         return this;
 
     }
-
-    public NetworkHost getHost() {
-
-        return host;
-
-    }
-
     public Stream setHost(final NetworkHost host) {
 
         this.host = host;
@@ -100,31 +103,13 @@ public class Stream extends BaseEntity {
         return this;
 
     }
+    public Stream setName(final String name) {
 
-    public Stream setPath(final String path) {
-
-        this.path = path;
-
-        return this;
-
-    }
-
-    public Stream setProtcol(final StreamProtocol protcol) {
-
-        this.protcol = protcol;
+        this.name = name;
 
         return this;
 
     }
-
-    public Stream setUsername(final String username) {
-
-        this.username = username;
-
-        return this;
-
-    }
-
     public Stream setPassword(final String password) {
 
         this.password = password;
@@ -132,10 +117,30 @@ public class Stream extends BaseEntity {
         return this;
 
     }
+    public Stream setPath(final String path) {
 
+        this.path = path;
+
+        return this;
+
+    }
+    public Stream setProtcol(final StreamProtocol protcol) {
+
+        this.protcol = protcol;
+
+        return this;
+
+    }
     public Stream setRecordings(final Set<StreamRecording> recordings) {
 
         this.recordings = recordings;
+
+        return this;
+
+    }
+    public Stream setUsername(final String username) {
+
+        this.username = username;
 
         return this;
 

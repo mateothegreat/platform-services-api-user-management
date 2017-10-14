@@ -49,17 +49,12 @@ package platform.services.api.users.authentication;
  * streaming-main.platform.com
  */
 
-import lombok.ToString;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.access.intercept.RunAsImplAuthenticationProvider;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -68,34 +63,27 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.web.http.HeaderHttpSessionStrategy;
-import org.springframework.session.web.http.HttpSessionStrategy;
 
-import javax.servlet.http.HttpSessionListener;
 import javax.sql.DataSource;
 
 import platform.services.api.commons.configuration.CommonsConfig;
-import platform.services.api.commons.sessions.HttpSessionEventListener;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-//@ComponentScan(basePackages = {
-//
-//        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
-//        CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
-//
-//})
-@Log4j2
-@ToString
+@ComponentScan(basePackages = {
+
+        CommonsConfig.PLATFORM_SERVICES_API_COMMONS_JPA_DATASOURCES,
+        CommonsConfig.PLATFORM_SERVICES_API_USERS_AUTHENTICATION
+
+})
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final DataSource                       platformDataSource;
     private final AuthenticationEntryPoint         authenticationEntryPoint;
     private final UserAuthenticationDetailsService userAuthenticationDetailsService;
 
-    @Autowired public SecurityConfiguration(final @Qualifier("platformBaseDataSource") DataSource platformDataSource,
+    @Autowired public SecurityConfiguration(final  DataSource platformDataSource,
                                             final AuthenticationEntryPoint authenticationEntryPoint,
                                             final UserAuthenticationDetailsService userAuthenticationDetailsService) {
 
@@ -105,20 +93,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean public static ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
-
-        return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
-
-    }
-    @Bean public static HttpSessionListener httpSessionListener() {
-
-        return new HttpSessionEventListener();
-
-    }
-    @Bean public static HttpSessionStrategy httpSessionStrategy() {
-
-        return new HeaderHttpSessionStrategy();
-    }
+//    @Bean public static ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+//
+//        return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
+//
+//    }
+//    @Bean public static HttpSessionListener httpSessionListener() {
+//
+//        return new HttpSessionEventListener();
+//
+//    }
+//    @Bean public static HttpSessionStrategy httpSessionStrategy() {
+//
+//        return new HeaderHttpSessionStrategy();
+//    }
 
     @Bean public DaoAuthenticationProvider authenticationProvider() {
 
@@ -150,16 +138,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         return new BCryptPasswordEncoder(11);
     }
-
-    @Bean public AuthenticationProvider runAsAuthenticationProvider() {
-
-        final RunAsImplAuthenticationProvider authProvider = new RunAsImplAuthenticationProvider();
-
-        authProvider.setKey("ROLE_INTEGRATION");
-
-        return authProvider;
-
-    }
+//
+//    @Bean public AuthenticationProvider runAsAuthenticationProvider() {
+//
+//        final RunAsImplAuthenticationProvider authProvider = new RunAsImplAuthenticationProvider();
+//
+//        authProvider.setKey("ROLE_INTEGRATION");
+//
+//        return authProvider;
+//
+//    }
 
     @Override protected void configure(final HttpSecurity http) throws Exception {
 
@@ -187,6 +175,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.anonymous()
             .disable();
+
+/*        http.authorizeRequests()
+            .anyRequest()
+            .anonymous();*/
 
     }
 

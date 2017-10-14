@@ -1,10 +1,10 @@
 package platform.services.api.users.profiles;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import platform.services.api.commons.jpa.repositories.BaseRepository;
 
-@Repository
+@RepositoryRestResource(path = "profiles", collectionResourceRel = "profiles", itemResourceRel = "profile")
 public interface UserProfileRepository extends BaseRepository<UserProfile> {
 
 //    Optional<UserProfile> getByUserId(final Long userId);

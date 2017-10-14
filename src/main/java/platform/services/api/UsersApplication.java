@@ -51,22 +51,48 @@ package platform.services.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.boot.autoconfigure.aop.AopAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
+import org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration;
 
-//@SpringBootApplication(
-//
-//        scanBasePackages = {
-//
-//                CommonsConfig.PLATFORM_SERVICES_API,
-//                CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
-//                UsersConfig.PLATFORM_SERVICES_API_COMMONS,
-//
-//        })
-@EnableDiscoveryClient
+import platform.services.api.commons.configuration.CommonsConfig;
+
+@SpringBootApplication(
+
+
+        scanBasePackages = {
+
+                CommonsConfig.PLATFORM_SERVICES_API,
+                CommonsConfig.PLATFORM_SERVICES_API_COMMONS_SESSION,
+                UsersConfig.PLATFORM_SERVICES_API_COMMONS,
+                "platform.services.api.organizations"
+
+        },
+
+        exclude = {
+
+                AopAutoConfiguration.class,
+                ErrorMvcAutoConfiguration.class,
+                MultipartAutoConfiguration.class,
+                RedisAutoConfiguration.class,
+//                WebMvcAutoConfiguration.class,
+                WebSocketAutoConfiguration.class,
+                JdbcTemplateAutoConfiguration.class
+
+        })
+//@EnableDiscoveryClient
 //@EnableConfigurationProperties
-@OverrideAutoConfiguration(enabled = true)
-@SpringBootApplication
+//@OverrideAutoConfiguration(enabled = true)
+//@SpringBootApplication(exclude = {
+//
+////        AuditAutoConfiguration.class,
+////        EndpointAutoConfiguration.class,
+//        SessionAutoConfiguration.class,
+//
+//})
 //@EnableAutoConfiguration
 public class UsersApplication {
 

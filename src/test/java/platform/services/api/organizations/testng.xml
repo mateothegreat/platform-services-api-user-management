@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Organizations Packages" parallel="tests" thread-count="32" verbose="1">
+
+
+    <test name="Organizations">
+
+        <packages>
+
+            <package name="platform.services.api.organizations"/>
+
+        </packages>
+
+    </test>
+
+</suite>

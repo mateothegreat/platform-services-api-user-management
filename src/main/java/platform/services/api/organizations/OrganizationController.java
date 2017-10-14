@@ -1,12 +1,12 @@
 package platform.services.api.organizations;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import platform.services.api.commons.controller.BaseController;
 
-@RepositoryRestController
+@Controller
 @RequestMapping("/organizations")
 public class OrganizationController extends BaseController<OrganizationService, OrganizationRepository, Organization> {
 

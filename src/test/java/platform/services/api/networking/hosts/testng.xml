@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Network Hosts Package" parallel="tests" thread-count="32" verbose="1">
+
+
+    <test name="Network Hosts">
+
+        <packages>
+
+            <package name="platform.services.api.networking.hosts"/>
+
+        </packages>
+
+    </test>
+
+
+</suite>
