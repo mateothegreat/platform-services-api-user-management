@@ -129,32 +129,30 @@ public class User extends BaseEntity<User> {
     }
     public static User create() {
 
-        return new User().setUsername(Randomizers.username())
-                         .setPasswordNotEncrypted(Randomizers.password())
-                         .setEmail(Randomizers.email())
-                         .setStatus(Status.ACTIVE_TESTING);
+        User user = new User();
+
+        user.setUsername(Randomizers.username());
+        user.setPasswordNotEncrypted(Randomizers.password());
+        user.setEmail(Randomizers.email());
+        user.setStatus(Status.ACTIVE_TESTING);
+
+        return user;
 
     }
+    public User addProfile(final UserProfile profile) {
 
-    public User setEmail(final String email) {
+//        profile.setParentId(this.getId());
 
-        this.email = email;
+        this.profiles.add(profile);
 
         return this;
 
     }
-    public User setPasswordNotEncrypted(final String passwordNotEncrypted) {
+    public User addRole(final UserRole role) {
 
-        setPassword(passwordNotEncrypted);
+//        role.setParentId(this.getId());
 
-        this.passwordNotEncrypted = passwordNotEncrypted;
-
-        return this;
-
-    }
-    public User setUsername(final String username) {
-
-        this.username = username;
+        this.roles.add(role);
 
         return this;
 
@@ -171,6 +169,20 @@ public class User extends BaseEntity<User> {
         return SecurityCryptor.encode(password);
 
     }
+    public User setEmail(final String email) {
+
+        this.email = email;
+
+        return this;
+
+    }
+    public User setOrganization(final Organization organization) {
+
+        this.organization = organization;
+
+        return this;
+
+    }
     public User setPassword(final String password) {
 
         this.password = SecurityCryptor.encode(password);
@@ -178,27 +190,11 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-    public User addRole(final UserRole role) {
+    public User setPasswordNotEncrypted(final String passwordNotEncrypted) {
 
-//        role.setParentId(this.getId());
+        setPassword(passwordNotEncrypted);
 
-        this.roles.add(role);
-
-        return this;
-
-    }
-    public User addProfile(final UserProfile profile) {
-
-//        profile.setParentId(this.getId());
-
-        this.profiles.add(profile);
-
-        return this;
-
-    }
-    public User setRoles(final Set<UserRole> roles) {
-
-        this.roles = roles;
+        this.passwordNotEncrypted = passwordNotEncrypted;
 
         return this;
 
@@ -210,9 +206,16 @@ public class User extends BaseEntity<User> {
         return this;
 
     }
-    public User setOrganization(final Organization organization) {
+    public User setRoles(final Set<UserRole> roles) {
 
-        this.organization = organization;
+        this.roles = roles;
+
+        return this;
+
+    }
+    public User setUsername(final String username) {
+
+        this.username = username;
 
         return this;
 

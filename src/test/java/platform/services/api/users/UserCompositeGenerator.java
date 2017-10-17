@@ -102,13 +102,14 @@ public class UserCompositeGenerator implements UserComposite {
 //    }
     public static User userFixture() {
 
-        return new User().setUsername(Randomizers.username())
-                         .setPasswordNotEncrypted(Randomizers.password())
-                         .setEmail(Randomizers.email())
-//                         .addRole(userRoleFixture())
-//                         .addProfile(userProfileFixture())
-//                         .setParentId(Randomizers.id())
-                         .setStatus(Status.ACTIVE_TESTING);
+        User user = new User();
+
+        user.setUsername(Randomizers.username());
+        user.setPasswordNotEncrypted(Randomizers.password());
+        user.setEmail(Randomizers.email());
+        user.setStatus(Status.ACTIVE_TESTING);
+
+        return user;
 
     }
 

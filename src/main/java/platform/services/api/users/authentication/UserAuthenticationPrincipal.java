@@ -12,9 +12,9 @@ import java.util.Collection;
 public class UserAuthenticationPrincipal implements UserDetails {
 
     private static final long serialVersionUID = -2303028515734000689L;
-    private String     username;
-    private String     password;
-    private Collection authorities;
+    private String                                 username;
+    private String                                 password;
+    private Collection                             authorities;
 //    private Collection<? extends GrantedAuthority> authorities;
 
 //    public UserAuthenticationPrincipal(final @NotEmpty String username, final String encrypted, final Set<UserRole> roles) {
@@ -57,13 +57,13 @@ public class UserAuthenticationPrincipal implements UserDetails {
 
     }
 
-//
-//    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
-//
-//        return this.user.getAuthorities();
-//
-//    }
-//
+
+    @Override public Collection  getAuthorities() {
+
+        return this.authorities;
+
+    }
+
 //    @Override public String getPassword() {
 //
 //        return this.user.getPassword();
