@@ -1,31 +1,4 @@
-import com.bmuschko.gradle.docker.tasks.container.*
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
-import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
-import com.bmuschko.gradle.docker.tasks.image.DockerTagImage
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-
-buildscript {
-
-    repositories {
-
-        jcenter()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url 'http://repo.spring.io/plugins-release' }
-        maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url "http://dl.bintray.com/tanemahuta/gradle-plugins" }
-
-    }
-
-    dependencies {
-
-        classpath 'com.bmuschko:gradle-docker-plugin:3.0.11'
-
-    }
-
-}
-apply plugin: "com.zoltu.git-versioning"
+mainClassName = "platform.services.api.UsersApplication"
 
 dependencies {
 
@@ -33,21 +6,21 @@ dependencies {
     testCompile project(path: ':platform-services-api-commons', configuration: 'testOutput')
 }
 
-    mainClassName = "platform.services.api.UsersApplication"
-compileJava {
-
-
-}
-//dockerDistTar {
-//
-//    instruction { 'RUN ls -la /' }
-//
-//    environmentVariable('JAVA_OPTS', '-Djava.security.egd=file:/dev/./urandom -XX:+UnlockExperimentalVMOptions ' + '-XX:+UseCGroupMemoryLimitForHeap')
-//
-//}
+apply plugin: 'com.bmuschko.docker-remote-api'
+apply plugin: 'com.bmuschko.docker-java-application'
 
 docker {
 
+    url = 'tcp://localhost:2375'
+
+    registryCredentials {
+
+        url = 'streamingplatform.azurecr.io'
+
+        username = 'streamingplatform'
+        password = 'i=/8/r7/O+/Mv/=u/+heJ=nh0=iTQou7'
+
+    }
     javaApplication {
 
         baseImage = 'openjdk:8-jdk-alpine'
@@ -58,6 +31,11 @@ docker {
     }
 
 }
+
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
 task bootRepackage_copyJar(type: Copy) {
 
     group 'app'
@@ -70,8 +48,6 @@ task bootRepackage_copyJar(type: Copy) {
     into 'build/docker'
 
 }
-
-// https://github.com/bmuschko/gradle-docker-plugin
 task docker_file_create(type: Dockerfile) {
 
     group 'app'
@@ -234,30 +210,6 @@ task docker_logs(type: DockerLogsContainer) {
     }
 
 }
-
-//task appDockerTagImage(type: Exec) {
-//
-//
-//    group 'app'
-//    //    targetImageId { dockerBuildImage.getImageId() }
-//
-////    imageId ='streaming-platform/platform-services-api-user-management:1.0.0'
-////    imageId = appDockerBuildImage.getTag()
-////    imageId = "streaming-platform/platform-services-api-user-management"
-//
-////    repository = "https://streamingplatform.azurecr.io" + docker.getRegistryCredentials().url
-////    repository = docker.getRegistryCredentials().url + project.name
-////
-////    repository = "streamingplatform.azurecr.io"
-////    tag = project.version
-//
-//    commandLine 'docker', 'tag', appDockerBuildImage.tag, "streamingplatform.azurecr.io/" + appDockerBuildImage.tag
-//    commandLine 'docker', 'push', "streamingplatform.azurecr.io/" + appDockerBuildImage.tag
-//
-//
-//}
-def registryUrl = 'streamingplatform.azurecr.io'
-
 task docker_azure_image_tag(type: DockerTagImage) {
 
     group 'app'
@@ -279,5 +231,5 @@ task docker_azure_push_image(type: DockerPushImage) {
 
     dependsOn docker_azure_image_tag
 
-    imageName = "$registryUrl/$project.name"
+    imageName = "$docker.registryCredentials.url/$project.name"
 }
