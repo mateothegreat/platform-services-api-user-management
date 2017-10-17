@@ -1,13 +1,11 @@
 package platform.services.api.system;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import platform.services.api.commons.jpa.entities.BaseEntity;
 
-@Entity @Data
+@Entity
 @Table(name = "systems")
 public class System extends BaseEntity<System> {
 

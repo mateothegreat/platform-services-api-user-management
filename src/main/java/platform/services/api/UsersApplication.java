@@ -49,19 +49,15 @@ package platform.services.api;
  * streaming-main.platform.com
  */
 
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.aop.AopAutoConfiguration;
-import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration;
-import org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import platform.services.api.commons.configuration.CommonsConfig;
 
 @SpringBootApplication(
-
 
         scanBasePackages = {
 
@@ -70,21 +66,22 @@ import platform.services.api.commons.configuration.CommonsConfig;
                 UsersConfig.PLATFORM_SERVICES_API_COMMONS,
                 "platform.services.api.organizations"
 
-        },
-
-        exclude = {
-
-                AopAutoConfiguration.class,
-                ErrorMvcAutoConfiguration.class,
-                MultipartAutoConfiguration.class,
-                RedisAutoConfiguration.class,
-//                WebMvcAutoConfiguration.class,
-                WebSocketAutoConfiguration.class,
-                JdbcTemplateAutoConfiguration.class
-
-        })
+        }
+//
+//        exclude = {
+//
+//                AopAutoConfiguration.class,
+//                ErrorMvcAutoConfiguration.class,
+//                MultipartAutoConfiguration.class,
+//                RedisAutoConfiguration.class,
+////                WebMvcAutoConfiguration.class,
+//                WebSocketAutoConfiguration.class,
+//                JdbcTemplateAutoConfiguration.class
+//
+//        }
+        )
 //@EnableDiscoveryClient
-//@EnableConfigurationProperties
+@EnableConfigurationProperties
 //@OverrideAutoConfiguration(enabled = true)
 //@SpringBootApplication(exclude = {
 //
@@ -93,12 +90,41 @@ import platform.services.api.commons.configuration.CommonsConfig;
 //        SessionAutoConfiguration.class,
 //
 //})
-//@EnableAutoConfiguration
+@EnableAutoConfiguration
 public class UsersApplication {
+
+    private static final Logger GrayLogLogger = Logger.getLogger("graylogLogger");
 
     public static void main(final String[] args) {
 
         SpringApplication.run(UsersApplication.class, args);
+
+//        final GelfConfiguration config = new GelfConfiguration("graylog.ops.streaming-platform.com", 12201).transport(GelfTransports.TCP)
+//                                                                .queueSize(1024)
+//                                                                .reconnectDelay(5000);
+//
+//        final GelfTransport transport = GelfTransports.create(config);
+//
+//        int count = 0;
+//        while(true) {
+//            final GelfMessage msg = new GelfMessage("Hello world! " + count + " " + config.getTransport().toString());
+//            count++;
+//
+//            msg.addAdditionalField("_count", count);
+//            msg.addAdditionalField("_oink", 1.231);
+//            msg.addAdditionalField("_objecttest", new Object());
+//
+//            try {
+//                transport.send(msg);
+//                TimeUnit.SECONDS.sleep(2);
+//
+//                GrayLogLogger.error(msg);
+////                GrayLogLogger.debug(msg);
+//
+//            } catch(InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 

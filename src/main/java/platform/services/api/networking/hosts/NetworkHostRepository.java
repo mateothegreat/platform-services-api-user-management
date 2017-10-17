@@ -11,7 +11,7 @@ import platform.services.api.commons.jpa.repositories.BaseRepository;
 //@Repository
 //@RepositoryRestResource(collectionResourceRel = "hosts", collectionResourceDescription = @Description("asdf"), itemResourceDescription = @Description("xx"), path = "network/hosts")
 //@RepositoryRestResource(path = "/network/hosts", collectionResourceRel = "hosts")
-@RepositoryRestResource(path = "/hosts", collectionResourceRel = "hosts", itemResourceRel = "host")
+@RepositoryRestResource(path = "hosts", collectionResourceRel = "hosts", itemResourceRel = "host")
 public interface NetworkHostRepository extends BaseRepository<NetworkHost> {
 
 //    @CacheEvict("byHostname")

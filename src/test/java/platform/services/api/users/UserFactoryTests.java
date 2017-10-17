@@ -11,6 +11,7 @@ import platform.services.api.commons.enums.Role;
 import platform.services.api.commons.jpa.datasources.DataSourceConfig;
 import platform.services.api.commons.security.SecurityCryptor;
 import platform.services.api.commons.validation.ValidationError;
+import platform.services.api.organizations.OrganizationRepository;
 import platform.services.api.organizations.OrganizationService;
 import platform.services.api.users.profiles.UserProfileService;
 import platform.services.api.users.roles.UserRole;
@@ -23,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
         DataSourceConfig.class,
         OrganizationService.class,
+
         UserService.class,
         UserRoleService.class,
         UserProfileService.class,

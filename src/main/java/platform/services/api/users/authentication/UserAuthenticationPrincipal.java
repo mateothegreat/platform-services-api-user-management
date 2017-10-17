@@ -4,20 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Set;
-
-import platform.services.api.users.roles.UserRole;
 
 @Getter @Setter @ToString
 public class UserAuthenticationPrincipal implements UserDetails {
 
     private static final long serialVersionUID = -2303028515734000689L;
-    private String        username;
-    private String        password;
+    private String     username;
+    private String     password;
     private Collection authorities;
 //    private Collection<? extends GrantedAuthority> authorities;
 
@@ -60,7 +56,6 @@ public class UserAuthenticationPrincipal implements UserDetails {
         return true;
 
     }
-
 
 //
 //    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
